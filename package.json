@@ -1,0 +1,26 @@
+{
+  "name": "anch0r",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.7.0",
+  "scripts": {
+    "prepare-data": "python3 scripts/build_catalog.py",
+    "validate:data": "python3 scripts/validate_data.py",
+    "typecheck": "tsc --noEmit",
+    "dev": "python3 scripts/build_catalog.py && vite --host 0.0.0.0",
+    "build": "python3 scripts/build_catalog.py && tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.0.0",
+    "typescript": "^5.8.0",
+    "vite": "^7.0.0"
+  }
+}
