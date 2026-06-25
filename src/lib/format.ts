@@ -7,7 +7,7 @@ export function formatDegrees(value: number, fractionDigits = 1): string {
 }
 
 export function formatVelocity(value: number): string {
-  return `${value.toFixed(1)} km/s`;
+  return `${Math.round(value)} km/s`;
 }
 
 export function formatUtc(date: Date | null): string {

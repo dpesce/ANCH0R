@@ -332,6 +332,22 @@ th {
   text-transform: uppercase;
 }
 
+.sort-button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  padding: 0;
+  text-align: left;
+  text-transform: inherit;
+}
+
+.sort-button:hover {
+  color: var(--accent-strong);
+}
+
 td strong,
 .subtle {
   display: block;
