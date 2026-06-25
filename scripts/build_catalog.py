@@ -23,7 +23,6 @@ RAW_SOURCE_FILES = {
 }
 
 OBSERVATIONS_FILE = ROOT / "data" / "observations.csv"
-RESERVATIONS_FILE = ROOT / "data" / "reservations.csv"
 MASTER_TARGETS_FILE = ROOT / "data" / "master_targets.csv"
 PUBLIC_CATALOG_FILE = ROOT / "public" / "data" / "catalog.json"
 
@@ -42,20 +41,6 @@ OBSERVATION_STATUSES = {
     "canceled",
     "cancelled",
 }
-RESERVATION_STATUSES = {
-    "active",
-    "reserved",
-    "planned",
-    "scheduled",
-    "done",
-    "canceled",
-    "cancelled",
-    "expired",
-}
-ACTIVE_OBSERVATION_STATUSES = {"planned", "scheduled"}
-ACTIVE_RESERVATION_STATUSES = {"active", "reserved", "planned", "scheduled"}
-
-
 class CatalogError(RuntimeError):
     """Raised when input data cannot be converted into a valid catalog."""
 
@@ -277,7 +262,7 @@ def build_targets(source_records: list[SourceRecord]) -> list[dict[str, Any]]:
                 "eligible_srt": "SRT" in telescopes,
                 "gbt_group": gbt_group,
                 "raw_flags": raw_flags,
-                "status": "available",
+                "status": "unobserved",
                 "assigned_telescope": "",
                 "spectrum_url": "",
                 "notes": "",
@@ -321,7 +306,6 @@ def validate_datetime_order(row: dict[str, str], path: Path) -> None:
 def apply_campaign_state(
     targets: list[dict[str, Any]],
     observations: list[dict[str, str]],
-    reservations: list[dict[str, str]],
 ) -> None:
     by_id = {target["target_id"]: target for target in targets}
 
@@ -340,45 +324,16 @@ def apply_campaign_state(
             )
         validate_datetime_order(row, OBSERVATIONS_FILE)
 
-    for row in reservations:
-        target_id = row.get("target_id", "")
-        if target_id not in by_id:
-            line = row.get("_line_number", "?")
-            raise CatalogError(f"{RESERVATIONS_FILE}:{line} references unknown target_id {target_id!r}")
-        row["status"] = normalize_status(row, RESERVATIONS_FILE, RESERVATION_STATUSES)
-        row["telescope"] = validate_telescope(row, RESERVATIONS_FILE)
-        if row["telescope"] not in by_id[target_id]["eligible_telescopes"]:
-            line = row.get("_line_number", "?")
-            raise CatalogError(
-                f"{RESERVATIONS_FILE}:{line} uses {row['telescope']} for target "
-                f"{target_id!r}, but that target is not eligible for that telescope"
-            )
-        validate_datetime_order(row, RESERVATIONS_FILE)
-
     observations_by_target: dict[str, list[dict[str, str]]] = defaultdict(list)
-    reservations_by_target: dict[str, list[dict[str, str]]] = defaultdict(list)
     for row in observations:
         observations_by_target[row["target_id"]].append(row)
-    for row in reservations:
-        reservations_by_target[row["target_id"]].append(row)
 
     for target in targets:
         target_id = target["target_id"]
         target_observations = observations_by_target.get(target_id, [])
-        target_reservations = reservations_by_target.get(target_id, [])
 
         observed_rows = [
             row for row in target_observations if row.get("status") == "observed"
-        ]
-        active_observation_rows = [
-            row
-            for row in target_observations
-            if row.get("status") in ACTIVE_OBSERVATION_STATUSES
-        ]
-        active_reservation_rows = [
-            row
-            for row in target_reservations
-            if row.get("status") in ACTIVE_RESERVATION_STATUSES
         ]
 
         target["observations_count"] = len(observed_rows)
@@ -391,15 +346,6 @@ def apply_campaign_state(
             target["assigned_telescope"] = latest.get("telescope", "")
             target["spectrum_url"] = latest.get("spectrum_url", "")
             target["notes"] = latest.get("notes", "")
-        elif active_observation_rows or active_reservation_rows:
-            active_rows = sorted(
-                active_observation_rows + active_reservation_rows,
-                key=lambda row: row.get("start_utc") or "",
-            )
-            active = active_rows[0]
-            target["status"] = "reserved"
-            target["assigned_telescope"] = active.get("telescope", "")
-            target["notes"] = active.get("notes", "")
 
 
 def build_catalog(write_outputs: bool = True) -> dict[str, Any]:
@@ -429,21 +375,8 @@ def build_catalog(write_outputs: bool = True) -> dict[str, Any]:
             "notes",
         ],
     )
-    reservations = read_campaign_csv(
-        RESERVATIONS_FILE,
-        [
-            "reservation_id",
-            "target_id",
-            "telescope",
-            "observer",
-            "start_utc",
-            "end_utc",
-            "status",
-            "notes",
-        ],
-    )
 
-    apply_campaign_state(targets, observations, reservations)
+    apply_campaign_state(targets, observations)
 
     status_counts = Counter(target["status"] for target in targets)
     eligible_by_telescope = {
@@ -468,11 +401,9 @@ def build_catalog(write_outputs: bool = True) -> dict[str, Any]:
             "status_counts": dict(sorted(status_counts.items())),
             "eligibility_overlap_counts": dict(sorted(overlap_counts.items())),
             "observations": len(observations),
-            "reservations": len(reservations),
         },
         "targets": targets,
         "observations": strip_private_fields(observations),
-        "reservations": strip_private_fields(reservations),
     }
 
     if write_outputs:

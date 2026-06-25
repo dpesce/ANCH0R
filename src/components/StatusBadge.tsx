@@ -5,8 +5,7 @@ interface StatusBadgeProps {
 }
 
 const LABELS: Record<TargetStatus, string> = {
-  available: "Available",
-  reserved: "Reserved",
+  unobserved: "Unobserved",
   observed: "Observed",
 };
 

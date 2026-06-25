@@ -48,12 +48,8 @@ export function MasterTable({ catalog }: MasterTableProps) {
   return (
     <main className="page-shell page-block">
       <div className="page-heading">
-        <p className="eyebrow">Master catalog</p>
-        <h1>Galaxy Target Table</h1>
-        <p>
-          The table is generated from the raw telescope source lists plus the
-          campaign observation and reservation CSV files.
-        </p>
+        <h1>Targets</h1>
+        <p>Search the master galaxy catalog and observation status.</p>
       </div>
 
       <section className="toolbar" aria-label="Master table filters">
@@ -89,8 +85,7 @@ export function MasterTable({ catalog }: MasterTableProps) {
             onChange={(event) => setStatus(event.target.value as StatusFilter)}
           >
             <option value="all">All statuses</option>
-            <option value="available">Available</option>
-            <option value="reserved">Reserved</option>
+            <option value="unobserved">Unobserved</option>
             <option value="observed">Observed</option>
           </select>
         </label>
@@ -106,12 +101,10 @@ export function MasterTable({ catalog }: MasterTableProps) {
           <thead>
             <tr>
               <th>Target</th>
-              <th>RA</th>
-              <th>Dec</th>
+              <th>Coordinates</th>
               <th>Velocity</th>
               <th>Eligible</th>
               <th>Status</th>
-              <th>Assigned</th>
               <th>Spectrum</th>
             </tr>
           </thead>
@@ -122,10 +115,9 @@ export function MasterTable({ catalog }: MasterTableProps) {
                   <strong>{target.source_name}</strong>
                   <span className="subtle">{target.target_id}</span>
                 </td>
-                <td>{target.ra_hms}</td>
                 <td>
-                  {target.dec_dms}
-                  <span className="subtle">{formatDegrees(target.dec_deg, 2)}</span>
+                  {target.ra_hms}, {target.dec_dms}
+                  <span className="subtle">Dec {formatDegrees(target.dec_deg, 2)}</span>
                 </td>
                 <td>{formatVelocity(target.velocity_km_s)}</td>
                 <td>
@@ -141,7 +133,6 @@ export function MasterTable({ catalog }: MasterTableProps) {
                 <td>
                   <StatusBadge status={target.status} />
                 </td>
-                <td>{target.assigned_telescope || ""}</td>
                 <td>
                   {target.spectrum_url ? (
                     <a href={target.spectrum_url} target="_blank" rel="noreferrer">

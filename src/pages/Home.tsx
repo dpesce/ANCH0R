@@ -1,90 +1,109 @@
 import type { CatalogData } from "../types";
 import { formatInteger } from "../lib/format";
-import { TELESCOPES, TELESCOPE_CODES } from "../lib/telescopes";
 
 interface HomeProps {
   catalog: CatalogData;
 }
 
+const TEAM_MEMBERS = [
+  "Jim Braatz",
+  "Paola Castangia",
+  "Frédéric Courbin",
+  "Christian Henkel",
+  "Cheng-Yu Kuo",
+  "Elisabetta Ladu",
+  "Dominic Pesce",
+  "Mark Reid",
+  "Andrea Tarchi",
+];
+
 export function Home({ catalog }: HomeProps) {
-  const available = catalog.stats.status_counts.available ?? 0;
-  const reserved = catalog.stats.status_counts.reserved ?? 0;
+  const totalTargets = catalog.stats.total_targets;
   const observed = catalog.stats.status_counts.observed ?? 0;
+  const progressPercent = totalTargets > 0 ? (observed / totalTargets) * 100 : 0;
 
   return (
     <main>
       <section className="hero-band">
         <div className="page-shell hero-layout">
-          <div>
-            <p className="eyebrow">22 GHz galaxy survey</p>
-            <h1>ANCH0R Survey Coordination</h1>
-            <p className="hero-copy">
-              ANCH0R coordinates multi-year radio observations of nearby galaxies with
-              the Green Bank Telescope, the Effelsberg 100m telescope, and the Sardinia
-              Radio Telescope. This site tracks target status and helps observers build
-              telescope-specific target lists for upcoming sessions.
-            </p>
-            <div className="hero-actions">
-              <a className="button button-primary" href="#planner">
-                Plan an observation
-              </a>
-              <a className="button button-secondary" href="#targets">
-                View master table
-              </a>
+          <h1>ANCH0R Survey</h1>
+          <p className="definition">
+            ANCH0R = Additional Nearby Calibrators for H0 Reliability
+          </p>
+          <p className="hero-copy">
+            The ANCH0R program is conducting a volume-limited survey to search every
+            galaxy within 20 Mpc for 22 GHz water megamaser emission, with the goal of
+            finding "the next NGC 4258." This survey makes use of the Green Bank
+            Telescope, the Effelsberg 100m telescope, and the Sardinia Radio Telescope.
+          </p>
+          <p>
+            <a href="https://greenbankobservatory.org/science/gbt-surveys/anch0r/">
+              GBT project page
+            </a>
+          </p>
+          <div className="progress-block" aria-label="Project observation progress">
+            <div className="progress-label">
+              <span>Project status</span>
+              <strong>
+                {formatInteger(observed)} / {formatInteger(totalTargets)} targets observed
+              </strong>
             </div>
-          </div>
-          <div className="metric-grid">
-            <div className="metric-card">
-              <span>Total targets</span>
-              <strong>{formatInteger(catalog.stats.total_targets)}</strong>
-            </div>
-            <div className="metric-card">
-              <span>Available</span>
-              <strong>{formatInteger(available)}</strong>
-            </div>
-            <div className="metric-card">
-              <span>Reserved</span>
-              <strong>{formatInteger(reserved)}</strong>
-            </div>
-            <div className="metric-card">
-              <span>Observed</span>
-              <strong>{formatInteger(observed)}</strong>
+            <div className="progress-track">
+              <div className="progress-fill" style={{ width: `${progressPercent}%` }} />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="page-shell section-grid">
+      <section className="page-shell content-stack">
         <article>
-          <p className="section-label">Project Team</p>
-          <h2>Campaign roles</h2>
-          <dl className="team-list">
-            <div>
-              <dt>Principal Investigator</dt>
-              <dd>D. Pesce</dd>
-            </div>
-            <div>
-              <dt>Collaboration</dt>
-              <dd>ANCH0R observing team</dd>
-            </div>
-            <div>
-              <dt>Facilities</dt>
-              <dd>GBT, Effelsberg 100m, and SRT</dd>
-            </div>
-          </dl>
+          <h2>Project Team</h2>
+          <ul className="team-list">
+            {TEAM_MEMBERS.map((member) => (
+              <li key={member}>{member}</li>
+            ))}
+          </ul>
         </article>
 
-        <article>
-          <p className="section-label">Telescope Eligibility</p>
-          <h2>Raw source-list coverage</h2>
-          <div className="coverage-list">
-            {TELESCOPE_CODES.map((code) => (
-              <div key={code} className="coverage-row">
-                <span>{TELESCOPES[code].label}</span>
-                <strong>{formatInteger(catalog.stats.eligible_by_telescope[code])}</strong>
-              </div>
-            ))}
-          </div>
+        <article className="longform">
+          <h2>Project Description</h2>
+          <p>
+            NGC 4258 is the nearest, brightest, and "cleanest" disk megamaser system
+            known, and its geometric distance carries disproportionate weight in setting
+            the absolute scale of most extragalactic distance-measuring techniques used
+            in cosmology today. This unique role makes NGC 4258 the most important
+            galaxy in the Universe for cosmology, but it also presents a single point of
+            failure that is no longer acceptable in the era of percent-level
+            cosmological measurements and in the face of the current "Hubble tension"
+            (the &gt;5 sigma discrepancy between the CMB-based value of the Hubble
+            constant and direct local-Universe measurements).
+          </p>
+          <p>
+            The ANCH0R strategy is deliberately simple: a comprehensive survey of
+            galaxies out to 20 Mpc. This approach avoids selection-based blind spots
+            while ensuring that any detected system is nearby enough to enable an
+            anchor-quality distance measurement. The ANCH0R survey will cover a volume
+            roughly an order of magnitude larger than that bounded by NGC 4258 itself.
+            Finding even one additional NGC 4258-like system will immediately reduce
+            the current reliance on a single galaxy, enable consistency checks between
+            calibrators, and harden the absolute distance scale against subtle
+            systematics that can dominate at the percent level.
+          </p>
+          <p>
+            Because the ANCH0R survey targets are selected purely by proximity and will
+            all be observed to a comparable sensitivity level, the resulting detection
+            statistics will also provide the first genuinely unbiased accounting of the
+            incidence rate and luminosity function for 22 GHz megamaser emission in the
+            local Universe. This sample will thus enable demographic tests of how
+            megamaser occurrence correlates with basic host galaxy properties, removing
+            selection function ambiguities and providing a reference population that can
+            be used to optimize target-selection strategies for the next generation of
+            megamaser discovery experiments.
+          </p>
+          <p>
+            ANCH0R is part of the larger RedH0T program, investigating the "Hubble
+            tension" problem in cosmology.
+          </p>
         </article>
       </section>
     </main>

@@ -38,7 +38,6 @@ export function TargetPlanner({ catalog }: TargetPlannerProps) {
   const [minElevationDeg, setMinElevationDeg] = useState(25);
   const [minObservableMinutes, setMinObservableMinutes] = useState(30);
   const [maxResults, setMaxResults] = useState(50);
-  const [includeReserved, setIncludeReserved] = useState(false);
 
   const site = TELESCOPES[telescope];
   const windowStart = parseUtcInput(startUtc);
@@ -48,12 +47,9 @@ export function TargetPlanner({ catalog }: TargetPlannerProps) {
   const candidates = useMemo(() => {
     return catalog.targets.filter((target) => {
       const eligible = target.eligible_telescopes.includes(telescope);
-      const usableStatus = includeReserved
-        ? target.status !== "observed"
-        : target.status === "available";
-      return eligible && usableStatus;
+      return eligible && target.status !== "observed";
     });
-  }, [catalog.targets, includeReserved, telescope]);
+  }, [catalog.targets, telescope]);
 
   const results = useMemo<PlannedTarget[]>(() => {
     if (invalidWindow) {
@@ -117,11 +113,10 @@ export function TargetPlanner({ catalog }: TargetPlannerProps) {
   return (
     <main className="page-shell page-block">
       <div className="page-heading">
-        <p className="eyebrow">Observation planning</p>
         <h1>Target Planner</h1>
         <p>
-          Generate a ranked list of unobserved targets that are eligible for a
-          telescope and visible during a UTC observing window.
+          Generate a ranked list of unobserved targets visible during a UTC observing
+          window.
         </p>
       </div>
 
@@ -191,36 +186,7 @@ export function TargetPlanner({ catalog }: TargetPlannerProps) {
               onChange={(event) => setMaxResults(Number(event.target.value))}
             />
           </label>
-
-          <label className="checkbox-row">
-            <input
-              type="checkbox"
-              checked={includeReserved}
-              onChange={(event) => setIncludeReserved(event.target.checked)}
-            />
-            Include reserved targets
-          </label>
         </form>
-
-        <aside className="planner-summary">
-          <span>{site.shortName}</span>
-          <strong>{formatInteger(candidates.length)}</strong>
-          <p>candidate targets before visibility filtering</p>
-          <dl>
-            <div>
-              <dt>Latitude</dt>
-              <dd>{formatDegrees(site.latitudeDeg, 3)}</dd>
-            </div>
-            <div>
-              <dt>Longitude</dt>
-              <dd>{formatDegrees(site.longitudeDeg, 3)}</dd>
-            </div>
-            <div>
-              <dt>Elevation</dt>
-              <dd>{formatInteger(site.elevationM)} m</dd>
-            </div>
-          </dl>
-        </aside>
       </section>
 
       {invalidWindow ? (

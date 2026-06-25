@@ -1,6 +1,6 @@
 export type TelescopeCode = "GBT" | "EFF" | "SRT";
 
-export type TargetStatus = "available" | "reserved" | "observed";
+export type TargetStatus = "unobserved" | "observed";
 
 export interface Target {
   target_id: string;
@@ -40,17 +40,6 @@ export interface Observation {
   notes: string;
 }
 
-export interface Reservation {
-  reservation_id: string;
-  target_id: string;
-  telescope: TelescopeCode;
-  observer: string;
-  start_utc: string;
-  end_utc: string;
-  status: string;
-  notes: string;
-}
-
 export interface CatalogStats {
   total_targets: number;
   raw_sources: Record<
@@ -65,7 +54,6 @@ export interface CatalogStats {
   status_counts: Partial<Record<TargetStatus, number>>;
   eligibility_overlap_counts: Record<string, number>;
   observations: number;
-  reservations: number;
 }
 
 export interface CatalogData {
@@ -78,5 +66,4 @@ export interface CatalogData {
   stats: CatalogStats;
   targets: Target[];
   observations: Observation[];
-  reservations: Reservation[];
 }
