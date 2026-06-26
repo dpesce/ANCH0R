@@ -304,6 +304,14 @@ dd {
   gap: 14px;
 }
 
+.target-filter-panel {
+  margin-top: 20px;
+}
+
+.target-filter-form {
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+}
+
 .time-field-heading {
   display: flex;
   align-items: center;

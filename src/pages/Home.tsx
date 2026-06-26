@@ -28,7 +28,7 @@ export function Home({ catalog }: HomeProps) {
         <div className="page-shell hero-layout">
           <h1>ANCH0R Survey</h1>
           <p className="definition">
-            ANCH0R = Additional Nearby Calibrators for H0 Reliability
+            ANCH0R = Additional Nearby Calibrators for H<sub>0</sub> Reliability
           </p>
           <p className="hero-copy">
             The ANCH0R program is conducting a volume-limited survey to search every

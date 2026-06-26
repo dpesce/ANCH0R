@@ -28,9 +28,9 @@ type SortKey =
   | "ra"
   | "dec"
   | "velocity"
-  | "observable"
   | "maxAltitude"
-  | "bestUtc";
+  | "riseUtc"
+  | "setUtc";
 type SortDirection = "asc" | "desc";
 
 const GITHUB_ISSUES_URL = "https://github.com/dpesce/ANCH0R/issues/new";
@@ -60,6 +60,17 @@ function compareRecommended(a: PlannedTarget, b: PlannedTarget): number {
 
 function formatVelocityValue(value: number): number {
   return Math.round(value);
+}
+
+function targetMatchesNameSearch(target: Target, search: string): boolean {
+  const normalizedSearch = search.trim().toLowerCase();
+  if (!normalizedSearch) {
+    return true;
+  }
+  return (
+    target.source_name.toLowerCase().includes(normalizedSearch) ||
+    target.target_id.toLowerCase().includes(normalizedSearch)
+  );
 }
 
 function formatDisplayUtc(date: Date | null): string {
@@ -449,6 +460,7 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
   const [minElevationDeg, setMinElevationDeg] = useState(25);
   const [minObservableMinutes, setMinObservableMinutes] = useState(30);
   const [maxResults, setMaxResults] = useState(50);
+  const [targetSearch, setTargetSearch] = useState("");
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [sortKey, setSortKey] = useState<SortKey>("recommended");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
@@ -470,15 +482,20 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
     minElevationDeg,
     minObservableMinutes,
     startTime,
+    targetSearch,
     telescope,
     timeScale,
   ]);
 
   const candidates = useMemo(() => {
     return catalog.targets.filter((target) => {
-      return target.eligible_telescopes.includes(telescope) && target.status !== "observed";
+      return (
+        target.eligible_telescopes.includes(telescope) &&
+        target.status !== "observed" &&
+        targetMatchesNameSearch(target, targetSearch)
+      );
     });
-  }, [catalog.targets, telescope]);
+  }, [catalog.targets, targetSearch, telescope]);
 
   const results = useMemo<PlannedTarget[]>(() => {
     if (!windowStart || !windowEnd || invalidWindow) {
@@ -515,13 +532,16 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
         comparison = a.target.dec_deg - b.target.dec_deg;
       } else if (sortKey === "velocity") {
         comparison = a.target.velocity_km_s - b.target.velocity_km_s;
-      } else if (sortKey === "observable") {
-        comparison = a.visibility.observableMinutes - b.visibility.observableMinutes;
       } else if (sortKey === "maxAltitude") {
         comparison = a.visibility.maxAltitudeDeg - b.visibility.maxAltitudeDeg;
-      } else if (sortKey === "bestUtc") {
+      } else if (sortKey === "riseUtc") {
         comparison =
-          a.visibility.maxAltitudeUtc.getTime() - b.visibility.maxAltitudeUtc.getTime();
+          (a.visibility.firstObservableUtc?.getTime() ?? Number.POSITIVE_INFINITY) -
+          (b.visibility.firstObservableUtc?.getTime() ?? Number.POSITIVE_INFINITY);
+      } else if (sortKey === "setUtc") {
+        comparison =
+          (a.visibility.lastObservableUtc?.getTime() ?? Number.POSITIVE_INFINITY) -
+          (b.visibility.lastObservableUtc?.getTime() ?? Number.POSITIVE_INFINITY);
       }
 
       return comparison * direction || a.target.source_name.localeCompare(b.target.source_name);
@@ -629,90 +649,6 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
         <p>{description}</p>
       </div>
 
-      <section className="planner-layout">
-        <form className="planner-form">
-          <label>
-            Telescope
-            <select
-              value={telescope}
-              onChange={(event) => setTelescope(event.target.value as TelescopeCode)}
-            >
-              {TELESCOPE_CODES.map((code) => (
-                <option key={code} value={code}>
-                  {TELESCOPES[code].label}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label>
-            <span className="time-field-heading">
-              Start time
-              <TimeScaleToggle
-                onChange={updateTimeScale}
-                siteLabel={site.shortName}
-                timeScale={timeScale}
-              />
-            </span>
-            <input
-              type="datetime-local"
-              value={startTime}
-              onChange={(event) => setStartTime(event.target.value)}
-            />
-          </label>
-
-          <label>
-            End time
-            <input
-              type="datetime-local"
-              value={endTime}
-              onChange={(event) => setEndTime(event.target.value)}
-            />
-          </label>
-
-          <label>
-            Minimum elevation
-            <input
-              type="number"
-              min={0}
-              max={80}
-              value={minElevationDeg}
-              onChange={(event) => setMinElevationDeg(Number(event.target.value))}
-            />
-          </label>
-
-          <label>
-            Minimum observable minutes
-            <input
-              type="number"
-              min={0}
-              step={10}
-              value={minObservableMinutes}
-              onChange={(event) => setMinObservableMinutes(Number(event.target.value))}
-            />
-          </label>
-
-          <label>
-            Maximum results
-            <input
-              type="number"
-              min={10}
-              step={10}
-              value={maxResults}
-              onChange={(event) => setMaxResults(Number(event.target.value))}
-            />
-          </label>
-        </form>
-      </section>
-
-      {missingWindow ? (
-        <div className="empty-state">Enter a start time and end time to show matching targets.</div>
-      ) : null}
-
-      {invalidWindow ? (
-        <div className="message-error">End time must be later than start time.</div>
-      ) : null}
-
       <section className="selection-panel">
         <div className="section-heading-row">
           <div>
@@ -761,6 +697,100 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
 
       {mode === "plan" ? <SkyMap results={results} selectedIds={selectedIds} /> : null}
 
+      <section className="target-filter-panel">
+        <form className="planner-form target-filter-form">
+          <label>
+            Telescope
+            <select
+              value={telescope}
+              onChange={(event) => setTelescope(event.target.value as TelescopeCode)}
+            >
+              {TELESCOPE_CODES.map((code) => (
+                <option key={code} value={code}>
+                  {TELESCOPES[code].label}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label>
+            <span className="time-field-heading">
+              Start time
+              <TimeScaleToggle
+                onChange={updateTimeScale}
+                siteLabel={site.shortName}
+                timeScale={timeScale}
+              />
+            </span>
+            <input
+              type="datetime-local"
+              value={startTime}
+              onChange={(event) => setStartTime(event.target.value)}
+            />
+          </label>
+
+          <label>
+            End time
+            <input
+              type="datetime-local"
+              value={endTime}
+              onChange={(event) => setEndTime(event.target.value)}
+            />
+          </label>
+
+          <label>
+            Search targets
+            <input
+              type="search"
+              value={targetSearch}
+              onChange={(event) => setTargetSearch(event.target.value)}
+              placeholder="Target name"
+            />
+          </label>
+
+          <label>
+            Minimum elevation
+            <input
+              type="number"
+              min={0}
+              max={80}
+              value={minElevationDeg}
+              onChange={(event) => setMinElevationDeg(Number(event.target.value))}
+            />
+          </label>
+
+          <label>
+            Minimum observable minutes
+            <input
+              type="number"
+              min={0}
+              step={10}
+              value={minObservableMinutes}
+              onChange={(event) => setMinObservableMinutes(Number(event.target.value))}
+            />
+          </label>
+
+          <label>
+            Maximum results
+            <input
+              type="number"
+              min={10}
+              step={10}
+              value={maxResults}
+              onChange={(event) => setMaxResults(Number(event.target.value))}
+            />
+          </label>
+        </form>
+      </section>
+
+      {missingWindow ? (
+        <div className="empty-state">Enter a start time and end time to show matching targets.</div>
+      ) : null}
+
+      {invalidWindow ? (
+        <div className="message-error">End time must be later than start time.</div>
+      ) : null}
+
       <section className="results-heading">
         <div>
           <h2>{tableTitle}</h2>
@@ -803,30 +833,29 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
                     <button
                       type="button"
                       className="sort-button"
-                      onClick={() => updateSort("observable")}
-                    >
-                      {sortLabel("Observable", "observable")}
-                    </button>
-                  </th>
-                  <th>
-                    <button
-                      type="button"
-                      className="sort-button"
                       onClick={() => updateSort("maxAltitude")}
                     >
-                      {sortLabel("Max Alt", "maxAltitude")}
+                      {sortLabel("Max alt", "maxAltitude")}
                     </button>
                   </th>
                   <th>
                     <button
                       type="button"
                       className="sort-button"
-                      onClick={() => updateSort("bestUtc")}
+                      onClick={() => updateSort("riseUtc")}
                     >
-                      {sortLabel("Best UTC", "bestUtc")}
+                      {sortLabel("Rise time (UTC)", "riseUtc")}
                     </button>
                   </th>
-                  <th>Window UTC</th>
+                  <th>
+                    <button
+                      type="button"
+                      className="sort-button"
+                      onClick={() => updateSort("setUtc")}
+                    >
+                      {sortLabel("Set time (UTC)", "setUtc")}
+                    </button>
+                  </th>
                 </>
               ) : null}
             </tr>
@@ -853,13 +882,9 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
                   <td>{formatVelocity(target.velocity_km_s)}</td>
                   {mode === "plan" ? (
                     <>
-                      <td>{formatInteger(visibility.observableMinutes)} min</td>
                       <td>{formatDegrees(visibility.maxAltitudeDeg, 1)}</td>
-                      <td>{formatDisplayUtc(visibility.maxAltitudeUtc)}</td>
-                      <td>
-                        {formatDisplayUtc(visibility.firstObservableUtc)} to{" "}
-                        {formatDisplayUtc(visibility.lastObservableUtc)}
-                      </td>
+                      <td>{formatDisplayUtc(visibility.firstObservableUtc) || "None"}</td>
+                      <td>{formatDisplayUtc(visibility.lastObservableUtc) || "None"}</td>
                     </>
                   ) : null}
                 </tr>
