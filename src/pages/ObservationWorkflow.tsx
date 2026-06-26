@@ -161,6 +161,10 @@ function SkyMap({
     return `${decDeg > 0 ? "+" : ""}${decDeg} deg`;
   }
 
+  function raLabel(raDeg: number) {
+    return `${raDeg / 15}h`;
+  }
+
   return (
     <section className="sky-map-panel" aria-label="Selected target sky map">
       <div className="section-heading-row">
@@ -207,16 +211,16 @@ function SkyMap({
           />
         ))}
         {meridians.map((raDeg) => {
-          const point = projectMollweide(raDeg, -74, width, height);
+          const point = projectMollweide(raDeg, -66, width, height);
           return (
             <text
-              className="sky-map-label"
+              className="sky-map-label sky-map-label--ra"
               key={`ra-label-${raDeg}`}
               textAnchor="middle"
               x={point.x}
-              y={point.y + 12}
+              y={point.y}
             >
-              {raDeg / 15}h
+              {raLabel(raDeg)}
             </text>
           );
         })}
@@ -224,11 +228,11 @@ function SkyMap({
           const point = projectMollweide(5, decDeg, width, height);
           return (
             <text
-              className="sky-map-label"
+              className="sky-map-label sky-map-label--dec"
               key={`dec-label-${decDeg}`}
               textAnchor="end"
               x={point.x - 8}
-              y={point.y + 4}
+              y={point.y}
             >
               {decLabel(decDeg)}
             </text>

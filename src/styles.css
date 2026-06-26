@@ -387,9 +387,18 @@ dd {
 }
 
 .sky-map-label {
-  fill: #4c5754;
-  font-size: 12px;
-  font-weight: 750;
+  fill: #5d6965;
+  font-size: 9px;
+  font-weight: 400;
+  dominant-baseline: middle;
+}
+
+.sky-map-label--ra {
+  text-anchor: middle;
+}
+
+.sky-map-label--dec {
+  text-anchor: end;
 }
 
 .sky-map-point {
