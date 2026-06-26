@@ -34,6 +34,20 @@ type SortKey =
 type SortDirection = "asc" | "desc";
 
 const REPORT_EMAIL = "dpesce@cfa.harvard.edu";
+const MONTH_LABELS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
 function initialWindow() {
   const now = new Date();
@@ -55,6 +69,18 @@ function compareRecommended(a: PlannedTarget, b: PlannedTarget): number {
 
 function formatVelocityValue(value: number): number {
   return Math.round(value);
+}
+
+function formatDisplayUtc(date: Date | null): string {
+  if (!date) {
+    return "";
+  }
+  const year = date.getUTCFullYear();
+  const month = MONTH_LABELS[date.getUTCMonth()];
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  const hours = String(date.getUTCHours()).padStart(2, "0");
+  const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+  return `${year} ${month} ${day} ${hours}:${minutes} UTC`;
 }
 
 function selectedTargetRows(selectedResults: PlannedTarget[], telescope: TelescopeCode) {
@@ -170,7 +196,7 @@ function SkyMap({
       <div className="section-heading-row">
         <div>
           <h2>Sky Map</h2>
-          <p>Mollweide projection of the current target list. Selected targets are highlighted.</p>
+          <p>Selected targets are highlighted.</p>
         </div>
       </div>
       <svg className="sky-map" viewBox={`0 0 ${width} ${height}`} role="img">
@@ -397,7 +423,7 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
   const title = mode === "plan" ? "Plan an observation" : "Submit an observing report";
   const description =
     mode === "plan"
-      ? "Find unobserved targets visible during a UTC observing window. The telescope filter uses the internal eligibility list from the master catalog."
+      ? "Specify the filters relevant for your observation and then select objects from the table below. All objects that have not yet been observed and which satisfy the selection criteria will be shown. Once you have selected all the objects you wish to observe, you can export the list as a CSV file."
       : "Select the targets actually observed during a run, add any notes, and generate an observing report email.";
   const actionLabel = mode === "plan" ? "Download selected CSV" : "Submit report";
   const action = mode === "plan" ? exportSelectedTargets : submitReport;
@@ -576,34 +602,38 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
                   {sortLabel("Velocity", "velocity")}
                 </button>
               </th>
-              <th>
-                <button
-                  type="button"
-                  className="sort-button"
-                  onClick={() => updateSort("observable")}
-                >
-                  {sortLabel("Observable", "observable")}
-                </button>
-              </th>
-              <th>
-                <button
-                  type="button"
-                  className="sort-button"
-                  onClick={() => updateSort("maxAltitude")}
-                >
-                  {sortLabel("Max Alt", "maxAltitude")}
-                </button>
-              </th>
-              <th>
-                <button
-                  type="button"
-                  className="sort-button"
-                  onClick={() => updateSort("bestUtc")}
-                >
-                  {sortLabel("Best UTC", "bestUtc")}
-                </button>
-              </th>
-              <th>Window UTC</th>
+              {mode === "plan" ? (
+                <>
+                  <th>
+                    <button
+                      type="button"
+                      className="sort-button"
+                      onClick={() => updateSort("observable")}
+                    >
+                      {sortLabel("Observable", "observable")}
+                    </button>
+                  </th>
+                  <th>
+                    <button
+                      type="button"
+                      className="sort-button"
+                      onClick={() => updateSort("maxAltitude")}
+                    >
+                      {sortLabel("Max Alt", "maxAltitude")}
+                    </button>
+                  </th>
+                  <th>
+                    <button
+                      type="button"
+                      className="sort-button"
+                      onClick={() => updateSort("bestUtc")}
+                    >
+                      {sortLabel("Best UTC", "bestUtc")}
+                    </button>
+                  </th>
+                  <th>Window UTC</th>
+                </>
+              ) : null}
             </tr>
           </thead>
           <tbody>
@@ -626,13 +656,17 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
                   <td>{target.ra_hms}</td>
                   <td>{target.dec_dms}</td>
                   <td>{formatVelocity(target.velocity_km_s)}</td>
-                  <td>{formatInteger(visibility.observableMinutes)} min</td>
-                  <td>{formatDegrees(visibility.maxAltitudeDeg, 1)}</td>
-                  <td>{formatUtc(visibility.maxAltitudeUtc)}</td>
-                  <td>
-                    {formatUtc(visibility.firstObservableUtc)} to{" "}
-                    {formatUtc(visibility.lastObservableUtc)}
-                  </td>
+                  {mode === "plan" ? (
+                    <>
+                      <td>{formatInteger(visibility.observableMinutes)} min</td>
+                      <td>{formatDegrees(visibility.maxAltitudeDeg, 1)}</td>
+                      <td>{formatDisplayUtc(visibility.maxAltitudeUtc)}</td>
+                      <td>
+                        {formatDisplayUtc(visibility.firstObservableUtc)} to{" "}
+                        {formatDisplayUtc(visibility.lastObservableUtc)}
+                      </td>
+                    </>
+                  ) : null}
                 </tr>
               );
             })}
