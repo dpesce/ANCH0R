@@ -28,7 +28,15 @@ export function Home({ catalog }: HomeProps) {
         <div className="page-shell hero-layout">
           <h1>ANCH0R Survey</h1>
           <p className="definition">
-            ANCH0R = Additional Nearby Calibrators for H<sub>0</sub> Reliability
+            <span className="definition-emphasis">ANCH0R</span>
+            <span> = </span>
+            <span className="definition-emphasis">A</span>dditional{" "}
+            <span className="definition-emphasis">N</span>earby{" "}
+            <span className="definition-emphasis">C</span>alibrators for{" "}
+            <span className="definition-emphasis">
+              H<sub>0</sub>
+            </span>{" "}
+            <span className="definition-emphasis">R</span>eliability
           </p>
           <p className="hero-copy">
             The ANCH0R program is conducting a volume-limited survey to search every
@@ -101,8 +109,12 @@ export function Home({ catalog }: HomeProps) {
             megamaser discovery experiments.
           </p>
           <p>
-            ANCH0R is part of the larger RedH0T program, investigating the "Hubble
-            tension" problem in cosmology.
+            ANCH0R is part of a concerted effort from the ERC-funded RedH0T synergy
+            project to address the Hubble tension with all known cosmological probes,
+            aiming to set the most reliable measurement of the Hubble constant.  The
+            ANCH0R survey is an international effort that makes use of the Green Bank
+            Telescope, the Effelsberg 100m telescope, and the Sardinia Radio Telescope
+            to efficiently survey all nearby galaxies for megamaser emission.
           </p>
         </article>
       </section>

@@ -166,8 +166,13 @@ nav a:hover,
 
 .definition {
   margin-bottom: 18px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.definition-emphasis {
   color: var(--accent-strong);
-  font-weight: 750;
+  font-weight: 800;
 }
 
 .section-label {
