@@ -291,7 +291,7 @@ dd {
 }
 
 .toolbar {
-  grid-template-columns: minmax(260px, 1fr) repeat(2, minmax(180px, 220px)) minmax(120px, auto);
+  grid-template-columns: minmax(260px, 1fr) minmax(210px, 260px) minmax(120px, auto);
 }
 
 .planner-layout {
@@ -302,6 +302,50 @@ dd {
   display: grid;
   grid-template-columns: repeat(3, minmax(160px, 1fr));
   gap: 14px;
+}
+
+.time-field-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  position: relative;
+}
+
+.time-scale-toggle {
+  display: inline-grid;
+  grid-template-columns: repeat(2, auto);
+  position: absolute;
+  right: 0;
+  top: -3px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: white;
+}
+
+.time-scale-option {
+  min-height: 24px;
+  border: 0;
+  border-right: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+
+.time-scale-option:last-child {
+  border-right: 0;
+}
+
+.time-scale-option.active,
+.time-scale-option:hover {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
 }
 
 .section-heading-row {
@@ -398,7 +442,7 @@ dd {
 }
 
 .sky-map-label--dec {
-  text-anchor: end;
+  text-anchor: start;
 }
 
 .sky-map-point {

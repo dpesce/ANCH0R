@@ -1,5 +1,61 @@
 {
-  "observations": [],
+  "observations": [
+    {
+      "end_utc": "2026-01-10T03:00:00Z",
+      "notes": "DEMO observation for interface testing",
+      "observation_id": "DEMO-001",
+      "observer": "DEMO",
+      "spectrum_url": "spectra/demo-galexascj00002.svg",
+      "start_utc": "2026-01-10T02:00:00Z",
+      "status": "observed",
+      "target_id": "galexascj00002",
+      "telescope": "GBT"
+    },
+    {
+      "end_utc": "2026-01-11T21:30:00Z",
+      "notes": "DEMO observation for interface testing",
+      "observation_id": "DEMO-002",
+      "observer": "DEMO",
+      "spectrum_url": "spectra/demo-ugc12894.svg",
+      "start_utc": "2026-01-11T20:30:00Z",
+      "status": "observed",
+      "target_id": "ugc12894",
+      "telescope": "EFF"
+    },
+    {
+      "end_utc": "2026-01-12T22:00:00Z",
+      "notes": "DEMO observation for interface testing",
+      "observation_id": "DEMO-003",
+      "observer": "DEMO",
+      "spectrum_url": "spectra/demo-ugc12893.svg",
+      "start_utc": "2026-01-12T21:00:00Z",
+      "status": "observed",
+      "target_id": "ugc12893",
+      "telescope": "SRT"
+    },
+    {
+      "end_utc": "2026-01-13T04:00:00Z",
+      "notes": "DEMO observation for interface testing",
+      "observation_id": "DEMO-004",
+      "observer": "DEMO",
+      "spectrum_url": "spectra/demo-wiseaj000103-0.svg",
+      "start_utc": "2026-01-13T03:00:00Z",
+      "status": "observed",
+      "target_id": "wiseaj000103-0",
+      "telescope": "GBT"
+    },
+    {
+      "end_utc": "2026-01-14T20:45:00Z",
+      "notes": "DEMO observation for interface testing",
+      "observation_id": "DEMO-005",
+      "observer": "DEMO",
+      "spectrum_url": "spectra/demo-ic5377.svg",
+      "start_utc": "2026-01-14T19:45:00Z",
+      "status": "observed",
+      "target_id": "ic5377",
+      "telescope": "EFF"
+    }
+  ],
   "project": {
     "description": "A multi-telescope 22 GHz spectral survey of nearby galaxies.",
     "name": "ANCH0R"
@@ -17,7 +73,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 0,
+    "observations": 5,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -36,13 +92,14 @@
       }
     },
     "status_counts": {
-      "unobserved": 2995
+      "observed": 5,
+      "unobserved": 2990
     },
     "total_targets": 2995
   },
   "targets": [
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "GBT",
       "coordinate_system": "Equatorial",
       "dec_deg": 31.02163889,
       "dec_dms": "+31:01:17.9",
@@ -56,8 +113,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "DEMO observation for interface testing",
+      "observations_count": 1,
       "ra_deg": 0.08833333,
       "ra_hms": "00:00:21.2",
       "ra_hours": 0.0058888889,
@@ -67,15 +124,15 @@
         "SRT": "N"
       },
       "source_name": "GALEXASCJ00002",
-      "spectrum_url": "",
-      "status": "unobserved",
+      "spectrum_url": "spectra/demo-galexascj00002.svg",
+      "status": "observed",
       "target_id": "galexascj00002",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
       "velocity_km_s": 566.0
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "EFF",
       "coordinate_system": "Equatorial",
       "dec_deg": 39.4955,
       "dec_dms": "+39:29:43.8",
@@ -89,8 +146,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group11",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "DEMO observation for interface testing",
+      "observations_count": 1,
       "ra_deg": 0.09416667,
       "ra_hms": "00:00:22.6",
       "ra_hours": 0.0062777778,
@@ -100,15 +157,15 @@
         "SRT": "N"
       },
       "source_name": "UGC12894",
-      "spectrum_url": "",
-      "status": "unobserved",
+      "spectrum_url": "spectra/demo-ugc12894.svg",
+      "status": "observed",
       "target_id": "ugc12894",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
       "velocity_km_s": 334.9
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "SRT",
       "coordinate_system": "Equatorial",
       "dec_deg": 17.22022222,
       "dec_dms": "+17:13:12.8",
@@ -122,8 +179,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "DEMO observation for interface testing",
+      "observations_count": 1,
       "ra_deg": 0.11875,
       "ra_hms": "00:00:28.5",
       "ra_hours": 0.0079166667,
@@ -133,15 +190,15 @@
         "SRT": "N"
       },
       "source_name": "UGC12893",
-      "spectrum_url": "",
-      "status": "unobserved",
+      "spectrum_url": "spectra/demo-ugc12893.svg",
+      "status": "observed",
       "target_id": "ugc12893",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
       "velocity_km_s": 1097.0
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "GBT",
       "coordinate_system": "Equatorial",
       "dec_deg": -26.08930556,
       "dec_dms": "-26:05:21.5",
@@ -154,8 +211,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "DEMO observation for interface testing",
+      "observations_count": 1,
       "ra_deg": 0.2625,
       "ra_hms": "00:01:03.0",
       "ra_hours": 0.0175,
@@ -164,15 +221,15 @@
         "SRT": "N"
       },
       "source_name": "WISEAJ000103.0",
-      "spectrum_url": "",
-      "status": "unobserved",
+      "spectrum_url": "spectra/demo-wiseaj000103-0.svg",
+      "status": "observed",
       "target_id": "wiseaj000103-0",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
       "velocity_km_s": 400.0
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "EFF",
       "coordinate_system": "Equatorial",
       "dec_deg": 16.59030556,
       "dec_dms": "+16:35:25.1",
@@ -186,8 +243,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "DEMO observation for interface testing",
+      "observations_count": 1,
       "ra_deg": 0.52291667,
       "ra_hms": "00:02:05.5",
       "ra_hours": 0.0348611111,
@@ -197,8 +254,8 @@
         "SRT": "N"
       },
       "source_name": "IC5377",
-      "spectrum_url": "",
-      "status": "unobserved",
+      "spectrum_url": "spectra/demo-ic5377.svg",
+      "status": "observed",
       "target_id": "ic5377",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",

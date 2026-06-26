@@ -1,15 +1,14 @@
 import { useMemo, useState } from "react";
 import { StatusBadge } from "../components/StatusBadge";
 import { formatInteger, formatVelocity } from "../lib/format";
-import { TELESCOPE_CODES, TELESCOPES } from "../lib/telescopes";
-import type { CatalogData, Target, TargetStatus, TelescopeCode } from "../types";
+import { TELESCOPE_CODES } from "../lib/telescopes";
+import type { CatalogData, Target, TelescopeCode } from "../types";
 
 interface MasterTableProps {
   catalog: CatalogData;
 }
 
-type TelescopeFilter = "all" | TelescopeCode;
-type StatusFilter = "all" | TargetStatus;
+type StatusFilter = "all" | "unobserved" | "observed" | `observed:${TelescopeCode}`;
 type SortKey = "catalog" | "name" | "ra" | "dec" | "velocity";
 type SortDirection = "asc" | "desc";
 
@@ -32,19 +31,46 @@ function targetMatchesSearch(target: Target, search: string): boolean {
   return haystack.includes(search.toLowerCase());
 }
 
+function observedTelescopesForTarget(
+  target: Target,
+  observedTelescopesByTarget: Map<string, TelescopeCode[]>,
+): TelescopeCode[] {
+  return (
+    observedTelescopesByTarget.get(target.target_id) ??
+    (target.assigned_telescope ? [target.assigned_telescope] : [])
+  );
+}
+
 function observedStatusLabel(
   target: Target,
   observedTelescopesByTarget: Map<string, TelescopeCode[]>,
 ): string {
-  const telescopes =
-    observedTelescopesByTarget.get(target.target_id) ??
-    (target.assigned_telescope ? [target.assigned_telescope] : []);
+  const telescopes = observedTelescopesForTarget(target, observedTelescopesByTarget);
   return telescopes.length > 0 ? `Observed with: ${telescopes.join(", ")}` : "Observed";
+}
+
+function targetMatchesStatus(
+  target: Target,
+  status: StatusFilter,
+  observedTelescopesByTarget: Map<string, TelescopeCode[]>,
+): boolean {
+  if (status === "all") {
+    return true;
+  }
+
+  if (status === "unobserved" || status === "observed") {
+    return target.status === status;
+  }
+
+  const telescope = status.replace("observed:", "") as TelescopeCode;
+  return (
+    target.status === "observed" &&
+    observedTelescopesForTarget(target, observedTelescopesByTarget).includes(telescope)
+  );
 }
 
 export function MasterTable({ catalog }: MasterTableProps) {
   const [search, setSearch] = useState("");
-  const [telescope, setTelescope] = useState<TelescopeFilter>("all");
   const [status, setStatus] = useState<StatusFilter>("all");
   const [sortKey, setSortKey] = useState<SortKey>("catalog");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
@@ -65,12 +91,12 @@ export function MasterTable({ catalog }: MasterTableProps) {
 
   const filteredTargets = useMemo(() => {
     return catalog.targets.filter((target) => {
-      const matchesTelescope =
-        telescope === "all" || target.eligible_telescopes.includes(telescope);
-      const matchesStatus = status === "all" || target.status === status;
-      return matchesTelescope && matchesStatus && targetMatchesSearch(target, search);
+      return (
+        targetMatchesStatus(target, status, observedTelescopesByTarget) &&
+        targetMatchesSearch(target, search)
+      );
     });
-  }, [catalog.targets, search, status, telescope]);
+  }, [catalog.targets, observedTelescopesByTarget, search, status]);
 
   const sortedTargets = useMemo(() => {
     if (sortKey === "catalog") {
@@ -128,21 +154,6 @@ export function MasterTable({ catalog }: MasterTableProps) {
         </label>
 
         <label>
-          Telescope
-          <select
-            value={telescope}
-            onChange={(event) => setTelescope(event.target.value as TelescopeFilter)}
-          >
-            <option value="all">All telescopes</option>
-            {TELESCOPE_CODES.map((code) => (
-              <option key={code} value={code}>
-                {TELESCOPES[code].shortName}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label>
           Status
           <select
             value={status}
@@ -150,7 +161,12 @@ export function MasterTable({ catalog }: MasterTableProps) {
           >
             <option value="all">All statuses</option>
             <option value="unobserved">Unobserved</option>
-            <option value="observed">Observed</option>
+            <option value="observed">All observed</option>
+            {TELESCOPE_CODES.map((code) => (
+              <option key={code} value={`observed:${code}`}>
+                Observed with: {code}
+              </option>
+            ))}
           </select>
         </label>
 

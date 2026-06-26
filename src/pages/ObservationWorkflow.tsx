@@ -6,7 +6,6 @@ import {
   formatUtc,
   formatVelocity,
   parseUtcInput,
-  toUtcInputValue,
 } from "../lib/format";
 import { TELESCOPES, TELESCOPE_CODES } from "../lib/telescopes";
 import { evaluateVisibility, type VisibilityResult } from "../lib/visibility";
@@ -22,6 +21,7 @@ interface PlannedTarget {
 }
 
 type ObservationMode = "plan" | "report";
+type TimeScale = "utc" | "local";
 type SortKey =
   | "recommended"
   | "name"
@@ -49,16 +49,6 @@ const MONTH_LABELS = [
   "Dec",
 ];
 
-function initialWindow() {
-  const now = new Date();
-  const start = new Date(now);
-  start.setUTCMinutes(0, 0, 0);
-  start.setUTCHours(start.getUTCHours() + 1);
-  const end = new Date(start);
-  end.setUTCHours(end.getUTCHours() + 8);
-  return { start, end };
-}
-
 function compareRecommended(a: PlannedTarget, b: PlannedTarget): number {
   return (
     b.visibility.observableMinutes - a.visibility.observableMinutes ||
@@ -81,6 +71,108 @@ function formatDisplayUtc(date: Date | null): string {
   const hours = String(date.getUTCHours()).padStart(2, "0");
   const minutes = String(date.getUTCMinutes()).padStart(2, "0");
   return `${year} ${month} ${day} ${hours}:${minutes} UTC`;
+}
+
+function parseDateTimeInput(value: string) {
+  const match = value.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/);
+  if (!match) {
+    return null;
+  }
+  const [, year, month, day, hours, minutes] = match;
+  return {
+    year: Number(year),
+    month: Number(month),
+    day: Number(day),
+    hours: Number(hours),
+    minutes: Number(minutes),
+  };
+}
+
+function getTimeZoneParts(date: Date, timeZone: string) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(date);
+  const values = Object.fromEntries(
+    parts.filter((part) => part.type !== "literal").map((part) => [part.type, part.value]),
+  );
+  return {
+    year: Number(values.year),
+    month: Number(values.month),
+    day: Number(values.day),
+    hours: Number(values.hour),
+    minutes: Number(values.minute),
+    seconds: Number(values.second),
+  };
+}
+
+function getTimeZoneOffsetMs(date: Date, timeZone: string): number {
+  const parts = getTimeZoneParts(date, timeZone);
+  const equivalentUtcMs = Date.UTC(
+    parts.year,
+    parts.month - 1,
+    parts.day,
+    parts.hours,
+    parts.minutes,
+    parts.seconds,
+  );
+  return equivalentUtcMs - date.getTime();
+}
+
+function parseTelescopeLocalInput(value: string, timeZone: string): Date | null {
+  const parts = parseDateTimeInput(value);
+  if (!parts) {
+    return null;
+  }
+  const wallTimeAsUtcMs = Date.UTC(
+    parts.year,
+    parts.month - 1,
+    parts.day,
+    parts.hours,
+    parts.minutes,
+    0,
+  );
+  let utcMs = wallTimeAsUtcMs - getTimeZoneOffsetMs(new Date(wallTimeAsUtcMs), timeZone);
+  utcMs = wallTimeAsUtcMs - getTimeZoneOffsetMs(new Date(utcMs), timeZone);
+  return new Date(utcMs);
+}
+
+function parseObservationTime(
+  value: string,
+  timeScale: TimeScale,
+  timeZone: string,
+): Date | null {
+  if (!value) {
+    return null;
+  }
+  if (timeScale === "utc") {
+    const parsed = parseUtcInput(value);
+    return Number.isNaN(parsed.getTime()) ? null : parsed;
+  }
+  return parseTelescopeLocalInput(value, timeZone);
+}
+
+function formatDateTimeInput(date: Date, timeScale: TimeScale, timeZone: string): string {
+  if (timeScale === "utc") {
+    return date.toISOString().slice(0, 16);
+  }
+  const parts = getTimeZoneParts(date, timeZone);
+  const datePart = [
+    String(parts.year).padStart(4, "0"),
+    String(parts.month).padStart(2, "0"),
+    String(parts.day).padStart(2, "0"),
+  ].join("-");
+  const timePart = `${String(parts.hours).padStart(2, "0")}:${String(parts.minutes).padStart(
+    2,
+    "0",
+  )}`;
+  return `${datePart}T${timePart}`;
 }
 
 function selectedTargetRows(selectedResults: PlannedTarget[], telescope: TelescopeCode) {
@@ -178,7 +270,8 @@ function SkyMap({
   results: PlannedTarget[];
   selectedIds: Set<string>;
 }) {
-  const width = 760;
+  const mapWidth = 760;
+  const width = 806;
   const height = 320;
   const parallels = [-60, -30, 0, 30, 60];
   const meridians = [0, 60, 120, 180, 240, 300];
@@ -203,9 +296,9 @@ function SkyMap({
         <title>Sky map of current and selected targets</title>
         <ellipse
           className="sky-map-outline"
-          cx={width / 2}
+          cx={mapWidth / 2}
           cy={height / 2}
-          rx={width / 2 - 16}
+          rx={mapWidth / 2 - 16}
           ry={height / 2 - 16}
         />
         {parallels.map((decDeg) => (
@@ -217,7 +310,7 @@ function SkyMap({
                 raDeg: index * 5,
                 decDeg,
               })),
-              width,
+              mapWidth,
               height,
             )}
           />
@@ -231,13 +324,13 @@ function SkyMap({
                 raDeg,
                 decDeg: -90 + index * 5,
               })),
-              width,
+              mapWidth,
               height,
             )}
           />
         ))}
         {meridians.map((raDeg) => {
-          const point = projectMollweide(raDeg, -66, width, height);
+          const point = projectMollweide(raDeg, -66, mapWidth, height);
           return (
             <text
               className="sky-map-label sky-map-label--ra"
@@ -251,13 +344,13 @@ function SkyMap({
           );
         })}
         {parallels.map((decDeg) => {
-          const point = projectMollweide(5, decDeg, width, height);
+          const point = projectMollweide(0, decDeg, mapWidth, height);
           return (
             <text
               className="sky-map-label sky-map-label--dec"
               key={`dec-label-${decDeg}`}
-              textAnchor="end"
-              x={point.x - 8}
+              textAnchor="start"
+              x={point.x + 8}
               y={point.y}
             >
               {decLabel(decDeg)}
@@ -265,7 +358,7 @@ function SkyMap({
           );
         })}
         {results.map(({ target }) => {
-          const point = projectMollweide(target.ra_deg, target.dec_deg, width, height);
+          const point = projectMollweide(target.ra_deg, target.dec_deg, mapWidth, height);
           const selected = selectedIds.has(target.target_id);
           return (
             <circle
@@ -273,7 +366,7 @@ function SkyMap({
               cx={point.x}
               cy={point.y}
               key={target.target_id}
-              r={selected ? 5.5 : 1.4}
+              r={selected ? 3.6 : 1.4}
             />
           );
         })}
@@ -282,11 +375,44 @@ function SkyMap({
   );
 }
 
+function TimeScaleToggle({
+  timeScale,
+  siteLabel,
+  onChange,
+}: {
+  timeScale: TimeScale;
+  siteLabel: string;
+  onChange: (nextTimeScale: TimeScale) => void;
+}) {
+  return (
+    <span className="time-scale-toggle" role="group" aria-label="Time scale">
+      <button
+        aria-pressed={timeScale === "utc"}
+        className={timeScale === "utc" ? "time-scale-option active" : "time-scale-option"}
+        onClick={() => onChange("utc")}
+        title="Use UTC times"
+        type="button"
+      >
+        UTC
+      </button>
+      <button
+        aria-pressed={timeScale === "local"}
+        className={timeScale === "local" ? "time-scale-option active" : "time-scale-option"}
+        onClick={() => onChange("local")}
+        title={`Use ${siteLabel} local times`}
+        type="button"
+      >
+        Local
+      </button>
+    </span>
+  );
+}
+
 function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: ObservationMode }) {
-  const defaults = useMemo(() => initialWindow(), []);
   const [telescope, setTelescope] = useState<TelescopeCode>("GBT");
-  const [startUtc, setStartUtc] = useState(toUtcInputValue(defaults.start));
-  const [endUtc, setEndUtc] = useState(toUtcInputValue(defaults.end));
+  const [timeScale, setTimeScale] = useState<TimeScale>("utc");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [minElevationDeg, setMinElevationDeg] = useState(25);
   const [minObservableMinutes, setMinObservableMinutes] = useState(30);
   const [maxResults, setMaxResults] = useState(50);
@@ -296,13 +422,24 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
   const [notes, setNotes] = useState("");
 
   const site = TELESCOPES[telescope];
-  const windowStart = parseUtcInput(startUtc);
-  const windowEnd = parseUtcInput(endUtc);
-  const invalidWindow = windowEnd.getTime() <= windowStart.getTime();
+  const windowStart = parseObservationTime(startTime, timeScale, site.timeZone);
+  const windowEnd = parseObservationTime(endTime, timeScale, site.timeZone);
+  const missingWindow = !windowStart || !windowEnd;
+  const invalidWindow = Boolean(
+    windowStart && windowEnd && windowEnd.getTime() <= windowStart.getTime(),
+  );
 
   useEffect(() => {
     setSelectedIds(new Set());
-  }, [endUtc, maxResults, minElevationDeg, minObservableMinutes, startUtc, telescope]);
+  }, [
+    endTime,
+    maxResults,
+    minElevationDeg,
+    minObservableMinutes,
+    startTime,
+    telescope,
+    timeScale,
+  ]);
 
   const candidates = useMemo(() => {
     return catalog.targets.filter((target) => {
@@ -311,7 +448,7 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
   }, [catalog.targets, telescope]);
 
   const results = useMemo<PlannedTarget[]>(() => {
-    if (invalidWindow) {
+    if (!windowStart || !windowEnd || invalidWindow) {
       return [];
     }
 
@@ -364,6 +501,7 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
     maxResults,
     minElevationDeg,
     minObservableMinutes,
+    missingWindow,
     site,
     sortDirection,
     sortKey,
@@ -408,16 +546,31 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
   }
 
   function exportSelectedTargets() {
-    const filename = `anch0r-${telescope.toLowerCase()}-${startUtc.replaceAll(":", "")}.csv`;
+    const windowLabel = startTime ? startTime.replaceAll(":", "") : "selected-targets";
+    const filename = `anch0r-${telescope.toLowerCase()}-${windowLabel}.csv`;
     downloadCsv(filename, selectedTargetRows(selectedResults, telescope));
   }
 
   function submitReport() {
+    const startUtc = formatUtc(windowStart);
+    const endUtc = formatUtc(windowEnd);
     const subject = `ANCH0R observing report: ${telescope} ${startUtc}`;
     const body = buildReportBody(selectedResults, telescope, startUtc, endUtc, notes);
     window.location.href = `mailto:${REPORT_EMAIL}?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`;
+  }
+
+  function updateTimeScale(nextTimeScale: TimeScale) {
+    if (nextTimeScale === timeScale) {
+      return;
+    }
+
+    setStartTime(
+      windowStart ? formatDateTimeInput(windowStart, nextTimeScale, site.timeZone) : startTime,
+    );
+    setEndTime(windowEnd ? formatDateTimeInput(windowEnd, nextTimeScale, site.timeZone) : endTime);
+    setTimeScale(nextTimeScale);
   }
 
   const title = mode === "plan" ? "Plan an observation" : "Submit an observing report";
@@ -462,20 +615,27 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
           </label>
 
           <label>
-            Start UTC
+            <span className="time-field-heading">
+              Start time
+              <TimeScaleToggle
+                onChange={updateTimeScale}
+                siteLabel={site.shortName}
+                timeScale={timeScale}
+              />
+            </span>
             <input
               type="datetime-local"
-              value={startUtc}
-              onChange={(event) => setStartUtc(event.target.value)}
+              value={startTime}
+              onChange={(event) => setStartTime(event.target.value)}
             />
           </label>
 
           <label>
-            End UTC
+            End time
             <input
               type="datetime-local"
-              value={endUtc}
-              onChange={(event) => setEndUtc(event.target.value)}
+              value={endTime}
+              onChange={(event) => setEndTime(event.target.value)}
             />
           </label>
 
@@ -514,8 +674,12 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
         </form>
       </section>
 
+      {missingWindow ? (
+        <div className="empty-state">Enter a start time and end time to show matching targets.</div>
+      ) : null}
+
       {invalidWindow ? (
-        <div className="message-error">End UTC must be later than Start UTC.</div>
+        <div className="message-error">End time must be later than start time.</div>
       ) : null}
 
       <section className="selection-panel">

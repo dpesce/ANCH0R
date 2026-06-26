@@ -1,9 +1,9 @@
 target_id,source_name,ra_hms,dec_dms,ra_deg,dec_deg,velocity_km_s,eligible_gbt,eligible_eff,eligible_srt,gbt_group,status,assigned_telescope,spectrum_url,observations_count,notes
-galexascj00002,GALEXASCJ00002,00:00:21.2,+31:01:17.9,0.08833333,31.02163889,566.0,True,True,True,Group01,unobserved,,,0,
-ugc12894,UGC12894,00:00:22.6,+39:29:43.8,0.09416667,39.4955,334.9,True,True,True,Group11,unobserved,,,0,
-ugc12893,UGC12893,00:00:28.5,+17:13:12.8,0.11875,17.22022222,1097.0,True,True,True,Group01,unobserved,,,0,
-wiseaj000103-0,WISEAJ000103.0,00:01:03.0,-26:05:21.5,0.2625,-26.08930556,400.0,True,False,True,Group01,unobserved,,,0,
-ic5377,IC5377,00:02:05.5,+16:35:25.1,0.52291667,16.59030556,1051.1,True,True,True,Group01,unobserved,,,0,
+galexascj00002,GALEXASCJ00002,00:00:21.2,+31:01:17.9,0.08833333,31.02163889,566.0,True,True,True,Group01,observed,GBT,spectra/demo-galexascj00002.svg,1,DEMO observation for interface testing
+ugc12894,UGC12894,00:00:22.6,+39:29:43.8,0.09416667,39.4955,334.9,True,True,True,Group11,observed,EFF,spectra/demo-ugc12894.svg,1,DEMO observation for interface testing
+ugc12893,UGC12893,00:00:28.5,+17:13:12.8,0.11875,17.22022222,1097.0,True,True,True,Group01,observed,SRT,spectra/demo-ugc12893.svg,1,DEMO observation for interface testing
+wiseaj000103-0,WISEAJ000103.0,00:01:03.0,-26:05:21.5,0.2625,-26.08930556,400.0,True,False,True,Group01,observed,GBT,spectra/demo-wiseaj000103-0.svg,1,DEMO observation for interface testing
+ic5377,IC5377,00:02:05.5,+16:35:25.1,0.52291667,16.59030556,1051.1,True,True,True,Group01,observed,EFF,spectra/demo-ic5377.svg,1,DEMO observation for interface testing
 wiseaj000232-7,WISEAJ000232.7,00:02:32.8,-21:46:11.3,0.63666667,-21.76980556,969.5,True,False,True,Group01,unobserved,,,0,
 ugc00017,UGC00017,00:03:43.2,+15:13:07.7,0.93,15.21880556,876.9,True,True,True,Group01,unobserved,,,0,
 ugc00031,UGC00031,00:04:52.0,+17:11:32.2,1.21666667,17.19227778,1034.0,True,True,True,Group01,unobserved,,,0,
