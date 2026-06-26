@@ -97,20 +97,52 @@ nav a {
   text-decoration: none;
 }
 
-nav a.active,
-nav a:hover {
-  background: var(--accent-soft);
-  color: var(--accent-strong);
+.nav-dropdown {
+  position: relative;
 }
 
-.nav-label {
-  align-self: center;
+.nav-dropdown-trigger {
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
   color: var(--muted);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  padding: 8px 2px 8px 8px;
-  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 650;
+  padding: 8px 10px;
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 20;
+  display: none;
+  min-width: 240px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 12px 28px rgba(34, 49, 45, 0.12);
+  padding: 6px;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu {
+  display: grid;
+  gap: 2px;
+}
+
+.nav-dropdown-menu a {
+  display: block;
+  padding: 9px 10px;
+  white-space: nowrap;
+}
+
+nav a.active,
+.nav-dropdown-trigger.active,
+nav a:hover,
+.nav-dropdown-trigger:hover {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
 }
 
 .page-shell {
@@ -312,27 +344,17 @@ dd {
   gap: 8px;
 }
 
-.selected-chip,
-.table-action {
+.selected-chip {
   border: 1px solid var(--border);
   border-radius: 999px;
   background: white;
   color: var(--accent-strong);
   cursor: pointer;
   font-weight: 800;
-}
-
-.selected-chip {
   padding: 7px 10px;
 }
 
-.table-action {
-  padding: 5px 9px;
-  white-space: nowrap;
-}
-
-.selected-chip:hover,
-.table-action:hover {
+.selected-chip:hover {
   border-color: var(--accent);
   background: var(--accent-soft);
 }
@@ -364,9 +386,15 @@ dd {
   stroke-width: 0.8;
 }
 
+.sky-map-label {
+  fill: #4c5754;
+  font-size: 12px;
+  font-weight: 750;
+}
+
 .sky-map-point {
-  fill: var(--accent-strong);
-  opacity: 0.42;
+  fill: #111816;
+  opacity: 0.5;
 }
 
 .sky-map-point--selected {
@@ -414,6 +442,14 @@ button:disabled {
   opacity: 0.55;
 }
 
+.target-checkbox {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
 .toolbar-count {
   color: var(--muted);
   padding: 10px 0;
@@ -459,6 +495,11 @@ td {
   border-bottom: 1px solid var(--border);
   text-align: left;
   vertical-align: top;
+}
+
+.checkbox-cell {
+  text-align: center;
+  vertical-align: middle;
 }
 
 th {
@@ -572,9 +613,20 @@ td strong,
     gap: 6px;
   }
 
-  .nav-label {
+  .nav-dropdown {
     width: 100%;
-    padding: 4px 0 0;
+  }
+
+  .nav-dropdown-trigger {
+    text-align: left;
+    width: 100%;
+  }
+
+  .nav-dropdown-menu {
+    position: static;
+    width: 100%;
+    margin-top: 4px;
+    box-shadow: none;
   }
 
   h1 {

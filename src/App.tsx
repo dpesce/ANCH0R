@@ -85,13 +85,27 @@ export default function App() {
           <a className={route === "targets" ? "active" : ""} href="#targets">
             Targets
           </a>
-          <span className="nav-label">Observations</span>
-          <a className={route === "plan" ? "active" : ""} href="#plan">
-            Plan
-          </a>
-          <a className={route === "report" ? "active" : ""} href="#report">
-            Report
-          </a>
+          <div className="nav-dropdown">
+            <button
+              aria-haspopup="true"
+              className={
+                route === "plan" || route === "report"
+                  ? "nav-dropdown-trigger active"
+                  : "nav-dropdown-trigger"
+              }
+              type="button"
+            >
+              Observations
+            </button>
+            <div className="nav-dropdown-menu">
+              <a className={route === "plan" ? "active" : ""} href="#plan">
+                Plan an observation
+              </a>
+              <a className={route === "report" ? "active" : ""} href="#report">
+                Submit an observing report
+              </a>
+            </div>
+          </div>
         </nav>
       </header>
       {page}

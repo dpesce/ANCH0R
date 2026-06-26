@@ -157,6 +157,10 @@ function SkyMap({
   const parallels = [-60, -30, 0, 30, 60];
   const meridians = [0, 60, 120, 180, 240, 300];
 
+  function decLabel(decDeg: number) {
+    return `${decDeg > 0 ? "+" : ""}${decDeg} deg`;
+  }
+
   return (
     <section className="sky-map-panel" aria-label="Selected target sky map">
       <div className="section-heading-row">
@@ -202,6 +206,34 @@ function SkyMap({
             )}
           />
         ))}
+        {meridians.map((raDeg) => {
+          const point = projectMollweide(raDeg, -74, width, height);
+          return (
+            <text
+              className="sky-map-label"
+              key={`ra-label-${raDeg}`}
+              textAnchor="middle"
+              x={point.x}
+              y={point.y + 12}
+            >
+              {raDeg / 15}h
+            </text>
+          );
+        })}
+        {parallels.map((decDeg) => {
+          const point = projectMollweide(5, decDeg, width, height);
+          return (
+            <text
+              className="sky-map-label"
+              key={`dec-label-${decDeg}`}
+              textAnchor="end"
+              x={point.x - 8}
+              y={point.y + 4}
+            >
+              {decLabel(decDeg)}
+            </text>
+          );
+        })}
         {results.map(({ target }) => {
           const point = projectMollweide(target.ra_deg, target.dec_deg, width, height);
           const selected = selectedIds.has(target.target_id);
@@ -211,7 +243,7 @@ function SkyMap({
               cx={point.x}
               cy={point.y}
               key={target.target_id}
-              r={selected ? 5 : 2.4}
+              r={selected ? 5.5 : 1.4}
             />
           );
         })}
@@ -358,19 +390,29 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
     )}&body=${encodeURIComponent(body)}`;
   }
 
-  const title = mode === "plan" ? "Plan an Observation" : "Submit an Observing Report";
+  const title = mode === "plan" ? "Plan an observation" : "Submit an observing report";
+  const description =
+    mode === "plan"
+      ? "Find unobserved targets visible during a UTC observing window. The telescope filter uses the internal eligibility list from the master catalog."
+      : "Select the targets actually observed during a run, add any notes, and generate an observing report email.";
   const actionLabel = mode === "plan" ? "Download selected CSV" : "Submit report";
   const action = mode === "plan" ? exportSelectedTargets : submitReport;
+  const selectedTitle = mode === "plan" ? "Selected Targets" : "Observed Targets";
+  const emptySelectionText =
+    mode === "plan" ? "Select targets from the table below." : "Check the targets observed during this run.";
+  const tableTitle = mode === "plan" ? "Candidate Targets" : "Observed Targets";
+  const tableSummary =
+    mode === "plan"
+      ? `Showing ${formatInteger(results.length)} candidate targets above ${minElevationDeg} deg for at least ${formatInteger(minObservableMinutes)} minutes.`
+      : `Showing ${formatInteger(results.length)} targets matching this observing setup; check the sources that were actually observed.`;
+  const selectionColumnLabel = mode === "plan" ? "Select" : "Observed";
 
   return (
     <main className="page-shell page-block">
       <div className="page-heading">
         <p className="section-label">Observations</p>
         <h1>{title}</h1>
-        <p>
-          Select unobserved targets visible during a UTC observing window. The telescope
-          filter uses the internal eligibility list from the master catalog.
-        </p>
+        <p>{description}</p>
       </div>
 
       <section className="planner-layout">
@@ -449,7 +491,7 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
       <section className="selection-panel">
         <div className="section-heading-row">
           <div>
-            <h2>Selected Targets</h2>
+            <h2>{selectedTitle}</h2>
             <p>{formatInteger(selectedResults.length)} targets selected.</p>
           </div>
           <button
@@ -488,19 +530,16 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
             ))}
           </div>
         ) : (
-          <p className="subtle">Select targets from the table below.</p>
+          <p className="subtle">{emptySelectionText}</p>
         )}
       </section>
 
-      <SkyMap results={results} selectedIds={selectedIds} />
+      {mode === "plan" ? <SkyMap results={results} selectedIds={selectedIds} /> : null}
 
       <section className="results-heading">
         <div>
-          <h2>Candidate Targets</h2>
-          <p>
-            Showing {formatInteger(results.length)} targets above {minElevationDeg} deg
-            for at least {formatInteger(minObservableMinutes)} minutes.
-          </p>
+          <h2>{tableTitle}</h2>
+          <p>{tableSummary}</p>
         </div>
       </section>
 
@@ -508,7 +547,7 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
         <table>
           <thead>
             <tr>
-              <th>Select</th>
+              <th>{selectionColumnLabel}</th>
               <th>
                 <button type="button" className="sort-button" onClick={() => updateSort("name")}>
                   {sortLabel("Target", "name")}
@@ -568,14 +607,14 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
               const selected = selectedIds.has(target.target_id);
               return (
                 <tr className={selected ? "selected-row" : ""} key={target.target_id}>
-                  <td>
-                    <button
-                      className="table-action"
-                      onClick={() => toggleSelection(target.target_id)}
-                      type="button"
-                    >
-                      {selected ? "Remove" : "Select"}
-                    </button>
+                  <td className="checkbox-cell">
+                    <input
+                      aria-label={`${selectionColumnLabel} ${target.source_name}`}
+                      checked={selected}
+                      className="target-checkbox"
+                      onChange={() => toggleSelection(target.target_id)}
+                      type="checkbox"
+                    />
                   </td>
                   <td>
                     <strong>{target.source_name}</strong>
