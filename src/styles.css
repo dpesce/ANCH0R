@@ -36,7 +36,8 @@ a {
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 
@@ -85,6 +86,7 @@ p {
 nav {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
 }
 
@@ -99,6 +101,16 @@ nav a.active,
 nav a:hover {
   background: var(--accent-soft);
   color: var(--accent-strong);
+}
+
+.nav-label {
+  align-self: center;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 8px 2px 8px 8px;
+  text-transform: uppercase;
 }
 
 .page-shell {
@@ -126,14 +138,22 @@ nav a:hover {
   font-weight: 750;
 }
 
+.section-label {
+  margin-bottom: 8px;
+  color: var(--accent-strong);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .hero-copy {
   max-width: 760px;
   color: #40504b;
   font-size: 1.08rem;
 }
 
-.hero-actions,
-.badge-row {
+.hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -252,6 +272,110 @@ dd {
   gap: 14px;
 }
 
+.section-heading-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.section-heading-row h2 {
+  margin-bottom: 4px;
+}
+
+.section-heading-row p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.selection-panel,
+.sky-map-panel {
+  margin-top: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 18px;
+}
+
+.selection-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.notes-field {
+  margin-top: 2px;
+}
+
+.selected-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.selected-chip,
+.table-action {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: white;
+  color: var(--accent-strong);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.selected-chip {
+  padding: 7px 10px;
+}
+
+.table-action {
+  padding: 5px 9px;
+  white-space: nowrap;
+}
+
+.selected-chip:hover,
+.table-action:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.selected-row {
+  background: #f2fbf8;
+}
+
+.sky-map-panel {
+  display: grid;
+  gap: 14px;
+}
+
+.sky-map {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.sky-map-outline {
+  fill: #f5f8f7;
+  stroke: var(--border);
+  stroke-width: 1.4;
+}
+
+.sky-map-grid {
+  fill: none;
+  stroke: #c9d5d1;
+  stroke-width: 0.8;
+}
+
+.sky-map-point {
+  fill: var(--accent-strong);
+  opacity: 0.42;
+}
+
+.sky-map-point--selected {
+  fill: #d84b2a;
+  opacity: 1;
+  stroke: white;
+  stroke-width: 1.6;
+}
+
 label {
   display: grid;
   gap: 7px;
@@ -261,7 +385,8 @@ label {
 }
 
 input,
-select {
+select,
+textarea {
   width: 100%;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -270,12 +395,23 @@ select {
   padding: 10px 11px;
 }
 
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
 input:focus,
 select:focus,
+textarea:focus,
 button:focus-visible,
 a:focus-visible {
   outline: 3px solid rgba(15, 118, 110, 0.22);
   outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 .toolbar-count {
@@ -359,7 +495,6 @@ td strong,
   font-size: 0.84rem;
 }
 
-.telescope-badge,
 .status-badge {
   display: inline-flex;
   align-items: center;
@@ -368,11 +503,6 @@ td strong,
   padding: 3px 8px;
   font-size: 0.78rem;
   font-weight: 800;
-}
-
-.telescope-badge {
-  background: var(--surface-soft);
-  color: var(--accent-strong);
 }
 
 .status-badge--unobserved {
@@ -407,8 +537,13 @@ td strong,
 
 @media (max-width: 920px) {
   .hero-layout,
-  .results-heading {
+  .results-heading,
+  .section-heading-row {
     grid-template-columns: 1fr;
+  }
+
+  .section-heading-row {
+    flex-direction: column;
   }
 
   .toolbar,
@@ -431,6 +566,15 @@ td strong,
   .planner-form,
   .team-list {
     grid-template-columns: 1fr;
+  }
+
+  nav {
+    gap: 6px;
+  }
+
+  .nav-label {
+    width: 100%;
+    padding: 4px 0 0;
   }
 
   h1 {

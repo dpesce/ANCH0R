@@ -24,7 +24,6 @@ function targetMatchesSearch(target: Target, search: string): boolean {
     target.ra_hms,
     target.dec_dms,
     target.velocity_km_s.toString(),
-    target.gbt_group,
     target.notes,
   ]
     .join(" ")
@@ -33,12 +32,36 @@ function targetMatchesSearch(target: Target, search: string): boolean {
   return haystack.includes(search.toLowerCase());
 }
 
+function observedStatusLabel(
+  target: Target,
+  observedTelescopesByTarget: Map<string, TelescopeCode[]>,
+): string {
+  const telescopes =
+    observedTelescopesByTarget.get(target.target_id) ??
+    (target.assigned_telescope ? [target.assigned_telescope] : []);
+  return telescopes.length > 0 ? `Observed with: ${telescopes.join(", ")}` : "Observed";
+}
+
 export function MasterTable({ catalog }: MasterTableProps) {
   const [search, setSearch] = useState("");
   const [telescope, setTelescope] = useState<TelescopeFilter>("all");
   const [status, setStatus] = useState<StatusFilter>("all");
   const [sortKey, setSortKey] = useState<SortKey>("catalog");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
+  const observedTelescopesByTarget = useMemo(() => {
+    const observed = new Map<string, TelescopeCode[]>();
+    for (const observation of catalog.observations) {
+      if (observation.status !== "observed") {
+        continue;
+      }
+      const telescopes = observed.get(observation.target_id) ?? [];
+      if (!telescopes.includes(observation.telescope)) {
+        telescopes.push(observation.telescope);
+      }
+      observed.set(observation.target_id, telescopes);
+    }
+    return observed;
+  }, [catalog.observations]);
 
   const filteredTargets = useMemo(() => {
     return catalog.targets.filter((target) => {
@@ -100,7 +123,7 @@ export function MasterTable({ catalog }: MasterTableProps) {
             type="search"
             value={search}
             onChange={(event) => setSearch(event.target.value)}
-            placeholder="Name, ID, group, velocity"
+            placeholder="Name or velocity"
           />
         </label>
 
@@ -165,7 +188,6 @@ export function MasterTable({ catalog }: MasterTableProps) {
                   {sortLabel("Velocity", "velocity")}
                 </button>
               </th>
-              <th>Eligible</th>
               <th>Status</th>
               <th>Spectrum</th>
             </tr>
@@ -180,16 +202,13 @@ export function MasterTable({ catalog }: MasterTableProps) {
                 <td>{target.dec_dms}</td>
                 <td>{formatVelocity(target.velocity_km_s)}</td>
                 <td>
-                  <div className="badge-row">
-                    {target.eligible_telescopes.map((code) => (
-                      <span className="telescope-badge" key={code}>
-                        {code}
-                      </span>
-                    ))}
-                  </div>
-                </td>
-                <td>
-                  <StatusBadge status={target.status} />
+                  {target.status === "observed" ? (
+                    <span className="status-badge status-badge--observed">
+                      {observedStatusLabel(target, observedTelescopesByTarget)}
+                    </span>
+                  ) : (
+                    <StatusBadge status={target.status} />
+                  )}
                 </td>
                 <td>
                   {target.spectrum_url ? (

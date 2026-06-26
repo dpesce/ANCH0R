@@ -2,15 +2,19 @@ import { useEffect, useMemo, useState } from "react";
 import { loadCatalog } from "./lib/api";
 import { Home } from "./pages/Home";
 import { MasterTable } from "./pages/MasterTable";
-import { TargetPlanner } from "./pages/TargetPlanner";
+import { PlanObservation, SubmitObservingReport } from "./pages/ObservationWorkflow";
 import type { CatalogData } from "./types";
 
-type Route = "home" | "targets" | "planner";
+type Route = "home" | "targets" | "plan" | "report";
 
-const ROUTES: Route[] = ["home", "targets", "planner"];
+const ROUTES: Route[] = ["home", "targets", "plan", "report"];
 
 function getRouteFromHash(): Route {
-  const route = window.location.hash.replace("#", "") as Route;
+  const hash = window.location.hash.replace("#", "");
+  if (hash === "planner") {
+    return "plan";
+  }
+  const route = hash as Route;
   return ROUTES.includes(route) ? route : "home";
 }
 
@@ -59,8 +63,11 @@ export default function App() {
     if (route === "targets") {
       return <MasterTable catalog={catalog} />;
     }
-    if (route === "planner") {
-      return <TargetPlanner catalog={catalog} />;
+    if (route === "plan") {
+      return <PlanObservation catalog={catalog} />;
+    }
+    if (route === "report") {
+      return <SubmitObservingReport catalog={catalog} />;
     }
     return <Home catalog={catalog} />;
   }, [catalog, error, route]);
@@ -78,8 +85,12 @@ export default function App() {
           <a className={route === "targets" ? "active" : ""} href="#targets">
             Targets
           </a>
-          <a className={route === "planner" ? "active" : ""} href="#planner">
-            Planner
+          <span className="nav-label">Observations</span>
+          <a className={route === "plan" ? "active" : ""} href="#plan">
+            Plan
+          </a>
+          <a className={route === "report" ? "active" : ""} href="#report">
+            Report
           </a>
         </nav>
       </header>
