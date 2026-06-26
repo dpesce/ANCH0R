@@ -33,7 +33,8 @@ type SortKey =
   | "bestUtc";
 type SortDirection = "asc" | "desc";
 
-const REPORT_EMAIL = "dpesce@cfa.harvard.edu";
+const GITHUB_ISSUES_URL = "https://github.com/dpesce/ANCH0R/issues/new";
+const REPORT_PAYLOAD_MARKER = "<!-- ANCH0R_OBSERVING_REPORT_V1 -->";
 const MONTH_LABELS = [
   "Jan",
   "Feb",
@@ -191,38 +192,70 @@ function selectedTargetRows(selectedResults: PlannedTarget[], telescope: Telesco
   }));
 }
 
-function buildReportBody(
+function buildReportIssueBody(
   selectedResults: PlannedTarget[],
   telescope: TelescopeCode,
   startUtc: string,
   endUtc: string,
   notes: string,
 ) {
-  const rows = selectedTargetRows(selectedResults, telescope)
-    .map((row) => {
+  const targetRows = selectedTargetRows(selectedResults, telescope);
+  const targetTable = [
+    "| Target ID | Source | RA | Dec | Velocity |",
+    "| --- | --- | --- | --- | ---: |",
+    ...targetRows.map((row) => {
       return [
+        row.target_id,
         row.source_name,
-        `RA ${row.ra_hms}`,
-        `Dec ${row.dec_dms}`,
+        row.ra_hms,
+        row.dec_dms,
         `${row.velocity_km_s} km/s`,
-        `${row.observable_minutes} min observable`,
-        `max alt ${row.max_altitude_deg} deg`,
       ].join(" | ");
-    })
-    .join("\n");
+    }).map((row) => `| ${row} |`),
+  ].join("\n");
+
+  const payload = {
+    schema_version: 1,
+    submitted_at_utc: formatUtc(new Date()),
+    telescope,
+    start_utc: startUtc,
+    end_utc: endUtc,
+    notes,
+    targets: targetRows.map((row) => ({
+      target_id: row.target_id,
+      source_name: row.source_name,
+      ra_hms: row.ra_hms,
+      dec_dms: row.dec_dms,
+      velocity_km_s: row.velocity_km_s,
+    })),
+  };
 
   return [
+    REPORT_PAYLOAD_MARKER,
+    "",
     "ANCH0R observing report",
     "",
     `Telescope: ${telescope}`,
     `UTC window: ${startUtc} to ${endUtc}`,
     "",
     "Selected targets:",
-    rows || "No targets selected.",
+    targetTable,
     "",
     "Notes:",
     notes || "(none)",
+    "",
+    "Machine-readable payload:",
+    "```json",
+    JSON.stringify(payload, null, 2),
+    "```",
   ].join("\n");
+}
+
+function buildReportIssueUrl(title: string, body: string): string {
+  const url = new URL(GITHUB_ISSUES_URL);
+  url.searchParams.set("title", title);
+  url.searchParams.set("body", body);
+  return url.toString();
 }
 
 function projectMollweide(raDeg: number, decDeg: number, width: number, height: number) {
@@ -554,11 +587,9 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
   function submitReport() {
     const startUtc = formatUtc(windowStart);
     const endUtc = formatUtc(windowEnd);
-    const subject = `ANCH0R observing report: ${telescope} ${startUtc}`;
-    const body = buildReportBody(selectedResults, telescope, startUtc, endUtc, notes);
-    window.location.href = `mailto:${REPORT_EMAIL}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
+    const title = `[ANCH0R Observing Report] ${telescope} ${startUtc}`;
+    const body = buildReportIssueBody(selectedResults, telescope, startUtc, endUtc, notes);
+    window.open(buildReportIssueUrl(title, body), "_blank", "noopener,noreferrer");
   }
 
   function updateTimeScale(nextTimeScale: TimeScale) {
@@ -577,7 +608,7 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
   const description =
     mode === "plan"
       ? "Specify the filters relevant for your observation and then select objects from the table below. All objects that have not yet been observed and which satisfy the selection criteria will be shown. Once you have selected all the objects you wish to observe, you can export the list as a CSV file."
-      : "Select the targets actually observed during a run, add any notes, and generate an observing report email.";
+      : "Select the targets actually observed during a run, add any notes, and open a prefilled GitHub report for submission.";
   const actionLabel = mode === "plan" ? "Download selected CSV" : "Submit report";
   const action = mode === "plan" ? exportSelectedTargets : submitReport;
   const selectedTitle = mode === "plan" ? "Selected Targets" : "Observed Targets";
@@ -705,7 +736,7 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
               rows={5}
               value={notes}
               onChange={(event) => setNotes(event.target.value)}
-              placeholder="Add observing notes to include in the email report."
+              placeholder="Add observing notes to include in the GitHub report."
             />
           </label>
         ) : null}

@@ -1,0 +1,78 @@
+name: Process Observing Report
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: observing-report-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  create-report-pr:
+    if: ${{ contains(github.event.issue.body || '', '<!-- ANCH0R_OBSERVING_REPORT_V1 -->') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Convert issue into observation rows
+        run: python3 scripts/process_observing_report_issue.py --event-path "$GITHUB_EVENT_PATH"
+
+      - name: Validate catalog data
+        run: python3 scripts/validate_data.py
+
+      - name: Rebuild catalog outputs
+        run: python3 scripts/build_catalog.py
+
+      - name: Check for generated changes
+        id: diff
+        run: |
+          if git diff --quiet -- data/observations.csv data/master_targets.csv public/data/catalog.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open or update observing-report PR
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          branch="observing-report/issue-${ISSUE_NUMBER}"
+          title="Add ANCH0R observing report from issue #${ISSUE_NUMBER}"
+          body="$(printf 'This PR was generated from observing-report issue #%s.\n\nReview the appended rows in data/observations.csv before merging.' "$ISSUE_NUMBER")"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add data/observations.csv data/master_targets.csv public/data/catalog.json
+          git commit -m "$title"
+          git push --force origin "$branch"
+
+          pr_number="$(gh pr list --head "$branch" --state open --json number --jq '.[0].number')"
+          if [ -z "$pr_number" ]; then
+            gh pr create --base "$DEFAULT_BRANCH" --head "$branch" --title "$title" --body "$body"
+          else
+            gh pr edit "$pr_number" --title "$title" --body "$body"
+          fi
+
+          gh label create observing-report --description "ANCH0R observing report submissions" --color "0f766e" || \
+            gh label edit observing-report --description "ANCH0R observing report submissions" --color "0f766e"
+          gh issue edit "$ISSUE_NUMBER" --add-label observing-report
