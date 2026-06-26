@@ -67,10 +67,21 @@ jobs:
           git push --force origin "$branch"
 
           pr_number="$(gh pr list --head "$branch" --state open --json number --jq '.[0].number')"
+          pr_url=""
+          pr_create_error="${RUNNER_TEMP}/pr-create-error.log"
           if [ -z "$pr_number" ]; then
-            gh pr create --base "$DEFAULT_BRANCH" --head "$branch" --title "$title" --body "$body"
+            if pr_url="$(gh pr create --base "$DEFAULT_BRANCH" --head "$branch" --title "$title" --body "$body" 2> "$pr_create_error")"; then
+              echo "Created $pr_url"
+            else
+              compare_url="https://github.com/${GITHUB_REPOSITORY}/compare/${DEFAULT_BRANCH}...${branch}?expand=1"
+              error_message="$(cat "$pr_create_error")"
+              echo "::warning::Could not create pull request automatically: ${error_message}"
+              gh issue comment "$ISSUE_NUMBER" --body "$(printf 'The observing-report branch was pushed, but GitHub blocked this workflow from creating a pull request automatically.\n\nCreate the pull request manually here:\n%s\n\nGitHub reported:\n```text\n%s\n```' "$compare_url" "$error_message")"
+            fi
           else
             gh pr edit "$pr_number" --title "$title" --body "$body"
+            pr_url="$(gh pr view "$pr_number" --json url --jq '.url')"
+            echo "Updated $pr_url"
           fi
 
           gh label create observing-report --description "ANCH0R observing report submissions" --color "0f766e" || \
