@@ -54,6 +54,17 @@
       "status": "observed",
       "target_id": "ic5377",
       "telescope": "EFF"
+    },
+    {
+      "end_utc": "2026-06-27T15:41:00Z",
+      "notes": "TEST TEST TEST This is not a real observation, but just a test of the observing report submission system. Submitted via GitHub issue #2 by @dpesce.",
+      "observation_id": "ISSUE-2-001",
+      "observer": "dpesce",
+      "spectrum_url": "",
+      "start_utc": "2026-06-26T15:41:00Z",
+      "status": "observed",
+      "target_id": "ugc00017",
+      "telescope": "GBT"
     }
   ],
   "project": {
@@ -73,7 +84,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 5,
+    "observations": 6,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -92,8 +103,8 @@
       }
     },
     "status_counts": {
-      "observed": 5,
-      "unobserved": 2990
+      "observed": 6,
+      "unobserved": 2989
     },
     "total_targets": 2995
   },
@@ -293,7 +304,7 @@
       "velocity_km_s": 969.5
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "GBT",
       "coordinate_system": "Equatorial",
       "dec_deg": 15.21880556,
       "dec_dms": "+15:13:07.7",
@@ -307,8 +318,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "TEST TEST TEST This is not a real observation, but just a test of the observing report submission system. Submitted via GitHub issue #2 by @dpesce.",
+      "observations_count": 1,
       "ra_deg": 0.93,
       "ra_hms": "00:03:43.2",
       "ra_hours": 0.062,
@@ -319,7 +330,7 @@
       },
       "source_name": "UGC00017",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "ugc00017",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
