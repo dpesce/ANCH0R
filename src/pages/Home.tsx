@@ -12,7 +12,7 @@ const TEAM_MEMBERS = [
   "Christian Henkel",
   "Cheng-Yu Kuo",
   "Elisabetta Ladu",
-  "Dominic Pesce",
+  "Dom Pesce",
   "Mark Reid",
   "Andrea Tarchi",
 ];
