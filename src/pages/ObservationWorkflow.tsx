@@ -544,7 +544,7 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
       </section>
 
       <div className="table-wrap">
-        <table>
+        <table className="observation-table">
           <thead>
             <tr>
               <th>{selectionColumnLabel}</th>
