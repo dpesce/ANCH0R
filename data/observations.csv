@@ -1,1 +1,6 @@
 observation_id,target_id,telescope,observer,start_utc,end_utc,status,spectrum_url,notes
+DEMO-001,galexascj00002,GBT,DEMO,2026-01-10T02:00:00Z,2026-01-10T03:00:00Z,observed,spectra/demo-galexascj00002.svg,DEMO observation for interface testing
+DEMO-002,ugc12894,EFF,DEMO,2026-01-11T20:30:00Z,2026-01-11T21:30:00Z,observed,spectra/demo-ugc12894.svg,DEMO observation for interface testing
+DEMO-003,ugc12893,SRT,DEMO,2026-01-12T21:00:00Z,2026-01-12T22:00:00Z,observed,spectra/demo-ugc12893.svg,DEMO observation for interface testing
+DEMO-004,wiseaj000103-0,GBT,DEMO,2026-01-13T03:00:00Z,2026-01-13T04:00:00Z,observed,spectra/demo-wiseaj000103-0.svg,DEMO observation for interface testing
+DEMO-005,ic5377,EFF,DEMO,2026-01-14T19:45:00Z,2026-01-14T20:45:00Z,observed,spectra/demo-ic5377.svg,DEMO observation for interface testing

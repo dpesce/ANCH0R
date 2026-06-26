@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 460" role="img" aria-labelledby="title desc">
+  <title id="title">Demo spectrum for IC5377</title>
+  <desc id="desc">Synthetic demo 22 GHz spectrum used for ANCH0R interface testing.</desc>
+  <rect width="820" height="460" fill="#ffffff"/>
+  <text x="54" y="48" fill="#22312d" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">IC5377</text>
+  <text x="54" y="76" fill="#66736f" font-family="Inter, Arial, sans-serif" font-size="14">DEMO 22 GHz spectrum - Effelsberg</text>
+  <line x1="80" y1="370" x2="760" y2="370" stroke="#9aa8a4" stroke-width="1.5"/>
+  <line x1="80" y1="96" x2="80" y2="370" stroke="#9aa8a4" stroke-width="1.5"/>
+  <g stroke="#d7dfdc" stroke-width="1">
+    <line x1="80" y1="300" x2="760" y2="300"/>
+    <line x1="80" y1="230" x2="760" y2="230"/>
+    <line x1="80" y1="160" x2="760" y2="160"/>
+  </g>
+  <polyline fill="none" stroke="#0b5f59" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="80,329 128,326 176,332 224,327 272,323 318,318 354,304 382,250 404,156 426,238 452,309 500,319 548,315 586,302 612,232 632,292 672,322 718,327 760,325"/>
+  <text x="395" y="410" fill="#66736f" font-family="Inter, Arial, sans-serif" font-size="13" text-anchor="middle">Velocity</text>
+  <text x="38" y="235" fill="#66736f" font-family="Inter, Arial, sans-serif" font-size="13" transform="rotate(-90 38 235)" text-anchor="middle">Flux density</text>
+</svg>
