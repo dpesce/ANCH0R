@@ -20,7 +20,6 @@ interface PlannedTarget {
   visibility: VisibilityResult;
 }
 
-type ObservationMode = "plan" | "report";
 type TimeScale = "utc" | "local";
 type SortKey =
   | "recommended"
@@ -33,8 +32,6 @@ type SortKey =
   | "setUtc";
 type SortDirection = "asc" | "desc";
 
-const GITHUB_ISSUES_URL = "https://github.com/dpesce/ANCH0R/issues/new";
-const REPORT_PAYLOAD_MARKER = "<!-- ANCH0R_OBSERVING_REPORT_V1 -->";
 const MONTH_LABELS = [
   "Jan",
   "Feb",
@@ -201,72 +198,6 @@ function selectedTargetRows(selectedResults: PlannedTarget[], telescope: Telesco
     first_observable_utc: formatUtc(visibility.firstObservableUtc),
     last_observable_utc: formatUtc(visibility.lastObservableUtc),
   }));
-}
-
-function buildReportIssueBody(
-  selectedResults: PlannedTarget[],
-  telescope: TelescopeCode,
-  startUtc: string,
-  endUtc: string,
-  notes: string,
-) {
-  const targetRows = selectedTargetRows(selectedResults, telescope);
-  const targetTable = [
-    "| Target ID | Source | RA | Dec | Velocity |",
-    "| --- | --- | --- | --- | ---: |",
-    ...targetRows.map((row) => {
-      return [
-        row.target_id,
-        row.source_name,
-        row.ra_hms,
-        row.dec_dms,
-        `${row.velocity_km_s} km/s`,
-      ].join(" | ");
-    }).map((row) => `| ${row} |`),
-  ].join("\n");
-
-  const payload = {
-    schema_version: 1,
-    submitted_at_utc: formatUtc(new Date()),
-    telescope,
-    start_utc: startUtc,
-    end_utc: endUtc,
-    notes,
-    targets: targetRows.map((row) => ({
-      target_id: row.target_id,
-      source_name: row.source_name,
-      ra_hms: row.ra_hms,
-      dec_dms: row.dec_dms,
-      velocity_km_s: row.velocity_km_s,
-    })),
-  };
-
-  return [
-    REPORT_PAYLOAD_MARKER,
-    "",
-    "ANCH0R observing report",
-    "",
-    `Telescope: ${telescope}`,
-    `UTC window: ${startUtc} to ${endUtc}`,
-    "",
-    "Selected targets:",
-    targetTable,
-    "",
-    "Notes:",
-    notes || "(none)",
-    "",
-    "Machine-readable payload:",
-    "```json",
-    JSON.stringify(payload, null, 2),
-    "```",
-  ].join("\n");
-}
-
-function buildReportIssueUrl(title: string, body: string): string {
-  const url = new URL(GITHUB_ISSUES_URL);
-  url.searchParams.set("title", title);
-  url.searchParams.set("body", body);
-  return url.toString();
 }
 
 function projectMollweide(raDeg: number, decDeg: number, width: number, height: number) {
@@ -452,7 +383,7 @@ function TimeScaleToggle({
   );
 }
 
-function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: ObservationMode }) {
+export function PlanObservation({ catalog }: ObservationPageProps) {
   const [telescope, setTelescope] = useState<TelescopeCode>("GBT");
   const [timeScale, setTimeScale] = useState<TimeScale>("utc");
   const [startTime, setStartTime] = useState("");
@@ -464,7 +395,6 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [sortKey, setSortKey] = useState<SortKey>("recommended");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
-  const [notes, setNotes] = useState("");
 
   const site = TELESCOPES[telescope];
   const windowStart = parseObservationTime(startTime, timeScale, site.timeZone);
@@ -604,14 +534,6 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
     downloadCsv(filename, selectedTargetRows(selectedResults, telescope));
   }
 
-  function submitReport() {
-    const startUtc = formatUtc(windowStart);
-    const endUtc = formatUtc(windowEnd);
-    const title = `[ANCH0R Observing Report] ${telescope} ${startUtc}`;
-    const body = buildReportIssueBody(selectedResults, telescope, startUtc, endUtc, notes);
-    window.open(buildReportIssueUrl(title, body), "_blank", "noopener,noreferrer");
-  }
-
   function updateTimeScale(nextTimeScale: TimeScale) {
     if (nextTimeScale === timeScale) {
       return;
@@ -624,58 +546,34 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
     setTimeScale(nextTimeScale);
   }
 
-  const title = mode === "plan" ? "Plan an observation" : "Submit an observing report";
-  const description =
-    mode === "plan"
-      ? "Specify the filters relevant for your observation and then select objects from the table below. All objects that have not yet been observed and which satisfy the selection criteria will be shown. Once you have selected all the objects you wish to observe, you can export the list as a CSV file."
-      : "Select the targets actually observed during a run, add any notes, and open a prefilled GitHub report for submission.";
-  const actionLabel = mode === "plan" ? "Download selected CSV" : "Submit report";
-  const action = mode === "plan" ? exportSelectedTargets : submitReport;
-  const selectedTitle = mode === "plan" ? "Selected Targets" : "Observed Targets";
-  const emptySelectionText =
-    mode === "plan" ? "Select targets from the table below." : "Check the targets observed during this run.";
-  const tableTitle = mode === "plan" ? "Candidate Targets" : "Observed Targets";
-  const tableSummary =
-    mode === "plan"
-      ? `Showing ${formatInteger(results.length)} candidate targets above ${minElevationDeg} deg for at least ${formatInteger(minObservableMinutes)} minutes.`
-      : `Showing ${formatInteger(results.length)} targets matching this observing setup; check the sources that were actually observed.`;
-  const selectionColumnLabel = mode === "plan" ? "Select" : "Observed";
-
   return (
     <main className="page-shell page-block">
       <div className="page-heading">
         <p className="section-label">Observations</p>
-        <h1>{title}</h1>
-        <p>{description}</p>
+        <h1>Plan an observation</h1>
+        <p>
+          Specify the filters relevant for your observation and then select objects from the table
+          below. All objects that have not yet been observed and which satisfy the selection
+          criteria will be shown. Once you have selected all the objects you wish to observe, you
+          can export the list as a CSV file.
+        </p>
       </div>
 
       <section className="selection-panel">
         <div className="section-heading-row">
           <div>
-            <h2>{selectedTitle}</h2>
+            <h2>Selected Targets</h2>
             <p>{formatInteger(selectedResults.length)} targets selected.</p>
           </div>
           <button
             className="button button-secondary"
             disabled={selectedResults.length === 0}
-            onClick={action}
+            onClick={exportSelectedTargets}
             type="button"
           >
-            {actionLabel}
+            Download selected CSV
           </button>
         </div>
-
-        {mode === "report" ? (
-          <label className="notes-field">
-            Notes
-            <textarea
-              rows={5}
-              value={notes}
-              onChange={(event) => setNotes(event.target.value)}
-              placeholder="Add observing notes to include in the GitHub report."
-            />
-          </label>
-        ) : null}
 
         {selectedResults.length > 0 ? (
           <div className="selected-list">
@@ -691,11 +589,11 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
             ))}
           </div>
         ) : (
-          <p className="subtle">{emptySelectionText}</p>
+          <p className="subtle">Select targets from the table below.</p>
         )}
       </section>
 
-      {mode === "plan" ? <SkyMap results={results} selectedIds={selectedIds} /> : null}
+      <SkyMap results={results} selectedIds={selectedIds} />
 
       <section className="target-filter-panel">
         <form className="planner-form target-filter-form">
@@ -793,8 +691,11 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
 
       <section className="results-heading">
         <div>
-          <h2>{tableTitle}</h2>
-          <p>{tableSummary}</p>
+          <h2>Candidate Targets</h2>
+          <p>
+            Showing {formatInteger(results.length)} candidate targets above {minElevationDeg} deg
+            for at least {formatInteger(minObservableMinutes)} minutes.
+          </p>
         </div>
       </section>
 
@@ -802,7 +703,7 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
         <table className="observation-table">
           <thead>
             <tr>
-              <th>{selectionColumnLabel}</th>
+              <th>Select</th>
               <th>
                 <button type="button" className="sort-button" onClick={() => updateSort("name")}>
                   {sortLabel("Target", "name")}
@@ -827,37 +728,33 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
                   {sortLabel("Velocity", "velocity")}
                 </button>
               </th>
-              {mode === "plan" ? (
-                <>
-                  <th>
-                    <button
-                      type="button"
-                      className="sort-button"
-                      onClick={() => updateSort("maxAltitude")}
-                    >
-                      {sortLabel("Max alt", "maxAltitude")}
-                    </button>
-                  </th>
-                  <th>
-                    <button
-                      type="button"
-                      className="sort-button"
-                      onClick={() => updateSort("riseUtc")}
-                    >
-                      {sortLabel("Rise time (UTC)", "riseUtc")}
-                    </button>
-                  </th>
-                  <th>
-                    <button
-                      type="button"
-                      className="sort-button"
-                      onClick={() => updateSort("setUtc")}
-                    >
-                      {sortLabel("Set time (UTC)", "setUtc")}
-                    </button>
-                  </th>
-                </>
-              ) : null}
+              <th>
+                <button
+                  type="button"
+                  className="sort-button"
+                  onClick={() => updateSort("maxAltitude")}
+                >
+                  {sortLabel("Max alt", "maxAltitude")}
+                </button>
+              </th>
+              <th>
+                <button
+                  type="button"
+                  className="sort-button"
+                  onClick={() => updateSort("riseUtc")}
+                >
+                  {sortLabel("Rise time (UTC)", "riseUtc")}
+                </button>
+              </th>
+              <th>
+                <button
+                  type="button"
+                  className="sort-button"
+                  onClick={() => updateSort("setUtc")}
+                >
+                  {sortLabel("Set time (UTC)", "setUtc")}
+                </button>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -867,7 +764,7 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
                 <tr className={selected ? "selected-row" : ""} key={target.target_id}>
                   <td className="checkbox-cell">
                     <input
-                      aria-label={`${selectionColumnLabel} ${target.source_name}`}
+                      aria-label={`Select ${target.source_name}`}
                       checked={selected}
                       className="target-checkbox"
                       onChange={() => toggleSelection(target.target_id)}
@@ -880,13 +777,9 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
                   <td>{target.ra_hms}</td>
                   <td>{target.dec_dms}</td>
                   <td>{formatVelocity(target.velocity_km_s)}</td>
-                  {mode === "plan" ? (
-                    <>
-                      <td>{formatDegrees(visibility.maxAltitudeDeg, 1)}</td>
-                      <td>{formatDisplayUtc(visibility.firstObservableUtc) || "None"}</td>
-                      <td>{formatDisplayUtc(visibility.lastObservableUtc) || "None"}</td>
-                    </>
-                  ) : null}
+                  <td>{formatDegrees(visibility.maxAltitudeDeg, 1)}</td>
+                  <td>{formatDisplayUtc(visibility.firstObservableUtc) || "None"}</td>
+                  <td>{formatDisplayUtc(visibility.lastObservableUtc) || "None"}</td>
                 </tr>
               );
             })}
@@ -898,12 +791,4 @@ function ObservationWorkflow({ catalog, mode }: ObservationPageProps & { mode: O
       </div>
     </main>
   );
-}
-
-export function PlanObservation({ catalog }: ObservationPageProps) {
-  return <ObservationWorkflow catalog={catalog} mode="plan" />;
-}
-
-export function SubmitObservingReport({ catalog }: ObservationPageProps) {
-  return <ObservationWorkflow catalog={catalog} mode="report" />;
 }

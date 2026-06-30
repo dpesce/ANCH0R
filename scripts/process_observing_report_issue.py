@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
 import os
 import re
 import sys
@@ -19,7 +20,7 @@ from build_catalog import CatalogError, build_catalog
 ROOT = Path(__file__).resolve().parents[1]
 OBSERVATIONS_FILE = ROOT / "data" / "observations.csv"
 
-REPORT_MARKER = "<!-- ANCH0R_OBSERVING_REPORT_V1 -->"
+REPORT_MARKER = "<!-- ANCH0R_OBSERVING_REPORT_V3 -->"
 OBSERVATION_FIELDS = [
     "observation_id",
     "target_id",
@@ -29,9 +30,14 @@ OBSERVATION_FIELDS = [
     "end_utc",
     "status",
     "spectrum_url",
+    "rms_mjy_per_1_km_s",
+    "data_quality",
+    "detection_status",
     "notes",
 ]
 VALID_TELESCOPES = {"GBT", "EFF", "SRT"}
+VALID_DATA_QUALITY = {"excellent", "good", "fair", "poor", "unobserved"}
+VALID_DETECTION_STATUSES = {"detected", "marginal", "undetected"}
 
 
 class ReportError(RuntimeError):
@@ -90,17 +96,14 @@ def parse_utc(value: Any, field: str) -> datetime:
 
 
 def validate_payload(payload: dict[str, Any]) -> None:
-    if payload.get("schema_version") != 1:
+    if payload.get("schema_version") != 3:
         raise ReportError("Unsupported report schema_version")
 
-    telescope = payload.get("telescope")
-    if telescope not in VALID_TELESCOPES:
-        raise ReportError(f"Invalid telescope {telescope!r}")
+    parse_utc(payload.get("submitted_at_utc"), "submitted_at_utc")
 
-    start_utc = parse_utc(payload.get("start_utc"), "start_utc")
-    end_utc = parse_utc(payload.get("end_utc"), "end_utc")
-    if end_utc <= start_utc:
-        raise ReportError("end_utc must be later than start_utc")
+    telescope = payload.get("telescope")
+    if not isinstance(telescope, str) or telescope not in VALID_TELESCOPES:
+        raise ReportError(f"Invalid telescope {telescope!r}")
 
     targets = payload.get("targets")
     if not isinstance(targets, list) or not targets:
@@ -115,6 +118,44 @@ def validate_payload(payload: dict[str, Any]) -> None:
         if target_id in seen_target_ids:
             raise ReportError(f"Report payload repeats target_id {target_id!r}")
         seen_target_ids.add(target_id)
+
+        data_quality = target.get("data_quality")
+        if (
+            not isinstance(data_quality, str)
+            or data_quality not in VALID_DATA_QUALITY
+        ):
+            raise ReportError(
+                f"targets[{index}] has invalid data_quality {data_quality!r}"
+            )
+
+        detection_status = target.get("detection_status")
+        rms = target.get("rms_mjy_per_1_km_s")
+        if data_quality == "unobserved":
+            if detection_status not in {"", None} or (
+                rms is not None and rms != ""
+            ):
+                raise ReportError(
+                    f"targets[{index}] cannot provide RMS or detection status "
+                    "when data_quality is 'unobserved'"
+                )
+            continue
+
+        if (
+            not isinstance(detection_status, str)
+            or detection_status not in VALID_DETECTION_STATUSES
+        ):
+            raise ReportError(
+                f"targets[{index}] has invalid detection_status "
+                f"{detection_status!r}"
+            )
+        if isinstance(rms, bool) or not isinstance(rms, (int, float)):
+            raise ReportError(
+                f"targets[{index}] rms_mjy_per_1_km_s must be numeric"
+            )
+        if not math.isfinite(rms) or rms < 0:
+            raise ReportError(
+                f"targets[{index}] rms_mjy_per_1_km_s must be finite and non-negative"
+            )
 
 
 def read_observation_rows() -> list[dict[str, str]]:
@@ -146,12 +187,10 @@ def make_observation_rows(
     catalog = build_catalog(write_outputs=False)
     targets_by_id = {target["target_id"]: target for target in catalog["targets"]}
 
-    telescope = payload["telescope"]
-    start_utc = payload["start_utc"]
-    end_utc = payload["end_utc"]
     report_notes = compact_text(payload.get("notes"))
     issue_note = f"Submitted via GitHub issue #{issue_number} by @{issue_author}."
     notes = " ".join(part for part in [report_notes, issue_note] if part)
+    telescope = payload["telescope"]
 
     rows: list[dict[str, str]] = []
     for index, target in enumerate(payload["targets"], 1):
@@ -161,16 +200,25 @@ def make_observation_rows(
         if telescope not in targets_by_id[target_id]["eligible_telescopes"]:
             raise ReportError(f"{target_id!r} is not eligible for {telescope}")
 
+        data_quality = target["data_quality"]
+        unobserved = data_quality == "unobserved"
         rows.append(
             {
                 "observation_id": f"ISSUE-{issue_number}-{index:03d}",
                 "target_id": target_id,
                 "telescope": telescope,
                 "observer": issue_author,
-                "start_utc": start_utc,
-                "end_utc": end_utc,
-                "status": "observed",
+                "start_utc": "",
+                "end_utc": "",
+                "status": "failed" if unobserved else "observed",
                 "spectrum_url": "",
+                "rms_mjy_per_1_km_s": (
+                    "" if unobserved else str(target["rms_mjy_per_1_km_s"])
+                ),
+                "data_quality": data_quality,
+                "detection_status": (
+                    "" if unobserved else target["detection_status"]
+                ),
                 "notes": notes,
             }
         )

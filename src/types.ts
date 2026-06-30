@@ -1,6 +1,8 @@
 export type TelescopeCode = "GBT" | "EFF" | "SRT";
 
 export type TargetStatus = "unobserved" | "observed";
+export type DetectionStatus = "detected" | "marginal" | "undetected";
+export type DataQuality = "excellent" | "good" | "fair" | "poor" | "unobserved";
 
 export interface Target {
   target_id: string;
@@ -22,6 +24,7 @@ export interface Target {
   gbt_group: string;
   raw_flags: Partial<Record<TelescopeCode, string>>;
   status: TargetStatus;
+  detection_status: DetectionStatus | "";
   assigned_telescope: TelescopeCode | "";
   spectrum_url: string;
   notes: string;
@@ -37,6 +40,9 @@ export interface Observation {
   end_utc: string;
   status: string;
   spectrum_url: string;
+  rms_mjy_per_1_km_s: string;
+  data_quality: DataQuality | "";
+  detection_status: DetectionStatus | "";
   notes: string;
 }
 
@@ -52,6 +58,7 @@ export interface CatalogStats {
   >;
   eligible_by_telescope: Record<TelescopeCode, number>;
   status_counts: Partial<Record<TargetStatus, number>>;
+  detection_status_counts: Partial<Record<DetectionStatus | "not_assessed", number>>;
   eligibility_overlap_counts: Record<string, number>;
   observations: number;
 }

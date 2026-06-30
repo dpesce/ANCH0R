@@ -1,14 +1,28 @@
 import { useMemo, useState } from "react";
+import { DetectionBadge } from "../components/DetectionBadge";
 import { StatusBadge } from "../components/StatusBadge";
 import { formatInteger, formatVelocity } from "../lib/format";
 import { TELESCOPE_CODES } from "../lib/telescopes";
-import type { CatalogData, Target, TelescopeCode } from "../types";
+import type {
+  CatalogData,
+  DetectionStatus,
+  Target,
+  TelescopeCode,
+} from "../types";
 
 interface MasterTableProps {
   catalog: CatalogData;
 }
 
-type StatusFilter = "all" | "unobserved" | "observed" | `observed:${TelescopeCode}`;
+type ObservationStatusFilter =
+  | "all"
+  | "unobserved"
+  | "observed"
+  | `observed:${TelescopeCode}`;
+type DetectionStatusFilter =
+  | "all"
+  | "detected-or-marginal"
+  | DetectionStatus;
 type SortKey = "catalog" | "name" | "ra" | "dec" | "velocity";
 type SortDirection = "asc" | "desc";
 
@@ -23,6 +37,7 @@ function targetMatchesSearch(target: Target, search: string): boolean {
     target.ra_hms,
     target.dec_dms,
     target.velocity_km_s.toString(),
+    target.detection_status,
     target.notes,
   ]
     .join(" ")
@@ -51,7 +66,7 @@ function observedStatusLabel(
 
 function targetMatchesStatus(
   target: Target,
-  status: StatusFilter,
+  status: ObservationStatusFilter,
   observedTelescopesByTarget: Map<string, TelescopeCode[]>,
 ): boolean {
   if (status === "all") {
@@ -69,9 +84,28 @@ function targetMatchesStatus(
   );
 }
 
+function targetMatchesDetectionStatus(
+  target: Target,
+  status: DetectionStatusFilter,
+): boolean {
+  if (status === "all") {
+    return true;
+  }
+  if (status === "detected-or-marginal") {
+    return (
+      target.detection_status === "detected" ||
+      target.detection_status === "marginal"
+    );
+  }
+  return target.detection_status === status;
+}
+
 export function MasterTable({ catalog }: MasterTableProps) {
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState<StatusFilter>("all");
+  const [observationStatus, setObservationStatus] =
+    useState<ObservationStatusFilter>("all");
+  const [detectionStatus, setDetectionStatus] =
+    useState<DetectionStatusFilter>("all");
   const [sortKey, setSortKey] = useState<SortKey>("catalog");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
   const observedTelescopesByTarget = useMemo(() => {
@@ -92,11 +126,18 @@ export function MasterTable({ catalog }: MasterTableProps) {
   const filteredTargets = useMemo(() => {
     return catalog.targets.filter((target) => {
       return (
-        targetMatchesStatus(target, status, observedTelescopesByTarget) &&
+        targetMatchesStatus(target, observationStatus, observedTelescopesByTarget) &&
+        targetMatchesDetectionStatus(target, detectionStatus) &&
         targetMatchesSearch(target, search)
       );
     });
-  }, [catalog.targets, observedTelescopesByTarget, search, status]);
+  }, [
+    catalog.targets,
+    detectionStatus,
+    observationStatus,
+    observedTelescopesByTarget,
+    search,
+  ]);
 
   const sortedTargets = useMemo(() => {
     if (sortKey === "catalog") {
@@ -154,10 +195,12 @@ export function MasterTable({ catalog }: MasterTableProps) {
         </label>
 
         <label>
-          Status
+          Observation status
           <select
-            value={status}
-            onChange={(event) => setStatus(event.target.value as StatusFilter)}
+            value={observationStatus}
+            onChange={(event) =>
+              setObservationStatus(event.target.value as ObservationStatusFilter)
+            }
           >
             <option value="all">All statuses</option>
             <option value="unobserved">Unobserved</option>
@@ -167,6 +210,22 @@ export function MasterTable({ catalog }: MasterTableProps) {
                 Observed with: {code}
               </option>
             ))}
+          </select>
+        </label>
+
+        <label>
+          Detection status
+          <select
+            value={detectionStatus}
+            onChange={(event) =>
+              setDetectionStatus(event.target.value as DetectionStatusFilter)
+            }
+          >
+            <option value="all">All detection statuses</option>
+            <option value="detected-or-marginal">Detected + marginal</option>
+            <option value="detected">Detected</option>
+            <option value="marginal">Marginal</option>
+            <option value="undetected">Undetected</option>
           </select>
         </label>
 
@@ -204,7 +263,8 @@ export function MasterTable({ catalog }: MasterTableProps) {
                   {sortLabel("Velocity", "velocity")}
                 </button>
               </th>
-              <th>Status</th>
+              <th>Observation status</th>
+              <th>Detection status</th>
               <th>Spectrum</th>
             </tr>
           </thead>
@@ -225,6 +285,9 @@ export function MasterTable({ catalog }: MasterTableProps) {
                   ) : (
                     <StatusBadge status={target.status} />
                   )}
+                </td>
+                <td>
+                  <DetectionBadge status={target.detection_status} />
                 </td>
                 <td>
                   {target.spectrum_url ? (

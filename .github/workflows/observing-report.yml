@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   create-report-pr:
-    if: ${{ contains(github.event.issue.body || '', '<!-- ANCH0R_OBSERVING_REPORT_V1 -->') }}
+    if: ${{ contains(github.event.issue.body || '', '<!-- ANCH0R_OBSERVING_REPORT_V3 -->') }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository

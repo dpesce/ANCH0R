@@ -296,7 +296,11 @@ dd {
 }
 
 .toolbar {
-  grid-template-columns: minmax(260px, 1fr) minmax(210px, 260px) minmax(120px, auto);
+  grid-template-columns:
+    minmax(220px, 1fr)
+    minmax(190px, 230px)
+    minmax(190px, 230px)
+    minmax(120px, auto);
 }
 
 .planner-layout {
@@ -389,6 +393,58 @@ dd {
 .selection-panel {
   display: grid;
   gap: 16px;
+}
+
+.report-selection-panel {
+  margin-bottom: 20px;
+}
+
+.report-global-fields {
+  width: min(320px, 100%);
+}
+
+.report-validation-message {
+  margin-top: 0;
+}
+
+.report-entry-table {
+  min-width: 780px;
+}
+
+.report-entry-table th:nth-child(2) {
+  min-width: 150px;
+}
+
+.report-entry-table th:nth-child(n + 3) {
+  min-width: 155px;
+}
+
+.report-entry-row--ineligible td {
+  background: var(--error-bg);
+}
+
+.report-entry-row--ineligible td:first-child {
+  box-shadow: inset 4px 0 var(--error);
+}
+
+.report-entry-row--ineligible td strong {
+  color: var(--error);
+}
+
+.table-heading-unit {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 650;
+  text-transform: none;
+}
+
+.report-target-search {
+  display: grid;
+  grid-template-columns: minmax(240px, 420px) auto;
+  gap: 18px;
+  align-items: end;
 }
 
 .notes-field {
@@ -618,13 +674,38 @@ td strong,
 }
 
 .status-badge--unobserved {
-  background: var(--success-bg);
-  color: var(--success);
+  background: #e8edeb;
+  color: #4f5d58;
 }
 
 .status-badge--observed {
   background: var(--accent-soft);
   color: var(--accent-strong);
+}
+
+.detection-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.detection-badge--detected {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.detection-badge--marginal {
+  background: #fff0c7;
+  color: #785100;
+}
+
+.detection-badge--undetected {
+  background: #f9dedb;
+  color: #982c24;
 }
 
 .empty-state,
@@ -676,6 +757,7 @@ td strong,
 
   .toolbar,
   .planner-form,
+  .report-target-search,
   .team-list {
     grid-template-columns: 1fr;
   }

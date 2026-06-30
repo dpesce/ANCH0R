@@ -32,6 +32,10 @@ def main() -> int:
 
     print(f"Validated {len(target_ids)} targets")
     print(f"Status counts: {catalog['stats']['status_counts']}")
+    print(
+        "Detection status counts: "
+        f"{catalog['stats']['detection_status_counts']}"
+    )
     return 0
 
 

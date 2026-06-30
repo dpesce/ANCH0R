@@ -2,7 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { loadCatalog } from "./lib/api";
 import { Home } from "./pages/Home";
 import { MasterTable } from "./pages/MasterTable";
-import { PlanObservation, SubmitObservingReport } from "./pages/ObservationWorkflow";
+import { PlanObservation } from "./pages/ObservationWorkflow";
+import { SubmitObservingReport } from "./pages/SubmitObservingReport";
 import type { CatalogData } from "./types";
 
 type Route = "home" | "targets" | "plan" | "report";

@@ -41,6 +41,10 @@ OBSERVATION_STATUSES = {
     "canceled",
     "cancelled",
 }
+DATA_QUALITY_VALUES = {"excellent", "good", "fair", "poor", "unobserved"}
+DETECTION_STATUSES = {"detected", "marginal", "undetected"}
+
+
 class CatalogError(RuntimeError):
     """Raised when input data cannot be converted into a valid catalog."""
 
@@ -263,6 +267,7 @@ def build_targets(source_records: list[SourceRecord]) -> list[dict[str, Any]]:
                 "gbt_group": gbt_group,
                 "raw_flags": raw_flags,
                 "status": "unobserved",
+                "detection_status": "",
                 "assigned_telescope": "",
                 "spectrum_url": "",
                 "notes": "",
@@ -303,6 +308,95 @@ def validate_datetime_order(row: dict[str, str], path: Path) -> None:
         raise CatalogError(f"{path}:{line} has start_utc >= end_utc")
 
 
+def normalize_optional_value(
+    row: dict[str, str],
+    path: Path,
+    field: str,
+    allowed: set[str],
+) -> str:
+    value = row.get(field, "").strip().lower()
+    if value and value not in allowed:
+        line = row.get("_line_number", "?")
+        raise CatalogError(
+            f"{path}:{line} has invalid {field} {value!r}; "
+            f"allowed values are {', '.join(sorted(allowed))}"
+        )
+    return value
+
+
+def validate_observation_assessment(row: dict[str, str], path: Path) -> None:
+    row["data_quality"] = normalize_optional_value(
+        row,
+        path,
+        "data_quality",
+        DATA_QUALITY_VALUES,
+    )
+    row["detection_status"] = normalize_optional_value(
+        row,
+        path,
+        "detection_status",
+        DETECTION_STATUSES,
+    )
+
+    line = row.get("_line_number", "?")
+    rms_text = row.get("rms_mjy_per_1_km_s", "").strip()
+    if rms_text:
+        try:
+            rms = float(rms_text)
+        except ValueError as exc:
+            raise CatalogError(
+                f"{path}:{line} has invalid rms_mjy_per_1_km_s {rms_text!r}"
+            ) from exc
+        if not math.isfinite(rms) or rms < 0:
+            raise CatalogError(
+                f"{path}:{line} has invalid rms_mjy_per_1_km_s {rms_text!r}; "
+                "expected a finite non-negative value"
+            )
+
+    quality = row["data_quality"]
+    detection = row["detection_status"]
+    status = row["status"]
+
+    if status == "observed":
+        if not quality or quality == "unobserved":
+            raise CatalogError(
+                f"{path}:{line} must provide an assessed data_quality for observed data"
+            )
+        if not rms_text or not detection:
+            raise CatalogError(
+                f"{path}:{line} must provide RMS and detection_status for observed data"
+            )
+    elif status == "failed":
+        if quality != "unobserved":
+            raise CatalogError(
+                f"{path}:{line} must use data_quality 'unobserved' for a failed attempt"
+            )
+        if rms_text or detection:
+            raise CatalogError(
+                f"{path}:{line} cannot provide RMS or detection_status when "
+                "status is 'failed'"
+            )
+    elif quality or rms_text or detection:
+        raise CatalogError(
+            f"{path}:{line} cannot provide an assessment unless status is "
+            "'observed' or 'failed'"
+        )
+
+    if quality == "unobserved" and status != "failed":
+        raise CatalogError(
+            f"{path}:{line} can only use data_quality 'unobserved' when status is 'failed'"
+        )
+
+    if detection and status != "observed":
+        raise CatalogError(
+            f"{path}:{line} can only set detection_status when status is 'observed'"
+        )
+    if quality in DATA_QUALITY_VALUES - {"unobserved"} and status != "observed":
+        raise CatalogError(
+            f"{path}:{line} can only set an assessed data_quality when status is 'observed'"
+        )
+
+
 def apply_campaign_state(
     targets: list[dict[str, Any]],
     observations: list[dict[str, str]],
@@ -323,6 +417,7 @@ def apply_campaign_state(
                 f"{target_id!r}, but that target is not eligible for that telescope"
             )
         validate_datetime_order(row, OBSERVATIONS_FILE)
+        validate_observation_assessment(row, OBSERVATIONS_FILE)
 
     observations_by_target: dict[str, list[dict[str, str]]] = defaultdict(list)
     for row in observations:
@@ -346,6 +441,12 @@ def apply_campaign_state(
             target["assigned_telescope"] = latest.get("telescope", "")
             target["spectrum_url"] = latest.get("spectrum_url", "")
             target["notes"] = latest.get("notes", "")
+
+            assessed_rows = [
+                row for row in observed_rows if row.get("detection_status")
+            ]
+            if assessed_rows:
+                target["detection_status"] = assessed_rows[-1]["detection_status"]
 
 
 def build_catalog(write_outputs: bool = True) -> dict[str, Any]:
@@ -372,6 +473,9 @@ def build_catalog(write_outputs: bool = True) -> dict[str, Any]:
             "end_utc",
             "status",
             "spectrum_url",
+            "rms_mjy_per_1_km_s",
+            "data_quality",
+            "detection_status",
             "notes",
         ],
     )
@@ -379,6 +483,9 @@ def build_catalog(write_outputs: bool = True) -> dict[str, Any]:
     apply_campaign_state(targets, observations)
 
     status_counts = Counter(target["status"] for target in targets)
+    detection_status_counts = Counter(
+        target["detection_status"] or "not_assessed" for target in targets
+    )
     eligible_by_telescope = {
         telescope: sum(
             1 for target in targets if telescope in target["eligible_telescopes"]
@@ -388,7 +495,7 @@ def build_catalog(write_outputs: bool = True) -> dict[str, Any]:
     overlap_counts = Counter("+".join(target["eligible_telescopes"]) for target in targets)
 
     catalog = {
-        "schema_version": 1,
+        "schema_version": 2,
         "project": {
             "name": "ANCH0R",
             "description": "A multi-telescope 22 GHz spectral survey of nearby galaxies.",
@@ -399,6 +506,7 @@ def build_catalog(write_outputs: bool = True) -> dict[str, Any]:
             "raw_sources": raw_stats,
             "eligible_by_telescope": eligible_by_telescope,
             "status_counts": dict(sorted(status_counts.items())),
+            "detection_status_counts": dict(sorted(detection_status_counts.items())),
             "eligibility_overlap_counts": dict(sorted(overlap_counts.items())),
             "observations": len(observations),
         },
@@ -440,6 +548,7 @@ def write_catalog_outputs(catalog: dict[str, Any]) -> None:
         "eligible_srt",
         "gbt_group",
         "status",
+        "detection_status",
         "assigned_telescope",
         "spectrum_url",
         "observations_count",
@@ -457,6 +566,7 @@ def print_summary(catalog: dict[str, Any]) -> None:
     print(f"Built {stats['total_targets']} targets")
     print(f"Eligibility: {stats['eligible_by_telescope']}")
     print(f"Status: {stats['status_counts']}")
+    print(f"Detection status: {stats['detection_status_counts']}")
     print(f"Wrote {PUBLIC_CATALOG_FILE.relative_to(ROOT)}")
     print(f"Wrote {MASTER_TARGETS_FILE.relative_to(ROOT)}")
 

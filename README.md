@@ -14,7 +14,7 @@ and provides a browser-side target planner for upcoming observing sessions.
 ```text
 data/
   raw/                    Original telescope source lists
-  observations.csv         Observation history and spectrum links
+  observations.csv         Observation history, assessments, and spectrum links
   master_targets.csv       Generated review table
 public/
   data/catalog.json        Generated website data
@@ -71,9 +71,16 @@ pnpm run build
 ## Updating Campaign State
 
 To mark a target as observed, add a row to `data/observations.csv` with
-`status` set to `observed`. Put spectrum images under `public/spectra/` and use
-a site-relative URL such as `/ANCH0R/spectra/example.png` in the `spectrum_url`
-column.
+`status` set to `observed`. Successful observations require:
+
+- `rms_mjy_per_1_km_s`: RMS noise in mJy per 1 km/s spectral channel
+- `data_quality`: `excellent`, `good`, `fair`, or `poor`
+- `detection_status`: `detected`, `marginal`, or `undetected`
+
+A target that was attempted but not observed uses `status=failed` and
+`data_quality=unobserved`, with blank RMS and detection fields. Put spectrum
+images under `public/spectra/` and use a site-relative URL such as
+`/ANCH0R/spectra/example.png` in the `spectrum_url` column.
 
 After editing data files:
 
@@ -94,10 +101,24 @@ Target IDs are generated from source names. If a source name ever appears for
 multiple physical targets, the builder appends a coordinate suffix to keep the
 ID stable and unique.
 
+The target-level detection status shown on the website comes from the last
+successfully observed row for that target that contains a detection assessment.
+This keeps repeated observations in the history while allowing a later report
+to update the current classification.
+
 The target planner uses telescope eligibility from the source lists and a
 browser-side altitude calculation based on the site coordinates in
 `src/lib/telescopes.ts`. It is intended for campaign coordination, not final
 telescope scheduling constraints.
+
+## Observing Reports
+
+The report page opens a prefilled GitHub issue containing a versioned,
+machine-readable payload. The observing-report workflow validates that payload,
+adds one row per selected target to `data/observations.csv`, rebuilds the
+generated catalog files, and opens a pull request for review. Reports use the
+current V3 payload format; earlier report formats are intentionally unsupported
+while the interface is under active design.
 
 ## License
 
