@@ -5,3 +5,4 @@ DEMO-003,ugc12893,SRT,DEMO,2026-01-12T21:00:00Z,2026-01-12T22:00:00Z,observed,sp
 DEMO-004,wiseaj000103-0,GBT,DEMO,2026-01-13T03:00:00Z,2026-01-13T04:00:00Z,observed,spectra/demo-wiseaj000103-0.svg,7.1,fair,undetected,DEMO observation for interface testing
 DEMO-005,ic5377,EFF,DEMO,2026-01-14T19:45:00Z,2026-01-14T20:45:00Z,observed,spectra/demo-ic5377.svg,5.9,excellent,undetected,DEMO observation for interface testing
 ISSUE-2-001,ugc00017,GBT,dpesce,2026-06-26T15:41:00Z,2026-06-27T15:41:00Z,failed,,,unobserved,,"TEST TEST TEST This is not a real observation, but just a test of the observing report submission system. Submitted via GitHub issue #2 by @dpesce."
+ISSUE-4-001,wiseaj000232-7,GBT,dpesce,,,observed,,3,good,marginal,"TEST TEST TEST This is not a real observation, but just a test of the observing report submission system. Submitted via GitHub issue #4 by @dpesce."

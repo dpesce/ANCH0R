@@ -83,6 +83,20 @@
       "status": "failed",
       "target_id": "ugc00017",
       "telescope": "GBT"
+    },
+    {
+      "data_quality": "good",
+      "detection_status": "marginal",
+      "end_utc": "",
+      "notes": "TEST TEST TEST This is not a real observation, but just a test of the observing report submission system. Submitted via GitHub issue #4 by @dpesce.",
+      "observation_id": "ISSUE-4-001",
+      "observer": "dpesce",
+      "rms_mjy_per_1_km_s": "3",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "wiseaj000232-7",
+      "telescope": "GBT"
     }
   ],
   "project": {
@@ -93,8 +107,8 @@
   "stats": {
     "detection_status_counts": {
       "detected": 1,
-      "marginal": 1,
-      "not_assessed": 2990,
+      "marginal": 2,
+      "not_assessed": 2989,
       "undetected": 3
     },
     "eligibility_overlap_counts": {
@@ -108,7 +122,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 6,
+    "observations": 7,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -127,8 +141,8 @@
       }
     },
     "status_counts": {
-      "observed": 5,
-      "unobserved": 2990
+      "observed": 6,
+      "unobserved": 2989
     },
     "total_targets": 2995
   },
@@ -302,11 +316,11 @@
       "velocity_km_s": 1051.1
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "GBT",
       "coordinate_system": "Equatorial",
       "dec_deg": -21.76980556,
       "dec_dms": "-21:46:11.3",
-      "detection_status": "",
+      "detection_status": "marginal",
       "eligible_eff": false,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -316,8 +330,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "TEST TEST TEST This is not a real observation, but just a test of the observing report submission system. Submitted via GitHub issue #4 by @dpesce.",
+      "observations_count": 1,
       "ra_deg": 0.63666667,
       "ra_hms": "00:02:32.8",
       "ra_hours": 0.0424444444,
@@ -327,7 +341,7 @@
       },
       "source_name": "WISEAJ000232.7",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "wiseaj000232-7",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
