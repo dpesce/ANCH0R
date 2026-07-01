@@ -111,6 +111,11 @@ browser-side altitude calculation based on the site coordinates in
 `src/lib/telescopes.ts`. It is intended for campaign coordination, not final
 telescope scheduling constraints.
 
+Selected GBT targets are exported as fixed-width `.cat` source catalogs. The
+format follows `examples/example_GBT_catalog.cat`, including its header and
+column alignment. Effelsberg and SRT selections are exported as CSV until
+telescope-specific catalog formats are added.
+
 ## Observing Reports
 
 The report page opens a prefilled GitHub issue containing a versioned,

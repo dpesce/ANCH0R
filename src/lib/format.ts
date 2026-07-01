@@ -47,7 +47,15 @@ export function downloadCsv(
     ...rows.map((row) => headers.map((header) => csvEscape(row[header])).join(",")),
   ].join("\n");
 
-  const blob = new Blob([`${body}\n`], { type: "text/csv;charset=utf-8" });
+  downloadText(filename, `${body}\n`, "text/csv;charset=utf-8");
+}
+
+export function downloadText(
+  filename: string,
+  body: string,
+  mimeType = "text/plain;charset=utf-8",
+): void {
+  const blob = new Blob([body], { type: mimeType });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;

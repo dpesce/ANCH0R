@@ -1,12 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   downloadCsv,
+  downloadText,
   formatDegrees,
   formatInteger,
   formatUtc,
   formatVelocity,
   parseUtcInput,
 } from "../lib/format";
+import {
+  buildGbtCatalog,
+  GBT_COLORS,
+  type GbtColor,
+} from "../lib/gbtCatalog";
 import { TELESCOPES, TELESCOPE_CODES } from "../lib/telescopes";
 import { evaluateVisibility, type VisibilityResult } from "../lib/visibility";
 import type { CatalogData, Target, TelescopeCode } from "../types";
@@ -393,6 +399,7 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
   const [maxResults, setMaxResults] = useState(50);
   const [targetSearch, setTargetSearch] = useState("");
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [gbtColors, setGbtColors] = useState<Record<string, GbtColor>>({});
   const [sortKey, setSortKey] = useState<SortKey>("recommended");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
 
@@ -406,13 +413,12 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
 
   useEffect(() => {
     setSelectedIds(new Set());
+    setGbtColors({});
   }, [
     endTime,
-    maxResults,
     minElevationDeg,
     minObservableMinutes,
     startTime,
-    targetSearch,
     telescope,
     timeScale,
   ]);
@@ -421,13 +427,12 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
     return catalog.targets.filter((target) => {
       return (
         target.eligible_telescopes.includes(telescope) &&
-        target.status !== "observed" &&
-        targetMatchesNameSearch(target, targetSearch)
+        target.status !== "observed"
       );
     });
-  }, [catalog.targets, targetSearch, telescope]);
+  }, [catalog.targets, telescope]);
 
-  const results = useMemo<PlannedTarget[]>(() => {
+  const visibleResults = useMemo<PlannedTarget[]>(() => {
     if (!windowStart || !windowEnd || invalidWindow) {
       return [];
     }
@@ -477,11 +482,10 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
       return comparison * direction || a.target.source_name.localeCompare(b.target.source_name);
     });
 
-    return sorted.slice(0, maxResults);
+    return sorted;
   }, [
     candidates,
     invalidWindow,
-    maxResults,
     minElevationDeg,
     minObservableMinutes,
     missingWindow,
@@ -492,9 +496,42 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
     windowStart,
   ]);
 
+  const results = useMemo(() => {
+    return visibleResults
+      .filter(({ target }) => targetMatchesNameSearch(target, targetSearch))
+      .slice(0, maxResults);
+  }, [maxResults, targetSearch, visibleResults]);
+
   const selectedResults = useMemo(() => {
-    return results.filter(({ target }) => selectedIds.has(target.target_id));
-  }, [results, selectedIds]);
+    return visibleResults.filter(({ target }) => selectedIds.has(target.target_id));
+  }, [selectedIds, visibleResults]);
+
+  const skyMapResults = useMemo(() => {
+    const displayedResults = new Map(
+      results.map((result) => [result.target.target_id, result]),
+    );
+    selectedResults.forEach((result) => {
+      displayedResults.set(result.target.target_id, result);
+    });
+    return [...displayedResults.values()];
+  }, [results, selectedResults]);
+
+  const gbtCatalogError = useMemo(() => {
+    if (telescope !== "GBT") {
+      return null;
+    }
+    try {
+      buildGbtCatalog(
+        selectedResults.map(({ target }) => ({
+          target,
+          color: gbtColors[target.target_id] ?? "red",
+        })),
+      );
+      return null;
+    } catch (error) {
+      return error instanceof Error ? error.message : "Unable to format GBT catalog";
+    }
+  }, [gbtColors, selectedResults, telescope]);
 
   function updateSort(nextSortKey: SortKey) {
     if (sortKey === nextSortKey && nextSortKey !== "recommended") {
@@ -517,6 +554,7 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
   }
 
   function toggleSelection(targetId: string) {
+    const currentlySelected = selectedIds.has(targetId);
     setSelectedIds((current) => {
       const next = new Set(current);
       if (next.has(targetId)) {
@@ -526,10 +564,38 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
       }
       return next;
     });
+    setGbtColors((current) => {
+      const next = { ...current };
+      if (currentlySelected) {
+        delete next[targetId];
+      } else {
+        next[targetId] = "red";
+      }
+      return next;
+    });
+  }
+
+  function updateGbtColor(targetId: string, color: GbtColor) {
+    setGbtColors((current) => ({
+      ...current,
+      [targetId]: color,
+    }));
   }
 
   function exportSelectedTargets() {
     const windowLabel = startTime ? startTime.replaceAll(":", "") : "selected-targets";
+
+    if (telescope === "GBT") {
+      const catalogBody = buildGbtCatalog(
+        selectedResults.map(({ target }) => ({
+          target,
+          color: gbtColors[target.target_id] ?? "red",
+        })),
+      );
+      downloadText(`anch0r-gbt-${windowLabel}.cat`, catalogBody);
+      return;
+    }
+
     const filename = `anch0r-${telescope.toLowerCase()}-${windowLabel}.csv`;
     downloadCsv(filename, selectedTargetRows(selectedResults, telescope));
   }
@@ -555,7 +621,7 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
           Specify the filters relevant for your observation and then select objects from the table
           below. All objects that have not yet been observed and which satisfy the selection
           criteria will be shown. Once you have selected all the objects you wish to observe, you
-          can export the list as a CSV file.
+          can export a GBT source catalog or an EFF/SRT CSV file.
         </p>
       </div>
 
@@ -563,37 +629,89 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
         <div className="section-heading-row">
           <div>
             <h2>Selected Targets</h2>
-            <p>{formatInteger(selectedResults.length)} targets selected.</p>
+            <p>
+              {formatInteger(selectedResults.length)}{" "}
+              {selectedResults.length === 1 ? "target" : "targets"} selected.
+            </p>
           </div>
           <button
             className="button button-secondary"
-            disabled={selectedResults.length === 0}
+            disabled={selectedResults.length === 0 || Boolean(gbtCatalogError)}
             onClick={exportSelectedTargets}
             type="button"
           >
-            Download selected CSV
+            {telescope === "GBT" ? "Download selected catalog" : "Download selected CSV"}
           </button>
         </div>
 
+        {gbtCatalogError ? (
+          <div className="message-error selection-message">{gbtCatalogError}</div>
+        ) : null}
+
         {selectedResults.length > 0 ? (
-          <div className="selected-list">
-            {selectedResults.map(({ target }) => (
-              <button
-                className="selected-chip"
-                key={target.target_id}
-                onClick={() => toggleSelection(target.target_id)}
-                type="button"
-              >
-                {target.source_name} x
-              </button>
-            ))}
+          <div className="table-wrap">
+            <table className="observation-table plan-selection-table">
+              <thead>
+                <tr>
+                  <th>Remove</th>
+                  <th>Name</th>
+                  <th>RA</th>
+                  <th>Dec</th>
+                  <th>Vel</th>
+                  {telescope === "GBT" ? <th>Color</th> : null}
+                </tr>
+              </thead>
+              <tbody>
+                {selectedResults.map(({ target }) => (
+                  <tr key={target.target_id}>
+                    <td className="checkbox-cell">
+                      <input
+                        aria-label={`Remove ${target.source_name}`}
+                        checked
+                        className="target-checkbox"
+                        onChange={() => toggleSelection(target.target_id)}
+                        type="checkbox"
+                      />
+                    </td>
+                    <td className="catalog-text-cell catalog-name-cell">
+                      <strong>{target.source_name}</strong>
+                    </td>
+                    <td className="catalog-text-cell catalog-ra-cell">{target.ra_hms}</td>
+                    <td className="catalog-text-cell catalog-dec-cell">{target.dec_dms}</td>
+                    <td className="catalog-text-cell catalog-velocity-cell">
+                      {formatVelocityValue(target.velocity_km_s)}
+                    </td>
+                    {telescope === "GBT" ? (
+                      <td>
+                        <select
+                          aria-label={`Color for ${target.source_name}`}
+                          value={gbtColors[target.target_id] ?? "red"}
+                          onChange={(event) =>
+                            updateGbtColor(
+                              target.target_id,
+                              event.target.value as GbtColor,
+                            )
+                          }
+                        >
+                          {GBT_COLORS.map((color) => (
+                            <option key={color} value={color}>
+                              {color}
+                            </option>
+                          ))}
+                        </select>
+                      </td>
+                    ) : null}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         ) : (
           <p className="subtle">Select targets from the table below.</p>
         )}
       </section>
 
-      <SkyMap results={results} selectedIds={selectedIds} />
+      <SkyMap results={skyMapResults} selectedIds={selectedIds} />
 
       <section className="target-filter-panel">
         <form className="planner-form target-filter-form">

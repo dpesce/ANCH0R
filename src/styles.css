@@ -395,6 +395,40 @@ dd {
   gap: 16px;
 }
 
+.selection-message {
+  margin-top: 0;
+}
+
+.plan-selection-table {
+  min-width: 680px;
+}
+
+.plan-selection-table .catalog-text-cell {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  white-space: nowrap;
+}
+
+.catalog-name-cell {
+  min-width: 18ch;
+}
+
+.catalog-ra-cell {
+  min-width: 12ch;
+}
+
+.catalog-dec-cell {
+  min-width: 13ch;
+}
+
+.catalog-velocity-cell {
+  min-width: 5ch;
+  text-align: right;
+}
+
+.plan-selection-table select {
+  min-width: 110px;
+}
+
 .report-selection-panel {
   margin-bottom: 20px;
 }
