@@ -485,6 +485,10 @@ dd {
   margin-top: 2px;
 }
 
+.notes-field textarea {
+  font-weight: 400;
+}
+
 .selected-list {
   display: flex;
   flex-wrap: wrap;
