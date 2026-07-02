@@ -181,6 +181,34 @@
       "status": "observed",
       "target_id": "ugc05442",
       "telescope": "GBT"
+    },
+    {
+      "data_quality": "fair",
+      "detection_status": "detected",
+      "end_utc": "",
+      "notes": "Test. Submitted via GitHub issue #16 by @dpesce.",
+      "observation_id": "ISSUE-16-001",
+      "observer": "dpesce",
+      "rms_mjy_per_1_km_s": "10",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "ugc00017",
+      "telescope": "EFF"
+    },
+    {
+      "data_quality": "poor",
+      "detection_status": "undetected",
+      "end_utc": "",
+      "notes": "Test. Submitted via GitHub issue #16 by @dpesce.",
+      "observation_id": "ISSUE-16-002",
+      "observer": "dpesce",
+      "rms_mjy_per_1_km_s": "15",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "ugc00031",
+      "telescope": "EFF"
     }
   ],
   "project": {
@@ -190,10 +218,10 @@
   "schema_version": 2,
   "stats": {
     "detection_status_counts": {
-      "detected": 2,
+      "detected": 3,
       "marginal": 3,
-      "not_assessed": 2983,
-      "undetected": 7
+      "not_assessed": 2981,
+      "undetected": 8
     },
     "eligibility_overlap_counts": {
       "EFF+GBT+SRT": 1681,
@@ -206,7 +234,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 13,
+    "observations": 15,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -225,8 +253,8 @@
       }
     },
     "status_counts": {
-      "observed": 12,
-      "unobserved": 2983
+      "observed": 14,
+      "unobserved": 2981
     },
     "total_targets": 2995
   },
@@ -432,11 +460,11 @@
       "velocity_km_s": 969.5
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "EFF",
       "coordinate_system": "Equatorial",
       "dec_deg": 15.21880556,
       "dec_dms": "+15:13:07.7",
-      "detection_status": "",
+      "detection_status": "detected",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -447,8 +475,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "Test. Submitted via GitHub issue #16 by @dpesce.",
+      "observations_count": 1,
       "ra_deg": 0.93,
       "ra_hms": "00:03:43.2",
       "ra_hours": 0.062,
@@ -459,18 +487,18 @@
       },
       "source_name": "UGC00017",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "ugc00017",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
       "velocity_km_s": 876.9
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "EFF",
       "coordinate_system": "Equatorial",
       "dec_deg": 17.19227778,
       "dec_dms": "+17:11:32.2",
-      "detection_status": "",
+      "detection_status": "undetected",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -481,8 +509,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "Test. Submitted via GitHub issue #16 by @dpesce.",
+      "observations_count": 1,
       "ra_deg": 1.21666667,
       "ra_hms": "00:04:52.0",
       "ra_hours": 0.0811111111,
@@ -493,7 +521,7 @@
       },
       "source_name": "UGC00031",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "ugc00031",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
