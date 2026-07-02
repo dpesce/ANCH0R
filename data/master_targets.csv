@@ -55,10 +55,10 @@ ngc0278,NGC0278,00:52:04.3,+47:33:01.7,13.01791667,47.55047222,626.6,True,True,T
 wiseaj005404-8,WISEAJ005404.8,00:54:04.9,+56:51:59.3,13.52041667,56.86647222,840.6,True,True,True,Group11,unobserved,,,,0,
 galexascj00550,GALEXASCJ00550,00:55:01.0,-23:10:08.9,13.75416667,-23.16913889,249.6,True,False,True,Group01,unobserved,,,,0,
 wiseaj005823-6,WISEAJ005823.6,00:58:23.7,+04:18:19.7,14.59875,4.30547222,1198.0,False,True,True,,unobserved,,,,0,
-ngc0337a,NGC0337A,01:01:33.9,-07:35:17.7,15.39125,-7.58825,1073.9,True,True,True,Group01,unobserved,,,,0,
+ngc0337a,NGC0337A,01:01:33.9,-07:35:17.7,15.39125,-7.58825,1073.9,True,True,True,Group01,observed,marginal,GBT,,1,Cool note here. Submitted via GitHub issue #12 by @jbraatz.
 galexascj01014,GALEXASCJ01014,01:01:49.0,-27:35:11.8,15.45416667,-27.58661111,1199.2,False,False,True,,unobserved,,,,0,
-mcg-01-03-085,MCG-01-03-085,01:05:04.9,-06:12:43.7,16.27041667,-6.21213889,1094.8,True,True,True,Group01,unobserved,,,,0,
-ugc00676,UGC00676,01:06:10.1,+01:14:00.2,16.54208333,1.23338889,6.5,True,True,True,Group01,unobserved,,,,0,
+mcg-01-03-085,MCG-01-03-085,01:05:04.9,-06:12:43.7,16.27041667,-6.21213889,1094.8,True,True,True,Group01,observed,detected,GBT,,1,Cool note here. Submitted via GitHub issue #12 by @jbraatz.
+ugc00676,UGC00676,01:06:10.1,+01:14:00.2,16.54208333,1.23338889,6.5,True,True,True,Group01,observed,undetected,GBT,,1,Cool note here. Submitted via GitHub issue #12 by @jbraatz.
 wiseaj010719-0,WISEAJ010719.0,01:07:19.1,+21:43:13.2,16.82958333,21.72033333,310.3,True,True,True,Group01,unobserved,,,,0,
 ugc00685,UGC00685,01:07:22.4,+16:41:04.4,16.84333333,16.68455556,155.9,True,True,True,Group01,unobserved,,,,0,
 wiseaj010732-4,WISEAJ010732.4,01:07:32.4,+51:26:25.4,16.885,51.44038889,60.9,True,True,True,Group11,unobserved,,,,0,
