@@ -181,6 +181,48 @@
       "status": "observed",
       "target_id": "ugc05442",
       "telescope": "GBT"
+    },
+    {
+      "data_quality": "good",
+      "detection_status": "marginal",
+      "end_utc": "",
+      "notes": "Wind was low, I think pointing is pretty good. Submitted via GitHub issue #14 by @dpesce.",
+      "observation_id": "ISSUE-14-001",
+      "observer": "dpesce",
+      "rms_mjy_per_1_km_s": "10",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "ngc0100",
+      "telescope": "SRT"
+    },
+    {
+      "data_quality": "good",
+      "detection_status": "undetected",
+      "end_utc": "",
+      "notes": "Wind was low, I think pointing is pretty good. Submitted via GitHub issue #14 by @dpesce.",
+      "observation_id": "ISSUE-14-002",
+      "observer": "dpesce",
+      "rms_mjy_per_1_km_s": "12",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "ngc1400",
+      "telescope": "SRT"
+    },
+    {
+      "data_quality": "fair",
+      "detection_status": "undetected",
+      "end_utc": "",
+      "notes": "Wind was low, I think pointing is pretty good. Submitted via GitHub issue #14 by @dpesce.",
+      "observation_id": "ISSUE-14-003",
+      "observer": "dpesce",
+      "rms_mjy_per_1_km_s": "15",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "ngc2500",
+      "telescope": "SRT"
     }
   ],
   "project": {
@@ -191,9 +233,9 @@
   "stats": {
     "detection_status_counts": {
       "detected": 2,
-      "marginal": 3,
-      "not_assessed": 2983,
-      "undetected": 7
+      "marginal": 4,
+      "not_assessed": 2980,
+      "undetected": 9
     },
     "eligibility_overlap_counts": {
       "EFF+GBT+SRT": 1681,
@@ -206,7 +248,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 13,
+    "observations": 16,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -225,8 +267,8 @@
       }
     },
     "status_counts": {
-      "observed": 12,
-      "unobserved": 2983
+      "observed": 15,
+      "unobserved": 2980
     },
     "total_targets": 2995
   },
@@ -1124,11 +1166,11 @@
       "velocity_km_s": 692.0
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "SRT",
       "coordinate_system": "Equatorial",
       "dec_deg": 16.48711111,
       "dec_dms": "+16:29:13.6",
-      "detection_status": "",
+      "detection_status": "marginal",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -1139,8 +1181,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "Wind was low, I think pointing is pretty good. Submitted via GitHub issue #14 by @dpesce.",
+      "observations_count": 1,
       "ra_deg": 6.0125,
       "ra_hms": "00:24:03.0",
       "ra_hours": 0.4008333333,
@@ -1151,7 +1193,7 @@
       },
       "source_name": "NGC0100",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "ngc0100",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
@@ -9604,11 +9646,11 @@
       "velocity_km_s": 1396.1
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "SRT",
       "coordinate_system": "Equatorial",
       "dec_deg": -18.68819444,
       "dec_dms": "-18:41:17.5",
-      "detection_status": "",
+      "detection_status": "undetected",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -9619,8 +9661,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group02",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "Wind was low, I think pointing is pretty good. Submitted via GitHub issue #14 by @dpesce.",
+      "observations_count": 1,
       "ra_deg": 54.87833333,
       "ra_hms": "03:39:30.8",
       "ra_hours": 3.6585555556,
@@ -9631,7 +9673,7 @@
       },
       "source_name": "NGC1400",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "ngc1400",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
@@ -17498,11 +17540,11 @@
       "velocity_km_s": 730.0
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "SRT",
       "coordinate_system": "Equatorial",
       "dec_deg": 50.73713889,
       "dec_dms": "+50:44:13.7",
-      "detection_status": "",
+      "detection_status": "undetected",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -17513,8 +17555,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group13",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "Wind was low, I think pointing is pretty good. Submitted via GitHub issue #14 by @dpesce.",
+      "observations_count": 1,
       "ra_deg": 120.47166667,
       "ra_hms": "08:01:53.2",
       "ra_hours": 8.0314444444,
@@ -17525,7 +17567,7 @@
       },
       "source_name": "NGC2500",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "ngc2500",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
