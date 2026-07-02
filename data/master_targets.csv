@@ -886,9 +886,9 @@ sdssj104351-82,SDSSJ104351.82,10:43:51.8,+58:38:39.1,160.96583333,58.64419444,11
 ugc05848,UGC05848,10:44:23.2,+56:25:17.3,161.09666667,56.42147222,821.5,True,True,True,Group14,unobserved,,,,0,
 ugc05846,UGC05846,10:44:29.7,+60:22:05.0,161.12375,60.36805556,1019.9,True,True,True,Group14,unobserved,,,,0,
 wiseaj104436-4,WISEAJ104436.4,10:44:36.5,+21:39:59.2,161.15208333,21.66644444,1161.1,False,True,True,,unobserved,,,,0,
-wiseaj104457-4,WISEAJ104457.4,10:44:57.5,+11:54:58.0,161.23958333,11.91611111,870.9,True,True,True,Group04,unobserved,,,,0,
+wiseaj104457-4,WISEAJ104457.4,10:44:57.5,+11:54:58.0,161.23958333,11.91611111,870.9,True,True,True,Group04,observed,detected,GBT,,1,Some interesting notes go here. Submitted via GitHub issue #10 by @jbraatz.
 wiseaj104509-8,WISEAJ104509.8,10:45:09.8,+15:26:59.5,161.29083333,15.44986111,1222.0,False,True,True,,unobserved,,,,0,
-wiseaj104534-3,WISEAJ104534.3,10:45:34.2,+51:21:45.1,161.3925,51.36252778,449.4,True,True,True,Group14,unobserved,,,,0,
+wiseaj104534-3,WISEAJ104534.3,10:45:34.2,+51:21:45.1,161.3925,51.36252778,449.4,True,True,True,Group14,observed,marginal,GBT,,1,Some interesting notes go here. Submitted via GitHub issue #10 by @jbraatz.
 wiseaj104602-7,WISEAJ104602.7,10:46:02.8,+19:32:15.9,161.51166667,19.53775,1296.7,False,True,True,,unobserved,,,,0,
 ngc3365,NGC3365,10:46:12.6,+01:48:47.7,161.5525,1.81325,986.0,True,True,True,Group04,unobserved,,,,0,
 galexmscj10462,GALEXMSCJ10462,10:46:24.8,+14:01:26.0,161.60333333,14.02388889,700.0,True,True,True,Group04,unobserved,,,,0,

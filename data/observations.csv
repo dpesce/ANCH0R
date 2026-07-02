@@ -12,3 +12,6 @@ ISSUE-6-003,ngc3115,GBT,jbraatz,,,observed,,12.5,good,marginal,"This is a test. 
 ISSUE-6-004,ugc05423,GBT,jbraatz,,,observed,,123.321,excellent,detected,"This is a test. Delete this test. NGC 3115 may host a brighter maser than NGC 4258. So we don't want to mark it ""observed"" until we actually observe it. :-) Submitted via GitHub issue #6 by @jbraatz."
 ISSUE-6-005,wiseaj100601-6,GBT,jbraatz,,,observed,,12.12,poor,undetected,"This is a test. Delete this test. NGC 3115 may host a brighter maser than NGC 4258. So we don't want to mark it ""observed"" until we actually observe it. :-) Submitted via GitHub issue #6 by @jbraatz."
 ISSUE-6-006,ugc05442,GBT,jbraatz,,,observed,,0.1,good,undetected,"This is a test. Delete this test. NGC 3115 may host a brighter maser than NGC 4258. So we don't want to mark it ""observed"" until we actually observe it. :-) Submitted via GitHub issue #6 by @jbraatz."
+ISSUE-10-001,wiseaj104457-4,GBT,jbraatz,,,observed,,1.1,excellent,detected,Some interesting notes go here. Submitted via GitHub issue #10 by @jbraatz.
+ISSUE-10-002,wiseaj104534-3,GBT,jbraatz,,,observed,,2.2,fair,marginal,Some interesting notes go here. Submitted via GitHub issue #10 by @jbraatz.
+ISSUE-10-003,ngc3365,GBT,jbraatz,,,failed,,,unobserved,,Some interesting notes go here. Submitted via GitHub issue #10 by @jbraatz.

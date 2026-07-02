@@ -181,6 +181,48 @@
       "status": "observed",
       "target_id": "ugc05442",
       "telescope": "GBT"
+    },
+    {
+      "data_quality": "excellent",
+      "detection_status": "detected",
+      "end_utc": "",
+      "notes": "Some interesting notes go here. Submitted via GitHub issue #10 by @jbraatz.",
+      "observation_id": "ISSUE-10-001",
+      "observer": "jbraatz",
+      "rms_mjy_per_1_km_s": "1.1",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "wiseaj104457-4",
+      "telescope": "GBT"
+    },
+    {
+      "data_quality": "fair",
+      "detection_status": "marginal",
+      "end_utc": "",
+      "notes": "Some interesting notes go here. Submitted via GitHub issue #10 by @jbraatz.",
+      "observation_id": "ISSUE-10-002",
+      "observer": "jbraatz",
+      "rms_mjy_per_1_km_s": "2.2",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "wiseaj104534-3",
+      "telescope": "GBT"
+    },
+    {
+      "data_quality": "unobserved",
+      "detection_status": "",
+      "end_utc": "",
+      "notes": "Some interesting notes go here. Submitted via GitHub issue #10 by @jbraatz.",
+      "observation_id": "ISSUE-10-003",
+      "observer": "jbraatz",
+      "rms_mjy_per_1_km_s": "",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "failed",
+      "target_id": "ngc3365",
+      "telescope": "GBT"
     }
   ],
   "project": {
@@ -190,9 +232,9 @@
   "schema_version": 2,
   "stats": {
     "detection_status_counts": {
-      "detected": 2,
-      "marginal": 3,
-      "not_assessed": 2983,
+      "detected": 3,
+      "marginal": 4,
+      "not_assessed": 2981,
       "undetected": 7
     },
     "eligibility_overlap_counts": {
@@ -206,7 +248,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 13,
+    "observations": 16,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -225,8 +267,8 @@
       }
     },
     "status_counts": {
-      "observed": 12,
-      "unobserved": 2983
+      "observed": 14,
+      "unobserved": 2981
     },
     "total_targets": 2995
   },
@@ -29474,11 +29516,11 @@
       "velocity_km_s": 1161.1
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "GBT",
       "coordinate_system": "Equatorial",
       "dec_deg": 11.91611111,
       "dec_dms": "+11:54:58.0",
-      "detection_status": "",
+      "detection_status": "detected",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -29489,8 +29531,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group04",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "Some interesting notes go here. Submitted via GitHub issue #10 by @jbraatz.",
+      "observations_count": 1,
       "ra_deg": 161.23958333,
       "ra_hms": "10:44:57.5",
       "ra_hours": 10.7493055556,
@@ -29501,7 +29543,7 @@
       },
       "source_name": "WISEAJ104457.4",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "wiseaj104457-4",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
@@ -29540,11 +29582,11 @@
       "velocity_km_s": 1222.0
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "GBT",
       "coordinate_system": "Equatorial",
       "dec_deg": 51.36252778,
       "dec_dms": "+51:21:45.1",
-      "detection_status": "",
+      "detection_status": "marginal",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -29555,8 +29597,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group14",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "Some interesting notes go here. Submitted via GitHub issue #10 by @jbraatz.",
+      "observations_count": 1,
       "ra_deg": 161.3925,
       "ra_hms": "10:45:34.2",
       "ra_hours": 10.7595,
@@ -29567,7 +29609,7 @@
       },
       "source_name": "WISEAJ104534.3",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "wiseaj104534-3",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
