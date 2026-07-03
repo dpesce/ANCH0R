@@ -41,7 +41,12 @@ OBSERVATION_STATUSES = {
     "canceled",
     "cancelled",
 }
-DATA_QUALITY_VALUES = {"excellent", "good", "fair", "poor", "unobserved"}
+DATA_QUALITY_VALUES = {
+    "trusted",
+    "possible_pointing_problems",
+    "possible_other_problems",
+    "untrusted",
+}
 DETECTION_STATUSES = {"detected", "marginal", "undetected"}
 
 
@@ -358,7 +363,7 @@ def validate_observation_assessment(row: dict[str, str], path: Path) -> None:
     status = row["status"]
 
     if status == "observed":
-        if not quality or quality == "unobserved":
+        if not quality:
             raise CatalogError(
                 f"{path}:{line} must provide an assessed data_quality for observed data"
             )
@@ -367,13 +372,9 @@ def validate_observation_assessment(row: dict[str, str], path: Path) -> None:
                 f"{path}:{line} must provide RMS and detection_status for observed data"
             )
     elif status == "failed":
-        if quality != "unobserved":
+        if quality or rms_text or detection:
             raise CatalogError(
-                f"{path}:{line} must use data_quality 'unobserved' for a failed attempt"
-            )
-        if rms_text or detection:
-            raise CatalogError(
-                f"{path}:{line} cannot provide RMS or detection_status when "
+                f"{path}:{line} cannot provide assessment fields when "
                 "status is 'failed'"
             )
     elif quality or rms_text or detection:
@@ -382,16 +383,11 @@ def validate_observation_assessment(row: dict[str, str], path: Path) -> None:
             "'observed' or 'failed'"
         )
 
-    if quality == "unobserved" and status != "failed":
-        raise CatalogError(
-            f"{path}:{line} can only use data_quality 'unobserved' when status is 'failed'"
-        )
-
     if detection and status != "observed":
         raise CatalogError(
             f"{path}:{line} can only set detection_status when status is 'observed'"
         )
-    if quality in DATA_QUALITY_VALUES - {"unobserved"} and status != "observed":
+    if quality in DATA_QUALITY_VALUES and status != "observed":
         raise CatalogError(
             f"{path}:{line} can only set an assessed data_quality when status is 'observed'"
         )

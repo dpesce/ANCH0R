@@ -21,6 +21,24 @@ interface TargetAssessment {
   detectionStatus: DetectionStatus | "";
 }
 
+interface PreparedReportTarget {
+  targetId: string;
+  sourceName: string;
+  raHms: string;
+  decDms: string;
+  velocityKmS: number;
+  rmsMjyPer1KmS: number;
+  dataQuality: DataQuality;
+  detectionStatus: DetectionStatus;
+}
+
+interface PreparedReport {
+  issueUrl: string;
+  telescope: TelescopeCode;
+  targets: PreparedReportTarget[];
+  notes: string;
+}
+
 type ReportSortKey =
   | "catalog"
   | "name"
@@ -32,19 +50,34 @@ type ReportSortKey =
 type SortDirection = "asc" | "desc";
 
 const GITHUB_ISSUES_URL = "https://github.com/dpesce/ANCH0R/issues/new";
-const REPORT_PAYLOAD_MARKER = "<!-- ANCH0R_OBSERVING_REPORT_V3 -->";
-const DATA_QUALITY_OPTIONS: DataQuality[] = [
-  "excellent",
-  "good",
-  "fair",
-  "poor",
-  "unobserved",
+const REPORT_PAYLOAD_MARKER = "<!-- ANCH0R_OBSERVING_REPORT_V4 -->";
+const DATA_QUALITY_OPTIONS: Array<{
+  value: DataQuality;
+  label: string;
+}> = [
+  { value: "trusted", label: "I trust the data" },
+  {
+    value: "possible_pointing_problems",
+    label: "There are potential pointing problems",
+  },
+  {
+    value: "possible_other_problems",
+    label: "There are potential other problems",
+  },
+  { value: "untrusted", label: "I do not trust the data at all" },
 ];
+const DATA_QUALITY_LABELS = Object.fromEntries(
+  DATA_QUALITY_OPTIONS.map(({ value, label }) => [value, label]),
+) as Record<DataQuality, string>;
 const DETECTION_STATUS_OPTIONS: DetectionStatus[] = [
   "detected",
   "marginal",
   "undetected",
 ];
+
+function githubCreateShortcut(): string {
+  return navigator.userAgent.includes("Mac") ? "⌘↵" : "Ctrl↵";
+}
 
 function capitalize(value: string): string {
   return value.charAt(0).toUpperCase() + value.slice(1);
@@ -63,70 +96,81 @@ function targetMatchesNameSearch(target: Target, search: string): boolean {
 }
 
 function assessmentIsComplete(assessment: TargetAssessment): boolean {
-  if (!assessment.dataQuality) {
-    return false;
-  }
-  if (assessment.dataQuality === "unobserved") {
-    return true;
-  }
-
   const rms = Number(assessment.rmsMjyPer1KmS);
   return (
     assessment.rmsMjyPer1KmS.trim() !== "" &&
     Number.isFinite(rms) &&
     rms >= 0 &&
+    Boolean(assessment.dataQuality) &&
     Boolean(assessment.detectionStatus)
   );
 }
 
-function buildReportIssueBody(
+function buildReportIssueUrl(title: string, body: string): string {
+  const url = new URL(GITHUB_ISSUES_URL);
+  url.searchParams.set("title", title);
+  url.searchParams.set("body", body);
+  return url.toString();
+}
+
+function prepareReport(
   telescope: TelescopeCode,
   selectedTargets: Target[],
   assessments: Record<string, TargetAssessment>,
   notes: string,
-) {
+): PreparedReport {
   const targets = selectedTargets.map((target) => {
     const assessment = assessments[target.target_id];
+    if (
+      !assessmentIsComplete(assessment) ||
+      !assessment.dataQuality ||
+      !assessment.detectionStatus
+    ) {
+      throw new Error(`Incomplete observing report entry for ${target.source_name}`);
+    }
+
     return {
-      target_id: target.target_id,
-      source_name: target.source_name,
-      ra_hms: target.ra_hms,
-      dec_dms: target.dec_dms,
-      velocity_km_s: Math.round(target.velocity_km_s),
-      rms_mjy_per_1_km_s:
-        assessment.dataQuality === "unobserved"
-          ? ""
-          : Number(assessment.rmsMjyPer1KmS),
-      data_quality: assessment.dataQuality,
-      detection_status:
-        assessment.dataQuality === "unobserved"
-          ? ""
-          : assessment.detectionStatus,
+      targetId: target.target_id,
+      sourceName: target.source_name,
+      raHms: target.ra_hms,
+      decDms: target.dec_dms,
+      velocityKmS: Math.round(target.velocity_km_s),
+      rmsMjyPer1KmS: Number(assessment.rmsMjyPer1KmS),
+      dataQuality: assessment.dataQuality,
+      detectionStatus: assessment.detectionStatus,
     };
   });
 
+  const submittedAtUtc = formatUtc(new Date());
   const targetTable = [
     "| Target | RMS (mJy / 1 km/s) | Data quality | Detection |",
     "| --- | ---: | --- | --- |",
-    ...targets.map((target) => {
-      const rms =
-        target.data_quality === "unobserved"
-          ? "N/A"
-          : String(target.rms_mjy_per_1_km_s);
-      const detection = target.detection_status || "N/A";
-      return `| ${target.source_name} | ${rms} | ${target.data_quality} | ${detection} |`;
-    }),
+    ...targets.map(
+      (target) =>
+        `| ${target.sourceName} | ${target.rmsMjyPer1KmS} | ${
+          DATA_QUALITY_LABELS[target.dataQuality]
+        } | ${capitalize(target.detectionStatus)} |`,
+    ),
   ].join("\n");
 
   const payload = {
-    schema_version: 3,
-    submitted_at_utc: formatUtc(new Date()),
+    schema_version: 4,
+    submitted_at_utc: submittedAtUtc,
     telescope,
     notes,
-    targets,
+    targets: targets.map((target) => ({
+      target_id: target.targetId,
+      source_name: target.sourceName,
+      ra_hms: target.raHms,
+      dec_dms: target.decDms,
+      velocity_km_s: target.velocityKmS,
+      rms_mjy_per_1_km_s: target.rmsMjyPer1KmS,
+      data_quality: target.dataQuality,
+      detection_status: target.detectionStatus,
+    })),
   };
 
-  return [
+  const body = [
     REPORT_PAYLOAD_MARKER,
     "",
     "ANCH0R observing report",
@@ -143,13 +187,130 @@ function buildReportIssueBody(
     JSON.stringify(payload, null, 2),
     "```",
   ].join("\n");
+  const title = `[ANCH0R Observing Report] ${telescope} ${
+    targets.length
+  } target${targets.length === 1 ? "" : "s"}`;
+
+  return {
+    issueUrl: buildReportIssueUrl(title, body),
+    telescope,
+    targets,
+    notes,
+  };
 }
 
-function buildReportIssueUrl(title: string, body: string): string {
-  const url = new URL(GITHUB_ISSUES_URL);
-  url.searchParams.set("title", title);
-  url.searchParams.set("body", body);
-  return url.toString();
+function ReportConfirmation({
+  report,
+  onBack,
+  onOpenGithub,
+}: {
+  report: PreparedReport;
+  onBack: () => void;
+  onOpenGithub: () => void;
+}) {
+  return (
+    <main className="page-shell page-block">
+      <div className="page-heading">
+        <p className="section-label">Observations</p>
+        <h1>Confirm observing report</h1>
+        <p>
+          Review the complete report below. Nothing has been submitted yet.
+        </p>
+      </div>
+
+      <section className="selection-panel report-confirmation-summary">
+        <div className="section-heading-row">
+          <div>
+            <h2>Report Summary</h2>
+            <p>
+              {TELESCOPES[report.telescope].label} |{" "}
+              {formatInteger(report.targets.length)}{" "}
+              {report.targets.length === 1 ? "target" : "targets"}
+            </p>
+          </div>
+        </div>
+
+        <div className="table-wrap">
+          <table className="observation-table report-confirmation-table">
+            <colgroup>
+              <col className="report-confirmation-target-column" />
+              <col className="report-confirmation-ra-column" />
+              <col className="report-confirmation-dec-column" />
+              <col className="report-confirmation-velocity-column" />
+              <col className="report-confirmation-rms-column" />
+              <col className="report-confirmation-quality-column" />
+              <col className="report-confirmation-detection-column" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Target</th>
+                <th>RA</th>
+                <th>Dec</th>
+                <th>Velocity</th>
+                <th>
+                  RMS noise
+                  <span className="table-heading-unit">
+                    mJy per 1 km/s channel
+                  </span>
+                </th>
+                <th>Data quality</th>
+                <th>Detection status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {report.targets.map((target) => (
+                <tr key={target.targetId}>
+                  <td>
+                    <strong>{target.sourceName}</strong>
+                  </td>
+                  <td>{target.raHms}</td>
+                  <td>{target.decDms}</td>
+                  <td>{formatVelocity(target.velocityKmS)}</td>
+                  <td>{target.rmsMjyPer1KmS}</td>
+                  <td>{DATA_QUALITY_LABELS[target.dataQuality]}</td>
+                  <td>{capitalize(target.detectionStatus)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="report-confirmation-notes">
+          <h3>Notes</h3>
+          <p>{report.notes || "No notes provided."}</p>
+        </div>
+      </section>
+
+      <section className="github-confirmation-panel">
+        <p className="section-label">Final Step</p>
+        <h2>Submit on GitHub</h2>
+        <p>
+          The button below will open this prefilled GitHub page in a new tab:
+        </p>
+        <p>
+          <code>github.com/dpesce/ANCH0R/issues/new</code>
+        </p>
+        <div className="github-instruction">
+          <strong>
+            On the bottom of that page, click the green button labeled:
+          </strong>
+          <span className="github-submit-button-example">
+            <span>Create</span>
+            <kbd>{githubCreateShortcut()}</kbd>
+          </span>
+          <span>No other editing is required.</span>
+        </div>
+        <div className="report-confirmation-actions">
+          <button className="button button-secondary" onClick={onBack} type="button">
+            Back to edit report
+          </button>
+          <button className="button button-primary" onClick={onOpenGithub} type="button">
+            Open GitHub report
+          </button>
+        </div>
+      </section>
+    </main>
+  );
 }
 
 export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
@@ -161,6 +322,7 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
   const [notes, setNotes] = useState("");
   const [sortKey, setSortKey] = useState<ReportSortKey>("catalog");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
+  const [pendingReport, setPendingReport] = useState<PreparedReport | null>(null);
 
   const selectedTargets = useMemo(
     () =>
@@ -267,37 +429,33 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
     }));
   }
 
-  function updateDataQuality(targetId: string, dataQuality: DataQuality | "") {
-    updateAssessment(
-      targetId,
-      dataQuality === "unobserved"
-        ? {
-            dataQuality,
-            rmsMjyPer1KmS: "",
-            detectionStatus: "",
-          }
-        : { dataQuality },
-    );
-  }
-
-  function submitReport() {
+  function reviewReport() {
     if (!reportIsComplete || !telescope) {
       return;
     }
 
-    const body = buildReportIssueBody(
-      telescope,
-      selectedTargets,
-      assessments,
-      notes,
+    setPendingReport(
+      prepareReport(telescope, selectedTargets, assessments, notes),
     );
-    const title = `[ANCH0R Observing Report] ${telescope} ${
-      selectedTargets.length
-    } target${selectedTargets.length === 1 ? "" : "s"}`;
-    window.open(
-      buildReportIssueUrl(title, body),
-      "_blank",
-      "noopener,noreferrer",
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  if (pendingReport) {
+    return (
+      <ReportConfirmation
+        report={pendingReport}
+        onBack={() => {
+          setPendingReport(null);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+        onOpenGithub={() =>
+          window.open(
+            pendingReport.issueUrl,
+            "_blank",
+            "noopener,noreferrer",
+          )
+        }
+      />
     );
   }
 
@@ -307,9 +465,9 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
         <p className="section-label">Observations</p>
         <h1>Submit an observing report</h1>
         <p>
-          Select the telescope and each target attempted during the observing
-          run, then record the data assessment for each target. Submitting
-          opens a prefilled GitHub report for review.
+          Select the telescope and each target observed during the run, then
+          record the data assessment for every target. Submitting first opens a
+          confirmation page where the complete report can be reviewed.
         </p>
       </div>
 
@@ -326,7 +484,7 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
           <button
             className="button button-secondary"
             disabled={!reportIsComplete}
-            onClick={submitReport}
+            onClick={reviewReport}
             type="button"
           >
             Submit report
@@ -363,6 +521,13 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
         {selectedTargets.length > 0 ? (
           <div className="table-wrap">
             <table className="observation-table report-entry-table">
+              <colgroup>
+                <col className="report-entry-remove-column" />
+                <col className="report-entry-target-column" />
+                <col className="report-entry-rms-column" />
+                <col className="report-entry-quality-column" />
+                <col className="report-entry-detection-column" />
+              </colgroup>
               <thead>
                 <tr>
                   <th>Remove</th>
@@ -380,8 +545,6 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
               <tbody>
                 {selectedTargets.map((target) => {
                   const assessment = assessments[target.target_id];
-                  const unobserved =
-                    assessment.dataQuality === "unobserved";
                   const ineligible =
                     telescope !== "" &&
                     !target.eligible_telescopes.includes(telescope);
@@ -407,14 +570,13 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
                       <td>
                         <input
                           aria-label={`RMS noise for ${target.source_name}`}
-                          disabled={unobserved}
                           min={0}
                           onChange={(event) =>
                             updateAssessment(target.target_id, {
                               rmsMjyPer1KmS: event.target.value,
                             })
                           }
-                          placeholder={unobserved ? "N/A" : "0.0"}
+                          placeholder="0.0"
                           step="any"
                           type="number"
                           value={assessment.rmsMjyPer1KmS}
@@ -425,16 +587,17 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
                           aria-label={`Data quality for ${target.source_name}`}
                           value={assessment.dataQuality}
                           onChange={(event) =>
-                            updateDataQuality(
-                              target.target_id,
-                              event.target.value as DataQuality | "",
-                            )
+                            updateAssessment(target.target_id, {
+                              dataQuality: event.target.value as
+                                | DataQuality
+                                | "",
+                            })
                           }
                         >
                           <option value="">Select...</option>
-                          {DATA_QUALITY_OPTIONS.map((quality) => (
-                            <option key={quality} value={quality}>
-                              {capitalize(quality)}
+                          {DATA_QUALITY_OPTIONS.map(({ value, label }) => (
+                            <option key={value} value={value}>
+                              {label}
                             </option>
                           ))}
                         </select>
@@ -442,7 +605,6 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
                       <td>
                         <select
                           aria-label={`Detection status for ${target.source_name}`}
-                          disabled={unobserved}
                           value={assessment.detectionStatus}
                           onChange={(event) =>
                             updateAssessment(target.target_id, {
@@ -452,9 +614,7 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
                             })
                           }
                         >
-                          <option value="">
-                            {unobserved ? "N/A" : "Select..."}
-                          </option>
+                          <option value="">Select...</option>
                           {DETECTION_STATUS_OPTIONS.map((status) => (
                             <option key={status} value={status}>
                               {capitalize(status)}
@@ -502,10 +662,7 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
       <section className="results-heading">
         <div>
           <h2>All Targets</h2>
-          <p>
-            Select every target attempted, including targets that were not
-            successfully observed.
-          </p>
+          <p>Select every target included in this observing report.</p>
         </div>
       </section>
 

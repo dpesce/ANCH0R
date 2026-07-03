@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   downloadCsv,
   downloadText,
@@ -8,13 +8,13 @@ import {
   formatVelocity,
   parseUtcInput,
 } from "../lib/format";
-import {
-  buildGbtCatalog,
-  GBT_COLORS,
-  type GbtColor,
-} from "../lib/gbtCatalog";
+import { buildGbtCatalog } from "../lib/gbtCatalog";
 import { TELESCOPES, TELESCOPE_CODES } from "../lib/telescopes";
-import { evaluateVisibility, type VisibilityResult } from "../lib/visibility";
+import {
+  evaluateVisibility,
+  localSiderealTimeHours,
+  type VisibilityResult,
+} from "../lib/visibility";
 import type { CatalogData, Target, TelescopeCode } from "../types";
 
 interface ObservationPageProps {
@@ -27,6 +27,7 @@ interface PlannedTarget {
 }
 
 type TimeScale = "utc" | "local";
+type CatalogDownloadScope = TelescopeCode | "all" | "selected";
 type SortKey =
   | "recommended"
   | "name"
@@ -63,6 +64,13 @@ function compareRecommended(a: PlannedTarget, b: PlannedTarget): number {
 
 function formatVelocityValue(value: number): number {
   return Math.round(value);
+}
+
+function formatSiderealTime(hours: number): string {
+  const totalMinutes = Math.round(hours * 60) % (24 * 60);
+  const hour = Math.floor(totalMinutes / 60);
+  const minute = totalMinutes % 60;
+  return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
 }
 
 function targetMatchesNameSearch(target: Target, search: string): boolean {
@@ -190,8 +198,8 @@ function formatDateTimeInput(date: Date, timeScale: TimeScale, timeZone: string)
   return `${datePart}T${timePart}`;
 }
 
-function selectedTargetRows(selectedResults: PlannedTarget[], telescope: TelescopeCode) {
-  return selectedResults.map(({ target, visibility }) => ({
+function plannedTargetRows(results: PlannedTarget[], telescope: TelescopeCode) {
+  return results.map(({ target, visibility }) => ({
     target_id: target.target_id,
     source_name: target.source_name,
     ra_hms: target.ra_hms,
@@ -203,6 +211,17 @@ function selectedTargetRows(selectedResults: PlannedTarget[], telescope: Telesco
     max_altitude_utc: formatUtc(visibility.maxAltitudeUtc),
     first_observable_utc: formatUtc(visibility.firstObservableUtc),
     last_observable_utc: formatUtc(visibility.lastObservableUtc),
+  }));
+}
+
+function availableTargetRows(targets: Target[]) {
+  return targets.map((target) => ({
+    target_id: target.target_id,
+    source_name: target.source_name,
+    ra_hms: target.ra_hms,
+    dec_dms: target.dec_dms,
+    velocity_km_s: formatVelocityValue(target.velocity_km_s),
+    eligible_telescopes: target.eligible_telescopes.join("|"),
   }));
 }
 
@@ -245,11 +264,11 @@ function polylineForGrid(
 }
 
 function SkyMap({
-  results,
-  selectedIds,
+  targets,
+  lstRange,
 }: {
-  results: PlannedTarget[];
-  selectedIds: Set<string>;
+  targets: Target[];
+  lstRange: string;
 }) {
   const mapWidth = 760;
   const width = 806;
@@ -266,15 +285,15 @@ function SkyMap({
   }
 
   return (
-    <section className="sky-map-panel" aria-label="Selected target sky map">
+    <section className="sky-map-panel" aria-label="Displayed target sky map">
       <div className="section-heading-row">
         <div>
           <h2>Sky Map</h2>
-          <p>Selected targets are highlighted.</p>
+          <p>{lstRange}</p>
         </div>
       </div>
       <svg className="sky-map" viewBox={`0 0 ${width} ${height}`} role="img">
-        <title>Sky map of current and selected targets</title>
+        <title>Sky map of targets in the displayed table</title>
         <ellipse
           className="sky-map-outline"
           cx={mapWidth / 2}
@@ -338,16 +357,15 @@ function SkyMap({
             </text>
           );
         })}
-        {results.map(({ target }) => {
+        {targets.map((target) => {
           const point = projectMollweide(target.ra_deg, target.dec_deg, mapWidth, height);
-          const selected = selectedIds.has(target.target_id);
           return (
             <circle
-              className={selected ? "sky-map-point sky-map-point--selected" : "sky-map-point"}
+              className="sky-map-point"
               cx={point.x}
               cy={point.y}
               key={target.target_id}
-              r={selected ? 3.6 : 1.4}
+              r={1.4}
             />
           );
         })}
@@ -396,10 +414,9 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
   const [endTime, setEndTime] = useState("");
   const [minElevationDeg, setMinElevationDeg] = useState(25);
   const [minObservableMinutes, setMinObservableMinutes] = useState(30);
-  const [maxResults, setMaxResults] = useState(50);
   const [targetSearch, setTargetSearch] = useState("");
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-  const [gbtColors, setGbtColors] = useState<Record<string, GbtColor>>({});
+  const [catalogDownloadScope, setCatalogDownloadScope] =
+    useState<CatalogDownloadScope>("selected");
   const [sortKey, setSortKey] = useState<SortKey>("recommended");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
 
@@ -410,18 +427,6 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
   const invalidWindow = Boolean(
     windowStart && windowEnd && windowEnd.getTime() <= windowStart.getTime(),
   );
-
-  useEffect(() => {
-    setSelectedIds(new Set());
-    setGbtColors({});
-  }, [
-    endTime,
-    minElevationDeg,
-    minObservableMinutes,
-    startTime,
-    telescope,
-    timeScale,
-  ]);
 
   const candidates = useMemo(() => {
     return catalog.targets.filter((target) => {
@@ -497,41 +502,85 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
   ]);
 
   const results = useMemo(() => {
-    return visibleResults
-      .filter(({ target }) => targetMatchesNameSearch(target, targetSearch))
-      .slice(0, maxResults);
-  }, [maxResults, targetSearch, visibleResults]);
-
-  const selectedResults = useMemo(() => {
-    return visibleResults.filter(({ target }) => selectedIds.has(target.target_id));
-  }, [selectedIds, visibleResults]);
-
-  const skyMapResults = useMemo(() => {
-    const displayedResults = new Map(
-      results.map((result) => [result.target.target_id, result]),
+    return visibleResults.filter(({ target }) =>
+      targetMatchesNameSearch(target, targetSearch),
     );
-    selectedResults.forEach((result) => {
-      displayedResults.set(result.target.target_id, result);
-    });
-    return [...displayedResults.values()];
-  }, [results, selectedResults]);
+  }, [targetSearch, visibleResults]);
 
-  const gbtCatalogError = useMemo(() => {
-    if (telescope !== "GBT") {
+  const availableTargets = useMemo(
+    () => catalog.targets.filter((target) => target.status !== "observed"),
+    [catalog.targets],
+  );
+
+  const downloadTargets = useMemo(() => {
+    if (catalogDownloadScope === "selected") {
+      return results.map(({ target }) => target);
+    }
+    if (catalogDownloadScope === "all") {
+      return availableTargets;
+    }
+    return availableTargets.filter((target) =>
+      target.eligible_telescopes.includes(catalogDownloadScope),
+    );
+  }, [availableTargets, catalogDownloadScope, results]);
+
+  const displayedTargets = useMemo(() => {
+    if (catalogDownloadScope === "selected") {
+      return results.map(({ target }) => target);
+    }
+
+    if (
+      sortKey === "recommended" ||
+      sortKey === "maxAltitude" ||
+      sortKey === "riseUtc" ||
+      sortKey === "setUtc"
+    ) {
+      return downloadTargets;
+    }
+
+    const direction = sortDirection === "asc" ? 1 : -1;
+    return [...downloadTargets].sort((a, b) => {
+      let comparison = 0;
+      if (sortKey === "name") {
+        comparison = a.source_name.localeCompare(b.source_name);
+      } else if (sortKey === "ra") {
+        comparison = a.ra_hours - b.ra_hours;
+      } else if (sortKey === "dec") {
+        comparison = a.dec_deg - b.dec_deg;
+      } else if (sortKey === "velocity") {
+        comparison = a.velocity_km_s - b.velocity_km_s;
+      }
+
+      return comparison * direction || a.source_name.localeCompare(b.source_name);
+    });
+  }, [catalogDownloadScope, downloadTargets, results, sortDirection, sortKey]);
+
+  const showingFilteredTargets = catalogDownloadScope === "selected";
+
+  const downloadUsesGbtFormat =
+    catalogDownloadScope === "GBT" ||
+    (catalogDownloadScope === "selected" && telescope === "GBT");
+
+  const catalogDownloadError = useMemo(() => {
+    if (!downloadUsesGbtFormat) {
       return null;
     }
     try {
-      buildGbtCatalog(
-        selectedResults.map(({ target }) => ({
-          target,
-          color: gbtColors[target.target_id] ?? "red",
-        })),
-      );
+      buildGbtCatalog(downloadTargets);
       return null;
     } catch (error) {
       return error instanceof Error ? error.message : "Unable to format GBT catalog";
     }
-  }, [gbtColors, selectedResults, telescope]);
+  }, [downloadTargets, downloadUsesGbtFormat]);
+
+  const lstRange =
+    windowStart && windowEnd && !invalidWindow
+      ? `LST range at ${site.shortName}: ${formatSiderealTime(
+          localSiderealTimeHours(windowStart, site),
+        )} to ${formatSiderealTime(
+          localSiderealTimeHours(windowEnd, site),
+        )} (start to end).`
+      : "Enter a valid observing window to calculate the LST range.";
 
   function updateSort(nextSortKey: SortKey) {
     if (sortKey === nextSortKey && nextSortKey !== "recommended") {
@@ -553,51 +602,42 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
     return `${label} (${sortDirection === "asc" ? "asc" : "desc"})`;
   }
 
-  function toggleSelection(targetId: string) {
-    const currentlySelected = selectedIds.has(targetId);
-    setSelectedIds((current) => {
-      const next = new Set(current);
-      if (next.has(targetId)) {
-        next.delete(targetId);
-      } else {
-        next.add(targetId);
+  function exportCatalog() {
+    if (catalogDownloadScope === "selected") {
+      const windowLabel = startTime
+        ? startTime.replaceAll(":", "")
+        : "filtered-targets";
+      if (telescope === "GBT") {
+        downloadText(
+          `anch0r-gbt-filtered-${windowLabel}.cat`,
+          buildGbtCatalog(downloadTargets),
+        );
+        return;
       }
-      return next;
-    });
-    setGbtColors((current) => {
-      const next = { ...current };
-      if (currentlySelected) {
-        delete next[targetId];
-      } else {
-        next[targetId] = "red";
-      }
-      return next;
-    });
-  }
 
-  function updateGbtColor(targetId: string, color: GbtColor) {
-    setGbtColors((current) => ({
-      ...current,
-      [targetId]: color,
-    }));
-  }
-
-  function exportSelectedTargets() {
-    const windowLabel = startTime ? startTime.replaceAll(":", "") : "selected-targets";
-
-    if (telescope === "GBT") {
-      const catalogBody = buildGbtCatalog(
-        selectedResults.map(({ target }) => ({
-          target,
-          color: gbtColors[target.target_id] ?? "red",
-        })),
+      downloadCsv(
+        `anch0r-${telescope.toLowerCase()}-filtered-${windowLabel}.csv`,
+        plannedTargetRows(results, telescope),
       );
-      downloadText(`anch0r-gbt-${windowLabel}.cat`, catalogBody);
       return;
     }
 
-    const filename = `anch0r-${telescope.toLowerCase()}-${windowLabel}.csv`;
-    downloadCsv(filename, selectedTargetRows(selectedResults, telescope));
+    if (catalogDownloadScope === "GBT") {
+      downloadText(
+        "anch0r-gbt-available.cat",
+        buildGbtCatalog(downloadTargets),
+      );
+      return;
+    }
+
+    const scopeLabel =
+      catalogDownloadScope === "all"
+        ? "all"
+        : catalogDownloadScope.toLowerCase();
+    downloadCsv(
+      `anch0r-${scopeLabel}-available.csv`,
+      availableTargetRows(downloadTargets),
+    );
   }
 
   function updateTimeScale(nextTimeScale: TimeScale) {
@@ -618,100 +658,14 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
         <p className="section-label">Observations</p>
         <h1>Plan an observation</h1>
         <p>
-          Specify the filters relevant for your observation and then select objects from the table
-          below. All objects that have not yet been observed and which satisfy the selection
-          criteria will be shown. Once you have selected all the objects you wish to observe, you
-          can export a GBT source catalog or an EFF/SRT CSV file.
+          Specify the filters relevant for your observation. All objects that
+          have not yet been observed and which satisfy the selection criteria
+          will be shown in the table below. Download the filtered table or the
+          latest complete catalog for any telescope.
         </p>
       </div>
 
-      <section className="selection-panel">
-        <div className="section-heading-row">
-          <div>
-            <h2>Selected Targets</h2>
-            <p>
-              {formatInteger(selectedResults.length)}{" "}
-              {selectedResults.length === 1 ? "target" : "targets"} selected.
-            </p>
-          </div>
-          <button
-            className="button button-secondary"
-            disabled={selectedResults.length === 0 || Boolean(gbtCatalogError)}
-            onClick={exportSelectedTargets}
-            type="button"
-          >
-            {telescope === "GBT" ? "Download selected catalog" : "Download selected CSV"}
-          </button>
-        </div>
-
-        {gbtCatalogError ? (
-          <div className="message-error selection-message">{gbtCatalogError}</div>
-        ) : null}
-
-        {selectedResults.length > 0 ? (
-          <div className="table-wrap">
-            <table className="observation-table plan-selection-table">
-              <thead>
-                <tr>
-                  <th>Remove</th>
-                  <th>Name</th>
-                  <th>RA</th>
-                  <th>Dec</th>
-                  <th>Vel</th>
-                  {telescope === "GBT" ? <th>Color</th> : null}
-                </tr>
-              </thead>
-              <tbody>
-                {selectedResults.map(({ target }) => (
-                  <tr key={target.target_id}>
-                    <td className="checkbox-cell">
-                      <input
-                        aria-label={`Remove ${target.source_name}`}
-                        checked
-                        className="target-checkbox"
-                        onChange={() => toggleSelection(target.target_id)}
-                        type="checkbox"
-                      />
-                    </td>
-                    <td className="catalog-text-cell catalog-name-cell">
-                      <strong>{target.source_name}</strong>
-                    </td>
-                    <td className="catalog-text-cell catalog-ra-cell">{target.ra_hms}</td>
-                    <td className="catalog-text-cell catalog-dec-cell">{target.dec_dms}</td>
-                    <td className="catalog-text-cell catalog-velocity-cell">
-                      {formatVelocityValue(target.velocity_km_s)}
-                    </td>
-                    {telescope === "GBT" ? (
-                      <td>
-                        <select
-                          aria-label={`Color for ${target.source_name}`}
-                          value={gbtColors[target.target_id] ?? "red"}
-                          onChange={(event) =>
-                            updateGbtColor(
-                              target.target_id,
-                              event.target.value as GbtColor,
-                            )
-                          }
-                        >
-                          {GBT_COLORS.map((color) => (
-                            <option key={color} value={color}>
-                              {color}
-                            </option>
-                          ))}
-                        </select>
-                      </td>
-                    ) : null}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <p className="subtle">Select targets from the table below.</p>
-        )}
-      </section>
-
-      <SkyMap results={skyMapResults} selectedIds={selectedIds} />
+      <SkyMap lstRange={lstRange} targets={displayedTargets} />
 
       <section className="target-filter-panel">
         <form className="planner-form target-filter-form">
@@ -785,43 +739,81 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
               onChange={(event) => setMinObservableMinutes(Number(event.target.value))}
             />
           </label>
-
-          <label>
-            Maximum results
-            <input
-              type="number"
-              min={10}
-              step={10}
-              value={maxResults}
-              onChange={(event) => setMaxResults(Number(event.target.value))}
-            />
-          </label>
         </form>
       </section>
 
-      {missingWindow ? (
+      {showingFilteredTargets && missingWindow ? (
         <div className="empty-state">Enter a start time and end time to show matching targets.</div>
       ) : null}
 
-      {invalidWindow ? (
+      {showingFilteredTargets && invalidWindow ? (
         <div className="message-error">End time must be later than start time.</div>
       ) : null}
 
       <section className="results-heading">
         <div>
-          <h2>Candidate Targets</h2>
-          <p>
-            Showing {formatInteger(results.length)} candidate targets above {minElevationDeg} deg
-            for at least {formatInteger(minObservableMinutes)} minutes.
-          </p>
+          <h2>
+            {showingFilteredTargets ? "Candidate Targets" : "Available Targets"}
+          </h2>
+          {showingFilteredTargets ? (
+            <p>
+              Showing {formatInteger(displayedTargets.length)} candidate{" "}
+              {displayedTargets.length === 1 ? "target" : "targets"} above{" "}
+              {minElevationDeg} deg for at least{" "}
+              {formatInteger(minObservableMinutes)} minutes.
+            </p>
+          ) : (
+            <p>
+              Showing {formatInteger(displayedTargets.length)} unobserved{" "}
+              {displayedTargets.length === 1 ? "target" : "targets"} from the
+              selected complete catalog.
+            </p>
+          )}
+        </div>
+        <div className="catalog-download-controls">
+          <label>
+            Catalog download
+            <select
+              value={catalogDownloadScope}
+              onChange={(event) =>
+                setCatalogDownloadScope(
+                  event.target.value as CatalogDownloadScope,
+                )
+              }
+            >
+              <option value="selected">Selected (filtered table)</option>
+              <option value="GBT">GBT (all available)</option>
+              <option value="EFF">Effelsberg (all available)</option>
+              <option value="SRT">SRT (all available)</option>
+              <option value="all">Everything (all available)</option>
+            </select>
+          </label>
+          <button
+            className="button button-secondary"
+            disabled={
+              downloadTargets.length === 0 || Boolean(catalogDownloadError)
+            }
+            onClick={exportCatalog}
+            type="button"
+          >
+            Download catalog
+          </button>
+          <span className="catalog-download-meta">
+            {formatInteger(downloadTargets.length)}{" "}
+            {downloadTargets.length === 1 ? "target" : "targets"},{" "}
+            {downloadUsesGbtFormat ? ".cat" : ".csv"} format
+          </span>
         </div>
       </section>
+
+      {catalogDownloadError ? (
+        <div className="message-error">{catalogDownloadError}</div>
+      ) : null}
 
       <div className="table-wrap">
         <table className="observation-table">
           <thead>
             <tr>
-              <th>Select</th>
               <th>
                 <button type="button" className="sort-button" onClick={() => updateSort("name")}>
                   {sortLabel("Target", "name")}
@@ -846,64 +838,67 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
                   {sortLabel("Velocity", "velocity")}
                 </button>
               </th>
-              <th>
-                <button
-                  type="button"
-                  className="sort-button"
-                  onClick={() => updateSort("maxAltitude")}
-                >
-                  {sortLabel("Max alt", "maxAltitude")}
-                </button>
-              </th>
-              <th>
-                <button
-                  type="button"
-                  className="sort-button"
-                  onClick={() => updateSort("riseUtc")}
-                >
-                  {sortLabel("Rise time (UTC)", "riseUtc")}
-                </button>
-              </th>
-              <th>
-                <button
-                  type="button"
-                  className="sort-button"
-                  onClick={() => updateSort("setUtc")}
-                >
-                  {sortLabel("Set time (UTC)", "setUtc")}
-                </button>
-              </th>
+              {showingFilteredTargets ? (
+                <>
+                  <th>
+                    <button
+                      type="button"
+                      className="sort-button"
+                      onClick={() => updateSort("maxAltitude")}
+                    >
+                      {sortLabel("Max alt", "maxAltitude")}
+                    </button>
+                  </th>
+                  <th>
+                    <button
+                      type="button"
+                      className="sort-button"
+                      onClick={() => updateSort("riseUtc")}
+                    >
+                      {sortLabel("Rise time (UTC)", "riseUtc")}
+                    </button>
+                  </th>
+                  <th>
+                    <button
+                      type="button"
+                      className="sort-button"
+                      onClick={() => updateSort("setUtc")}
+                    >
+                      {sortLabel("Set time (UTC)", "setUtc")}
+                    </button>
+                  </th>
+                </>
+              ) : null}
             </tr>
           </thead>
           <tbody>
-            {results.map(({ target, visibility }) => {
-              const selected = selectedIds.has(target.target_id);
-              return (
-                <tr className={selected ? "selected-row" : ""} key={target.target_id}>
-                  <td className="checkbox-cell">
-                    <input
-                      aria-label={`Select ${target.source_name}`}
-                      checked={selected}
-                      className="target-checkbox"
-                      onChange={() => toggleSelection(target.target_id)}
-                      type="checkbox"
-                    />
-                  </td>
-                  <td>
-                    <strong>{target.source_name}</strong>
-                  </td>
-                  <td>{target.ra_hms}</td>
-                  <td>{target.dec_dms}</td>
-                  <td>{formatVelocity(target.velocity_km_s)}</td>
-                  <td>{formatDegrees(visibility.maxAltitudeDeg, 1)}</td>
-                  <td>{formatDisplayUtc(visibility.firstObservableUtc) || "None"}</td>
-                  <td>{formatDisplayUtc(visibility.lastObservableUtc) || "None"}</td>
-                </tr>
-              );
-            })}
+            {showingFilteredTargets
+              ? results.map(({ target, visibility }) => (
+                  <tr key={target.target_id}>
+                    <td>
+                      <strong>{target.source_name}</strong>
+                    </td>
+                    <td>{target.ra_hms}</td>
+                    <td>{target.dec_dms}</td>
+                    <td>{formatVelocity(target.velocity_km_s)}</td>
+                    <td>{formatDegrees(visibility.maxAltitudeDeg, 1)}</td>
+                    <td>{formatDisplayUtc(visibility.firstObservableUtc) || "None"}</td>
+                    <td>{formatDisplayUtc(visibility.lastObservableUtc) || "None"}</td>
+                  </tr>
+                ))
+              : displayedTargets.map((target) => (
+                  <tr key={target.target_id}>
+                    <td>
+                      <strong>{target.source_name}</strong>
+                    </td>
+                    <td>{target.ra_hms}</td>
+                    <td>{target.dec_dms}</td>
+                    <td>{formatVelocity(target.velocity_km_s)}</td>
+                  </tr>
+                ))}
           </tbody>
         </table>
-        {results.length === 0 ? (
+        {displayedTargets.length === 0 ? (
           <div className="empty-state">No targets match this observing setup.</div>
         ) : null}
       </div>

@@ -318,7 +318,7 @@ dd {
 }
 
 .target-filter-form {
-  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  grid-template-columns: repeat(3, minmax(160px, 1fr));
 }
 
 .time-field-heading {
@@ -395,40 +395,6 @@ dd {
   gap: 16px;
 }
 
-.selection-message {
-  margin-top: 0;
-}
-
-.plan-selection-table {
-  min-width: 680px;
-}
-
-.plan-selection-table .catalog-text-cell {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  white-space: nowrap;
-}
-
-.catalog-name-cell {
-  min-width: 18ch;
-}
-
-.catalog-ra-cell {
-  min-width: 12ch;
-}
-
-.catalog-dec-cell {
-  min-width: 13ch;
-}
-
-.catalog-velocity-cell {
-  min-width: 5ch;
-  text-align: right;
-}
-
-.plan-selection-table select {
-  min-width: 110px;
-}
-
 .report-selection-panel {
   margin-bottom: 20px;
 }
@@ -442,15 +408,35 @@ dd {
 }
 
 .report-entry-table {
-  min-width: 780px;
+  min-width: 0;
+  table-layout: fixed;
 }
 
-.report-entry-table th:nth-child(2) {
-  min-width: 150px;
+.report-entry-remove-column {
+  width: 82px;
 }
 
-.report-entry-table th:nth-child(n + 3) {
-  min-width: 155px;
+.report-entry-target-column {
+  width: 20%;
+}
+
+.report-entry-rms-column {
+  width: 17%;
+}
+
+.report-entry-quality-column {
+  width: auto;
+}
+
+.report-entry-detection-column {
+  width: 18%;
+}
+
+.report-entry-table th,
+.report-entry-table td,
+.report-confirmation-table th,
+.report-confirmation-table td {
+  overflow-wrap: anywhere;
 }
 
 .report-entry-row--ineligible td {
@@ -489,25 +475,113 @@ dd {
   font-weight: 400;
 }
 
-.selected-list {
+.report-confirmation-summary {
+  margin-bottom: 20px;
+}
+
+.report-confirmation-table {
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.report-confirmation-target-column {
+  width: 18%;
+}
+
+.report-confirmation-ra-column {
+  width: 12%;
+}
+
+.report-confirmation-dec-column {
+  width: 13%;
+}
+
+.report-confirmation-velocity-column {
+  width: 10%;
+}
+
+.report-confirmation-rms-column {
+  width: 13%;
+}
+
+.report-confirmation-quality-column {
+  width: 22%;
+}
+
+.report-confirmation-detection-column {
+  width: 12%;
+}
+
+.report-confirmation-notes {
+  padding-top: 4px;
+}
+
+.report-confirmation-notes h3 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+}
+
+.report-confirmation-notes p {
+  margin-bottom: 0;
+  white-space: pre-wrap;
+}
+
+.github-confirmation-panel {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 22px;
+}
+
+.github-confirmation-panel code {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  border-radius: 5px;
+  background: var(--surface-soft);
+  padding: 5px 8px;
+}
+
+.github-instruction {
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+  margin: 20px 0;
+  border-left: 4px solid var(--accent);
+  background: var(--accent-soft);
+  padding: 16px;
+}
+
+.github-submit-button-example {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  border: 1px solid #1a7f37;
+  border-radius: 6px;
+  background: #1f883d;
+  color: white;
+  font-weight: 700;
+  padding: 6px 12px;
+}
+
+.github-submit-button-example kbd {
+  margin-left: 8px;
+  border: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: 0.78em;
+  font-weight: 600;
+  padding-left: 8px;
+}
+
+.report-confirmation-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-}
-
-.selected-chip {
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: white;
-  color: var(--accent-strong);
-  cursor: pointer;
-  font-weight: 800;
-  padding: 7px 10px;
-}
-
-.selected-chip:hover {
-  border-color: var(--accent);
-  background: var(--accent-soft);
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .selected-row {
@@ -555,13 +629,6 @@ dd {
 .sky-map-point {
   fill: #111816;
   opacity: 0.5;
-}
-
-.sky-map-point--selected {
-  fill: #d84b2a;
-  opacity: 1;
-  stroke: white;
-  stroke-width: 1.6;
 }
 
 label {
@@ -634,6 +701,19 @@ button:disabled {
 .results-heading p {
   margin-bottom: 0;
   color: var(--muted);
+}
+
+.catalog-download-controls {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) auto;
+  align-items: end;
+  gap: 8px 10px;
+}
+
+.catalog-download-meta {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 0.82rem;
 }
 
 .table-wrap {
@@ -778,7 +858,8 @@ td strong,
   }
 
   .toolbar,
-  .planner-form {
+  .planner-form,
+  .catalog-download-controls {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -795,9 +876,14 @@ td strong,
 
   .toolbar,
   .planner-form,
+  .catalog-download-controls,
   .report-target-search,
   .team-list {
     grid-template-columns: 1fr;
+  }
+
+  .catalog-download-meta {
+    grid-column: auto;
   }
 
   nav {

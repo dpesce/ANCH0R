@@ -2,7 +2,11 @@ export type TelescopeCode = "GBT" | "EFF" | "SRT";
 
 export type TargetStatus = "unobserved" | "observed";
 export type DetectionStatus = "detected" | "marginal" | "undetected";
-export type DataQuality = "excellent" | "good" | "fair" | "poor" | "unobserved";
+export type DataQuality =
+  | "trusted"
+  | "possible_pointing_problems"
+  | "possible_other_problems"
+  | "untrusted";
 
 export interface Target {
   target_id: string;

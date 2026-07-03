@@ -74,12 +74,13 @@ To mark a target as observed, add a row to `data/observations.csv` with
 `status` set to `observed`. Successful observations require:
 
 - `rms_mjy_per_1_km_s`: RMS noise in mJy per 1 km/s spectral channel
-- `data_quality`: `excellent`, `good`, `fair`, or `poor`
+- `data_quality`: `trusted`, `possible_pointing_problems`,
+  `possible_other_problems`, or `untrusted`
 - `detection_status`: `detected`, `marginal`, or `undetected`
 
-A target that was attempted but not observed uses `status=failed` and
-`data_quality=unobserved`, with blank RMS and detection fields. Put spectrum
-images under `public/spectra/` and use a site-relative URL such as
+A target that was attempted but not observed uses `status=failed`, with blank
+RMS, data-quality, and detection fields. Put spectrum images under
+`public/spectra/` and use a site-relative URL such as
 `/ANCH0R/spectra/example.png` in the `spectrum_url` column.
 
 After editing data files:
@@ -111,19 +112,21 @@ browser-side altitude calculation based on the site coordinates in
 `src/lib/telescopes.ts`. It is intended for campaign coordination, not final
 telescope scheduling constraints.
 
-Selected GBT targets are exported as fixed-width `.cat` source catalogs. The
-format follows `examples/example_GBT_catalog.cat`, including its header and
-column alignment. Effelsberg and SRT selections are exported as CSV until
-telescope-specific catalog formats are added.
+Filtered GBT targets and the complete available GBT catalog are exported as
+fixed-width `.cat` source catalogs. The format follows
+`examples/example_GBT_catalog.cat`, including its header and column alignment.
+Effelsberg, SRT, and combined catalogs are exported as CSV until additional
+telescope-specific formats are added.
 
 ## Observing Reports
 
-The report page opens a prefilled GitHub issue containing a versioned,
-machine-readable payload. The observing-report workflow validates that payload,
-adds one row per selected target to `data/observations.csv`, rebuilds the
-generated catalog files, and opens a pull request for review. Reports use the
-current V3 payload format; earlier report formats are intentionally unsupported
-while the interface is under active design.
+The report page first shows an in-app confirmation screen and then opens a
+prefilled GitHub issue containing a versioned, machine-readable payload. The
+observing-report workflow validates that payload, adds one row per selected
+target to `data/observations.csv`, rebuilds the generated catalog files, and
+opens a pull request for review. Reports use the current V4 payload format;
+earlier report formats are intentionally unsupported while the interface is
+under active design.
 
 ## License
 

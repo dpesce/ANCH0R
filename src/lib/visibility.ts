@@ -31,13 +31,20 @@ function gmstHours(date: Date): number {
   return normalizeHours(18.697374558 + 24.06570982441908 * daysSinceJ2000);
 }
 
+export function localSiderealTimeHours(
+  date: Date,
+  site: TelescopeSite,
+): number {
+  return normalizeHours(gmstHours(date) + site.longitudeDeg / 15);
+}
+
 export function altitudeDeg(
   raHours: number,
   decDeg: number,
   site: TelescopeSite,
   date: Date,
 ): number {
-  const localSiderealHours = normalizeHours(gmstHours(date) + site.longitudeDeg / 15);
+  const localSiderealHours = localSiderealTimeHours(date, site);
   const hourAngleHours = normalizeHours(localSiderealHours - raHours + 12) - 12;
   const hourAngleRad = hourAngleHours * 15 * DEG_TO_RAD;
   const decRad = decDeg * DEG_TO_RAD;

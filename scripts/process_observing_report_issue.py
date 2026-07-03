@@ -20,7 +20,7 @@ from build_catalog import CatalogError, build_catalog
 ROOT = Path(__file__).resolve().parents[1]
 OBSERVATIONS_FILE = ROOT / "data" / "observations.csv"
 
-REPORT_MARKER = "<!-- ANCH0R_OBSERVING_REPORT_V3 -->"
+REPORT_MARKER = "<!-- ANCH0R_OBSERVING_REPORT_V4 -->"
 OBSERVATION_FIELDS = [
     "observation_id",
     "target_id",
@@ -36,7 +36,12 @@ OBSERVATION_FIELDS = [
     "notes",
 ]
 VALID_TELESCOPES = {"GBT", "EFF", "SRT"}
-VALID_DATA_QUALITY = {"excellent", "good", "fair", "poor", "unobserved"}
+VALID_DATA_QUALITY = {
+    "trusted",
+    "possible_pointing_problems",
+    "possible_other_problems",
+    "untrusted",
+}
 VALID_DETECTION_STATUSES = {"detected", "marginal", "undetected"}
 
 
@@ -96,7 +101,7 @@ def parse_utc(value: Any, field: str) -> datetime:
 
 
 def validate_payload(payload: dict[str, Any]) -> None:
-    if payload.get("schema_version") != 3:
+    if payload.get("schema_version") != 4:
         raise ReportError("Unsupported report schema_version")
 
     parse_utc(payload.get("submitted_at_utc"), "submitted_at_utc")
@@ -130,16 +135,6 @@ def validate_payload(payload: dict[str, Any]) -> None:
 
         detection_status = target.get("detection_status")
         rms = target.get("rms_mjy_per_1_km_s")
-        if data_quality == "unobserved":
-            if detection_status not in {"", None} or (
-                rms is not None and rms != ""
-            ):
-                raise ReportError(
-                    f"targets[{index}] cannot provide RMS or detection status "
-                    "when data_quality is 'unobserved'"
-                )
-            continue
-
         if (
             not isinstance(detection_status, str)
             or detection_status not in VALID_DETECTION_STATUSES
@@ -200,8 +195,6 @@ def make_observation_rows(
         if telescope not in targets_by_id[target_id]["eligible_telescopes"]:
             raise ReportError(f"{target_id!r} is not eligible for {telescope}")
 
-        data_quality = target["data_quality"]
-        unobserved = data_quality == "unobserved"
         rows.append(
             {
                 "observation_id": f"ISSUE-{issue_number}-{index:03d}",
@@ -210,15 +203,11 @@ def make_observation_rows(
                 "observer": issue_author,
                 "start_utc": "",
                 "end_utc": "",
-                "status": "failed" if unobserved else "observed",
+                "status": "observed",
                 "spectrum_url": "",
-                "rms_mjy_per_1_km_s": (
-                    "" if unobserved else str(target["rms_mjy_per_1_km_s"])
-                ),
-                "data_quality": data_quality,
-                "detection_status": (
-                    "" if unobserved else target["detection_status"]
-                ),
+                "rms_mjy_per_1_km_s": str(target["rms_mjy_per_1_km_s"]),
+                "data_quality": target["data_quality"],
+                "detection_status": target["detection_status"],
                 "notes": notes,
             }
         )

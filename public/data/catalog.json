@@ -1,7 +1,7 @@
 {
   "observations": [
     {
-      "data_quality": "excellent",
+      "data_quality": "trusted",
       "detection_status": "detected",
       "end_utc": "2026-01-10T03:00:00Z",
       "notes": "DEMO observation for interface testing",
@@ -15,7 +15,7 @@
       "telescope": "GBT"
     },
     {
-      "data_quality": "good",
+      "data_quality": "trusted",
       "detection_status": "marginal",
       "end_utc": "2026-01-11T21:30:00Z",
       "notes": "DEMO observation for interface testing",
@@ -29,7 +29,7 @@
       "telescope": "EFF"
     },
     {
-      "data_quality": "good",
+      "data_quality": "trusted",
       "detection_status": "undetected",
       "end_utc": "2026-01-12T22:00:00Z",
       "notes": "DEMO observation for interface testing",
@@ -43,7 +43,7 @@
       "telescope": "SRT"
     },
     {
-      "data_quality": "fair",
+      "data_quality": "possible_other_problems",
       "detection_status": "undetected",
       "end_utc": "2026-01-13T04:00:00Z",
       "notes": "DEMO observation for interface testing",
@@ -57,7 +57,7 @@
       "telescope": "GBT"
     },
     {
-      "data_quality": "excellent",
+      "data_quality": "trusted",
       "detection_status": "undetected",
       "end_utc": "2026-01-14T20:45:00Z",
       "notes": "DEMO observation for interface testing",
@@ -71,7 +71,7 @@
       "telescope": "EFF"
     },
     {
-      "data_quality": "unobserved",
+      "data_quality": "",
       "detection_status": "",
       "end_utc": "2026-06-27T15:41:00Z",
       "notes": "TEST TEST TEST This is not a real observation, but just a test of the observing report submission system. Submitted via GitHub issue #2 by @dpesce.",
@@ -85,7 +85,7 @@
       "telescope": "GBT"
     },
     {
-      "data_quality": "good",
+      "data_quality": "trusted",
       "detection_status": "marginal",
       "end_utc": "",
       "notes": "TEST TEST TEST This is not a real observation, but just a test of the observing report submission system. Submitted via GitHub issue #4 by @dpesce.",
@@ -99,7 +99,7 @@
       "telescope": "GBT"
     },
     {
-      "data_quality": "excellent",
+      "data_quality": "trusted",
       "detection_status": "undetected",
       "end_utc": "",
       "notes": "This is a test. Delete this test. NGC 3115 may host a brighter maser than NGC 4258. So we don't want to mark it \"observed\" until we actually observe it. :-) Submitted via GitHub issue #6 by @jbraatz.",
@@ -113,7 +113,7 @@
       "telescope": "GBT"
     },
     {
-      "data_quality": "fair",
+      "data_quality": "possible_other_problems",
       "detection_status": "undetected",
       "end_utc": "",
       "notes": "This is a test. Delete this test. NGC 3115 may host a brighter maser than NGC 4258. So we don't want to mark it \"observed\" until we actually observe it. :-) Submitted via GitHub issue #6 by @jbraatz.",
@@ -127,7 +127,7 @@
       "telescope": "GBT"
     },
     {
-      "data_quality": "good",
+      "data_quality": "trusted",
       "detection_status": "marginal",
       "end_utc": "",
       "notes": "This is a test. Delete this test. NGC 3115 may host a brighter maser than NGC 4258. So we don't want to mark it \"observed\" until we actually observe it. :-) Submitted via GitHub issue #6 by @jbraatz.",
@@ -141,7 +141,7 @@
       "telescope": "GBT"
     },
     {
-      "data_quality": "excellent",
+      "data_quality": "trusted",
       "detection_status": "detected",
       "end_utc": "",
       "notes": "This is a test. Delete this test. NGC 3115 may host a brighter maser than NGC 4258. So we don't want to mark it \"observed\" until we actually observe it. :-) Submitted via GitHub issue #6 by @jbraatz.",
@@ -155,7 +155,7 @@
       "telescope": "GBT"
     },
     {
-      "data_quality": "poor",
+      "data_quality": "untrusted",
       "detection_status": "undetected",
       "end_utc": "",
       "notes": "This is a test. Delete this test. NGC 3115 may host a brighter maser than NGC 4258. So we don't want to mark it \"observed\" until we actually observe it. :-) Submitted via GitHub issue #6 by @jbraatz.",
@@ -169,7 +169,7 @@
       "telescope": "GBT"
     },
     {
-      "data_quality": "good",
+      "data_quality": "trusted",
       "detection_status": "undetected",
       "end_utc": "",
       "notes": "This is a test. Delete this test. NGC 3115 may host a brighter maser than NGC 4258. So we don't want to mark it \"observed\" until we actually observe it. :-) Submitted via GitHub issue #6 by @jbraatz.",

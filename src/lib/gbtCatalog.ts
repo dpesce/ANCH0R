@@ -1,18 +1,7 @@
 import type { Target } from "../types";
 
 export const GBT_CATALOG_HEADER = "head= name ra dec vel color";
-
-export const GBT_COLORS = [
-  "blue",
-  "cyan",
-  "green",
-  "purple",
-  "red",
-  "white",
-  "yellow",
-] as const;
-
-export type GbtColor = (typeof GBT_COLORS)[number];
+const GBT_DEFAULT_COLOR = "red";
 
 const FIELD_WIDTHS = {
   name: 18,
@@ -29,7 +18,7 @@ function assertFieldFits(label: string, value: string, width: number): void {
   }
 }
 
-export function formatGbtCatalogRow(target: Target, color: GbtColor): string {
+export function formatGbtCatalogRow(target: Target): string {
   const velocity = String(Math.round(target.velocity_km_s));
   const dec = /^[+-]/.test(target.dec_dms)
     ? target.dec_dms
@@ -46,16 +35,14 @@ export function formatGbtCatalogRow(target: Target, color: GbtColor): string {
     dec.padEnd(FIELD_WIDTHS.dec),
     velocity.padStart(FIELD_WIDTHS.velocity),
     "   ",
-    color,
+    GBT_DEFAULT_COLOR,
   ].join("");
 }
 
-export function buildGbtCatalog(
-  rows: Array<{ target: Target; color: GbtColor }>,
-): string {
+export function buildGbtCatalog(targets: Target[]): string {
   return [
     GBT_CATALOG_HEADER,
-    ...rows.map(({ target, color }) => formatGbtCatalogRow(target, color)),
+    ...targets.map(formatGbtCatalogRow),
     "",
   ].join("\n");
 }
