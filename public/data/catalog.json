@@ -181,6 +181,62 @@
       "status": "observed",
       "target_id": "ugc05442",
       "telescope": "GBT"
+    },
+    {
+      "data_quality": "trusted",
+      "detection_status": "undetected",
+      "end_utc": "",
+      "notes": "Notes go here. Submitted via GitHub issue #18 by @jbraatz.",
+      "observation_id": "ISSUE-18-001",
+      "observer": "jbraatz",
+      "rms_mjy_per_1_km_s": "2.5",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "ugc00017",
+      "telescope": "GBT"
+    },
+    {
+      "data_quality": "trusted",
+      "detection_status": "marginal",
+      "end_utc": "",
+      "notes": "Notes go here. Submitted via GitHub issue #18 by @jbraatz.",
+      "observation_id": "ISSUE-18-002",
+      "observer": "jbraatz",
+      "rms_mjy_per_1_km_s": "2.6",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "ugc00031",
+      "telescope": "GBT"
+    },
+    {
+      "data_quality": "possible_other_problems",
+      "detection_status": "undetected",
+      "end_utc": "",
+      "notes": "Notes go here. Submitted via GitHub issue #18 by @jbraatz.",
+      "observation_id": "ISSUE-18-003",
+      "observer": "jbraatz",
+      "rms_mjy_per_1_km_s": "2.7",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "ugc00064",
+      "telescope": "GBT"
+    },
+    {
+      "data_quality": "possible_pointing_problems",
+      "detection_status": "undetected",
+      "end_utc": "",
+      "notes": "Notes go here. Submitted via GitHub issue #18 by @jbraatz.",
+      "observation_id": "ISSUE-18-004",
+      "observer": "jbraatz",
+      "rms_mjy_per_1_km_s": "2.8",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "ugc00063",
+      "telescope": "GBT"
     }
   ],
   "project": {
@@ -191,9 +247,9 @@
   "stats": {
     "detection_status_counts": {
       "detected": 2,
-      "marginal": 3,
-      "not_assessed": 2983,
-      "undetected": 7
+      "marginal": 4,
+      "not_assessed": 2979,
+      "undetected": 10
     },
     "eligibility_overlap_counts": {
       "EFF+GBT+SRT": 1681,
@@ -206,7 +262,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 13,
+    "observations": 17,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -225,8 +281,8 @@
       }
     },
     "status_counts": {
-      "observed": 12,
-      "unobserved": 2983
+      "observed": 16,
+      "unobserved": 2979
     },
     "total_targets": 2995
   },
@@ -432,11 +488,11 @@
       "velocity_km_s": 969.5
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "GBT",
       "coordinate_system": "Equatorial",
       "dec_deg": 15.21880556,
       "dec_dms": "+15:13:07.7",
-      "detection_status": "",
+      "detection_status": "undetected",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -447,8 +503,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "Notes go here. Submitted via GitHub issue #18 by @jbraatz.",
+      "observations_count": 1,
       "ra_deg": 0.93,
       "ra_hms": "00:03:43.2",
       "ra_hours": 0.062,
@@ -459,18 +515,18 @@
       },
       "source_name": "UGC00017",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "ugc00017",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
       "velocity_km_s": 876.9
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "GBT",
       "coordinate_system": "Equatorial",
       "dec_deg": 17.19227778,
       "dec_dms": "+17:11:32.2",
-      "detection_status": "",
+      "detection_status": "marginal",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -481,8 +537,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "Notes go here. Submitted via GitHub issue #18 by @jbraatz.",
+      "observations_count": 1,
       "ra_deg": 1.21666667,
       "ra_hms": "00:04:52.0",
       "ra_hours": 0.0811111111,
@@ -493,7 +549,7 @@
       },
       "source_name": "UGC00031",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "ugc00031",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
@@ -596,11 +652,11 @@
       "velocity_km_s": 235.3
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "GBT",
       "coordinate_system": "Equatorial",
       "dec_deg": 40.87580556,
       "dec_dms": "+40:52:32.9",
-      "detection_status": "",
+      "detection_status": "undetected",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -611,8 +667,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group11",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "Notes go here. Submitted via GitHub issue #18 by @jbraatz.",
+      "observations_count": 1,
       "ra_deg": 1.93291667,
       "ra_hms": "00:07:43.9",
       "ra_hours": 0.1288611111,
@@ -623,18 +679,18 @@
       },
       "source_name": "UGC00064",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "ugc00064",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
       "velocity_km_s": 273.1
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "GBT",
       "coordinate_system": "Equatorial",
       "dec_deg": 35.96619444,
       "dec_dms": "+35:57:58.3",
-      "detection_status": "",
+      "detection_status": "undetected",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -645,8 +701,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "Notes go here. Submitted via GitHub issue #18 by @jbraatz.",
+      "observations_count": 1,
       "ra_deg": 1.96083333,
       "ra_hms": "00:07:50.6",
       "ra_hours": 0.1307222222,
@@ -657,7 +713,7 @@
       },
       "source_name": "UGC00063",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "ugc00063",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
