@@ -237,6 +237,34 @@
       "status": "observed",
       "target_id": "ugc00063",
       "telescope": "GBT"
+    },
+    {
+      "data_quality": "untrusted",
+      "detection_status": "undetected",
+      "end_utc": "",
+      "notes": "trash Submitted via GitHub issue #22 by @fredcourbin.",
+      "observation_id": "ISSUE-22-001",
+      "observer": "fredcourbin",
+      "rms_mjy_per_1_km_s": "3",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "ic5377",
+      "telescope": "SRT"
+    },
+    {
+      "data_quality": "untrusted",
+      "detection_status": "undetected",
+      "end_utc": "",
+      "notes": "trash Submitted via GitHub issue #22 by @fredcourbin.",
+      "observation_id": "ISSUE-22-002",
+      "observer": "fredcourbin",
+      "rms_mjy_per_1_km_s": "0",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "wiseaj000232-7",
+      "telescope": "SRT"
     }
   ],
   "project": {
@@ -247,9 +275,9 @@
   "stats": {
     "detection_status_counts": {
       "detected": 2,
-      "marginal": 4,
+      "marginal": 3,
       "not_assessed": 2979,
-      "undetected": 10
+      "undetected": 11
     },
     "eligibility_overlap_counts": {
       "EFF+GBT+SRT": 1681,
@@ -262,7 +290,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 17,
+    "observations": 19,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -438,7 +466,7 @@
       "epoch": "J2000",
       "gbt_group": "Group01",
       "notes": "DEMO observation for interface testing",
-      "observations_count": 1,
+      "observations_count": 2,
       "ra_deg": 0.52291667,
       "ra_hms": "00:02:05.5",
       "ra_hours": 0.0348611111,
@@ -456,11 +484,11 @@
       "velocity_km_s": 1051.1
     },
     {
-      "assigned_telescope": "GBT",
+      "assigned_telescope": "SRT",
       "coordinate_system": "Equatorial",
       "dec_deg": -21.76980556,
       "dec_dms": "-21:46:11.3",
-      "detection_status": "marginal",
+      "detection_status": "undetected",
       "eligible_eff": false,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -470,8 +498,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "TEST TEST TEST This is not a real observation, but just a test of the observing report submission system. Submitted via GitHub issue #4 by @dpesce.",
-      "observations_count": 1,
+      "notes": "trash Submitted via GitHub issue #22 by @fredcourbin.",
+      "observations_count": 2,
       "ra_deg": 0.63666667,
       "ra_hms": "00:02:32.8",
       "ra_hours": 0.0424444444,
