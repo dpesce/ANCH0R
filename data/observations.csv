@@ -16,3 +16,4 @@ ISSUE-18-001,ugc00017,GBT,jbraatz,,,observed,,2.5,trusted,undetected,Notes go he
 ISSUE-18-002,ugc00031,GBT,jbraatz,,,observed,,2.6,trusted,marginal,Notes go here. Submitted via GitHub issue #18 by @jbraatz.
 ISSUE-18-003,ugc00064,GBT,jbraatz,,,observed,,2.7,possible_other_problems,undetected,Notes go here. Submitted via GitHub issue #18 by @jbraatz.
 ISSUE-18-004,ugc00063,GBT,jbraatz,,,observed,,2.8,possible_pointing_problems,undetected,Notes go here. Submitted via GitHub issue #18 by @jbraatz.
+ISSUE-28-001,eso409-ig015,SRT,fredcourbin,,,observed,,1,trusted,detected,this was observed at SRT Submitted via GitHub issue #28 by @fredcourbin.
