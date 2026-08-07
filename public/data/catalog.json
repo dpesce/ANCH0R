@@ -237,6 +237,20 @@
       "status": "observed",
       "target_id": "ugc00063",
       "telescope": "GBT"
+    },
+    {
+      "data_quality": "possible_other_problems",
+      "detection_status": "marginal",
+      "end_utc": "",
+      "notes": "so so Submitted via GitHub issue #24 by @fredcourbin.",
+      "observation_id": "ISSUE-24-001",
+      "observer": "fredcourbin",
+      "rms_mjy_per_1_km_s": "2",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "wiseaj000103-0",
+      "telescope": "SRT"
     }
   ],
   "project": {
@@ -247,9 +261,9 @@
   "stats": {
     "detection_status_counts": {
       "detected": 2,
-      "marginal": 4,
+      "marginal": 5,
       "not_assessed": 2979,
-      "undetected": 10
+      "undetected": 9
     },
     "eligibility_overlap_counts": {
       "EFF+GBT+SRT": 1681,
@@ -262,7 +276,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 17,
+    "observations": 18,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -394,7 +408,7 @@
       "coordinate_system": "Equatorial",
       "dec_deg": -26.08930556,
       "dec_dms": "-26:05:21.5",
-      "detection_status": "undetected",
+      "detection_status": "marginal",
       "eligible_eff": false,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -405,7 +419,7 @@
       "epoch": "J2000",
       "gbt_group": "Group01",
       "notes": "DEMO observation for interface testing",
-      "observations_count": 1,
+      "observations_count": 2,
       "ra_deg": 0.2625,
       "ra_hms": "00:01:03.0",
       "ra_hours": 0.0175,
