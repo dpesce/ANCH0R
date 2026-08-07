@@ -237,6 +237,34 @@
       "status": "observed",
       "target_id": "ugc00063",
       "telescope": "GBT"
+    },
+    {
+      "data_quality": "trusted",
+      "detection_status": "detected",
+      "end_utc": "",
+      "notes": "Bingo. These are two new anchors !!! Submitted via GitHub issue #20 by @fredcourbin.",
+      "observation_id": "ISSUE-20-001",
+      "observer": "fredcourbin",
+      "rms_mjy_per_1_km_s": "2",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "ugc12894",
+      "telescope": "SRT"
+    },
+    {
+      "data_quality": "trusted",
+      "detection_status": "detected",
+      "end_utc": "",
+      "notes": "Bingo. These are two new anchors !!! Submitted via GitHub issue #20 by @fredcourbin.",
+      "observation_id": "ISSUE-20-002",
+      "observer": "fredcourbin",
+      "rms_mjy_per_1_km_s": "4",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "ugc12893",
+      "telescope": "SRT"
     }
   ],
   "project": {
@@ -246,10 +274,10 @@
   "schema_version": 2,
   "stats": {
     "detection_status_counts": {
-      "detected": 2,
-      "marginal": 4,
+      "detected": 4,
+      "marginal": 3,
       "not_assessed": 2979,
-      "undetected": 10
+      "undetected": 9
     },
     "eligibility_overlap_counts": {
       "EFF+GBT+SRT": 1681,
@@ -262,7 +290,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 17,
+    "observations": 19,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -326,7 +354,7 @@
       "coordinate_system": "Equatorial",
       "dec_deg": 39.4955,
       "dec_dms": "+39:29:43.8",
-      "detection_status": "marginal",
+      "detection_status": "detected",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -338,7 +366,7 @@
       "epoch": "J2000",
       "gbt_group": "Group11",
       "notes": "DEMO observation for interface testing",
-      "observations_count": 1,
+      "observations_count": 2,
       "ra_deg": 0.09416667,
       "ra_hms": "00:00:22.6",
       "ra_hours": 0.0062777778,
@@ -360,7 +388,7 @@
       "coordinate_system": "Equatorial",
       "dec_deg": 17.22022222,
       "dec_dms": "+17:13:12.8",
-      "detection_status": "undetected",
+      "detection_status": "detected",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -372,7 +400,7 @@
       "epoch": "J2000",
       "gbt_group": "Group01",
       "notes": "DEMO observation for interface testing",
-      "observations_count": 1,
+      "observations_count": 2,
       "ra_deg": 0.11875,
       "ra_hms": "00:00:28.5",
       "ra_hours": 0.0079166667,
