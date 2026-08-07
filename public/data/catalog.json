@@ -237,6 +237,20 @@
       "status": "observed",
       "target_id": "ugc00063",
       "telescope": "GBT"
+    },
+    {
+      "data_quality": "possible_pointing_problems",
+      "detection_status": "marginal",
+      "end_utc": "",
+      "notes": "Observed at SRT Submitted via GitHub issue #32 by @fredcourbin.",
+      "observation_id": "ISSUE-32-001",
+      "observer": "fredcourbin",
+      "rms_mjy_per_1_km_s": "2",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "eso472-g015",
+      "telescope": "SRT"
     }
   ],
   "project": {
@@ -247,8 +261,8 @@
   "stats": {
     "detection_status_counts": {
       "detected": 2,
-      "marginal": 4,
-      "not_assessed": 2979,
+      "marginal": 5,
+      "not_assessed": 2978,
       "undetected": 10
     },
     "eligibility_overlap_counts": {
@@ -262,7 +276,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 17,
+    "observations": 18,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -281,8 +295,8 @@
       }
     },
     "status_counts": {
-      "observed": 16,
-      "unobserved": 2979
+      "observed": 17,
+      "unobserved": 2978
     },
     "total_targets": 2995
   },
@@ -588,11 +602,11 @@
       "velocity_km_s": 737.2
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "SRT",
       "coordinate_system": "Equatorial",
       "dec_deg": -24.94475,
       "dec_dms": "-24:56:41.1",
-      "detection_status": "",
+      "detection_status": "marginal",
       "eligible_eff": false,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -602,8 +616,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "Observed at SRT Submitted via GitHub issue #32 by @fredcourbin.",
+      "observations_count": 1,
       "ra_deg": 1.70166667,
       "ra_hms": "00:06:48.4",
       "ra_hours": 0.1134444444,
@@ -613,7 +627,7 @@
       },
       "source_name": "ESO472-G015",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "eso472-g015",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
