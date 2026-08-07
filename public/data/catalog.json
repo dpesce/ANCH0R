@@ -237,6 +237,34 @@
       "status": "observed",
       "target_id": "ugc00063",
       "telescope": "GBT"
+    },
+    {
+      "data_quality": "trusted",
+      "detection_status": "detected",
+      "end_utc": "",
+      "notes": "Observed at Effelsberg Submitted via GitHub issue #36 by @fredcourbin.",
+      "observation_id": "ISSUE-36-001",
+      "observer": "fredcourbin",
+      "rms_mjy_per_1_km_s": "1",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "ugc00064",
+      "telescope": "EFF"
+    },
+    {
+      "data_quality": "trusted",
+      "detection_status": "detected",
+      "end_utc": "",
+      "notes": "Observed at Effelsberg Submitted via GitHub issue #36 by @fredcourbin.",
+      "observation_id": "ISSUE-36-002",
+      "observer": "fredcourbin",
+      "rms_mjy_per_1_km_s": "1",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "ngc0100",
+      "telescope": "EFF"
     }
   ],
   "project": {
@@ -246,10 +274,10 @@
   "schema_version": 2,
   "stats": {
     "detection_status_counts": {
-      "detected": 2,
+      "detected": 4,
       "marginal": 4,
-      "not_assessed": 2979,
-      "undetected": 10
+      "not_assessed": 2978,
+      "undetected": 9
     },
     "eligibility_overlap_counts": {
       "EFF+GBT+SRT": 1681,
@@ -262,7 +290,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 17,
+    "observations": 19,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -281,8 +309,8 @@
       }
     },
     "status_counts": {
-      "observed": 16,
-      "unobserved": 2979
+      "observed": 17,
+      "unobserved": 2978
     },
     "total_targets": 2995
   },
@@ -652,11 +680,11 @@
       "velocity_km_s": 235.3
     },
     {
-      "assigned_telescope": "GBT",
+      "assigned_telescope": "EFF",
       "coordinate_system": "Equatorial",
       "dec_deg": 40.87580556,
       "dec_dms": "+40:52:32.9",
-      "detection_status": "undetected",
+      "detection_status": "detected",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -667,8 +695,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group11",
-      "notes": "Notes go here. Submitted via GitHub issue #18 by @jbraatz.",
-      "observations_count": 1,
+      "notes": "Observed at Effelsberg Submitted via GitHub issue #36 by @fredcourbin.",
+      "observations_count": 2,
       "ra_deg": 1.93291667,
       "ra_hms": "00:07:43.9",
       "ra_hours": 0.1288611111,
@@ -1180,11 +1208,11 @@
       "velocity_km_s": 692.0
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "EFF",
       "coordinate_system": "Equatorial",
       "dec_deg": 16.48711111,
       "dec_dms": "+16:29:13.6",
-      "detection_status": "",
+      "detection_status": "detected",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -1195,8 +1223,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "Observed at Effelsberg Submitted via GitHub issue #36 by @fredcourbin.",
+      "observations_count": 1,
       "ra_deg": 6.0125,
       "ra_hms": "00:24:03.0",
       "ra_hours": 0.4008333333,
@@ -1207,7 +1235,7 @@
       },
       "source_name": "NGC0100",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "ngc0100",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",

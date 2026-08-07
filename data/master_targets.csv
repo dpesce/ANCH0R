@@ -10,7 +10,7 @@ ugc00031,UGC00031,00:04:52.0,+17:11:32.2,1.21666667,17.19227778,1034.0,True,True
 eso409-ig015,ESO409-IG015,00:05:31.9,-28:05:53.1,1.38291667,-28.09808333,737.2,True,False,True,Group01,unobserved,,,,0,
 eso472-g015,ESO472-G015,00:06:48.4,-24:56:41.1,1.70166667,-24.94475,689.5,True,False,True,Group01,unobserved,,,,0,
 lsbgf409-005,LSBGF409-005,00:07:13.1,-27:23:12.0,1.80458333,-27.38666667,235.3,True,False,True,Group01,unobserved,,,,0,
-ugc00064,UGC00064,00:07:43.9,+40:52:32.9,1.93291667,40.87580556,273.1,True,True,True,Group11,observed,undetected,GBT,,1,Notes go here. Submitted via GitHub issue #18 by @jbraatz.
+ugc00064,UGC00064,00:07:43.9,+40:52:32.9,1.93291667,40.87580556,273.1,True,True,True,Group11,observed,detected,EFF,,2,Observed at Effelsberg Submitted via GitHub issue #36 by @fredcourbin.
 ugc00063,UGC00063,00:07:50.6,+35:57:58.3,1.96083333,35.96619444,441.0,True,True,True,Group01,observed,undetected,GBT,,1,Notes go here. Submitted via GitHub issue #18 by @jbraatz.
 ngc0014,NGC0014,00:08:46.4,+15:48:56.3,2.19333333,15.81563889,863.1,True,True,True,Group01,unobserved,,,,0,
 wiseaj000903-3,WISEAJ000903.3,00:09:03.3,+25:27:50.4,2.26375,25.464,1393.0,False,True,True,,unobserved,,,,0,
@@ -26,7 +26,7 @@ ngc0063,NGC0063,00:17:45.5,+11:27:01.1,4.43958333,11.45030556,1159.9,False,True,
 mcg-04-02-003,MCG-04-02-003,00:19:11.4,-22:40:03.9,4.7975,-22.66775,670.0,True,False,True,Group01,unobserved,,,,0,
 ugc00191,UGC00191,00:20:05.0,+10:52:44.9,5.02083333,10.87913889,1143.1,False,True,True,,unobserved,,,,0,
 sdssj002041-45,SDSSJ002041.45,00:20:41.3,+08:37:00.9,5.17208333,8.61691667,692.0,True,True,True,Group01,unobserved,,,,0,
-ngc0100,NGC0100,00:24:03.0,+16:29:13.6,6.0125,16.48711111,843.9,True,True,True,Group01,unobserved,,,,0,
+ngc0100,NGC0100,00:24:03.0,+16:29:13.6,6.0125,16.48711111,843.9,True,True,True,Group01,observed,detected,EFF,,1,Observed at Effelsberg Submitted via GitHub issue #36 by @fredcourbin.
 um038,UM038,00:27:51.5,+03:29:22.8,6.96458333,3.48966667,1382.9,False,True,True,,unobserved,,,,0,
 um040,UM040,00:28:26.5,+05:00:14.6,7.11041667,5.00405556,1341.0,False,True,True,,unobserved,,,,0,
 ugc00288,UGC00288,00:29:03.4,+43:25:52.9,7.26416667,43.43136111,187.4,True,True,True,Group11,unobserved,,,,0,
