@@ -237,6 +237,20 @@
       "status": "observed",
       "target_id": "ugc00063",
       "telescope": "GBT"
+    },
+    {
+      "data_quality": "trusted",
+      "detection_status": "detected",
+      "end_utc": "",
+      "notes": "done at SRT Submitted via GitHub issue #30 by @fredcourbin.",
+      "observation_id": "ISSUE-30-001",
+      "observer": "fredcourbin",
+      "rms_mjy_per_1_km_s": "2",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "eso409-ig015",
+      "telescope": "SRT"
     }
   ],
   "project": {
@@ -246,9 +260,9 @@
   "schema_version": 2,
   "stats": {
     "detection_status_counts": {
-      "detected": 2,
+      "detected": 3,
       "marginal": 4,
-      "not_assessed": 2979,
+      "not_assessed": 2978,
       "undetected": 10
     },
     "eligibility_overlap_counts": {
@@ -262,7 +276,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 17,
+    "observations": 18,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -281,8 +295,8 @@
       }
     },
     "status_counts": {
-      "observed": 16,
-      "unobserved": 2979
+      "observed": 17,
+      "unobserved": 2978
     },
     "total_targets": 2995
   },
@@ -556,11 +570,11 @@
       "velocity_km_s": 1034.0
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "SRT",
       "coordinate_system": "Equatorial",
       "dec_deg": -28.09808333,
       "dec_dms": "-28:05:53.1",
-      "detection_status": "",
+      "detection_status": "detected",
       "eligible_eff": false,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -570,8 +584,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "done at SRT Submitted via GitHub issue #30 by @fredcourbin.",
+      "observations_count": 1,
       "ra_deg": 1.38291667,
       "ra_hms": "00:05:31.9",
       "ra_hours": 0.0921944444,
@@ -581,7 +595,7 @@
       },
       "source_name": "ESO409-IG015",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "eso409-ig015",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
