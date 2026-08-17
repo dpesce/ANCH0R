@@ -18,3 +18,4 @@ ISSUE-18-003,ugc00064,GBT,jbraatz,,,observed,,2.7,possible_other_problems,undete
 ISSUE-18-004,ugc00063,GBT,jbraatz,,,observed,,2.8,possible_pointing_problems,undetected,Notes go here. Submitted via GitHub issue #18 by @jbraatz.
 ISSUE-20-001,ugc12894,SRT,fredcourbin,,,observed,,2,trusted,detected,Bingo. These are two new anchors !!! Submitted via GitHub issue #20 by @fredcourbin.
 ISSUE-20-002,ugc12893,SRT,fredcourbin,,,observed,,4,trusted,detected,Bingo. These are two new anchors !!! Submitted via GitHub issue #20 by @fredcourbin.
+ISSUE-38-001,ic1574,SRT,andreatarchi-max,,,observed,,10.2,trusted,marginal,This is a test to send an observing report for an observation of a single target with the SRT Submitted via GitHub issue #38 by @andreatarchi-max.

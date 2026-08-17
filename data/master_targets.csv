@@ -36,7 +36,7 @@ ugc00300,UGC00300,00:30:03.9,+03:30:45.8,7.51625,3.51272222,1344.9,False,True,Tr
 eso539-g015,ESO539-G015,00:32:48.2,-18:35:17.6,8.20083333,-18.58822222,1328.1,False,True,True,,unobserved,,,,0,
 cgcg409-040,CGCG409-040,00:34:48.9,+07:27:01.1,8.70375,7.45030556,554.9,True,True,True,Group01,unobserved,,,,0,
 wiseaj004129-4,WISEAJ004129.4,00:41:29.4,+22:02:30.7,10.3725,22.04186111,812.0,True,True,True,Group01,unobserved,,,,0,
-ic1574,IC1574,00:43:03.6,-22:14:35.3,10.765,-22.24313889,361.0,True,False,True,Group01,unobserved,,,,0,
+ic1574,IC1574,00:43:03.6,-22:14:35.3,10.765,-22.24313889,361.0,True,False,True,Group01,observed,marginal,SRT,,1,This is a test to send an observing report for an observation of a single target with the SRT Submitted via GitHub issue #38 by @andreatarchi-max.
 wiseaj004335-4,WISEAJ004335.4,00:43:35.5,-26:03:22.5,10.89791667,-26.05625,1259.0,False,False,True,,unobserved,,,,0,
 ngc0244,NGC0244,00:45:46.4,-15:35:48.7,11.44333333,-15.59686111,941.0,True,True,True,Group01,unobserved,,,,0,
 galexmscj00464,GALEXMSCJ00464,00:46:48.9,+00:35:56.5,11.70375,0.59902778,1013.0,True,True,True,Group01,unobserved,,,,0,
