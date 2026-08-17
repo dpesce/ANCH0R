@@ -265,6 +265,20 @@
       "status": "observed",
       "target_id": "ugc12893",
       "telescope": "SRT"
+    },
+    {
+      "data_quality": "trusted",
+      "detection_status": "marginal",
+      "end_utc": "",
+      "notes": "This is a test to send an observing report for an observation of a single target with the SRT Submitted via GitHub issue #38 by @andreatarchi-max.",
+      "observation_id": "ISSUE-38-001",
+      "observer": "andreatarchi-max",
+      "rms_mjy_per_1_km_s": "10.2",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "ic1574",
+      "telescope": "SRT"
     }
   ],
   "project": {
@@ -275,8 +289,8 @@
   "stats": {
     "detection_status_counts": {
       "detected": 4,
-      "marginal": 3,
-      "not_assessed": 2979,
+      "marginal": 4,
+      "not_assessed": 2978,
       "undetected": 9
     },
     "eligibility_overlap_counts": {
@@ -290,7 +304,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 19,
+    "observations": 20,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -309,8 +323,8 @@
       }
     },
     "status_counts": {
-      "observed": 16,
-      "unobserved": 2979
+      "observed": 17,
+      "unobserved": 2978
     },
     "total_targets": 2995
   },
@@ -1540,11 +1554,11 @@
       "velocity_km_s": 812.0
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "SRT",
       "coordinate_system": "Equatorial",
       "dec_deg": -22.24313889,
       "dec_dms": "-22:14:35.3",
-      "detection_status": "",
+      "detection_status": "marginal",
       "eligible_eff": false,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -1554,8 +1568,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group01",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "This is a test to send an observing report for an observation of a single target with the SRT Submitted via GitHub issue #38 by @andreatarchi-max.",
+      "observations_count": 1,
       "ra_deg": 10.765,
       "ra_hms": "00:43:03.6",
       "ra_hours": 0.7176666667,
@@ -1565,7 +1579,7 @@
       },
       "source_name": "IC1574",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "ic1574",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
