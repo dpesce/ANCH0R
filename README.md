@@ -115,8 +115,11 @@ telescope scheduling constraints.
 Filtered GBT targets and the complete available GBT catalog are exported as
 fixed-width `.cat` source catalogs. The format follows
 `examples/example_GBT_catalog.cat`, including its header and column alignment.
-Effelsberg, SRT, and combined catalogs are exported as CSV until additional
-telescope-specific formats are added.
+Filtered SRT targets and the complete available SRT catalog are exported as
+`.txt` schedule catalogs following `examples/example_SRT_catalog.txt`, with the
+template header retained and one `Nodcal`/`SARDARA` row per target. Effelsberg
+and combined catalogs remain CSV until additional telescope-specific formats
+are added.
 
 ## Observing Reports
 

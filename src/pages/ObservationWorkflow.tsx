@@ -9,6 +9,7 @@ import {
   parseUtcInput,
 } from "../lib/format";
 import { buildGbtCatalog } from "../lib/gbtCatalog";
+import { buildSrtCatalog } from "../lib/srtCatalog";
 import { TELESCOPES, TELESCOPE_CODES } from "../lib/telescopes";
 import {
   evaluateVisibility,
@@ -557,21 +558,32 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
 
   const showingFilteredTargets = catalogDownloadScope === "selected";
 
-  const downloadUsesGbtFormat =
+  const catalogDownloadFormat =
     catalogDownloadScope === "GBT" ||
-    (catalogDownloadScope === "selected" && telescope === "GBT");
+    (catalogDownloadScope === "selected" && telescope === "GBT")
+      ? "gbt"
+      : catalogDownloadScope === "SRT" ||
+          (catalogDownloadScope === "selected" && telescope === "SRT")
+        ? "srt"
+        : "csv";
 
   const catalogDownloadError = useMemo(() => {
-    if (!downloadUsesGbtFormat) {
+    if (catalogDownloadFormat === "csv") {
       return null;
     }
     try {
-      buildGbtCatalog(downloadTargets);
+      if (catalogDownloadFormat === "gbt") {
+        buildGbtCatalog(downloadTargets);
+      } else {
+        buildSrtCatalog(downloadTargets);
+      }
       return null;
     } catch (error) {
-      return error instanceof Error ? error.message : "Unable to format GBT catalog";
+      return error instanceof Error
+        ? error.message
+        : `Unable to format ${catalogDownloadFormat.toUpperCase()} catalog`;
     }
-  }, [downloadTargets, downloadUsesGbtFormat]);
+  }, [catalogDownloadFormat, downloadTargets]);
 
   const lstRange =
     windowStart && windowEnd && !invalidWindow
@@ -614,6 +626,13 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
         );
         return;
       }
+      if (telescope === "SRT") {
+        downloadText(
+          `anch0r-srt-filtered-${windowLabel}.txt`,
+          buildSrtCatalog(downloadTargets),
+        );
+        return;
+      }
 
       downloadCsv(
         `anch0r-${telescope.toLowerCase()}-filtered-${windowLabel}.csv`,
@@ -626,6 +645,13 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
       downloadText(
         "anch0r-gbt-available.cat",
         buildGbtCatalog(downloadTargets),
+      );
+      return;
+    }
+    if (catalogDownloadScope === "SRT") {
+      downloadText(
+        "anch0r-srt-available.txt",
+        buildSrtCatalog(downloadTargets),
       );
       return;
     }
@@ -801,7 +827,11 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
           <span className="catalog-download-meta">
             {formatInteger(downloadTargets.length)}{" "}
             {downloadTargets.length === 1 ? "target" : "targets"},{" "}
-            {downloadUsesGbtFormat ? ".cat" : ".csv"} format
+            {catalogDownloadFormat === "gbt"
+              ? ".cat"
+              : catalogDownloadFormat === "srt"
+                ? ".txt"
+                : ".csv"} format
           </span>
         </div>
       </section>
