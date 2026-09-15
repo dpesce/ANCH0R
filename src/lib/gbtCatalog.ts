@@ -1,6 +1,7 @@
 import type { Target } from "../types";
 
 export const GBT_CATALOG_HEADER = "head= name ra dec vel color";
+export const GBT_CATALOG_VELOCITY_DEFINITION = "veldef=VOPT-HEL";
 const GBT_DEFAULT_COLOR = "red";
 
 const FIELD_WIDTHS = {
@@ -41,6 +42,7 @@ export function formatGbtCatalogRow(target: Target): string {
 
 export function buildGbtCatalog(targets: Target[]): string {
   return [
+    GBT_CATALOG_VELOCITY_DEFINITION,
     GBT_CATALOG_HEADER,
     ...targets.map(formatGbtCatalogRow),
     "",

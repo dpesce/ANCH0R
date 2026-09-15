@@ -1,17 +1,17 @@
 target_id,source_name,ra_hms,dec_dms,ra_deg,dec_deg,velocity_km_s,eligible_gbt,eligible_eff,eligible_srt,gbt_group,status,detection_status,assigned_telescope,spectrum_url,observations_count,notes
-galexascj00002,GALEXASCJ00002,00:00:21.2,+31:01:17.9,0.08833333,31.02163889,566.0,True,True,True,Group01,observed,detected,GBT,spectra/demo-galexascj00002.svg,1,DEMO observation for interface testing
-ugc12894,UGC12894,00:00:22.6,+39:29:43.8,0.09416667,39.4955,334.9,True,True,True,Group11,observed,detected,EFF,spectra/demo-ugc12894.svg,2,DEMO observation for interface testing
-ugc12893,UGC12893,00:00:28.5,+17:13:12.8,0.11875,17.22022222,1097.0,True,True,True,Group01,observed,detected,SRT,spectra/demo-ugc12893.svg,2,DEMO observation for interface testing
-wiseaj000103-0,WISEAJ000103.0,00:01:03.0,-26:05:21.5,0.2625,-26.08930556,400.0,True,False,True,Group01,observed,undetected,GBT,spectra/demo-wiseaj000103-0.svg,1,DEMO observation for interface testing
-ic5377,IC5377,00:02:05.5,+16:35:25.1,0.52291667,16.59030556,1051.1,True,True,True,Group01,observed,undetected,EFF,spectra/demo-ic5377.svg,1,DEMO observation for interface testing
-wiseaj000232-7,WISEAJ000232.7,00:02:32.8,-21:46:11.3,0.63666667,-21.76980556,969.5,True,False,True,Group01,observed,marginal,GBT,,1,"TEST TEST TEST This is not a real observation, but just a test of the observing report submission system. Submitted via GitHub issue #4 by @dpesce."
-ugc00017,UGC00017,00:03:43.2,+15:13:07.7,0.93,15.21880556,876.9,True,True,True,Group01,observed,undetected,GBT,,1,Notes go here. Submitted via GitHub issue #18 by @jbraatz.
-ugc00031,UGC00031,00:04:52.0,+17:11:32.2,1.21666667,17.19227778,1034.0,True,True,True,Group01,observed,marginal,GBT,,1,Notes go here. Submitted via GitHub issue #18 by @jbraatz.
+galexascj00002,GALEXASCJ00002,00:00:21.2,+31:01:17.9,0.08833333,31.02163889,566.0,True,True,True,Group01,unobserved,,,,0,
+ugc12894,UGC12894,00:00:22.6,+39:29:43.8,0.09416667,39.4955,334.9,True,True,True,Group11,unobserved,,,,0,
+ugc12893,UGC12893,00:00:28.5,+17:13:12.8,0.11875,17.22022222,1097.0,True,True,True,Group01,unobserved,,,,0,
+wiseaj000103-0,WISEAJ000103.0,00:01:03.0,-26:05:21.5,0.2625,-26.08930556,400.0,True,False,True,Group01,unobserved,,,,0,
+ic5377,IC5377,00:02:05.5,+16:35:25.1,0.52291667,16.59030556,1051.1,True,True,True,Group01,unobserved,,,,0,
+wiseaj000232-7,WISEAJ000232.7,00:02:32.8,-21:46:11.3,0.63666667,-21.76980556,969.5,True,False,True,Group01,unobserved,,,,0,
+ugc00017,UGC00017,00:03:43.2,+15:13:07.7,0.93,15.21880556,876.9,True,True,True,Group01,unobserved,,,,0,
+ugc00031,UGC00031,00:04:52.0,+17:11:32.2,1.21666667,17.19227778,1034.0,True,True,True,Group01,unobserved,,,,0,
 eso409-ig015,ESO409-IG015,00:05:31.9,-28:05:53.1,1.38291667,-28.09808333,737.2,True,False,True,Group01,unobserved,,,,0,
 eso472-g015,ESO472-G015,00:06:48.4,-24:56:41.1,1.70166667,-24.94475,689.5,True,False,True,Group01,unobserved,,,,0,
 lsbgf409-005,LSBGF409-005,00:07:13.1,-27:23:12.0,1.80458333,-27.38666667,235.3,True,False,True,Group01,unobserved,,,,0,
-ugc00064,UGC00064,00:07:43.9,+40:52:32.9,1.93291667,40.87580556,273.1,True,True,True,Group11,observed,undetected,GBT,,1,Notes go here. Submitted via GitHub issue #18 by @jbraatz.
-ugc00063,UGC00063,00:07:50.6,+35:57:58.3,1.96083333,35.96619444,441.0,True,True,True,Group01,observed,undetected,GBT,,1,Notes go here. Submitted via GitHub issue #18 by @jbraatz.
+ugc00064,UGC00064,00:07:43.9,+40:52:32.9,1.93291667,40.87580556,273.1,True,True,True,Group11,unobserved,,,,0,
+ugc00063,UGC00063,00:07:50.6,+35:57:58.3,1.96083333,35.96619444,441.0,True,True,True,Group01,unobserved,,,,0,
 ngc0014,NGC0014,00:08:46.4,+15:48:56.3,2.19333333,15.81563889,863.1,True,True,True,Group01,unobserved,,,,0,
 wiseaj000903-3,WISEAJ000903.3,00:09:03.3,+25:27:50.4,2.26375,25.464,1393.0,False,True,True,,unobserved,,,,0,
 kug0007-154,KUG0007+154,00:09:53.0,+15:44:04.6,2.47083333,15.73461111,872.5,True,True,True,Group01,unobserved,,,,0,
@@ -36,7 +36,7 @@ ugc00300,UGC00300,00:30:03.9,+03:30:45.8,7.51625,3.51272222,1344.9,False,True,Tr
 eso539-g015,ESO539-G015,00:32:48.2,-18:35:17.6,8.20083333,-18.58822222,1328.1,False,True,True,,unobserved,,,,0,
 cgcg409-040,CGCG409-040,00:34:48.9,+07:27:01.1,8.70375,7.45030556,554.9,True,True,True,Group01,unobserved,,,,0,
 wiseaj004129-4,WISEAJ004129.4,00:41:29.4,+22:02:30.7,10.3725,22.04186111,812.0,True,True,True,Group01,unobserved,,,,0,
-ic1574,IC1574,00:43:03.6,-22:14:35.3,10.765,-22.24313889,361.0,True,False,True,Group01,observed,marginal,SRT,,1,This is a test to send an observing report for an observation of a single target with the SRT Submitted via GitHub issue #38 by @andreatarchi-max.
+ic1574,IC1574,00:43:03.6,-22:14:35.3,10.765,-22.24313889,361.0,True,False,True,Group01,unobserved,,,,0,
 wiseaj004335-4,WISEAJ004335.4,00:43:35.5,-26:03:22.5,10.89791667,-26.05625,1259.0,False,False,True,,unobserved,,,,0,
 ngc0244,NGC0244,00:45:46.4,-15:35:48.7,11.44333333,-15.59686111,941.0,True,True,True,Group01,unobserved,,,,0,
 galexmscj00464,GALEXMSCJ00464,00:46:48.9,+00:35:56.5,11.70375,0.59902778,1013.0,True,True,True,Group01,unobserved,,,,0,
@@ -720,17 +720,17 @@ ngc3113,NGC3113,10:04:26.2,-28:26:39.1,151.10916667,-28.44419444,1082.9,True,Fal
 sdssj100427-03,SDSSJ100427.03,10:04:27.0,+01:53:41.3,151.1125,1.89480556,1287.7,False,True,True,,unobserved,,,,0,
 ugc05427,UGC05427,10:04:41.0,+29:21:51.5,151.17083333,29.36430556,476.6,True,True,True,Group04,unobserved,,,,0,
 wiseaj100443-9,WISEAJ100443.9,10:04:43.9,+55:19:42.6,151.18291667,55.3285,1148.0,False,True,True,,unobserved,,,,0,
-ugc05428,UGC05428,10:05:06.4,+66:33:30.8,151.27666667,66.55855556,-129.2,True,True,True,Group14,observed,undetected,GBT,,1,"This is a test. Delete this test. NGC 3115 may host a brighter maser than NGC 4258. So we don't want to mark it ""observed"" until we actually observe it. :-) Submitted via GitHub issue #6 by @jbraatz."
-sdssj100512-15,SDSSJ100512.15,10:05:12.2,+37:22:01.5,151.30083333,37.36708333,479.7,True,True,True,Group04,observed,undetected,GBT,,1,"This is a test. Delete this test. NGC 3115 may host a brighter maser than NGC 4258. So we don't want to mark it ""observed"" until we actually observe it. :-) Submitted via GitHub issue #6 by @jbraatz."
-ngc3115,NGC3115,10:05:14.0,-07:43:06.9,151.30833333,-7.71858333,685.6,True,True,True,Group04,observed,marginal,GBT,,1,"This is a test. Delete this test. NGC 3115 may host a brighter maser than NGC 4258. So we don't want to mark it ""observed"" until we actually observe it. :-) Submitted via GitHub issue #6 by @jbraatz."
+ugc05428,UGC05428,10:05:06.4,+66:33:30.8,151.27666667,66.55855556,-129.2,True,True,True,Group14,unobserved,,,,0,
+sdssj100512-15,SDSSJ100512.15,10:05:12.2,+37:22:01.5,151.30083333,37.36708333,479.7,True,True,True,Group04,unobserved,,,,0,
+ngc3115,NGC3115,10:05:14.0,-07:43:06.9,151.30833333,-7.71858333,685.6,True,True,True,Group04,unobserved,,,,0,
 galexascj10051,GALEXASCJ10051,10:05:17.5,+01:38:25.8,151.32291667,1.6405,1253.5,False,True,True,,unobserved,,,,0,
-ugc05423,UGC05423,10:05:30.1,+70:21:50.9,151.37541667,70.36413889,347.5,True,True,True,Group20,observed,detected,GBT,,1,"This is a test. Delete this test. NGC 3115 may host a brighter maser than NGC 4258. So we don't want to mark it ""observed"" until we actually observe it. :-) Submitted via GitHub issue #6 by @jbraatz."
+ugc05423,UGC05423,10:05:30.1,+70:21:50.9,151.37541667,70.36413889,347.5,True,True,True,Group20,unobserved,,,,0,
 eso435-g039,ESO435-G039,10:05:39.6,-28:26:43.7,151.415,-28.44547222,1042.1,True,False,True,Group04,unobserved,,,,0,
 ngc3115b,NGC3115B,10:05:41.6,-07:58:53.3,151.42333333,-7.98147222,680.6,True,True,True,Group04,unobserved,,,,0,
-wiseaj100601-6,WISEAJ100601.6,10:06:01.6,-03:01:40.3,151.50666667,-3.02786111,779.0,True,True,True,Group04,observed,undetected,GBT,,1,"This is a test. Delete this test. NGC 3115 may host a brighter maser than NGC 4258. So we don't want to mark it ""observed"" until we actually observe it. :-) Submitted via GitHub issue #6 by @jbraatz."
+wiseaj100601-6,WISEAJ100601.6,10:06:01.6,-03:01:40.3,151.50666667,-3.02786111,779.0,True,True,True,Group04,unobserved,,,,0,
 ugc05446,UGC05446,10:06:30.9,+32:56:49.0,151.62875,32.94694444,1356.0,False,True,True,,unobserved,,,,0,
 ngc3125,NGC3125,10:06:33.4,-29:56:05.5,151.63916667,-29.93486111,1112.8,False,False,True,,unobserved,,,,0,
-ugc05442,UGC05442,10:07:01.9,+67:49:39.8,151.75791667,67.82772222,-15.0,True,True,True,Group20,observed,undetected,GBT,,1,"This is a test. Delete this test. NGC 3115 may host a brighter maser than NGC 4258. So we don't want to mark it ""observed"" until we actually observe it. :-) Submitted via GitHub issue #6 by @jbraatz."
+ugc05442,UGC05442,10:07:01.9,+67:49:39.8,151.75791667,67.82772222,-15.0,True,True,True,Group20,unobserved,,,,0,
 ngc3118,NGC3118,10:07:11.6,+33:01:38.9,151.79833333,33.02747222,1341.9,False,True,True,,unobserved,,,,0,
 ugc05451,UGC05451,10:07:18.9,+47:00:23.0,151.82875,47.00638889,631.5,True,True,True,Group14,unobserved,,,,0,
 ugc05456,UGC05456,10:07:19.6,+10:21:42.5,151.83166667,10.36180556,544.1,True,True,True,Group04,unobserved,,,,0,

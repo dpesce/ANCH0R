@@ -22,6 +22,10 @@ public/
 scripts/
   build_catalog.py         Builds generated catalog products
   validate_data.py         Validates source and campaign CSV files
+observing_scripts/
+  anch0r_kfpa_config.py    Shared KFPA/VEGAS AstrID configuration
+  anch0r_kfpa_survey.py    Five-minute survey observations
+  anch0r_kfpa_followup.py  Thirty-minute single-target follow-up
 src/                       Vite/React/TypeScript website
 ```
 
@@ -114,7 +118,11 @@ telescope scheduling constraints.
 
 Filtered GBT targets and the complete available GBT catalog are exported as
 fixed-width `.cat` source catalogs. The format follows
-`examples/example_GBT_catalog.cat`, including its header and column alignment.
+`examples/example_GBT_catalog.cat`, including its column alignment, and adds a
+`veldef=VOPT-HEL` header so AstrID interprets target velocities as heliocentric
+optical velocities. The GBT AstrID configuration and scheduling blocks are in
+`observing_scripts/`; review that directory's README and have the blocks
+validated by the project's GBT support scientist before telescope use.
 Filtered SRT targets and the complete available SRT catalog are exported as
 `.txt` schedule catalogs following `examples/example_SRT_catalog.txt`, with the
 template header retained and one `Nodcal`/`SARDARA` row per target. Effelsberg
