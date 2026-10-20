@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   create-report-pr:
-    if: ${{ contains(github.event.issue.body || '', '<!-- ANCH0R_OBSERVING_REPORT_V4 -->') }}
+    if: ${{ contains(github.event.issue.body || '', '<!-- ANCH0R_OBSERVING_REPORT_V5 -->') }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -30,7 +30,10 @@ jobs:
           python-version: "3.12"
 
       - name: Convert issue into observation rows
-        run: python3 scripts/process_observing_report_issue.py --event-path "$GITHUB_EVENT_PATH"
+        run: |
+          python3 scripts/process_observing_report_issue.py \
+            --event-path "$GITHUB_EVENT_PATH" \
+            --expanded-body-path "$RUNNER_TEMP/observing-report.md"
 
       - name: Validate catalog data
         run: python3 scripts/validate_data.py
@@ -87,3 +90,9 @@ jobs:
           gh label create observing-report --description "ANCH0R observing report submissions" --color "0f766e" || \
             gh label edit observing-report --description "ANCH0R observing report submissions" --color "0f766e"
           gh issue edit "$ISSUE_NUMBER" --add-label observing-report
+
+      - name: Show readable report on GitHub
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: gh issue edit "$ISSUE_NUMBER" --body-file "$RUNNER_TEMP/observing-report.md"

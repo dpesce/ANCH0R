@@ -1,7 +1,19 @@
 import { useMemo, useState } from "react";
 import { DetectionBadge } from "../components/DetectionBadge";
 import { StatusBadge } from "../components/StatusBadge";
-import { formatInteger, formatUtc, formatVelocity } from "../lib/format";
+import {
+  downloadText,
+  formatInteger,
+  formatUtc,
+  formatVelocity,
+} from "../lib/format";
+import {
+  buildReportSubmissions,
+  DATA_QUALITY_LABELS,
+  DATA_QUALITY_OPTIONS,
+  type PreparedReportTarget,
+  type ReportSubmission,
+} from "../lib/observingReport";
 import { TELESCOPES, TELESCOPE_CODES } from "../lib/telescopes";
 import type {
   CatalogData,
@@ -21,19 +33,8 @@ interface TargetAssessment {
   detectionStatus: DetectionStatus | "";
 }
 
-interface PreparedReportTarget {
-  targetId: string;
-  sourceName: string;
-  raHms: string;
-  decDms: string;
-  velocityKmS: number;
-  rmsMjyPer1KmS: number;
-  dataQuality: DataQuality;
-  detectionStatus: DetectionStatus;
-}
-
 interface PreparedReport {
-  issueUrl: string;
+  submissions: ReportSubmission[];
   telescope: TelescopeCode;
   targets: PreparedReportTarget[];
   notes: string;
@@ -49,26 +50,6 @@ type ReportSortKey =
   | "detectionStatus";
 type SortDirection = "asc" | "desc";
 
-const GITHUB_ISSUES_URL = "https://github.com/dpesce/ANCH0R/issues/new";
-const REPORT_PAYLOAD_MARKER = "<!-- ANCH0R_OBSERVING_REPORT_V4 -->";
-const DATA_QUALITY_OPTIONS: Array<{
-  value: DataQuality;
-  label: string;
-}> = [
-  { value: "trusted", label: "I trust the data" },
-  {
-    value: "possible_pointing_problems",
-    label: "There are potential pointing problems",
-  },
-  {
-    value: "possible_other_problems",
-    label: "There are potential other problems",
-  },
-  { value: "untrusted", label: "I do not trust the data at all" },
-];
-const DATA_QUALITY_LABELS = Object.fromEntries(
-  DATA_QUALITY_OPTIONS.map(({ value, label }) => [value, label]),
-) as Record<DataQuality, string>;
 const DETECTION_STATUS_OPTIONS: DetectionStatus[] = [
   "detected",
   "marginal",
@@ -106,19 +87,12 @@ function assessmentIsComplete(assessment: TargetAssessment): boolean {
   );
 }
 
-function buildReportIssueUrl(title: string, body: string): string {
-  const url = new URL(GITHUB_ISSUES_URL);
-  url.searchParams.set("title", title);
-  url.searchParams.set("body", body);
-  return url.toString();
-}
-
-function prepareReport(
+async function prepareReport(
   telescope: TelescopeCode,
   selectedTargets: Target[],
   assessments: Record<string, TargetAssessment>,
   notes: string,
-): PreparedReport {
+): Promise<PreparedReport> {
   const targets = selectedTargets.map((target) => {
     const assessment = assessments[target.target_id];
     if (
@@ -142,57 +116,8 @@ function prepareReport(
   });
 
   const submittedAtUtc = formatUtc(new Date());
-  const targetTable = [
-    "| Target | RMS (mJy / 1 km/s) | Data quality | Detection |",
-    "| --- | ---: | --- | --- |",
-    ...targets.map(
-      (target) =>
-        `| ${target.sourceName} | ${target.rmsMjyPer1KmS} | ${
-          DATA_QUALITY_LABELS[target.dataQuality]
-        } | ${capitalize(target.detectionStatus)} |`,
-    ),
-  ].join("\n");
-
-  const payload = {
-    schema_version: 4,
-    submitted_at_utc: submittedAtUtc,
-    telescope,
-    notes,
-    targets: targets.map((target) => ({
-      target_id: target.targetId,
-      source_name: target.sourceName,
-      ra_hms: target.raHms,
-      dec_dms: target.decDms,
-      velocity_km_s: target.velocityKmS,
-      rms_mjy_per_1_km_s: target.rmsMjyPer1KmS,
-      data_quality: target.dataQuality,
-      detection_status: target.detectionStatus,
-    })),
-  };
-
-  const body = [
-    REPORT_PAYLOAD_MARKER,
-    "",
-    "ANCH0R observing report",
-    "",
-    `Telescope: ${telescope}`,
-    "",
-    targetTable,
-    "",
-    "Notes:",
-    notes || "(none)",
-    "",
-    "Machine-readable payload:",
-    "```json",
-    JSON.stringify(payload, null, 2),
-    "```",
-  ].join("\n");
-  const title = `[ANCH0R Observing Report] ${telescope} ${
-    targets.length
-  } target${targets.length === 1 ? "" : "s"}`;
-
   return {
-    issueUrl: buildReportIssueUrl(title, body),
+    submissions: await buildReportSubmissions(telescope, targets, notes, submittedAtUtc),
     telescope,
     targets,
     notes,
@@ -202,12 +127,13 @@ function prepareReport(
 function ReportConfirmation({
   report,
   onBack,
-  onOpenGithub,
 }: {
   report: PreparedReport;
   onBack: () => void;
-  onOpenGithub: () => void;
 }) {
+  const [partIndex, setPartIndex] = useState(0);
+  const submission = report.submissions[partIndex];
+
   return (
     <main className="page-shell page-block">
       <div className="page-heading">
@@ -285,12 +211,44 @@ function ReportConfirmation({
         <p className="section-label">Final Step</p>
         <h2>Submit on GitHub</h2>
         <p>
-          The button below will open this prefilled GitHub page in a new tab:
+          Open GitHub to submit your report. The title and report data will be
+          filled in automatically; no copying or editing is needed.
         </p>
         <p>
           <code>github.com/dpesce/ANCH0R/issues/new</code>
         </p>
+        {report.submissions.length > 1 ? (
+          <label className="report-part-selector">
+            Report part
+            <select
+              value={partIndex}
+              onChange={(event) => {
+                setPartIndex(Number(event.target.value));
+              }}
+            >
+              {report.submissions.map((part, index) => (
+                <option key={index} value={index}>
+                  Part {index + 1} of {report.submissions.length} ({part.targetCount}{" "}
+                  targets)
+                </option>
+              ))}
+            </select>
+            <span className="subtle">
+              This large report is split into {report.submissions.length} issues.
+              Submit each part using the steps below; every part includes your
+              notes.
+            </span>
+          </label>
+        ) : null}
         <div className="github-instruction">
+          <a
+            className="button button-primary"
+            href={submission.issueUrl}
+            rel="noreferrer"
+            target="_blank"
+          >
+            Open GitHub report
+          </a>
           <strong>
             On the bottom of that page, click the green button labeled:
           </strong>
@@ -298,14 +256,23 @@ function ReportConfirmation({
             <span>Create</span>
             <kbd>{githubCreateShortcut()}</kbd>
           </span>
-          <span>No other editing is required.</span>
+          <span>Your report is submitted only after you click Create on GitHub.</span>
+          <span>
+            The GitHub description initially contains compressed report data.
+            A readable target table and your notes will appear automatically
+            after submission.
+          </span>
         </div>
         <div className="report-confirmation-actions">
+          <button
+            className="button button-secondary"
+            onClick={() => downloadText(submission.filename, submission.body)}
+            type="button"
+          >
+            Download report text
+          </button>
           <button className="button button-secondary" onClick={onBack} type="button">
             Back to edit report
-          </button>
-          <button className="button button-primary" onClick={onOpenGithub} type="button">
-            Open GitHub report
           </button>
         </div>
       </section>
@@ -323,6 +290,8 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
   const [sortKey, setSortKey] = useState<ReportSortKey>("catalog");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
   const [pendingReport, setPendingReport] = useState<PreparedReport | null>(null);
+  const [reportError, setReportError] = useState("");
+  const [preparingReport, setPreparingReport] = useState(false);
 
   const selectedTargets = useMemo(
     () =>
@@ -429,15 +398,25 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
     }));
   }
 
-  function reviewReport() {
-    if (!reportIsComplete || !telescope) {
+  async function reviewReport() {
+    if (!reportIsComplete || !telescope || preparingReport) {
       return;
     }
 
-    setPendingReport(
-      prepareReport(telescope, selectedTargets, assessments, notes),
-    );
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    try {
+      setPreparingReport(true);
+      setPendingReport(
+        await prepareReport(telescope, selectedTargets, assessments, notes),
+      );
+      setReportError("");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (error) {
+      setReportError(
+        error instanceof Error ? error.message : "Unable to prepare report.",
+      );
+    } finally {
+      setPreparingReport(false);
+    }
   }
 
   if (pendingReport) {
@@ -448,13 +427,6 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
           setPendingReport(null);
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
-        onOpenGithub={() =>
-          window.open(
-            pendingReport.issueUrl,
-            "_blank",
-            "noopener,noreferrer",
-          )
-        }
       />
     );
   }
@@ -483,11 +455,11 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
           </div>
           <button
             className="button button-secondary"
-            disabled={!reportIsComplete}
+            disabled={!reportIsComplete || preparingReport}
             onClick={reviewReport}
             type="button"
           >
-            Submit report
+            {preparingReport ? "Preparing report..." : "Submit report"}
           </button>
         </div>
 
@@ -516,6 +488,10 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
             {ineligibleTargetCount === 1 ? "target is" : "targets are"} not
             eligible for {telescope}.
           </div>
+        ) : null}
+
+        {reportError ? (
+          <p className="message-error" role="alert">{reportError}</p>
         ) : null}
 
         {selectedTargets.length > 0 ? (

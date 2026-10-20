@@ -131,12 +131,29 @@ are added.
 
 ## Observing Reports
 
-The report page first shows an in-app confirmation screen and then opens a
-prefilled GitHub issue containing a versioned, machine-readable payload. The
+The report page first shows an in-app confirmation screen. The observer opens
+the prefilled GitHub issue and clicks Create. No copying or pasting is needed.
+The browser compresses target IDs, RMS values, assessments, and notes using gzip
+and URL-safe base64. Source names and coordinates are recovered from the master
+catalog instead of being transmitted again.
+
+Each complete URL is measured against a conservative 1,800-character budget.
+Larger reports split into numbered parts, each submitted as its own issue.
+Every part preserves the notes and the original target order. If the notes
+alone prevent even a single-target link from fitting, the page asks the observer
+to shorten the notes while retaining all entered targets and assessments.
+The confirmation page also offers a readable text download for the observer's
+records.
+
+Each issue contains a versioned, machine-readable payload. The
 observing-report workflow validates that payload, adds one row per selected
 target to `data/observations.csv`, rebuilds the generated catalog files, and
-opens a pull request for review. Reports use the current V4 payload format;
-earlier report formats are intentionally unsupported while the interface is
+opens a pull request for review. The workflow also replaces the initial compact
+issue description with a readable target table and notes while keeping the
+compressed payload in a collapsed details section. Reports use the current V5
+payload format; decompression is bounded and every target and assessment is
+validated before observation rows are written. Earlier report formats are
+intentionally unsupported while the interface is
 under active design.
 
 ## License

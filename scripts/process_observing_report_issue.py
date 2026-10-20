@@ -4,12 +4,15 @@
 from __future__ import annotations
 
 import argparse
+import base64
+import binascii
 import csv
 import json
 import math
 import os
 import re
 import sys
+import zlib
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -20,7 +23,10 @@ from build_catalog import CatalogError, build_catalog
 ROOT = Path(__file__).resolve().parents[1]
 OBSERVATIONS_FILE = ROOT / "data" / "observations.csv"
 
-REPORT_MARKER = "<!-- ANCH0R_OBSERVING_REPORT_V4 -->"
+REPORT_MARKER = "<!-- ANCH0R_OBSERVING_REPORT_V5 -->"
+MAX_DECOMPRESSED_REPORT_BYTES = 1_000_000
+MAX_ENCODED_REPORT_CHARACTERS = 10_000
+MAX_READABLE_REPORT_BYTES = 60_000
 OBSERVATION_FIELDS = [
     "observation_id",
     "target_id",
@@ -43,6 +49,12 @@ VALID_DATA_QUALITY = {
     "untrusted",
 }
 VALID_DETECTION_STATUSES = {"detected", "marginal", "undetected"}
+DATA_QUALITY_LABELS = {
+    "trusted": "I trust the data",
+    "possible_pointing_problems": "There are potential pointing problems",
+    "possible_other_problems": "There are potential other problems",
+    "untrusted": "I do not trust the data at all",
+}
 
 
 class ReportError(RuntimeError):
@@ -73,22 +85,63 @@ def parse_event(path: str | None) -> tuple[int, str, str]:
     return issue_number, issue_author, issue_body
 
 
-def extract_report_payload(body: str) -> dict[str, Any]:
+def extract_encoded_report(body: str) -> str:
     if REPORT_MARKER not in body:
         raise ReportError("Issue body does not contain an ANCH0R observing-report marker")
 
-    match = re.search(r"```json\s*([\s\S]*?)\s*```", body)
+    match = re.search(r"```anch0r-gzip\s+([A-Za-z0-9_-]+)\s*```", body)
     if not match:
-        raise ReportError("Issue body does not contain a JSON payload block")
+        raise ReportError("Issue body does not contain a compressed report block")
+    encoded = match.group(1)
+    if len(encoded) > MAX_ENCODED_REPORT_CHARACTERS:
+        raise ReportError("Encoded report exceeds the supported size")
+    return encoded
+
+
+def extract_report_payload(body: str) -> dict[str, Any]:
+    encoded = extract_encoded_report(body)
 
     try:
-        payload = json.loads(match.group(1))
-    except json.JSONDecodeError as exc:
-        raise ReportError(f"Report JSON is invalid: {exc}") from exc
+        compressed = base64.b64decode(
+            encoded + "=" * (-len(encoded) % 4), altchars=b"-_", validate=True
+        )
+        # Public issues are untrusted input. Bound expansion before parsing JSON
+        # and reject truncated streams, concatenated gzip members, and trailing data.
+        decoder = zlib.decompressobj(wbits=31)
+        raw = decoder.decompress(compressed, MAX_DECOMPRESSED_REPORT_BYTES + 1)
+        if len(raw) > MAX_DECOMPRESSED_REPORT_BYTES or decoder.unconsumed_tail:
+            raise ReportError("Decompressed report exceeds the supported size")
+        if not decoder.eof or decoder.unused_data:
+            raise ReportError("Compressed report is truncated or contains trailing data")
+        compact = json.loads(raw.decode("utf-8"))
+    except (binascii.Error, zlib.error, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ReportError(f"Compressed report is invalid: {exc}") from exc
 
-    if not isinstance(payload, dict):
+    if not isinstance(compact, dict):
         raise ReportError("Report JSON payload must be an object")
-    return payload
+    if compact.get("v") != 5:
+        raise ReportError("Unsupported report schema_version")
+    entries = compact.get("targets")
+    if not isinstance(entries, list):
+        raise ReportError("Report payload must contain a target list")
+    targets = []
+    for index, entry in enumerate(entries, 1):
+        if not isinstance(entry, list) or len(entry) != 4:
+            raise ReportError(f"targets[{index}] must contain ID, RMS, quality, and detection")
+        target_id, rms, quality, detection = entry
+        targets.append({
+            "target_id": target_id,
+            "rms_mjy_per_1_km_s": rms,
+            "data_quality": quality,
+            "detection_status": detection,
+        })
+    return {
+        "schema_version": 5,
+        "submitted_at_utc": compact.get("at"),
+        "telescope": compact.get("t"),
+        "notes": compact.get("notes"),
+        "targets": targets,
+    }
 
 
 def parse_utc(value: Any, field: str) -> datetime:
@@ -101,10 +154,12 @@ def parse_utc(value: Any, field: str) -> datetime:
 
 
 def validate_payload(payload: dict[str, Any]) -> None:
-    if payload.get("schema_version") != 4:
+    if payload.get("schema_version") != 5:
         raise ReportError("Unsupported report schema_version")
 
     parse_utc(payload.get("submitted_at_utc"), "submitted_at_utc")
+    if not isinstance(payload.get("notes"), str):
+        raise ReportError("Report notes must be text")
 
     telescope = payload.get("telescope")
     if not isinstance(telescope, str) or telescope not in VALID_TELESCOPES:
@@ -117,8 +172,8 @@ def validate_payload(payload: dict[str, Any]) -> None:
     for index, target in enumerate(targets, 1):
         if not isinstance(target, dict):
             raise ReportError(f"targets[{index}] must be an object")
-        target_id = compact_text(target.get("target_id"))
-        if not target_id:
+        target_id = target.get("target_id")
+        if not isinstance(target_id, str) or not target_id or target_id != target_id.strip():
             raise ReportError(f"targets[{index}] is missing target_id")
         if target_id in seen_target_ids:
             raise ReportError(f"Report payload repeats target_id {target_id!r}")
@@ -215,7 +270,46 @@ def make_observation_rows(
     return rows
 
 
-def process_report_issue(event_path: str | None) -> int:
+def render_expanded_issue(
+    payload: dict[str, Any], issue_body: str, issue_author: str
+) -> str:
+    catalog = build_catalog(write_outputs=False)
+    by_id = {target["target_id"]: target for target in catalog["targets"]}
+    lines = [
+        REPORT_MARKER,
+        "",
+        "<details>",
+        "<summary>Compressed report data (used by the observing-report workflow)</summary>",
+        "",
+        "```anch0r-gzip",
+        extract_encoded_report(issue_body),
+        "```",
+        "</details>",
+        "",
+        "## ANCH0R observing report",
+        "",
+        f"Telescope: {payload['telescope']} | Targets: {len(payload['targets'])}",
+        f"Reported by: @{issue_author}",
+        f"Prepared at: {payload['submitted_at_utc']}",
+        "",
+        "| Target | RMS (mJy per 1 km/s channel) | Data quality | Detection |",
+        "| --- | ---: | --- | --- |",
+    ]
+    for entry in payload["targets"]:
+        source_name = by_id[entry["target_id"]]["source_name"].replace("|", r"\|")
+        quality = DATA_QUALITY_LABELS[entry["data_quality"]]
+        detection = entry["detection_status"].capitalize()
+        lines.append(
+            f"| {source_name} | {entry['rms_mjy_per_1_km_s']} | {quality} | {detection} |"
+        )
+    lines.extend(["", "### Notes", "", payload["notes"] or "(none)", ""])
+    result = "\n".join(lines)
+    if len(result.encode("utf-8")) > MAX_READABLE_REPORT_BYTES:
+        raise ReportError("Readable report is too large; submit a smaller report part")
+    return result
+
+
+def process_report_issue(event_path: str | None, expanded_body_path: str | None = None) -> int:
     issue_number, issue_author, issue_body = parse_event(event_path)
     payload = extract_report_payload(issue_body)
     validate_payload(payload)
@@ -225,6 +319,9 @@ def process_report_issue(event_path: str | None) -> int:
         row for row in read_observation_rows() if not row["observation_id"].startswith(prefix)
     ]
     new_rows = make_observation_rows(payload, issue_number, issue_author)
+    expanded_body = render_expanded_issue(payload, issue_body, issue_author)
+    if expanded_body_path:
+        Path(expanded_body_path).write_text(expanded_body, encoding="utf-8")
     write_observation_rows(existing_rows + new_rows)
 
     print(f"Processed observing report issue #{issue_number}: {len(new_rows)} targets")
@@ -234,10 +331,11 @@ def process_report_issue(event_path: str | None) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--event-path", help="Path to the GitHub Actions event JSON payload")
+    parser.add_argument("--expanded-body-path", help="Write a readable issue body to this path")
     args = parser.parse_args()
 
     try:
-        return process_report_issue(args.event_path)
+        return process_report_issue(args.event_path, args.expanded_body_path)
     except (CatalogError, ReportError) as exc:
         print(f"Observing report processing failed: {exc}", file=sys.stderr)
         return 1

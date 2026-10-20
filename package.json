@@ -8,6 +8,7 @@
     "prepare-data": "python3 scripts/build_catalog.py",
     "validate:data": "python3 scripts/validate_data.py",
     "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs && python3 -m unittest discover -s tests -p 'test_*.py'",
     "dev": "python3 scripts/build_catalog.py && vite --host 0.0.0.0",
     "build": "python3 scripts/build_catalog.py && tsc --noEmit && vite build",
     "preview": "vite preview"

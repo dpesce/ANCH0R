@@ -584,6 +584,14 @@ dd {
   gap: 10px;
 }
 
+.report-part-selector {
+  max-width: 520px;
+}
+
+.report-part-selector .subtle {
+  font-weight: 400;
+}
+
 .selected-row {
   background: #f2fbf8;
 }
