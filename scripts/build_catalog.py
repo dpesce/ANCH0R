@@ -367,9 +367,9 @@ def validate_observation_assessment(row: dict[str, str], path: Path) -> None:
             raise CatalogError(
                 f"{path}:{line} must provide an assessed data_quality for observed data"
             )
-        if not rms_text or not detection:
+        if not detection:
             raise CatalogError(
-                f"{path}:{line} must provide RMS and detection_status for observed data"
+                f"{path}:{line} must provide detection_status for observed data"
             )
     elif status == "failed":
         if quality or rms_text or detection:

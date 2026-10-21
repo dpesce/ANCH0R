@@ -4,7 +4,7 @@ export const GITHUB_ISSUES_URL = "https://github.com/dpesce/ANCH0R/issues/new";
 // A conservative URL budget, including the fully encoded title and body.
 export const MAX_REPORT_URL_LENGTH = 1_800;
 const MAX_READABLE_REPORT_BYTES = 60_000;
-const REPORT_PAYLOAD_MARKER = "<!-- ANCH0R_OBSERVING_REPORT_V5 -->";
+const REPORT_PAYLOAD_MARKER = "<!-- ANCH0R_OBSERVING_REPORT_V6 -->";
 
 export const DATA_QUALITY_OPTIONS: Array<{ value: DataQuality; label: string }> = [
   { value: "trusted", label: "I trust the data" },
@@ -29,7 +29,6 @@ export interface PreparedReportTarget {
   raHms: string;
   decDms: string;
   velocityKmS: number;
-  rmsMjyPer1KmS: number;
   dataQuality: DataQuality;
   detectionStatus: DetectionStatus;
 }
@@ -49,11 +48,11 @@ function buildReadableReport(
   partDescription = "",
 ): string {
   const targetTable = [
-    "| Target | RMS (mJy / 1 km/s) | Data quality | Detection |",
-    "| --- | ---: | --- | --- |",
+    "| Target | Data quality | Detection |",
+    "| --- | --- | --- |",
     ...targets.map(
       (target) =>
-        `| ${target.sourceName} | ${target.rmsMjyPer1KmS} | ${
+        `| ${target.sourceName} | ${
           DATA_QUALITY_LABELS[target.dataQuality]
         } | ${target.detectionStatus} |`,
     ),
@@ -80,13 +79,12 @@ async function compressPayload(
   submittedAtUtc: string,
 ): Promise<string> {
   const payload = {
-    v: 5,
+    v: 6,
     t: telescope,
     at: submittedAtUtc,
     notes,
     targets: targets.map((target) => [
       target.targetId,
-      target.rmsMjyPer1KmS,
       target.dataQuality,
       target.detectionStatus,
     ]),

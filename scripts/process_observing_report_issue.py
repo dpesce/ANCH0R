@@ -8,7 +8,6 @@ import base64
 import binascii
 import csv
 import json
-import math
 import os
 import re
 import sys
@@ -23,7 +22,7 @@ from build_catalog import CatalogError, build_catalog
 ROOT = Path(__file__).resolve().parents[1]
 OBSERVATIONS_FILE = ROOT / "data" / "observations.csv"
 
-REPORT_MARKER = "<!-- ANCH0R_OBSERVING_REPORT_V5 -->"
+REPORT_MARKER = "<!-- ANCH0R_OBSERVING_REPORT_V6 -->"
 MAX_DECOMPRESSED_REPORT_BYTES = 1_000_000
 MAX_ENCODED_REPORT_CHARACTERS = 10_000
 MAX_READABLE_REPORT_BYTES = 60_000
@@ -119,24 +118,23 @@ def extract_report_payload(body: str) -> dict[str, Any]:
 
     if not isinstance(compact, dict):
         raise ReportError("Report JSON payload must be an object")
-    if compact.get("v") != 5:
+    if compact.get("v") != 6:
         raise ReportError("Unsupported report schema_version")
     entries = compact.get("targets")
     if not isinstance(entries, list):
         raise ReportError("Report payload must contain a target list")
     targets = []
     for index, entry in enumerate(entries, 1):
-        if not isinstance(entry, list) or len(entry) != 4:
-            raise ReportError(f"targets[{index}] must contain ID, RMS, quality, and detection")
-        target_id, rms, quality, detection = entry
+        if not isinstance(entry, list) or len(entry) != 3:
+            raise ReportError(f"targets[{index}] must contain ID, quality, and detection")
+        target_id, quality, detection = entry
         targets.append({
             "target_id": target_id,
-            "rms_mjy_per_1_km_s": rms,
             "data_quality": quality,
             "detection_status": detection,
         })
     return {
-        "schema_version": 5,
+        "schema_version": 6,
         "submitted_at_utc": compact.get("at"),
         "telescope": compact.get("t"),
         "notes": compact.get("notes"),
@@ -154,7 +152,7 @@ def parse_utc(value: Any, field: str) -> datetime:
 
 
 def validate_payload(payload: dict[str, Any]) -> None:
-    if payload.get("schema_version") != 5:
+    if payload.get("schema_version") != 6:
         raise ReportError("Unsupported report schema_version")
 
     parse_utc(payload.get("submitted_at_utc"), "submitted_at_utc")
@@ -189,7 +187,6 @@ def validate_payload(payload: dict[str, Any]) -> None:
             )
 
         detection_status = target.get("detection_status")
-        rms = target.get("rms_mjy_per_1_km_s")
         if (
             not isinstance(detection_status, str)
             or detection_status not in VALID_DETECTION_STATUSES
@@ -197,14 +194,6 @@ def validate_payload(payload: dict[str, Any]) -> None:
             raise ReportError(
                 f"targets[{index}] has invalid detection_status "
                 f"{detection_status!r}"
-            )
-        if isinstance(rms, bool) or not isinstance(rms, (int, float)):
-            raise ReportError(
-                f"targets[{index}] rms_mjy_per_1_km_s must be numeric"
-            )
-        if not math.isfinite(rms) or rms < 0:
-            raise ReportError(
-                f"targets[{index}] rms_mjy_per_1_km_s must be finite and non-negative"
             )
 
 
@@ -260,7 +249,7 @@ def make_observation_rows(
                 "end_utc": "",
                 "status": "observed",
                 "spectrum_url": "",
-                "rms_mjy_per_1_km_s": str(target["rms_mjy_per_1_km_s"]),
+                "rms_mjy_per_1_km_s": "",
                 "data_quality": target["data_quality"],
                 "detection_status": target["detection_status"],
                 "notes": notes,
@@ -292,15 +281,15 @@ def render_expanded_issue(
         f"Reported by: @{issue_author}",
         f"Prepared at: {payload['submitted_at_utc']}",
         "",
-        "| Target | RMS (mJy per 1 km/s channel) | Data quality | Detection |",
-        "| --- | ---: | --- | --- |",
+        "| Target | Data quality | Detection |",
+        "| --- | --- | --- |",
     ]
     for entry in payload["targets"]:
         source_name = by_id[entry["target_id"]]["source_name"].replace("|", r"\|")
         quality = DATA_QUALITY_LABELS[entry["data_quality"]]
         detection = entry["detection_status"].capitalize()
         lines.append(
-            f"| {source_name} | {entry['rms_mjy_per_1_km_s']} | {quality} | {detection} |"
+            f"| {source_name} | {quality} | {detection} |"
         )
     lines.extend(["", "### Notes", "", payload["notes"] or "(none)", ""])
     result = "\n".join(lines)
@@ -315,10 +304,21 @@ def process_report_issue(event_path: str | None, expanded_body_path: str | None 
     validate_payload(payload)
 
     prefix = f"ISSUE-{issue_number}-"
+    current_rows = read_observation_rows()
+    previous_by_target = {
+        (row["target_id"], row["telescope"]): row
+        for row in current_rows if row["observation_id"].startswith(prefix)
+    }
     existing_rows = [
-        row for row in read_observation_rows() if not row["observation_id"].startswith(prefix)
+        row for row in current_rows if not row["observation_id"].startswith(prefix)
     ]
     new_rows = make_observation_rows(payload, issue_number, issue_author)
+    # Reports do not own measurements and plots added after calibration.
+    for row in new_rows:
+        previous = previous_by_target.get((row["target_id"], row["telescope"]))
+        if previous:
+            for field in ("rms_mjy_per_1_km_s", "spectrum_url"):
+                row[field] = previous[field]
     expanded_body = render_expanded_issue(payload, issue_body, issue_author)
     if expanded_body_path:
         Path(expanded_body_path).write_text(expanded_body, encoding="utf-8")

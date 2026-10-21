@@ -19,7 +19,6 @@ function target(source, index) {
     raHms: source.ra_hms,
     decDms: source.dec_dms,
     velocityKmS: Math.round(source.velocity_km_s),
-    rmsMjyPer1KmS: index === 0 ? 0 : 6 + (index % 7) / 10,
     dataQuality: ["trusted", "possible_pointing_problems", "possible_other_problems", "untrusted"][index % 4],
     detectionStatus: ["detected", "marginal", "undetected"][index % 3],
   };
@@ -32,7 +31,7 @@ function payload(submission) {
 }
 
 function expectedEntries(targets) {
-  return targets.map((entry) => [entry.targetId, entry.rmsMjyPer1KmS, entry.dataQuality, entry.detectionStatus]);
+  return targets.map((entry) => [entry.targetId, entry.dataQuality, entry.detectionStatus]);
 }
 
 function checkPythonRoundTrip(submissions, targets, telescope, notes) {
@@ -55,10 +54,12 @@ test("52 targets fit in one prefilled compressed link with every assessment inta
   const [submission] = submissions;
   assert.ok(submission.issueUrl.length <= MAX_REPORT_URL_LENGTH);
   assert.match(new URL(submission.issueUrl).searchParams.get("title"), /GBT 52 targets$/);
-  assert.equal(payload(submission).v, 5);
+  assert.equal(payload(submission).v, 6);
+  assert.match(new URL(submission.issueUrl).searchParams.get("body"), /ANCH0R_OBSERVING_REPORT_V6/);
   assert.deepEqual(payload(submission).targets, expectedEntries(targets));
   assert.equal(payload(submission).notes, notes);
-  assert.match(submission.body, /RMS/);
+  assert.match(submission.body, /\| Target \| Data quality \| Detection \|/);
+  assert.doesNotMatch(submission.body, /RMS/);
   assert.ok(submission.body.includes(targets[0].sourceName));
   checkPythonRoundTrip(submissions, targets, "GBT", notes);
 });

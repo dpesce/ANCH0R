@@ -77,10 +77,15 @@ pnpm run build
 To mark a target as observed, add a row to `data/observations.csv` with
 `status` set to `observed`. Successful observations require:
 
-- `rms_mjy_per_1_km_s`: RMS noise in mJy per 1 km/s spectral channel
 - `data_quality`: `trusted`, `possible_pointing_problems`,
   `possible_other_problems`, or `untrusted`
 - `detection_status`: `detected`, `marginal`, or `undetected`
+
+The `rms_mjy_per_1_km_s` column is optional for observed data. Leave it blank
+until calibration is complete, then add the RMS noise in mJy per 1 km/s
+spectral channel. When supplied, it must be finite and non-negative.
+Reprocessing an edited report preserves RMS values and spectrum links already
+added for the same target and telescope within that report.
 
 A target that was attempted but not observed uses `status=failed`, with blank
 RMS, data-quality, and detection fields. Put spectrum images under
@@ -133,7 +138,9 @@ are added.
 
 The report page first shows an in-app confirmation screen. The observer opens
 the prefilled GitHub issue and clicks Create. No copying or pasting is needed.
-The browser compresses target IDs, RMS values, assessments, and notes using gzip
+Only data quality and detection status are required per target; RMS noise is
+not collected in observing reports and can be added to the CSV after calibration.
+The browser compresses target IDs, assessments, and notes using gzip
 and URL-safe base64. Source names and coordinates are recovered from the master
 catalog instead of being transmitted again.
 
@@ -150,7 +157,7 @@ observing-report workflow validates that payload, adds one row per selected
 target to `data/observations.csv`, rebuilds the generated catalog files, and
 opens a pull request for review. The workflow also replaces the initial compact
 issue description with a readable target table and notes while keeping the
-compressed payload in a collapsed details section. Reports use the current V5
+compressed payload in a collapsed details section. Reports use the current V6
 payload format; decompression is bounded and every target and assessment is
 validated before observation rows are written. Earlier report formats are
 intentionally unsupported while the interface is

@@ -28,7 +28,6 @@ interface SubmitObservingReportProps {
 }
 
 interface TargetAssessment {
-  rmsMjyPer1KmS: string;
   dataQuality: DataQuality | "";
   detectionStatus: DetectionStatus | "";
 }
@@ -77,11 +76,7 @@ function targetMatchesNameSearch(target: Target, search: string): boolean {
 }
 
 function assessmentIsComplete(assessment: TargetAssessment): boolean {
-  const rms = Number(assessment.rmsMjyPer1KmS);
   return (
-    assessment.rmsMjyPer1KmS.trim() !== "" &&
-    Number.isFinite(rms) &&
-    rms >= 0 &&
     Boolean(assessment.dataQuality) &&
     Boolean(assessment.detectionStatus)
   );
@@ -109,7 +104,6 @@ async function prepareReport(
       raHms: target.ra_hms,
       decDms: target.dec_dms,
       velocityKmS: Math.round(target.velocity_km_s),
-      rmsMjyPer1KmS: Number(assessment.rmsMjyPer1KmS),
       dataQuality: assessment.dataQuality,
       detectionStatus: assessment.detectionStatus,
     };
@@ -163,7 +157,6 @@ function ReportConfirmation({
               <col className="report-confirmation-ra-column" />
               <col className="report-confirmation-dec-column" />
               <col className="report-confirmation-velocity-column" />
-              <col className="report-confirmation-rms-column" />
               <col className="report-confirmation-quality-column" />
               <col className="report-confirmation-detection-column" />
             </colgroup>
@@ -173,12 +166,6 @@ function ReportConfirmation({
                 <th>RA</th>
                 <th>Dec</th>
                 <th>Velocity</th>
-                <th>
-                  RMS noise
-                  <span className="table-heading-unit">
-                    mJy per 1 km/s channel
-                  </span>
-                </th>
                 <th>Data quality</th>
                 <th>Detection status</th>
               </tr>
@@ -186,15 +173,14 @@ function ReportConfirmation({
             <tbody>
               {report.targets.map((target) => (
                 <tr key={target.targetId}>
-                  <td>
+                  <td data-label="Target">
                     <strong>{target.sourceName}</strong>
                   </td>
-                  <td>{target.raHms}</td>
-                  <td>{target.decDms}</td>
-                  <td>{formatVelocity(target.velocityKmS)}</td>
-                  <td>{target.rmsMjyPer1KmS}</td>
-                  <td>{DATA_QUALITY_LABELS[target.dataQuality]}</td>
-                  <td>{capitalize(target.detectionStatus)}</td>
+                  <td data-label="RA">{target.raHms}</td>
+                  <td data-label="Dec">{target.decDms}</td>
+                  <td data-label="Velocity">{formatVelocity(target.velocityKmS)}</td>
+                  <td data-label="Data quality">{DATA_QUALITY_LABELS[target.dataQuality]}</td>
+                  <td data-label="Detection status">{capitalize(target.detectionStatus)}</td>
                 </tr>
               ))}
             </tbody>
@@ -376,7 +362,6 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
         delete next[target.target_id];
       } else {
         next[target.target_id] = {
-          rmsMjyPer1KmS: "",
           dataQuality: "",
           detectionStatus: "",
         };
@@ -438,8 +423,9 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
         <h1>Submit an observing report</h1>
         <p>
           Select the telescope and each target observed during the run, then
-          record the data assessment for every target. Submitting first opens a
-          confirmation page where the complete report can be reviewed.
+          record the data quality and detection status for every target.
+          Submitting first opens a confirmation page where the complete report
+          can be reviewed.
         </p>
       </div>
 
@@ -500,7 +486,6 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
               <colgroup>
                 <col className="report-entry-remove-column" />
                 <col className="report-entry-target-column" />
-                <col className="report-entry-rms-column" />
                 <col className="report-entry-quality-column" />
                 <col className="report-entry-detection-column" />
               </colgroup>
@@ -508,12 +493,6 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
                 <tr>
                   <th>Remove</th>
                   <th>Target</th>
-                  <th>
-                    RMS noise
-                    <span className="table-heading-unit">
-                      mJy per 1 km/s channel
-                    </span>
-                  </th>
                   <th>Data quality</th>
                   <th>Detection status</th>
                 </tr>
@@ -531,7 +510,7 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
                       }
                       key={target.target_id}
                     >
-                      <td className="checkbox-cell">
+                      <td className="checkbox-cell" data-label="Remove">
                         <input
                           aria-label={`Remove ${target.source_name}`}
                           checked
@@ -540,25 +519,10 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
                           type="checkbox"
                         />
                       </td>
-                      <td>
+                      <td data-label="Target">
                         <strong>{target.source_name}</strong>
                       </td>
-                      <td>
-                        <input
-                          aria-label={`RMS noise for ${target.source_name}`}
-                          min={0}
-                          onChange={(event) =>
-                            updateAssessment(target.target_id, {
-                              rmsMjyPer1KmS: event.target.value,
-                            })
-                          }
-                          placeholder="0.0"
-                          step="any"
-                          type="number"
-                          value={assessment.rmsMjyPer1KmS}
-                        />
-                      </td>
-                      <td>
+                      <td data-label="Data quality">
                         <select
                           aria-label={`Data quality for ${target.source_name}`}
                           value={assessment.dataQuality}
@@ -578,7 +542,7 @@ export function SubmitObservingReport({ catalog }: SubmitObservingReportProps) {
                           ))}
                         </select>
                       </td>
-                      <td>
+                      <td data-label="Detection status">
                         <select
                           aria-label={`Detection status for ${target.source_name}`}
                           value={assessment.detectionStatus}
