@@ -1437,7 +1437,7 @@ vcc0050,VCC0050,12:12:19.0,+15:28:59.6,183.07916667,15.48322222,1220.0,False,Tru
 ngc4173,NGC4173,12:12:21.4,+29:12:25.0,183.08916667,29.20694444,1119.1,False,True,True,,unobserved,,,,0,
 sdssj121224-31,SDSSJ121224.31,12:12:24.4,+65:10:27.1,183.10166667,65.17419444,1274.0,False,True,True,,unobserved,,,,0,
 vcc0055,VCC0055,12:12:26.8,+13:16:46.9,183.11166667,13.27969444,1150.0,False,True,True,,unobserved,,,,0,
-ngc4178,NGC4178,12:12:46.5,+10:51:57.7,183.19375,10.86602778,374.1,True,True,True,Group06,unobserved,,,,0,
+ngc4178,NGC4178,12:12:46.5,+10:51:57.7,183.19375,10.86602778,374.1,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ic3044,IC3044,12:12:48.7,+13:58:35.0,183.20291667,13.97638889,-192.4,True,True,True,Group06,unobserved,,,,0,
 ngc4179,NGC4179,12:12:52.1,+01:17:58.9,183.21708333,1.29969444,1299.9,False,True,True,,unobserved,,,,0,
 wiseaj121255-1,WISEAJ121255.1,12:12:55.2,+44:05:27.7,183.23,44.09102778,968.7,True,True,True,Group16,unobserved,,,,0,
@@ -1477,7 +1477,7 @@ wiseaj121519-1,WISEAJ121519.1,12:15:19.1,+02:55:40.0,183.82958333,2.92777778,136
 vcc0146,VCC0146,12:15:20.3,+12:36:54.5,183.83458333,12.61513889,1150.0,False,True,True,,unobserved,,,,0,
 ugc07267,UGC07267,12:15:23.7,+51:20:59.0,183.84875,51.34972222,461.6,True,True,True,Group16,unobserved,,,,0,
 galexmscj12152,GALEXMSCJ12152,12:15:29.2,+13:58:06.4,183.87166667,13.96844444,1150.0,False,True,True,,unobserved,,,,0,
-ngc4207,NGC4207,12:15:30.4,+09:35:05.7,183.87666667,9.58491667,596.0,True,True,True,Group06,unobserved,,,,0,
+ngc4207,NGC4207,12:15:30.4,+09:35:05.7,183.87666667,9.58491667,596.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ugc07271,UGC07271,12:15:33.4,+43:26:02.8,183.88916667,43.43411111,552.3,True,True,True,Group16,unobserved,,,,0,
 galexascj12153,GALEXASCJ12153,12:15:33.9,+13:50:14.3,183.89125,13.83730556,1150.0,False,True,True,,unobserved,,,,0,
 sdssj121537-11,SDSSJ121537.11,12:15:37.1,+44:17:10.2,183.90458333,44.28616667,892.5,True,True,True,Group16,unobserved,,,,0,
@@ -1584,7 +1584,7 @@ wiseaj122055-7,WISEAJ122055.7,12:20:55.7,+11:05:56.2,185.23208333,11.09894444,11
 vcc0448,VCC0448,12:21:00.2,+12:43:33.6,185.25083333,12.726,672.1,True,True,True,Group06,unobserved,,,,0,
 vcc0453,VCC0453,12:21:06.1,+11:35:43.1,185.27541667,11.59530556,937.7,True,True,True,Group06,unobserved,,,,0,
 ugc07408,UGC07408,12:21:15.2,+45:48:43.3,185.31333333,45.81202778,459.9,True,True,True,Group16,unobserved,,,,0,
-ngc4294,NGC4294,12:21:17.8,+11:30:38.6,185.32416667,11.51072222,355.0,True,True,True,Group06,unobserved,,,,0,
+ngc4294,NGC4294,12:21:17.8,+11:30:38.6,185.32416667,11.51072222,355.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 vcc0469,VCC0469,12:21:19.2,+16:36:33.6,185.33,16.60933333,1245.0,False,True,True,,unobserved,,,,0,
 sdssj122120-10,SDSSJ122120.10,12:21:20.1,+29:42:55.7,185.33375,29.71547222,908.9,True,True,True,Group06,unobserved,,,,0,
 wiseaj122121-0,WISEAJ122121.0,12:21:21.0,+08:03:47.4,185.3375,8.06316667,1150.0,False,True,True,,unobserved,,,,0,
@@ -1593,7 +1593,7 @@ ngc4298,NGC4298,12:21:32.8,+14:36:21.8,185.38666667,14.60605556,1124.0,False,Tru
 sdssj122138-37,SDSSJ122138.37,12:21:38.4,+08:46:38.1,185.41,8.77725,1396.3,False,True,True,,unobserved,,,,0,
 ic0783,IC0783,12:21:38.8,+15:44:42.9,185.41166667,15.74525,1266.9,False,True,True,,unobserved,,,,0,
 vcc0489,VCC0489,12:21:39.6,+04:23:33.3,185.415,4.39258333,1142.5,False,True,True,,unobserved,,,,0,
-ngc4299,NGC4299,12:21:40.5,+11:29:59.7,185.41875,11.49991667,237.1,True,True,True,Group06,unobserved,,,,0,
+ngc4299,NGC4299,12:21:40.5,+11:29:59.7,185.41875,11.49991667,237.1,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 wiseaj122147-0,WISEAJ122147.0,12:21:47.1,+05:59:20.7,185.44625,5.98908333,746.6,True,True,True,Group06,unobserved,,,,0,
 vcc0502,VCC0502,12:21:48.8,+11:51:06.8,185.45333333,11.85188889,1150.0,False,True,True,,unobserved,,,,0,
 wiseaj122149-0,WISEAJ122149.0,12:21:49.1,+13:35:51.2,185.45458333,13.59755556,1150.0,False,True,True,,unobserved,,,,0,
@@ -1601,11 +1601,11 @@ vcc0503,VCC0503,12:21:50.2,+08:32:30.4,185.45916667,8.54177778,1116.1,False,True
 ugc07425,UGC07425,12:21:53.7,+15:38:45.0,185.47375,15.64583333,840.8,True,True,True,Group06,unobserved,,,,0,
 ic3208,IC3208,12:21:55.6,+11:58:00.6,185.48166667,11.96683333,150.7,True,True,True,Group06,unobserved,,,,0,
 ngc4308,NGC4308,12:21:56.9,+30:04:27.8,185.48708333,30.07438889,636.6,True,True,True,Group06,unobserved,,,,0,
-ugc07424,UGC07424,12:21:57.5,+08:40:30.0,185.48958333,8.675,851.1,True,True,True,Group06,unobserved,,,,0,
+ugc07424,UGC07424,12:21:57.5,+08:40:30.0,185.48958333,8.675,851.1,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ugc07428,UGC07428,12:22:02.6,+32:05:45.4,185.51083333,32.09594444,1137.1,False,True,True,,unobserved,,,,0,
 vcca026,VCCA026,12:22:04.7,+07:44:22.1,185.51958333,7.73947222,1276.3,False,True,True,,unobserved,,,,0,
 galexascj12220,GALEXASCJ12220,12:22:05.5,-09:48:02.5,185.52291667,-9.80069444,1328.1,False,True,True,,unobserved,,,,0,
-ngc4307,NGC4307,12:22:05.6,+09:02:37.3,185.52333333,9.04369444,1055.4,True,True,True,Group06,unobserved,,,,0,
+ngc4307,NGC4307,12:22:05.6,+09:02:37.3,185.52333333,9.04369444,1055.4,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 vcc0529,VCC0529,12:22:08.6,+09:53:39.8,185.53583333,9.89438889,996.7,True,True,True,Group06,unobserved,,,,0,
 ic3215,IC3215,12:22:10.2,+26:03:07.8,185.5425,26.05216667,1019.0,True,True,True,Group06,unobserved,,,,0,
 vcc0536,VCC0536,12:22:12.2,+16:58:27.7,185.55083333,16.97436111,1150.0,False,True,True,,unobserved,,,,0,
@@ -1697,7 +1697,7 @@ vcc0756,VCC0756,12:24:53.1,+09:29:37.3,186.22125,9.49369444,761.9,True,True,True
 mcg-10-18-044,MCG+10-18-044,12:24:53.8,+61:03:49.0,186.22416667,61.06361111,709.9,True,True,True,Group16,unobserved,,,,0,
 vcc0755,VCC0755,12:24:54.1,+07:33:25.0,186.22541667,7.55694444,1250.7,False,True,True,,unobserved,,,,0,
 ngc4370,NGC4370,12:24:54.9,+07:26:41.6,186.22875,7.44488889,771.1,True,True,True,Group06,observed,undetected,GBT,,1,"GBT observation, October 19, 2026. Weather was great, wind was low, system temperature ~44K. Manually imported from the observing report PDF supplied by Dom Pesce after the GitHub submission URL exceeded its length limit."
-ngc4371,NGC4371,12:24:55.4,+11:42:15.0,186.23083333,11.70416667,933.0,True,True,True,Group06,unobserved,,,,0,
+ngc4371,NGC4371,12:24:55.4,+11:42:15.0,186.23083333,11.70416667,933.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 vcc0761,VCC0761,12:25:00.3,+15:36:15.4,186.25125,15.60427778,932.1,True,True,True,Group06,unobserved,,,,0,
 vcc0762,VCC0762,12:25:03.0,+07:30:13.8,186.2625,7.50383333,1274.4,False,True,True,,unobserved,,,,0,
 vcc0765,VCC0765,12:25:03.5,+13:14:40.5,186.26458333,13.24458333,956.9,True,True,True,Group06,unobserved,,,,0,
@@ -1714,7 +1714,7 @@ vcc0788,VCC0788,12:25:16.8,+11:36:19.3,186.32,11.60536111,156.1,True,True,True,G
 ic3301,IC3301,12:25:17.5,+14:10:21.6,186.32291667,14.17266667,642.7,True,True,True,Group06,unobserved,,,,0,
 ic3308,IC3308,12:25:18.2,+26:42:54.4,186.32583333,26.71511111,316.0,True,True,True,Group06,unobserved,,,,0,
 ngc4391,NGC4391,12:25:18.8,+64:56:00.5,186.32833333,64.93347222,1320.3,False,True,True,,unobserved,,,,0,
-ngc4380,NGC4380,12:25:22.2,+10:01:00.5,186.3425,10.01680556,962.9,True,True,True,Group06,unobserved,,,,0,
+ngc4380,NGC4380,12:25:22.2,+10:01:00.5,186.3425,10.01680556,962.9,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 wiseaj122523-3,WISEAJ122523.3,12:25:23.3,+12:35:32.5,186.34708333,12.59236111,971.0,True,True,True,Group06,unobserved,,,,0,
 vcc0797,VCC0797,12:25:24.0,+18:08:24.0,186.35,18.14,772.9,True,True,True,Group06,unobserved,,,,0,
 wiseaj122528-9,WISEAJ122528.9,12:25:29.0,+09:36:21.2,186.37083333,9.60588889,1150.0,False,True,True,,unobserved,,,,0,
@@ -1788,7 +1788,7 @@ ngc4411b,NGC4411b,12:26:47.2,+08:53:04.6,186.69666667,8.88461111,1272.0,False,Tr
 vcc0941,VCC0941,12:26:47.9,+13:22:44.8,186.69958333,13.37911111,1288.0,False,True,True,,unobserved,,,,0,
 vcca034,VCCA034,12:26:48.0,+07:40:17.6,186.7,7.67155556,610.1,True,True,True,Group06,unobserved,,,,0,
 ic3356,IC3356,12:26:50.5,+11:33:32.5,186.71041667,11.55902778,1099.9,True,True,True,Group06,unobserved,,,,0,
-ngc4417,NGC4417,12:26:50.6,+09:35:03.5,186.71083333,9.58430556,828.0,True,True,True,Group06,unobserved,,,,0,
+ngc4417,NGC4417,12:26:50.6,+09:35:03.5,186.71083333,9.58430556,828.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ic3355,IC3355,12:26:50.9,+13:10:37.6,186.71208333,13.17711111,161.9,True,True,True,Group06,unobserved,,,,0,
 sbs1224-533,SBS1224+533,12:26:52.7,+53:06:19.2,186.71958333,53.10533333,300.1,True,True,True,Group16,unobserved,,,,0,
 ic3361,IC3361,12:26:54.5,+10:39:57.3,186.72708333,10.66591667,1275.3,False,True,True,,unobserved,,,,0,
@@ -1801,7 +1801,7 @@ ugc07559,UGC07559,12:27:05.2,+37:08:33.6,186.77166667,37.14266667,219.4,True,Tru
 vcc0968,VCC0968,12:27:06.0,+13:19:24.8,186.775,13.32355556,1172.0,False,True,True,,unobserved,,,,0,
 ngc4423,NGC4423,12:27:08.9,+05:52:47.5,186.78708333,5.87986111,1121.9,False,True,True,,unobserved,,,,0,
 ugc07557,UGC07557,12:27:11.1,+07:15:47.9,186.79625,7.26330556,932.1,True,True,True,Group06,observed,undetected,GBT,,1,"GBT observation, October 19, 2026. Weather was great, wind was low, system temperature ~44K. Manually imported from the observing report PDF supplied by Dom Pesce after the GitHub submission URL exceeded its length limit."
-ngc4424,NGC4424,12:27:11.6,+09:25:14.0,186.79833333,9.42055556,437.1,True,True,True,Group06,unobserved,,,,0,
+ngc4424,NGC4424,12:27:11.6,+09:25:14.0,186.79833333,9.42055556,437.1,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 vcc0976,VCC0976,12:27:12.0,+08:50:23.7,186.8,8.83991667,1170.5,False,True,True,,unobserved,,,,0,
 vcc0982,VCC0982,12:27:12.7,+17:49:15.0,186.80291667,17.82083333,935.1,True,True,True,Group06,unobserved,,,,0,
 wiseaj122712-7,WISEAJ122712.7,12:27:12.8,+07:38:20.5,186.80333333,7.63902778,1164.4,False,True,True,,unobserved,,,,0,
@@ -1816,7 +1816,7 @@ vcc1001,VCC1001,12:27:24.5,+13:42:57.3,186.85208333,13.71591667,332.6,True,True,
 wiseaj122726-9,WISEAJ122726.9,12:27:27.0,+05:11:16.5,186.8625,5.18791667,1218.3,False,True,True,,unobserved,,,,0,
 vcc1009,VCC1009,12:27:27.0,+08:21:08.1,186.8625,8.35225,1150.0,False,True,True,,unobserved,,,,0,
 vcc1008,VCC1008,12:27:27.0,+11:56:33.2,186.8625,11.94255556,1172.0,False,True,True,,unobserved,,,,0,
-ngc4431,NGC4431,12:27:27.4,+12:17:24.8,186.86416667,12.29022222,930.0,True,True,True,Group06,unobserved,,,,0,
+ngc4431,NGC4431,12:27:27.4,+12:17:24.8,186.86416667,12.29022222,930.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 vcc1012,VCC1012,12:27:28.5,+08:23:28.2,186.86875,8.39116667,1150.0,False,True,True,,unobserved,,,,0,
 ugc07567,UGC07567,12:27:29.1,+07:38:36.5,186.87125,7.64347222,873.0,True,True,True,Group06,observed,undetected,GBT,,1,"GBT observation, October 19, 2026. Weather was great, wind was low, system temperature ~44K. Manually imported from the observing report PDF supplied by Dom Pesce after the GitHub submission URL exceeded its length limit."
 vcc1020,VCC1020,12:27:32.0,+11:36:54.7,186.88333333,11.61519444,1378.7,False,True,True,,unobserved,,,,0,
@@ -1838,12 +1838,12 @@ sdssj122746-35,SDSSJ122746.35,12:27:46.4,+08:55:20.8,186.94333333,8.92244444,115
 vpc0556,VPC0556,12:27:48.4,+13:04:31.3,186.95166667,13.07536111,1172.0,False,True,True,,unobserved,,,,0,
 vpc0555,VPC0555,12:27:48.6,+10:40:45.8,186.9525,10.67938889,1031.6,True,True,True,Group06,unobserved,,,,0,
 wiseaj122751-2,WISEAJ122751.2,12:27:51.2,+33:37:35.4,186.96333333,33.6265,299.8,True,True,True,Group06,unobserved,,,,0,
-ngc4440,NGC4440,12:27:53.6,+12:17:35.8,186.97333333,12.29327778,723.1,True,True,True,Group06,unobserved,,,,0,
+ngc4440,NGC4440,12:27:53.6,+12:17:35.8,186.97333333,12.29327778,723.1,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 vv279b,VV279b,12:27:54.0,+28:38:01.0,186.975,28.63361111,1052.0,True,True,True,Group06,unobserved,,,,0,
 ugc07580,UGC07580,12:27:54.8,+08:05:25.6,186.97833333,8.09044444,607.0,True,True,True,Group06,observed,undetected,GBT,,1,"GBT observation, October 19, 2026. Weather was great, wind was low, system temperature ~44K. Manually imported from the observing report PDF supplied by Dom Pesce after the GitHub submission URL exceeded its length limit."
 vcc1057,VCC1057,12:27:59.4,+08:06:58.6,186.9975,8.11627778,1150.0,False,True,True,,unobserved,,,,0,
 ugc07584,UGC07584,12:28:02.8,+22:35:17.1,187.01166667,22.58808333,602.9,True,True,True,Group06,unobserved,,,,0,
-ngc4442,NGC4442,12:28:03.9,+09:48:13.3,187.01625,9.80369444,547.1,True,True,True,Group06,unobserved,,,,0,
+ngc4442,NGC4442,12:28:03.9,+09:48:13.3,187.01625,9.80369444,547.1,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 wiseaj122804-6,WISEAJ122804.6,12:28:04.6,+11:36:18.3,187.01916667,11.60508333,1150.0,False,True,True,,unobserved,,,,0,
 vcc1064,VCC1064,12:28:04.9,+13:36:43.5,187.02041667,13.61208333,860.2,True,True,True,Group06,unobserved,,,,0,
 vcc1065,VCC1065,12:28:05.0,+13:34:41.4,187.02083333,13.57816667,111.3,True,True,True,Group06,unobserved,,,,0,
@@ -1856,7 +1856,7 @@ vcc1079,VCC1079,12:28:12.0,+10:21:55.1,187.05,10.36530556,1354.2,False,True,True
 vcc1081,VCC1081,12:28:12.9,+13:00:54.4,187.05375,13.01511111,1150.0,False,True,True,,unobserved,,,,0,
 ic3381,IC3381,12:28:14.9,+11:47:23.0,187.06208333,11.78972222,658.6,True,True,True,Group06,unobserved,,,,0,
 ngc4448,NGC4448,12:28:15.4,+28:37:13.2,187.06416667,28.62033333,658.0,True,True,True,Group06,unobserved,,,,0,
-ngc4445,NGC4445,12:28:15.9,+09:26:10.3,187.06625,9.43619444,345.9,True,True,True,Group06,unobserved,,,,0,
+ngc4445,NGC4445,12:28:15.9,+09:26:10.3,187.06625,9.43619444,345.9,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 sdssj122815-96,SDSSJ122815.96,12:28:16.0,+01:49:44.1,187.06666667,1.82891667,911.8,True,True,True,Group06,unobserved,,,,0,
 ugc07590,UGC07590,12:28:18.8,+08:43:46.1,187.07833333,8.72947222,1120.0,False,True,True,,unobserved,,,,0,
 sdssj122820-02,SDSSJ122820.02,12:28:20.0,+12:48:58.7,187.08333333,12.81630556,1172.0,False,True,True,,unobserved,,,,0,
@@ -1867,7 +1867,7 @@ wiseaj122828-0,WISEAJ122828.0,12:28:28.1,+11:38:58.8,187.11708333,11.64966667,10
 ugc07599,UGC07599,12:28:28.5,+37:14:01.8,187.11875,37.23383333,277.9,True,True,True,Group06,unobserved,,,,0,
 ugc07596,UGC07596,12:28:33.9,+08:38:22.6,187.14125,8.63961111,560.0,True,True,True,Group06,observed,undetected,GBT,,1,"GBT observation, October 19, 2026. Weather was great, wind was low, system temperature ~44K. Manually imported from the observing report PDF supplied by Dom Pesce after the GitHub submission URL exceeded its length limit."
 ugc07605,UGC07605,12:28:38.7,+35:43:02.9,187.16125,35.71747222,310.3,True,True,True,Group06,unobserved,,,,0,
-ngc4451,NGC4451,12:28:40.5,+09:15:32.6,187.16875,9.25905556,858.9,True,True,True,Group06,unobserved,,,,0,
+ngc4451,NGC4451,12:28:40.5,+09:15:32.6,187.16875,9.25905556,858.9,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ngc4472dw05,NGC4472DW05,12:28:41.5,+07:48:15.2,187.17291667,7.80422222,847.0,True,True,True,Group06,observed,undetected,GBT,,1,"GBT observation, October 19, 2026. Weather was great, wind was low, system temperature ~44K. Manually imported from the observing report PDF supplied by Dom Pesce after the GitHub submission URL exceeded its length limit."
 ic3393,IC3393,12:28:41.7,+12:54:57.2,187.17375,12.91588889,465.0,True,True,True,Group06,unobserved,,,,0,
 vcc1124,VCC1124,12:28:44.1,+10:51:56.1,187.18375,10.86558333,1150.0,False,True,True,,unobserved,,,,0,
@@ -1886,7 +1886,7 @@ vcc1143,VCC1143,12:28:55.4,+12:42:25.6,187.23083333,12.70711111,1150.0,False,Tru
 vcc1142,VCC1142,12:28:55.5,+08:49:00.6,187.23125,8.81683333,1305.9,False,True,True,,unobserved,,,,0,
 sdssj122856-78,SDSSJ122856.78,12:28:56.8,+11:36:48.6,187.23666667,11.6135,1217.0,False,True,True,,unobserved,,,,0,
 ngc4458,NGC4458,12:28:57.6,+13:14:30.9,187.24,13.24191667,676.9,True,True,True,Group06,unobserved,,,,0,
-ngc4457,NGC4457,12:28:59.0,+03:34:14.1,187.24583333,3.57058333,882.0,True,True,True,Group06,unobserved,,,,0,
+ngc4457,NGC4457,12:28:59.0,+03:34:14.1,187.24583333,3.57058333,882.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 wiseaj122859-1,WISEAJ122859.1,12:28:59.2,+03:46:49.3,187.24666667,3.78036111,825.0,True,True,True,Group06,unobserved,,,,0,
 ngc4472dw02,NGC4472DW02,12:28:59.2,+07:31:34.7,187.24666667,7.52630556,630.0,True,True,True,Group06,observed,undetected,GBT,,1,"GBT observation, October 19, 2026. Weather was great, wind was low, system temperature ~44K. Manually imported from the observing report PDF supplied by Dom Pesce after the GitHub submission URL exceeded its length limit."
 vcc1153,VCC1153,12:28:59.8,+12:38:54.3,187.24916667,12.64841667,990.0,True,True,True,Group06,unobserved,,,,0,
@@ -1896,13 +1896,13 @@ vcc1164,VCC1164,12:29:08.2,+09:26:37.9,187.28416667,9.44386111,1040.0,True,True,
 vcc1170,VCC1170,12:29:13.0,+10:59:26.2,187.30416667,10.99061111,1150.0,False,True,True,,unobserved,,,,0,
 vcc1171,VCC1171,12:29:14.6,+08:14:29.1,187.31083333,8.24141667,1150.0,False,True,True,,unobserved,,,,0,
 wiseaj122914-8,WISEAJ122914.8,12:29:14.9,+11:53:43.8,187.31208333,11.8955,905.0,True,True,True,Group06,unobserved,,,,0,
-ugc07622notes0,UGC07622NOTES0,12:29:15.3,+08:48:52.3,187.31375,8.81452778,984.8,True,True,True,Group06,unobserved,,,,0,
+ugc07622notes0,UGC07622NOTES0,12:29:15.3,+08:48:52.3,187.31375,8.81452778,984.8,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 vcc1180,VCC1180,12:29:21.2,+16:48:23.0,187.33833333,16.80638889,869.5,True,True,True,Group06,unobserved,,,,0,
 ngc4464,NGC4464,12:29:21.3,+08:09:24.0,187.33875,8.15666667,1242.9,False,True,True,,unobserved,,,,0,
 ic3413,IC3413,12:29:22.5,+11:26:02.7,187.34375,11.43408333,1326.6,False,True,True,,unobserved,,,,0,
 wiseaj122922-7,WISEAJ122922.7,12:29:22.7,+15:03:52.4,187.34458333,15.06455556,1150.0,False,True,True,,unobserved,,,,0,
 messier087dw07,MESSIER087DW07,12:29:23.5,+12:27:02.6,187.34791667,12.45072222,448.2,True,True,True,Group06,unobserved,,,,0,
-ngc4469,NGC4469,12:29:28.0,+08:45:00.6,187.36666667,8.75016667,588.2,True,True,True,Group06,unobserved,,,,0,
+ngc4469,NGC4469,12:29:28.0,+08:45:00.6,187.36666667,8.75016667,588.2,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 wiseaj122928-2,WISEAJ122928.2,12:29:28.2,+07:53:55.4,187.3675,7.89872222,637.0,True,True,True,Group06,unobserved,,,,0,
 sdssj122928-92,SDSSJ122928.92,12:29:28.9,+27:36:51.8,187.37041667,27.61438889,974.0,True,True,True,Group06,unobserved,,,,0,
 ngc4467,NGC4467,12:29:30.3,+07:59:34.3,187.37625,7.99286111,1390.4,False,True,True,,unobserved,,,,0,
@@ -1957,7 +1957,7 @@ vcc1300,VCC1300,12:30:34.7,+12:27:30.5,187.64458333,12.45847222,1172.0,False,Tru
 ngc4490,NGC4490,12:30:36.2,+41:38:38.0,187.65083333,41.64388889,565.1,True,True,True,Group16,unobserved,,,,0,
 vcc1301,VCC1301,12:30:38.2,+13:37:10.5,187.65916667,13.61958333,1150.0,False,True,True,,unobserved,,,,0,
 vcc1302,VCC1302,12:30:38.6,+15:36:29.1,187.66083333,15.60808333,759.7,True,True,True,Group06,unobserved,,,,0,
-ngc4483,NGC4483,12:30:40.6,+09:00:56.4,187.66916667,9.01566667,883.5,True,True,True,Group06,unobserved,,,,0,
+ngc4483,NGC4483,12:30:40.6,+09:00:56.4,187.66916667,9.01566667,883.5,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 vcc1307,VCC1307,12:30:44.7,+13:47:58.5,187.68625,13.79958333,1240.5,False,True,True,,unobserved,,,,0,
 vpc0766,VPC0766,12:30:46.3,+12:05:56.7,187.69291667,12.09908333,1265.0,False,True,True,,unobserved,,,,0,
 wiseaj123047-6,WISEAJ123047.6,12:30:47.7,+12:08:25.2,187.69875,12.14033333,1288.0,False,True,True,,unobserved,,,,0,
@@ -1966,7 +1966,7 @@ vcc1317,VCC1317,12:30:50.6,+12:44:11.9,187.71083333,12.73663889,326.7,True,True,
 ngc4488,NGC4488,12:30:51.4,+08:21:36.1,187.71416667,8.36002778,980.1,True,True,True,Group06,observed,undetected,GBT,,1,"GBT observation, October 19, 2026. Weather was great, wind was low, system temperature ~44K. Manually imported from the observing report PDF supplied by Dom Pesce after the GitHub submission URL exceeded its length limit."
 ngc4489,NGC4489,12:30:52.2,+16:45:31.8,187.7175,16.75883333,939.8,True,True,True,Group06,unobserved,,,,0,
 wiseaj123055-9,WISEAJ123055.9,12:30:56.0,+26:30:40.3,187.73333333,26.51119444,927.0,True,True,True,Group06,unobserved,,,,0,
-ngc4491,NGC4491,12:30:57.1,+11:29:00.4,187.73791667,11.48344444,507.5,True,True,True,Group06,unobserved,,,,0,
+ngc4491,NGC4491,12:30:57.1,+11:29:00.4,187.73791667,11.48344444,507.5,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ngc4486a,NGC4486A,12:30:57.7,+12:16:13.5,187.74041667,12.27041667,757.9,True,True,True,Group06,unobserved,,,,0,
 ngc4472dw04,NGC4472DW04,12:31:01.1,+07:43:23.7,187.75458333,7.72325,1251.3,False,True,True,,unobserved,,,,0,
 cgcg014-054,CGCG014-054,12:31:03.8,+01:40:34.0,187.76583333,1.67611111,1105.0,False,True,True,,unobserved,,,,0,
@@ -1979,7 +1979,7 @@ ic3446,IC3446,12:31:23.0,+11:29:33.3,187.84583333,11.49258333,1251.9,False,True,
 ic3448,IC3448,12:31:23.2,+17:12:23.1,187.84666667,17.20641667,1352.0,False,True,True,,unobserved,,,,0,
 ngc4494,NGC4494,12:31:24.1,+25:46:30.9,187.85041667,25.77525,1341.9,False,True,True,,unobserved,,,,0,
 wiseaj123131-6,WISEAJ123131.6,12:31:31.7,+12:41:30.4,187.88208333,12.69177778,1119.0,False,True,True,,unobserved,,,,0,
-ngc4497,NGC4497,12:31:32.6,+11:37:29.3,187.88583333,11.62480556,1041.9,True,True,True,Group06,unobserved,,,,0,
+ngc4497,NGC4497,12:31:32.6,+11:37:29.3,187.88583333,11.62480556,1041.9,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 vcc1369,VCC1369,12:31:33.4,+12:03:49.7,187.88916667,12.06380556,797.1,True,True,True,Group06,unobserved,,,,0,
 vcc1377,VCC1377,12:31:39.0,+10:50:26.3,187.9125,10.84063889,639.4,True,True,True,Group06,unobserved,,,,0,
 wiseaj123139-4,WISEAJ123139.4,12:31:39.6,+17:46:04.1,187.915,17.76780556,1150.0,False,True,True,,unobserved,,,,0,
@@ -2001,12 +2001,12 @@ wiseaj123209-5,WISEAJ123209.5,12:32:09.6,+14:08:20.5,188.04,14.13902778,1150.0,F
 ngc4506,NGC4506,12:32:10.5,+13:25:10.2,188.04375,13.4195,561.1,True,True,True,Group06,unobserved,,,,0,
 ic3465,IC3465,12:32:12.3,+12:03:41.3,188.05125,12.06147222,984.6,True,True,True,Group06,unobserved,,,,0,
 ic3468,IC3468,12:32:14.3,+10:15:05.4,188.05958333,10.2515,1300.0,False,True,True,,unobserved,,,,0,
-ngc4504,NGC4504,12:32:17.4,-07:33:48.9,188.0725,-7.56358333,998.0,True,True,True,Group06,unobserved,,,,0,
+ngc4504,NGC4504,12:32:17.4,-07:33:48.9,188.0725,-7.56358333,998.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 galexmscj12321,GALEXMSCJ12321,12:32:17.6,+16:16:10.0,188.07333333,16.26944444,1150.0,False,True,True,,unobserved,,,,0,
 ic3473,IC3473,12:32:19.1,+18:14:41.1,188.07958333,18.24475,832.1,True,True,True,Group06,unobserved,,,,0,
 vcc1426,VCC1426,12:32:23.5,+11:53:35.8,188.09791667,11.89327778,832.5,True,True,True,Group06,unobserved,,,,0,
 ugc07690,UGC07690,12:32:26.9,+42:42:14.8,188.11208333,42.70411111,538.1,True,True,True,Group16,unobserved,,,,0,
-ugc07688,UGC07688,12:32:32.4,+08:02:42.6,188.135,8.04516667,423.9,True,True,True,Group06,unobserved,,,,0,
+ugc07688,UGC07688,12:32:32.4,+08:02:42.6,188.135,8.04516667,423.9,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 galexmscj12323,GALEXMSCJ12323,12:32:33.4,+12:47:23.0,188.13916667,12.78972222,1150.0,False,True,True,,unobserved,,,,0,
 ic0798,IC0798,12:32:33.4,+15:24:55.5,188.13916667,15.41541667,428.6,True,True,True,Group06,unobserved,,,,0,
 ugca284,UGCA284,12:32:33.5,+09:10:25.2,188.13958333,9.17366667,1155.1,False,True,True,,unobserved,,,,0,
@@ -2064,7 +2064,7 @@ ugc07715,UGC07715,12:33:55.7,+03:32:46.2,188.48208333,3.54616667,1145.7,False,Tr
 ugc07719,UGC07719,12:34:00.5,+39:01:09.1,188.50208333,39.01919444,679.0,True,True,True,Group16,unobserved,,,,0,
 galexmscj12340,GALEXMSCJ12340,12:34:01.4,+12:43:12.6,188.50583333,12.72016667,1150.0,False,True,True,,unobserved,,,,0,
 vcc1533,VCC1533,12:34:01.5,+05:57:11.5,188.50625,5.95319444,648.0,True,True,True,Group06,unobserved,,,,0,
-ngc4526,NGC4526,12:34:03.0,+07:41:56.9,188.5125,7.69913889,617.0,True,True,True,Group06,unobserved,,,,0,
+ngc4526,NGC4526,12:34:03.0,+07:41:56.9,188.5125,7.69913889,617.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ngc4534,NGC4534,12:34:05.4,+35:31:06.0,188.5225,35.51833333,801.9,True,True,True,Group06,unobserved,,,,0,
 ngc4528,NGC4528,12:34:06.1,+11:19:16.5,188.52541667,11.32125,1378.1,False,True,True,,unobserved,,,,0,
 ic3510,IC3510,12:34:14.8,+11:04:17.5,188.56166667,11.07152778,1389.2,False,True,True,,unobserved,,,,0,
@@ -2096,7 +2096,7 @@ sdssj123525-58,SDSSJ123525.58,12:35:25.6,+08:16:22.7,188.85666667,8.27297222,115
 messier091,MESSIER091,12:35:26.5,+14:29:46.9,188.86041667,14.49636111,486.0,True,True,True,Group06,unobserved,,,,0,
 ic3540,IC3540,12:35:27.3,+12:45:00.9,188.86375,12.75025,738.5,True,True,True,Group06,unobserved,,,,0,
 vcc1616,VCC1616,12:35:28.0,+14:15:40.4,188.86666667,14.26122222,192.9,True,True,True,Group06,unobserved,,,,0,
-ngc4546,NGC4546,12:35:29.5,-03:47:35.3,188.87291667,-3.79313889,1057.1,True,True,True,Group06,unobserved,,,,0,
+ngc4546,NGC4546,12:35:29.5,-03:47:35.3,188.87291667,-3.79313889,1057.1,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ngc4550,NGC4550,12:35:30.6,+12:13:15.0,188.8775,12.22083333,459.0,True,True,True,Group06,unobserved,,,,0,
 ugc07767,UGC07767,12:35:32.4,+73:40:29.8,188.885,73.67494444,1281.1,False,True,True,,unobserved,,,,0,
 vcc1621,VCC1621,12:35:34.0,+11:47:09.1,188.89166667,11.78586111,1150.0,False,True,True,,unobserved,,,,0,
@@ -2148,7 +2148,7 @@ vcc1711,VCC1711,12:37:22.2,+12:17:13.1,189.3425,12.28697222,438.3,True,True,True
 vcc1715,VCC1715,12:37:28.5,+08:47:40.2,189.36875,8.7945,888.0,True,True,True,Group06,unobserved,,,,0,
 wiseaj123734-1,WISEAJ123734.1,12:37:34.1,+08:50:19.5,189.39208333,8.83875,1150.0,False,True,True,,unobserved,,,,0,
 galexascj12373,GALEXASCJ12373,12:37:35.5,-08:52:04.0,189.39791667,-8.86777778,1101.1,False,True,True,,unobserved,,,,0,
-ugc07795,UGC07795,12:37:45.2,+07:06:08.6,189.43833333,7.10238889,63.9,True,True,True,Group06,unobserved,,,,0,
+ugc07795,UGC07795,12:37:45.2,+07:06:08.6,189.43833333,7.10238889,63.9,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 vcc1729,VCC1729,12:37:46.1,+10:59:06.6,189.44208333,10.98516667,1150.0,False,True,True,,unobserved,,,,0,
 lcrsb123512-2,LCRSB123512.2-,12:37:46.5,-02:46:53.9,189.44375,-2.78163889,1092.7,True,True,True,Group06,unobserved,,,,0,
 mcg-06-28-014,MCG+06-28-014,12:37:51.4,+34:01:21.4,189.46416667,34.02261111,805.5,True,True,True,Group06,unobserved,,,,0,
@@ -2164,14 +2164,14 @@ wiseaj123821-9,WISEAJ123821.9,12:38:22.0,+14:34:41.4,189.59166667,14.57816667,11
 wiseaj123823-6,WISEAJ123823.6,12:38:23.7,+61:40:57.4,189.59875,61.68261111,402.1,True,True,True,Group16,unobserved,,,,0,
 kug1236-293,KUG1236+293,12:38:30.1,+29:03:17.8,189.62541667,29.05494444,756.0,True,True,True,Group06,unobserved,,,,0,
 ic3607,IC3607,12:38:32.1,+10:22:35.8,189.63375,10.37661111,193.8,True,True,True,Group06,unobserved,,,,0,
-ngc4587,NGC4587,12:38:35.5,+02:39:26.8,189.64791667,2.65744444,900.9,True,True,True,Group06,unobserved,,,,0,
+ngc4587,NGC4587,12:38:35.5,+02:39:26.8,189.64791667,2.65744444,900.9,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 wiseaj123851-2,WISEAJ123851.2,12:38:51.2,+09:44:08.0,189.71333333,9.73555556,1150.0,False,True,True,,unobserved,,,,0,
 galexascj12390,GALEXASCJ12390,12:39:02.6,-00:39:54.1,189.76083333,-0.66502778,1140.0,False,True,True,,unobserved,,,,0,
 ic3612,IC3612,12:39:04.7,+14:43:52.7,189.76958333,14.73130556,1250.7,False,True,True,,unobserved,,,,0,
 sdssj123904-98,SDSSJ123904.98,12:39:05.0,+32:30:15.0,189.77083333,32.50416667,613.0,True,True,True,Group06,unobserved,,,,0,
 vcc1783,VCC1783,12:39:13.5,+12:06:02.6,189.80625,12.10072222,1150.0,False,True,True,,unobserved,,,,0,
 wiseaj123915-2,WISEAJ123915.2,12:39:15.3,-11:43:07.4,189.81375,-11.71872222,1368.0,False,True,True,,unobserved,,,,0,
-ngc4592,NGC4592,12:39:18.7,-00:31:55.0,189.82791667,-0.53194444,1069.1,True,True,True,Group06,unobserved,,,,0,
+ngc4592,NGC4592,12:39:18.7,-00:31:55.0,189.82791667,-0.53194444,1069.1,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 lcrsb123647-4,LCRSB123647.4-,12:39:22.2,-05:39:53.1,189.8425,-5.66475,1199.2,False,True,True,,unobserved,,,,0,
 vcc1792,VCC1792,12:39:26.0,+12:55:41.5,189.85833333,12.92819444,1150.0,False,True,True,,unobserved,,,,0,
 vcc1794,VCC1794,12:39:27.1,+11:46:35.1,189.86291667,11.77641667,1228.2,False,True,True,,unobserved,,,,0,
@@ -2189,11 +2189,11 @@ sucd1,SUCD1,12:40:03.1,-11:40:03.7,190.01291667,-11.66769444,1293.0,False,True,T
 vcc1819,VCC1819,12:40:05.2,+05:45:32.0,190.02166667,5.75888889,1121.8,False,True,True,,unobserved,,,,0,
 vcc1822,VCC1822,12:40:10.3,+06:50:47.9,190.04291667,6.84663889,1012.1,True,True,True,Group06,unobserved,,,,0,
 ic3634,IC3634,12:40:11.4,+09:50:50.9,190.0475,9.84747222,320.9,True,True,True,Group06,unobserved,,,,0,
-ngc4597,NGC4597,12:40:12.9,-05:47:57.4,190.05375,-5.79927778,1037.0,True,True,True,Group06,unobserved,,,,0,
+ngc4597,NGC4597,12:40:12.9,-05:47:57.4,190.05375,-5.79927778,1037.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 eso506-g033,ESO506-G033,12:40:13.8,-25:19:36.4,190.0575,-25.32677778,1225.9,False,False,True,,unobserved,,,,0,
 vcc1829,VCC1829,12:40:17.7,+06:43:55.4,190.07375,6.73205556,991.8,True,True,True,Group06,unobserved,,,,0,
 vcc1831,VCC1831,12:40:18.3,+10:59:47.1,190.07625,10.99641667,1150.0,False,True,True,,unobserved,,,,0,
-ngc4600,NGC4600,12:40:23.0,+03:07:04.0,190.09583333,3.11777778,836.1,True,True,True,Group06,unobserved,,,,0,
+ngc4600,NGC4600,12:40:23.0,+03:07:04.0,190.09583333,3.11777778,836.1,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 vcc1837,VCC1837,12:40:23.9,+02:36:30.1,190.09958333,2.60836111,1328.4,False,True,True,,unobserved,,,,0,
 vcc1839,VCC1839,12:40:25.9,+04:03:00.6,190.10791667,4.05016667,727.1,True,True,True,Group06,unobserved,,,,0,
 kug1238-278b,KUG1238+278B,12:40:49.5,+27:33:49.6,190.20625,27.56377778,1117.6,False,True,True,,unobserved,,,,0,
@@ -2230,7 +2230,7 @@ lsbcf574-09,LSBCF574-09,12:42:20.6,+17:30:35.1,190.58583333,17.50975,1168.5,Fals
 vcc1920,VCC1920,12:42:21.3,+02:03:60.0,190.58875,2.06666667,1317.7,False,True,True,,unobserved,,,,0,
 ic3684,IC3684,12:42:26.5,+11:44:25.3,190.61041667,11.74036111,1127.0,False,True,True,,unobserved,,,,0,
 sdssj124228-57,SDSSJ124228.57,12:42:28.6,+01:05:51.5,190.61916667,1.09763889,971.4,True,True,True,Group06,unobserved,,,,0,
-ngc4630,NGC4630,12:42:31.2,+03:57:36.6,190.63,3.96016667,741.1,True,True,True,Group06,unobserved,,,,0,
+ngc4630,NGC4630,12:42:31.2,+03:57:36.6,190.63,3.96016667,741.1,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ngc4629,NGC4629,12:42:32.6,-01:21:02.1,190.63583333,-1.35058333,1116.1,False,True,True,,unobserved,,,,0,
 ngc4635,NGC4635,12:42:39.2,+19:56:43.7,190.66333333,19.94547222,956.0,True,True,True,Group06,unobserved,,,,0,
 wiseaj124242-9,WISEAJ124242.9,12:42:42.9,+00:35:32.4,190.67875,0.59233333,1009.4,True,True,True,Group06,unobserved,,,,0,
@@ -2271,7 +2271,7 @@ vcc1993,VCC1993,12:44:12.0,+12:56:30.6,191.05,12.94183333,847.3,True,True,True,G
 sdssj124414-39,SDSSJ124414.39,12:44:14.4,+16:53:26.1,191.06,16.89058333,299.8,True,True,True,Group06,unobserved,,,,0,
 wiseaj124417-3,WISEAJ124417.3,12:44:17.4,+02:40:02.4,191.0725,2.66733333,1085.0,True,True,True,Group06,unobserved,,,,0,
 wiseaj124425-5,WISEAJ124425.5,12:44:25.5,+35:11:47.9,191.10625,35.19663889,884.0,True,True,True,Group06,unobserved,,,,0,
-ugc07912ned01,UGC07912NED01,12:44:25.6,+03:31:30.7,191.10666667,3.52519444,478.5,True,True,True,Group06,unobserved,,,,0,
+ugc07912ned01,UGC07912NED01,12:44:25.6,+03:31:30.7,191.10666667,3.52519444,478.5,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 wiseaj124428-4,WISEAJ124428.4,12:44:28.5,+10:48:51.7,191.11875,10.81436111,1150.0,False,True,True,,unobserved,,,,0,
 ugc07911,UGC07911,12:44:28.8,+00:28:05.1,191.12,0.46808333,1175.8,False,True,True,,unobserved,,,,0,
 ngc4659,NGC4659,12:44:29.4,+13:29:55.1,191.1225,13.49863889,468.9,True,True,True,Group06,unobserved,,,,0,
@@ -2285,7 +2285,7 @@ wiseaj124448-8,WISEAJ124448.8,12:44:48.9,+12:53:04.7,191.20375,12.88463889,1150.
 vcc2010,VCC2010,12:44:52.9,+12:10:57.3,191.22041667,12.18258333,1150.0,False,True,True,,unobserved,,,,0,
 lsbvcc316,LSBVCC316,12:44:54.1,+11:01:11.3,191.22541667,11.01980556,1150.0,False,True,True,,unobserved,,,,0,
 ic3727,IC3727,12:45:05.7,+10:54:03.4,191.27375,10.90094444,1065.7,True,True,True,Group06,unobserved,,,,0,
-ngc4665,NGC4665,12:45:06.0,+03:03:20.9,191.275,3.05580556,912.0,True,True,True,Group06,unobserved,,,,0,
+ngc4665,NGC4665,12:45:06.0,+03:03:20.9,191.275,3.05580556,912.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 vcc2014,VCC2014,12:45:09.7,+10:37:49.6,191.29041667,10.63044444,936.5,True,True,True,Group06,unobserved,,,,0,
 vcc2017,VCC2017,12:45:15.4,+07:36:56.5,191.31416667,7.61569444,1304.1,False,True,True,,unobserved,,,,0,
 ngc4670,NGC4670,12:45:17.1,+27:07:31.6,191.32125,27.12544444,1088.2,True,True,True,Group06,unobserved,,,,0,
@@ -2297,7 +2297,7 @@ vcc2032,VCC2032,12:45:52.4,+11:14:45.8,191.46833333,11.24605556,1150.0,False,Tru
 wiseaj124607-2,WISEAJ124607.2,12:46:07.2,-03:16:08.0,191.53,-3.26888889,1050.7,True,True,True,Group06,unobserved,,,,0,
 vcc2037,VCC2037,12:46:15.3,+10:12:19.2,191.56375,10.20533333,1141.9,False,True,True,,unobserved,,,,0,
 ugc07942,UGC07942,12:46:38.3,+09:18:25.3,191.65958333,9.30702778,853.2,True,True,True,Group06,unobserved,,,,0,
-ugc07943,UGC07943,12:46:45.7,+05:57:18.1,191.69041667,5.95502778,836.1,True,True,True,Group06,unobserved,,,,0,
+ugc07943,UGC07943,12:46:45.7,+05:57:18.1,191.69041667,5.95502778,836.1,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ugca298,UGCA298,12:46:55.4,+26:33:51.6,191.73083333,26.56433333,822.3,True,True,True,Group06,unobserved,,,,0,
 ic3767,IC3767,12:46:55.5,+10:10:56.5,191.73125,10.18236111,1245.0,False,True,True,,unobserved,,,,0,
 ugc07950,UGC07950,12:46:56.7,+51:36:48.1,191.73625,51.61336111,497.4,True,True,True,Group16,unobserved,,,,0,
@@ -2308,7 +2308,7 @@ ic3779,IC3779,12:47:20.7,+12:09:58.9,191.83625,12.16636111,1165.1,False,True,Tru
 galexascj12472,GALEXASCJ12472,12:47:25.1,-08:24:29.1,191.85458333,-8.40808333,1180.0,False,True,True,,unobserved,,,,0,
 sdssj124728-35,SDSSJ124728.35,12:47:28.4,-00:08:17.5,191.86833333,-0.13819444,1021.4,True,True,True,Group06,unobserved,,,,0,
 mcg-01-33-007,MCG-01-33-007,12:47:38.2,-05:52:02.5,191.90916667,-5.86736111,1382.9,False,True,True,,unobserved,,,,0,
-ngc4688,NGC4688,12:47:46.5,+04:20:08.9,191.94375,4.33580556,986.0,True,True,True,Group06,unobserved,,,,0,
+ngc4688,NGC4688,12:47:46.5,+04:20:08.9,191.94375,4.33580556,986.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 wiseaj124750-9,WISEAJ124750.9,12:47:51.0,-08:28:16.9,191.9625,-8.47136111,1039.1,True,True,True,Group06,unobserved,,,,0,
 cgcg043-030,CGCG043-030,12:47:59.8,+04:41:41.4,191.99916667,4.69483333,1023.0,True,True,True,Group06,unobserved,,,,0,
 ngc4691,NGC4691,12:48:13.6,-03:19:57.7,192.05666667,-3.33269444,1120.0,False,True,True,,unobserved,,,,0,
@@ -2319,17 +2319,17 @@ wiseaj124827-2,WISEAJ124827.2,12:48:27.2,-01:40:02.8,192.11333333,-1.66744444,12
 ngc4697,NGC4697,12:48:35.9,-05:48:02.3,192.14958333,-5.80063889,1241.1,False,True,True,,unobserved,,,,0,
 lcrsb124617-5,LCRSB124617.5-,12:48:54.1,-11:40:42.3,192.22541667,-11.67841667,1329.0,False,True,True,,unobserved,,,,0,
 ngc4699,NGC4699,12:49:02.2,-08:39:51.9,192.25916667,-8.66441667,1394.0,False,True,True,,unobserved,,,,0,
-ngc4701,NGC4701,12:49:11.6,+03:23:19.2,192.29833333,3.38866667,721.3,True,True,True,Group06,unobserved,,,,0,
+ngc4701,NGC4701,12:49:11.6,+03:23:19.2,192.29833333,3.38866667,721.3,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 mcg-02-33-015,MCG-02-33-015,12:49:23.7,-10:07:06.3,192.34875,-10.11841667,1308.9,False,True,True,,unobserved,,,,0,
 sdssj124936-89,SDSSJ124936.89,12:49:36.9,+21:55:05.7,192.40375,21.91825,538.6,True,True,True,Group06,unobserved,,,,0,
 ngc4710,NGC4710,12:49:38.8,+15:09:56.8,192.41166667,15.16577778,1102.0,False,True,True,,unobserved,,,,0,
 ugc07979,UGC07979,12:49:39.5,+12:37:31.1,192.41458333,12.62530556,786.5,True,True,True,Group06,unobserved,,,,0,
 kug1247-260,KUG1247+260,12:49:40.5,+25:46:20.8,192.41875,25.77244444,1292.1,False,True,True,,unobserved,,,,0,
 vcc2081,VCC2081,12:49:46.2,+11:13:29.3,192.4425,11.22480556,228.7,True,True,True,Group06,unobserved,,,,0,
-ugc07983,UGC07983,12:49:47.0,+03:50:32.3,192.44583333,3.84230556,694.0,True,True,True,Group06,unobserved,,,,0,
+ugc07983,UGC07983,12:49:47.0,+03:50:32.3,192.44583333,3.84230556,694.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ugc07982,UGC07982,12:49:50.2,+02:51:04.6,192.45916667,2.85127778,1155.1,False,True,True,,unobserved,,,,0,
 wiseaj124956-4,WISEAJ124956.4,12:49:56.4,+02:30:35.6,192.485,2.50988889,741.4,True,True,True,Group06,unobserved,,,,0,
-ngc4713,NGC4713,12:49:57.9,+05:18:40.8,192.49125,5.31133333,654.4,True,True,True,Group06,unobserved,,,,0,
+ngc4713,NGC4713,12:49:57.9,+05:18:40.8,192.49125,5.31133333,654.4,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 wiseaj124959-2,WISEAJ124959.2,12:49:59.2,+05:49:15.5,192.49666667,5.82097222,617.3,True,True,True,Group06,unobserved,,,,0,
 sdssj125004-75,SDSSJ125004.75,12:50:04.8,-00:13:57.7,192.52,-0.23269444,754.0,True,True,True,Group06,unobserved,,,,0,
 vcc2083,VCC2083,12:50:14.5,+10:32:24.2,192.56041667,10.54005556,867.9,True,True,True,Group06,unobserved,,,,0,
@@ -2353,7 +2353,7 @@ ngc4753,NGC4753,12:52:22.1,-01:11:58.6,193.09208333,-1.19961111,1162.9,False,Tru
 sdssj125233-74,SDSSJ125233.74,12:52:33.7,-01:43:48.7,193.14041667,-1.73019444,1129.5,False,True,True,,unobserved,,,,0,
 wiseaj125234-1,WISEAJ125234.1,12:52:34.0,-00:10:04.3,193.14166667,-0.16786111,1079.3,True,True,True,Group06,unobserved,,,,0,
 ngc4758,NGC4758,12:52:44.0,+15:50:56.3,193.18333333,15.84897222,1244.1,False,True,True,,unobserved,,,,0,
-ngc4757,NGC4757,12:52:50.1,-10:18:36.3,193.20875,-10.31008333,846.9,True,True,True,Group06,unobserved,,,,0,
+ngc4757,NGC4757,12:52:50.1,-10:18:36.3,193.20875,-10.31008333,846.9,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ngc4762,NGC4762,12:52:56.0,+11:13:51.5,193.23333333,11.23097222,986.0,True,True,True,Group06,unobserved,,,,0,
 mrk1338,MRK1338,12:53:10.1,+25:16:41.9,193.29208333,25.27830556,1087.3,True,True,True,Group06,unobserved,,,,0,
 wiseaj125316-7,WISEAJ125316.7,12:53:16.8,-05:18:12.9,193.32,-5.30358333,659.5,True,True,True,Group06,unobserved,,,,0,
@@ -2375,8 +2375,8 @@ ngc4800,NGC4800,12:54:37.8,+46:31:52.2,193.6575,46.53116667,836.4,True,True,True
 cgcg015-036,CGCG015-036,12:54:41.6,+02:06:15.1,193.67333333,2.10419444,858.1,True,True,True,Group06,unobserved,,,,0,
 ugc08032,UGC08032,12:54:44.2,+13:14:14.2,193.68416667,13.23727778,1116.9,False,True,True,,unobserved,,,,0,
 ic3877,IC3877,12:54:48.7,+19:10:43.7,193.70291667,19.17880556,920.1,True,True,True,Group06,unobserved,,,,0,
-ngc4809,NGC4809,12:54:51.1,+02:39:14.8,193.71291667,2.65411111,976.0,True,True,True,Group06,unobserved,,,,0,
-ngc4810,NGC4810,12:54:51.3,+02:38:25.7,193.71375,2.64047222,912.0,True,True,True,Group06,unobserved,,,,0,
+ngc4809,NGC4809,12:54:51.1,+02:39:14.8,193.71291667,2.65411111,976.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
+ngc4810,NGC4810,12:54:51.3,+02:38:25.7,193.71375,2.64047222,912.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ngc4790,NGC4790,12:54:52.0,-10:14:52.2,193.71666667,-10.24783333,1344.0,False,True,True,,unobserved,,,,0,
 eso443-g009,ESO443-G009,12:54:54.1,-28:20:20.7,193.72541667,-28.33908333,644.6,True,False,True,Group06,unobserved,,,,0,
 galexascj12545,GALEXASCJ12545,12:54:57.6,+01:58:41.6,193.74,1.97822222,1081.0,True,True,True,Group06,unobserved,,,,0,
@@ -2385,16 +2385,16 @@ ugc08041,UGC08041,12:55:12.7,+00:06:59.9,193.80291667,0.11663889,1323.9,False,Tr
 wiseaj125537-2,WISEAJ125537.2,12:55:37.1,+24:14:39.8,193.90458333,24.24438889,91.8,True,True,True,Group06,unobserved,,,,0,
 wiseaj125537-3,WISEAJ125537.3,12:55:37.3,-01:19:47.3,193.90541667,-1.32980556,854.9,True,True,True,Group06,unobserved,,,,0,
 ugc08048,UGC08048,12:55:39.4,-00:15:48.3,193.91416667,-0.26341667,1109.5,False,True,True,,unobserved,,,,0,
-ngc4808,NGC4808,12:55:48.9,+04:18:14.8,193.95375,4.30411111,760.0,True,True,True,Group06,unobserved,,,,0,
-ugc08053,UGC08053,12:55:49.1,+04:00:50.2,193.95458333,4.01394444,709.0,True,True,True,Group06,unobserved,,,,0,
-ngc4802,NGC4802,12:55:49.7,-12:03:18.7,193.95708333,-12.05519444,941.0,True,True,True,Group06,unobserved,,,,0,
+ngc4808,NGC4808,12:55:48.9,+04:18:14.8,193.95375,4.30411111,760.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
+ugc08053,UGC08053,12:55:49.1,+04:00:50.2,193.95458333,4.01394444,709.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
+ngc4802,NGC4802,12:55:49.7,-12:03:18.7,193.95708333,-12.05519444,941.0,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ngc4813,NGC4813,12:56:36.1,-06:49:04.5,194.15041667,-6.81791667,1394.0,False,True,True,,unobserved,,,,0,
 ic3908,IC3908,12:56:40.6,-07:33:44.8,194.16916667,-7.56244444,1296.0,False,True,True,,unobserved,,,,0,
-ngc4818,NGC4818,12:56:48.9,-08:31:30.9,194.20375,-8.52525,1064.9,True,True,True,Group06,unobserved,,,,0,
+ngc4818,NGC4818,12:56:48.9,-08:31:30.9,194.20375,-8.52525,1064.9,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 wiseaj125651-3,WISEAJ125651.3,12:56:51.3,+16:30:25.2,194.21375,16.507,1229.1,False,True,True,,unobserved,,,,0,
 cgcg043-077,CGCG043-077,12:56:57.0,+04:03:53.3,194.2375,4.06480556,834.2,True,True,True,Group06,unobserved,,,,0,
 mcg-01-33-059,MCG-01-33-059,12:57:16.0,-05:20:45.2,194.31666667,-5.34588889,1257.9,False,True,True,,unobserved,,,,0,
-ugc08074,UGC08074,12:57:44.6,+02:41:30.3,194.43583333,2.69175,917.3,True,True,True,Group06,unobserved,,,,0,
+ugc08074,UGC08074,12:57:44.6,+02:41:30.3,194.43583333,2.69175,917.3,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ugc08081,UGC08081,12:58:09.0,+14:51:32.2,194.5375,14.85894444,853.0,True,True,True,Group06,unobserved,,,,0,
 mcg-02-33-075,MCG-02-33-075,12:58:28.3,-10:34:35.8,194.61791667,-10.57661111,1266.9,False,True,True,,unobserved,,,,0,
 lsbcd575-07,LSBCD575-07,12:58:36.0,+17:48:46.9,194.65,17.81302778,1020.3,True,True,True,Group06,unobserved,,,,0,
@@ -2409,10 +2409,10 @@ galexascj12593,GALEXASCJ12593,12:59:38.9,+24:35:51.5,194.91208333,24.59763889,10
 wiseaj125945-1,WISEAJ125945.1,12:59:45.2,-00:52:15.9,194.93833333,-0.87108333,1235.4,False,True,True,,unobserved,,,,0,
 wiseaj125952-4,WISEAJ125952.4,12:59:52.4,+03:37:59.7,194.96833333,3.63325,1040.0,True,True,True,Group06,unobserved,,,,0,
 kk176,KK176,12:59:56.5,-19:24:46.5,194.98541667,-19.41291667,825.3,True,True,True,Group06,unobserved,,,,0,
-ugc08105,UGC08105,12:59:58.1,+02:02:57.4,194.99208333,2.04927778,886.5,True,True,True,Group06,unobserved,,,,0,
+ugc08105,UGC08105,12:59:58.1,+02:02:57.4,194.99208333,2.04927778,886.5,True,True,True,Group06,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ngc4880,NGC4880,13:00:10.6,+12:29:00.7,195.04416667,12.48352778,1362.0,False,True,True,,unobserved,,,,0,
 wiseaj130017-5,WISEAJ130017.5,13:00:17.6,-03:03:58.0,195.07333333,-3.06611111,1113.4,False,True,True,,unobserved,,,,0,
-ngc4900,NGC4900,13:00:39.3,+02:30:02.7,195.16375,2.50075,962.9,True,True,True,Group07,unobserved,,,,0,
+ngc4900,NGC4900,13:00:39.3,+02:30:02.7,195.16375,2.50075,962.9,True,True,True,Group07,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 wiseaj130045-7,WISEAJ130045.7,13:00:45.8,-02:43:04.2,195.19083333,-2.71783333,1139.2,False,True,True,,unobserved,,,,0,
 ngc4904,NGC4904,13:00:58.6,-00:01:39.4,195.24416667,-0.02761111,1180.0,False,True,True,,unobserved,,,,0,
 galexascj13010a,GALEXASCJ13010A,13:01:05.1,-05:28:20.6,195.27125,-5.47238889,1094.8,True,True,True,Group07,unobserved,,,,0,
@@ -2465,7 +2465,7 @@ wiseaj131126-8,WISEAJ131126.8,13:11:26.9,+37:18:42.8,197.86208333,37.31188889,96
 ngc5014,NGC5014,13:11:31.2,+36:16:55.2,197.88,36.282,1135.2,False,True,True,,unobserved,,,,0,
 sdssj131141-36,SDSSJ131141.36,13:11:41.4,+40:51:45.5,197.9225,40.86263889,604.0,True,True,True,Group17,unobserved,,,,0,
 kug1309-362,KUG1309+362,13:11:43.1,+35:57:38.6,197.92958333,35.96072222,1136.7,False,True,True,,unobserved,,,,0,
-ugc08276,UGC08276,13:12:06.5,+05:28:32.2,198.02708333,5.47561111,912.9,True,True,True,Group07,unobserved,,,,0,
+ugc08276,UGC08276,13:12:06.5,+05:28:32.2,198.02708333,5.47561111,912.9,True,True,True,Group07,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ic4213,IC4213,13:12:11.2,+35:40:12.3,198.04666667,35.67008333,815.1,True,True,True,Group07,unobserved,,,,0,
 ngc5023,NGC5023,13:12:12.6,+44:02:28.4,198.0525,44.04122222,407.1,True,True,True,Group17,unobserved,,,,0,
 kug1309-269,KUG1309+269,13:12:17.6,+26:41:09.3,198.07333333,26.68591667,778.5,True,True,True,Group07,unobserved,,,,0,
@@ -2503,7 +2503,7 @@ ngc5068,NGC5068,13:18:54.8,-21:02:19.7,199.72833333,-21.03880556,670.0,True,Fals
 wiseaj131858-2,WISEAJ131858.2,13:18:58.2,+33:28:59.5,199.7425,33.48319444,869.4,True,True,True,Group07,unobserved,,,,0,
 ngc5103,NGC5103,13:20:30.1,+43:05:02.2,200.12541667,43.08394444,1272.9,False,True,True,,unobserved,,,,0,
 wiseaj132031-6,WISEAJ132031.6,13:20:31.7,+43:51:55.0,200.13208333,43.86527778,1221.0,False,True,True,,unobserved,,,,0,
-ugc08382,UGC08382,13:20:32.5,+05:24:23.8,200.13541667,5.40661111,964.1,True,True,True,Group07,unobserved,,,,0,
+ugc08382,UGC08382,13:20:32.5,+05:24:23.8,200.13541667,5.40661111,964.1,True,True,True,Group07,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ugc08385,UGC08385,13:20:38.2,+09:47:15.3,200.15916667,9.78758333,1132.9,False,True,True,,unobserved,,,,0,
 wiseaj132042-5,WISEAJ132042.5,13:20:42.5,-21:46:04.6,200.17708333,-21.76794444,1340.1,False,False,True,,unobserved,,,,0,
 wiseaj132044-5,WISEAJ132044.5,13:20:44.6,+43:03:38.3,200.18583333,43.06063889,1311.6,False,True,True,,unobserved,,,,0,
@@ -2525,7 +2525,7 @@ ngc5145,NGC5145,13:25:14.0,+43:16:02.1,201.30833333,43.26725,1226.0,False,True,T
 sdssj132517-69,SDSSJ132517.69,13:25:17.7,+05:32:31.6,201.32375,5.54211111,989.0,True,True,True,Group07,unobserved,,,,0,
 wiseaj132548-6,WISEAJ132548.6,13:25:48.6,-11:36:38.1,201.4525,-11.61058333,1220.3,False,True,True,,unobserved,,,,0,
 ugca357,UGCA357,13:26:12.3,+37:46:01.4,201.55125,37.76705556,1165.0,False,True,True,,unobserved,,,,0,
-ngc5147,NGC5147,13:26:19.7,+02:06:04.0,201.58208333,2.10111111,1092.1,True,True,True,Group07,unobserved,,,,0,
+ngc5147,NGC5147,13:26:19.7,+02:06:04.0,201.58208333,2.10111111,1092.1,True,True,True,Group07,observed,undetected,GBT,,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 wiseaj132636-6,WISEAJ132636.6,13:26:36.6,-09:28:31.0,201.6525,-9.47527778,1218.1,False,True,True,,unobserved,,,,0,
 ugc08449,UGC08449,13:26:36.6,+42:45:51.3,201.6525,42.76425,1230.0,False,True,True,,unobserved,,,,0,
 ugc08450,UGC08450,13:27:01.4,+10:03:23.0,201.75583333,10.05638889,1049.0,True,True,True,Group07,unobserved,,,,0,
