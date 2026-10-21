@@ -105,6 +105,26 @@ git push
 GitHub Actions validates the data, builds the site, and deploys GitHub Pages on
 pushes to `main`.
 
+## Manual Deployment
+
+Once the workflow update is on `main`, open the repository's **Actions** tab,
+choose **Build and Deploy**, and click **Run workflow**. Keep the branch set to
+`main`, then click **Run workflow** to build and publish its latest commit.
+
+Manual runs on other branches are intentionally skipped. Pull requests still
+run validation and tests without deploying. A manual run does not change
+observation records or require a new commit.
+
+With GitHub CLI, the equivalent command is:
+
+```bash
+gh workflow run pages.yml --repo dpesce/ANCH0R --ref main
+```
+
+This starts a fresh deployment run; re-running an older workflow run instead
+uses that older run's commit. See GitHub's
+[manual workflow instructions](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow).
+
 ## Data Notes
 
 Target IDs are generated from source names. If a source name ever appears for
