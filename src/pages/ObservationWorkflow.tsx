@@ -4,10 +4,10 @@ import {
   downloadText,
   formatDegrees,
   formatInteger,
-  formatUtc,
   formatVelocity,
   parseUtcInput,
 } from "../lib/format";
+import { buildEffCatalog } from "../lib/effCatalog";
 import { buildGbtCatalog } from "../lib/gbtCatalog";
 import { buildSrtCatalog } from "../lib/srtCatalog";
 import { TELESCOPES, TELESCOPE_CODES } from "../lib/telescopes";
@@ -197,22 +197,6 @@ function formatDateTimeInput(date: Date, timeScale: TimeScale, timeZone: string)
     "0",
   )}`;
   return `${datePart}T${timePart}`;
-}
-
-function plannedTargetRows(results: PlannedTarget[], telescope: TelescopeCode) {
-  return results.map(({ target, visibility }) => ({
-    target_id: target.target_id,
-    source_name: target.source_name,
-    ra_hms: target.ra_hms,
-    dec_dms: target.dec_dms,
-    velocity_km_s: formatVelocityValue(target.velocity_km_s),
-    telescope,
-    observable_minutes: visibility.observableMinutes,
-    max_altitude_deg: visibility.maxAltitudeDeg.toFixed(1),
-    max_altitude_utc: formatUtc(visibility.maxAltitudeUtc),
-    first_observable_utc: formatUtc(visibility.firstObservableUtc),
-    last_observable_utc: formatUtc(visibility.lastObservableUtc),
-  }));
 }
 
 function availableTargetRows(targets: Target[]) {
@@ -565,7 +549,10 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
       : catalogDownloadScope === "SRT" ||
           (catalogDownloadScope === "selected" && telescope === "SRT")
         ? "srt"
-        : "csv";
+        : catalogDownloadScope === "EFF" ||
+            (catalogDownloadScope === "selected" && telescope === "EFF")
+          ? "eff"
+          : "csv";
 
   const catalogDownloadError = useMemo(() => {
     if (catalogDownloadFormat === "csv") {
@@ -574,8 +561,10 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
     try {
       if (catalogDownloadFormat === "gbt") {
         buildGbtCatalog(downloadTargets);
-      } else {
+      } else if (catalogDownloadFormat === "srt") {
         buildSrtCatalog(downloadTargets);
+      } else {
+        buildEffCatalog(downloadTargets);
       }
       return null;
     } catch (error) {
@@ -634,10 +623,12 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
         return;
       }
 
-      downloadCsv(
-        `anch0r-${telescope.toLowerCase()}-filtered-${windowLabel}.csv`,
-        plannedTargetRows(results, telescope),
-      );
+      if (telescope === "EFF") {
+        downloadText(
+          `anch0r-eff-filtered-${windowLabel}.cat`,
+          buildEffCatalog(downloadTargets),
+        );
+      }
       return;
     }
 
@@ -655,13 +646,16 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
       );
       return;
     }
+    if (catalogDownloadScope === "EFF") {
+      downloadText(
+        "anch0r-eff-available.cat",
+        buildEffCatalog(downloadTargets),
+      );
+      return;
+    }
 
-    const scopeLabel =
-      catalogDownloadScope === "all"
-        ? "all"
-        : catalogDownloadScope.toLowerCase();
     downloadCsv(
-      `anch0r-${scopeLabel}-available.csv`,
+      "anch0r-all-available.csv",
       availableTargetRows(downloadTargets),
     );
   }
@@ -827,7 +821,7 @@ export function PlanObservation({ catalog }: ObservationPageProps) {
           <span className="catalog-download-meta">
             {formatInteger(downloadTargets.length)}{" "}
             {downloadTargets.length === 1 ? "target" : "targets"},{" "}
-            {catalogDownloadFormat === "gbt"
+            {catalogDownloadFormat === "gbt" || catalogDownloadFormat === "eff"
               ? ".cat"
               : catalogDownloadFormat === "srt"
                 ? ".txt"

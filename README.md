@@ -150,9 +150,14 @@ optical velocities. The GBT AstrID configuration and scheduling blocks are in
 validated by the project's GBT support scientist before telescope use.
 Filtered SRT targets and the complete available SRT catalog are exported as
 `.txt` schedule catalogs following `examples/example_SRT_catalog.txt`, with the
-template header retained and one `Nodcal`/`SARDARA` row per target. Effelsberg
-and combined catalogs remain CSV until additional telescope-specific formats
-are added.
+template header retained and one `Nodcal`/`SARDARA` row per target.
+Filtered Effelsberg targets and the complete available Effelsberg catalog use
+`.cat` files following `examples/example_EFF_catalog.cat`: the same header
+records, field widths, coordinate units, CRLF line endings, and final `STOP`
+record. The comment's target count and UTC creation date are generated for each
+download. Coordinates are J2000; despite the field name `VLSR`, velocities are
+heliocentric optical values in km/s, with one decimal place, as specified in the
+example. Combined "Everything" catalogs remain CSV.
 
 ## Observing Reports
 

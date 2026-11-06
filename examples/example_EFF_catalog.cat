@@ -1,0 +1,12 @@
+COMMON: SBAS=-1
+INDIVIDUAL: SNAM SLAM SBET VLSR
+!
+! ANCH0R survey: 5 Effelsberg targets not yet observed (2026-10-28)
+! J2000. VLSR column = heliocentric cz (optical convention), km/s
+!
+SNAM=GALEXASCJ00002  ; SLAM=00 00 21.2 S ; SBET=+31 01 17.9 " ; VLSR=  566.0 ;
+SNAM=SDSSJ011003.63  ; SLAM=01 10 03.6 S ; SBET=-00 00 36.4 " ; VLSR= 1136.0 ;
+SNAM=SDSSJ102148.93  ; SLAM=10 21 48.9 S ; SBET=+64 18 00.0 " ; VLSR=  524.8 ;
+SNAM=VCC0815         ; SLAM=12 25 37.2 S ; SBET=+13 08 37.4 " ; VLSR= -743.8 ;
+SNAM=MCG-01-01-003   ; SLAM=23 55 27.0 S ; SBET=-06 14 15.0 " ; VLSR= 1242.0 ;
+STOP
