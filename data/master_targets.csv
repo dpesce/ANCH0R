@@ -627,7 +627,7 @@ ugc05047,UGC05047,09:28:49.7,+51:33:38.0,142.20708333,51.56055556,502.0,True,Tru
 lsbcd565-10,LSBCD565-10,09:30:12.8,+19:59:26.4,142.55333333,19.99066667,561.5,True,True,True,Group04,unobserved,,,,0,
 ngc2903,NGC2903,09:32:10.1,+21:30:03.0,143.04208333,21.50083333,549.8,True,True,True,Group04,unobserved,,,,0,
 ugc05076,UGC05076,09:32:36.4,+51:52:19.0,143.15166667,51.87194444,572.9,True,True,True,Group14,unobserved,,,,0,
-ugc05086,UGC05086,09:32:48.9,+21:27:55.8,143.20375,21.4655,491.1,True,True,True,Group04,unobserved,,,,0,
+ugc05086,UGC05086,09:32:48.9,+21:27:55.8,143.20375,21.4655,491.1,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 mcg-09-16-029,MCG+09-16-029,09:33:45.3,+51:55:09.8,143.43875,51.91938889,602.8,True,True,True,Group14,unobserved,,,,0,
 ugca166,UGCA166,09:34:02.0,+55:14:27.9,143.50833333,55.24108333,751.0,True,True,True,Group14,unobserved,,,,0,
 wiseaj093441-7,WISEAJ093441.7,09:34:41.8,+32:32:03.5,143.67416667,32.53430556,1390.9,False,True,True,,unobserved,,,,0,
@@ -667,10 +667,10 @@ ugc05306,UGC05306,09:54:09.2,+58:20:27.5,148.53833333,58.34097222,1176.0,False,T
 ngc3056,NGC3056,09:54:32.9,-28:17:53.6,148.63708333,-28.29822222,973.1,True,False,True,Group04,unobserved,,,,0,
 wiseaj095510-5,WISEAJ095510.5,09:55:10.5,-06:16:10.8,148.79375,-6.26966667,790.9,True,True,True,Group04,unobserved,,,,0,
 ngc3027,NGC3027,09:55:40.3,+72:12:13.4,148.91791667,72.20372222,1060.1,True,True,True,Group20,unobserved,,,,0,
-ugc05332,UGC05332,09:55:48.3,+16:24:49.7,148.95125,16.41380556,805.2,True,True,True,Group04,unobserved,,,,0,
+ugc05332,UGC05332,09:55:48.3,+16:24:49.7,148.95125,16.41380556,805.2,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 wiseaj095633-2,WISEAJ095633.2,09:56:33.3,+27:16:52.6,149.13875,27.28127778,1074.0,True,True,True,Group04,unobserved,,,,0,
 wiseaj095637-5,WISEAJ095637.5,09:56:37.6,-09:29:10.0,149.15666667,-9.48611111,602.0,True,True,True,Group04,unobserved,,,,0,
-ugc05340,UGC05340,09:56:45.7,+28:49:35.0,149.19041667,28.82638889,503.1,True,True,True,Group04,unobserved,,,,0,
+ugc05340,UGC05340,09:56:45.7,+28:49:35.0,149.19041667,28.82638889,503.1,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 wiseaj095708-8,WISEAJ095708.8,09:57:08.9,-09:15:48.7,149.28708333,-9.26352778,542.0,True,True,True,Group04,unobserved,,,,0,
 wiseaj095729-3,WISEAJ095729.3,09:57:29.4,+27:45:24.3,149.3725,27.75675,1180.0,False,True,True,,unobserved,,,,0,
 holmbergix,HolmbergIX,09:57:32.0,+69:02:45.5,149.38333333,69.04597222,50.0,True,True,True,Group20,unobserved,,,,0,
@@ -718,7 +718,7 @@ mrk0714,MRK0714,10:04:08.7,+06:30:37.6,151.03625,6.51044444,1252.8,False,True,Tr
 wiseaj100425-1,WISEAJ100425.1,10:04:25.1,+02:33:31.4,151.10458333,2.55872222,1129.4,False,True,True,,unobserved,,,,0,
 ngc3113,NGC3113,10:04:26.2,-28:26:39.1,151.10916667,-28.44419444,1082.9,True,False,True,Group04,unobserved,,,,0,
 sdssj100427-03,SDSSJ100427.03,10:04:27.0,+01:53:41.3,151.1125,1.89480556,1287.7,False,True,True,,unobserved,,,,0,
-ugc05427,UGC05427,10:04:41.0,+29:21:51.5,151.17083333,29.36430556,476.6,True,True,True,Group04,unobserved,,,,0,
+ugc05427,UGC05427,10:04:41.0,+29:21:51.5,151.17083333,29.36430556,476.6,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 wiseaj100443-9,WISEAJ100443.9,10:04:43.9,+55:19:42.6,151.18291667,55.3285,1148.0,False,True,True,,unobserved,,,,0,
 ugc05428,UGC05428,10:05:06.4,+66:33:30.8,151.27666667,66.55855556,-129.2,True,True,True,Group14,unobserved,,,,0,
 sdssj100512-15,SDSSJ100512.15,10:05:12.2,+37:22:01.5,151.30083333,37.36708333,479.7,True,True,True,Group04,unobserved,,,,0,
@@ -733,8 +733,8 @@ ngc3125,NGC3125,10:06:33.4,-29:56:05.5,151.63916667,-29.93486111,1112.8,False,Fa
 ugc05442,UGC05442,10:07:01.9,+67:49:39.8,151.75791667,67.82772222,-15.0,True,True,True,Group20,unobserved,,,,0,
 ngc3118,NGC3118,10:07:11.6,+33:01:38.9,151.79833333,33.02747222,1341.9,False,True,True,,unobserved,,,,0,
 ugc05451,UGC05451,10:07:18.9,+47:00:23.0,151.82875,47.00638889,631.5,True,True,True,Group14,unobserved,,,,0,
-ugc05456,UGC05456,10:07:19.6,+10:21:42.5,151.83166667,10.36180556,544.1,True,True,True,Group04,unobserved,,,,0,
-ugc05464,UGC05464,10:08:07.7,+29:32:34.4,152.03208333,29.54288889,1020.5,True,True,True,Group04,unobserved,,,,0,
+ugc05456,UGC05456,10:07:19.6,+10:21:42.5,151.83166667,10.36180556,544.1,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
+ugc05464,UGC05464,10:08:07.7,+29:32:34.4,152.03208333,29.54288889,1020.5,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 ugc05460,UGC05460,10:08:09.2,+51:50:41.6,152.03833333,51.84488889,1093.0,True,True,True,Group14,unobserved,,,,0,
 ugc05459,UGC05459,10:08:09.9,+53:05:00.7,152.04125,53.08352778,1108.9,False,True,True,,unobserved,,,,0,
 wiseaj100836-4,WISEAJ100836.4,10:08:36.4,-04:37:35.3,152.15166667,-4.62647222,720.0,True,True,True,Group04,unobserved,,,,0,
@@ -816,7 +816,7 @@ ark244,ARK244,10:27:41.5,+24:16:17.6,156.92291667,24.27155556,1229.4,False,True,
 ugc05658,UGC05658,10:27:44.6,+71:14:14.0,156.93583333,71.23722222,1126.0,False,True,True,,unobserved,,,,0,
 mcg-10-15-083,MCG+10-15-083,10:27:57.2,+60:38:03.1,156.98833333,60.63419444,1297.5,False,True,True,,unobserved,,,,0,
 wiseaj102801-9,WISEAJ102801.9,10:28:01.9,-03:30:31.5,157.00791667,-3.50875,1319.0,False,True,True,,unobserved,,,,0,
-ugc05672,UGC05672,10:28:21.0,+22:34:09.6,157.0875,22.56933333,530.9,True,True,True,Group04,unobserved,,,,0,
+ugc05672,UGC05672,10:28:21.0,+22:34:09.6,157.0875,22.56933333,530.9,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 ic2574,IC2574,10:28:23.3,+68:24:43.8,157.09708333,68.41216667,57.0,True,True,True,Group20,unobserved,,,,0,
 ugc05677,UGC05677,10:28:38.2,+03:33:38.2,157.15916667,3.56061111,1156.9,False,True,True,,unobserved,,,,0,
 wiseaj102839-7,WISEAJ102839.7,10:28:39.8,+70:14:01.6,157.16583333,70.23377778,-69.0,True,True,True,Group20,unobserved,,,,0,
@@ -824,7 +824,7 @@ ugc05671,UGC05671,10:28:52.8,+66:48:20.4,157.22,66.80566667,1135.9,False,True,Tr
 wiseaj102858-6,WISEAJ102858.6,10:28:58.7,+25:17:14.1,157.24458333,25.28725,1243.5,False,True,True,,unobserved,,,,0,
 kug1026-365,KUG1026+365,10:29:43.4,+36:16:16.9,157.43083333,36.27136111,1169.5,False,True,True,,unobserved,,,,0,
 wiseaj103009-5,WISEAJ103009.5,10:30:09.6,+27:23:18.5,157.54,27.38847222,1322.0,False,True,True,,unobserved,,,,0,
-wiseaj103052-9,WISEAJ103052.9,10:30:52.9,+12:26:47.8,157.72041667,12.44661111,915.0,True,True,True,Group04,unobserved,,,,0,
+wiseaj103052-9,WISEAJ103052.9,10:30:52.9,+12:26:47.8,157.72041667,12.44661111,915.0,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 wiseaj103103-8,WISEAJ103103.8,10:31:03.8,+05:24:00.2,157.76583333,5.40005556,299.8,True,True,True,Group04,unobserved,,,,0,
 sdssj103108-88,SDSSJ103108.88,10:31:08.9,+50:47:08.9,157.78708333,50.78580556,934.4,True,True,True,Group14,unobserved,,,,0,
 ugc05708,UGC05708,10:31:13.3,+04:28:21.3,157.80541667,4.47258333,1176.1,False,True,True,,unobserved,,,,0,
@@ -842,7 +842,7 @@ wiseaj103324-4,WISEAJ103324.4,10:33:24.4,+28:33:10.7,158.35166667,28.55297222,12
 wiseaj103405-7,WISEAJ103405.7,10:34:05.7,+15:46:49.5,158.52375,15.78041667,1218.1,False,True,True,,unobserved,,,,0,
 wiseaj103439-7,WISEAJ103439.7,10:34:39.8,+23:05:23.4,158.66583333,23.08983333,1238.1,False,True,True,,unobserved,,,,0,
 ngc3279,NGC3279,10:34:42.8,+11:11:50.4,158.67833333,11.19733333,1394.0,False,True,True,,unobserved,,,,0,
-ugc05745,UGC05745,10:34:44.8,-01:58:08.6,158.68666667,-1.96905556,892.6,True,True,True,Group04,unobserved,,,,0,
+ugc05745,UGC05745,10:34:44.8,-01:58:08.6,158.68666667,-1.96905556,892.6,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 ugc05740,UGC05740,10:34:46.0,+50:46:05.5,158.69166667,50.76819444,649.1,True,True,True,Group14,unobserved,,,,0,
 kug1031-358,KUG1031+358,10:34:48.3,+35:37:55.6,158.70125,35.63211111,915.3,True,True,True,Group04,unobserved,,,,0,
 sdssj103451-08,SDSSJ103451.08,10:34:51.1,+28:39:50.9,158.71291667,28.66413889,1323.0,False,True,True,,unobserved,,,,0,
@@ -855,11 +855,11 @@ wiseaj103559-8,WISEAJ103559.8,10:35:59.9,+50:16:30.8,158.99958333,50.27522222,84
 wiseaj103601-3,WISEAJ103601.3,10:36:01.4,-03:56:50.3,159.00583333,-3.94730556,209.9,True,True,True,Group04,unobserved,,,,0,
 eso501-g029,ESO501-G029,10:36:10.0,-24:48:47.5,159.04166667,-24.81319444,1012.0,True,False,True,Group04,unobserved,,,,0,
 galexascj10361,GALEXASCJ10361,10:36:16.3,+27:32:16.8,159.06791667,27.538,383.1,True,True,True,Group04,unobserved,,,,0,
-ngc3299,NGC3299,10:36:23.9,+12:42:27.1,159.09958333,12.70752778,641.0,True,True,True,Group04,unobserved,,,,0,
+ngc3299,NGC3299,10:36:23.9,+12:42:27.1,159.09958333,12.70752778,641.0,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 sbs1033-531,SBS1033+531,10:36:36.4,+52:51:02.2,159.15166667,52.85061111,986.0,True,True,True,Group14,unobserved,,,,0,
-ugc05764,UGC05764,10:36:43.4,+31:32:49.1,159.18083333,31.54697222,581.9,True,True,True,Group04,unobserved,,,,0,
+ugc05764,UGC05764,10:36:43.4,+31:32:49.1,159.18083333,31.54697222,581.9,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 ngc3301,NGC3301,10:36:56.0,+21:52:55.7,159.23333333,21.88213889,1338.9,False,True,True,,unobserved,,,,0,
-sdssj103704-94,SDSSJ103704.94,10:37:05.0,+15:20:13.4,159.27083333,15.33705556,724.0,True,True,True,Group04,unobserved,,,,0,
+sdssj103704-94,SDSSJ103704.94,10:37:05.0,+15:20:13.4,159.27083333,15.33705556,724.0,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 fgc125a,FGC125A,10:37:28.7,+12:23:47.6,159.36958333,12.39655556,1329.9,False,True,True,,unobserved,,,,0,
 cgcg065-074,CGCG065-074,10:38:08.0,+10:22:51.3,159.53333333,10.38091667,1148.8,False,True,True,,unobserved,,,,0,
 ngc3319,NGC3319,10:39:09.5,+41:41:12.1,159.78958333,41.68669444,739.0,True,True,True,Group14,unobserved,,,,0,
@@ -867,9 +867,9 @@ wiseaj103912-9,WISEAJ103912.9,10:39:12.9,+41:30:19.9,159.80375,41.50552778,665.5
 ugc05791,UGC05791,10:39:26.9,+47:56:50.0,159.86208333,47.94722222,854.9,True,True,True,Group14,unobserved,,,,0,
 wiseaj103942-9,WISEAJ103942.9,10:39:42.9,+12:38:05.4,159.92875,12.63483333,780.1,True,True,True,Group04,unobserved,,,,0,
 sdssj103955-87,SDSSJ103955.87,10:39:55.7,+13:54:34.0,159.98208333,13.90944444,1010.0,True,True,True,Group04,unobserved,,,,0,
-wiseaj103956-1,WISEAJ103956.1,10:39:56.2,+13:54:03.8,159.98416667,13.90105556,1011.0,True,True,True,Group04,unobserved,,,,0,
+wiseaj103956-1,WISEAJ103956.1,10:39:56.2,+13:54:03.8,159.98416667,13.90105556,1011.0,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 ugc05805,UGC05805,10:40:24.7,+21:37:07.3,160.10291667,21.61869444,1230.0,False,True,True,,unobserved,,,,0,
-ugc05812,UGC05812,10:40:56.6,+12:28:24.9,160.23583333,12.47358333,1007.9,True,True,True,Group04,unobserved,,,,0,
+ugc05812,UGC05812,10:40:56.6,+12:28:24.9,160.23583333,12.47358333,1007.9,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 mrk0724,MRK0724,10:41:09.6,+21:21:43.2,160.29,21.362,1191.9,False,True,True,,unobserved,,,,0,
 ngc3355,NGC3355,10:41:26.0,-23:23:03.3,160.35833333,-23.38425,1195.0,False,False,True,,unobserved,,,,0,
 wiseaj104140-9,WISEAJ104140.9,10:41:41.0,+13:49:29.9,160.42083333,13.82497222,1271.1,False,True,True,,unobserved,,,,0,
@@ -890,21 +890,21 @@ wiseaj104457-4,WISEAJ104457.4,10:44:57.5,+11:54:58.0,161.23958333,11.91611111,87
 wiseaj104509-8,WISEAJ104509.8,10:45:09.8,+15:26:59.5,161.29083333,15.44986111,1222.0,False,True,True,,unobserved,,,,0,
 wiseaj104534-3,WISEAJ104534.3,10:45:34.2,+51:21:45.1,161.3925,51.36252778,449.4,True,True,True,Group14,unobserved,,,,0,
 wiseaj104602-7,WISEAJ104602.7,10:46:02.8,+19:32:15.9,161.51166667,19.53775,1296.7,False,True,True,,unobserved,,,,0,
-ngc3365,NGC3365,10:46:12.6,+01:48:47.7,161.5525,1.81325,986.0,True,True,True,Group04,unobserved,,,,0,
+ngc3365,NGC3365,10:46:12.6,+01:48:47.7,161.5525,1.81325,986.0,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 galexmscj10462,GALEXMSCJ10462,10:46:24.8,+14:01:26.0,161.60333333,14.02388889,700.0,True,True,True,Group04,unobserved,,,,0,
 ngc3370,NGC3370,10:47:04.1,+17:16:25.6,161.76708333,17.27377778,1281.0,False,True,True,,unobserved,,,,0,
-ngc3377a,NGC3377A,10:47:22.3,+14:04:10.0,161.84291667,14.06944444,573.2,True,True,True,Group04,unobserved,,,,0,
+ngc3377a,NGC3377A,10:47:22.3,+14:04:10.0,161.84291667,14.06944444,573.2,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 mcg-12-10-079,MCG+12-10-079,10:47:41.8,+72:49:18.8,161.92416667,72.82188889,1007.9,True,True,True,Group20,unobserved,,,,0,
-ngc3377,NGC3377,10:47:42.3,+13:59:09.3,161.92625,13.98591667,663.7,True,True,True,Group04,unobserved,,,,0,
+ngc3377,NGC3377,10:47:42.3,+13:59:09.3,161.92625,13.98591667,663.7,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 ugc05888,UGC05888,10:47:45.7,+56:05:28.0,161.94041667,56.09111111,1239.7,False,True,True,,unobserved,,,,0,
-messier105,MESSIER105,10:47:49.6,+12:34:53.8,161.95666667,12.58161111,907.2,True,True,True,Group04,unobserved,,,,0,
+messier105,MESSIER105,10:47:49.6,+12:34:53.8,161.95666667,12.58161111,907.2,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 wiseaj104813-1,WISEAJ104813.1,10:48:13.1,+11:58:06.5,162.05458333,11.96847222,486.0,True,True,True,Group04,unobserved,,,,0,
-ngc3384,NGC3384,10:48:16.9,+12:37:45.5,162.07041667,12.62930556,703.9,True,True,True,Group04,unobserved,,,,0,
+ngc3384,NGC3384,10:48:16.9,+12:37:45.5,162.07041667,12.62930556,703.9,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 ngc3389,NGC3389,10:48:27.9,+12:31:59.9,162.11625,12.53330556,1302.9,False,True,True,,unobserved,,,,0,
 cgcg066-026,CGCG066-026,10:48:53.7,+14:07:28.1,162.22375,14.12447222,542.2,True,True,True,Group04,unobserved,,,,0,
 mrk1263,MRK1263,10:48:56.9,+12:11:42.1,162.23708333,12.19502778,1323.0,False,True,True,,unobserved,,,,0,
 wiseaj104904-8,WISEAJ104904.8,10:49:04.9,+12:24:26.8,162.27041667,12.40744444,1365.0,False,True,True,,unobserved,,,,0,
-ugc05923,UGC05923,10:49:07.5,+06:55:02.7,162.28125,6.91741667,720.6,True,True,True,Group04,unobserved,,,,0,
+ugc05923,UGC05923,10:49:07.5,+06:55:02.7,162.28125,6.91741667,720.6,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 cgcg066-029,CGCG066-029,10:49:17.2,+12:25:18.7,162.32166667,12.42186111,1382.0,False,True,True,,unobserved,,,,0,
 wiseaj104926-7,WISEAJ104926.7,10:49:26.8,+12:15:28.3,162.36166667,12.25786111,1324.1,False,True,True,,unobserved,,,,0,
 ugc05918,UGC05918,10:49:36.5,+65:31:50.0,162.40208333,65.53055556,340.0,True,True,True,Group14,unobserved,,,,0,
@@ -912,18 +912,18 @@ mrk1265,MRK1265,10:49:40.5,+22:50:17.0,162.41875,22.83805556,632.0,True,True,Tru
 sdssj104955-40,SDSSJ104955.40,10:49:55.4,+23:04:06.9,162.48083333,23.06858333,609.0,True,True,True,Group04,unobserved,,,,0,
 galexascj10495,GALEXASCJ10495,10:49:55.7,+21:11:19.8,162.48208333,21.18883333,1203.0,False,True,True,,unobserved,,,,0,
 wiseaj105001-7,WISEAJ105001.7,10:50:01.8,+13:47:05.2,162.5075,13.78477778,1311.0,False,True,True,,unobserved,,,,0,
-ugc05944,UGC05944,10:50:19.0,+13:16:18.7,162.57916667,13.27186111,1033.3,True,True,True,Group04,unobserved,,,,0,
+ugc05944,UGC05944,10:50:19.0,+13:16:18.7,162.57916667,13.27186111,1033.3,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 ugc05945,UGC05945,10:50:25.5,+17:33:51.2,162.60625,17.56422222,1132.0,False,True,True,,unobserved,,,,0,
 ugc05947,UGC05947,10:50:30.4,+19:38:39.5,162.62666667,19.64430556,1251.0,False,True,True,,unobserved,,,,0,
 wiseaj105035-2,WISEAJ105035.2,10:50:35.3,+66:02:42.5,162.64708333,66.04513889,1138.4,False,True,True,,unobserved,,,,0,
 lsbcd640-11,LSBCD640-11,10:51:01.6,+13:20:01.0,162.75666667,13.33361111,701.4,True,True,True,Group04,unobserved,,,,0,
 wiseaj105107-6,WISEAJ105107.6,10:51:07.8,+51:20:13.4,162.7825,51.33705556,803.5,True,True,True,Group14,unobserved,,,,0,
 wiseaj105113-0,WISEAJ105113.0,10:51:13.0,+28:00:22.3,162.80416667,28.00619444,1194.7,False,True,True,,unobserved,,,,0,
-ngc3423,NGC3423,10:51:14.3,+05:50:24.2,162.80958333,5.84005556,1004.0,True,True,True,Group04,unobserved,,,,0,
+ngc3423,NGC3423,10:51:14.3,+05:50:24.2,162.80958333,5.84005556,1004.0,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 ugc05958,UGC05958,10:51:15.8,+27:50:55.8,162.81583333,27.84883333,1183.6,False,True,True,,unobserved,,,,0,
 ngc3413,NGC3413,10:51:20.7,+32:45:58.4,162.83625,32.76622222,634.0,True,True,True,Group04,unobserved,,,,0,
 ngc3418,NGC3418,10:51:24.0,+28:06:43.4,162.85,28.11205556,1256.8,False,True,True,,unobserved,,,,0,
-ugc05974,UGC05974,10:51:35.3,+04:34:57.8,162.89708333,4.58272222,1039.1,True,True,True,Group04,unobserved,,,,0,
+ugc05974,UGC05974,10:51:35.3,+04:34:57.8,162.89708333,4.58272222,1039.1,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 sdssj105148-64,SDSSJ105148.64,10:51:48.6,+19:46:05.5,162.9525,19.76819444,1374.5,False,True,True,,unobserved,,,,0,
 ugc05976,UGC05976,10:52:02.8,+55:36:03.8,163.01166667,55.60105556,1210.0,False,True,True,,unobserved,,,,0,
 ugc05955,UGC05955,10:52:04.3,+71:46:23.4,163.01791667,71.77316667,1164.4,False,True,True,,unobserved,,,,0,
@@ -935,14 +935,14 @@ wiseaj105245-4,WISEAJ105245.4,10:52:45.4,-01:13:53.1,163.18916667,-1.23141667,92
 galexascj10525,GALEXASCJ10525,10:52:56.7,+69:32:58.8,163.23625,69.54966667,115.7,True,True,True,Group20,unobserved,,,,0,
 ngc3443,NGC3443,10:53:00.1,+17:34:26.5,163.25041667,17.57402778,1132.0,False,True,True,,unobserved,,,,0,
 lsbcl1-137,LSBCL1-137,10:53:18.6,+02:37:33.7,163.3275,2.62602778,1046.0,True,True,True,Group04,unobserved,,,,0,
-ngc3447a,NGC3447a,10:53:24.0,+16:46:20.8,163.35,16.77244444,1066.1,True,True,True,Group04,unobserved,,,,0,
-ngc3447b,NGC3447b,10:53:29.7,+16:47:09.6,163.37375,16.786,1098.1,True,True,True,Group04,unobserved,,,,0,
+ngc3447a,NGC3447a,10:53:24.0,+16:46:20.8,163.35,16.77244444,1066.1,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
+ngc3447b,NGC3447b,10:53:29.7,+16:47:09.6,163.37375,16.786,1098.1,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 ugc06014,UGC06014,10:53:42.7,+09:43:40.5,163.42791667,9.72791667,1132.9,False,True,True,,unobserved,,,,0,
 ngc3403,NGC3403,10:53:54.9,+73:41:25.4,163.47875,73.69038889,1260.9,False,True,True,,unobserved,,,,0,
 sdssj105356-27,SDSSJ105356.27,10:53:56.3,+60:02:43.0,163.48458333,60.04527778,1266.2,False,True,True,,unobserved,,,,0,
 wiseaj105400-0,WISEAJ105400.0,10:54:00.0,+09:49:54.0,163.5,9.83166667,1189.4,False,True,True,,unobserved,,,,0,
 ugc06018,UGC06018,10:54:05.7,+20:38:40.0,163.52375,20.64444444,1301.2,False,True,True,,unobserved,,,,0,
-ugc06022,UGC06022,10:54:15.3,+17:48:36.3,163.56375,17.81008333,970.1,True,True,True,Group04,unobserved,,,,0,
+ugc06022,UGC06022,10:54:15.3,+17:48:36.3,163.56375,17.81008333,970.1,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 ngc3451,NGC3451,10:54:20.9,+27:14:23.2,163.58708333,27.23977778,1332.0,False,True,True,,unobserved,,,,0,
 wiseaj105429-6,WISEAJ105429.6,10:54:29.6,+60:43:27.0,163.62333333,60.72416667,1321.0,False,True,True,,unobserved,,,,0,
 ngc3455,NGC3455,10:54:31.1,+17:17:04.6,163.62958333,17.28461111,1105.0,False,True,True,,unobserved,,,,0,
@@ -957,9 +957,9 @@ cgcg095-070,CGCG095-070,10:55:44.5,+17:00:18.4,163.93541667,17.00511111,1135.0,F
 wiseaj105603-0,WISEAJ105603.0,10:56:03.0,+23:48:48.5,164.0125,23.81347222,1277.7,False,True,True,,unobserved,,,,0,
 mrk1271,MRK1271,10:56:09.1,+06:10:22.4,164.03791667,6.17288889,1013.3,True,True,True,Group04,unobserved,,,,0,
 galexascj10561,GALEXASCJ10561,10:56:17.9,-27:42:53.7,164.07458333,-27.71491667,330.0,True,False,True,Group04,unobserved,,,,0,
-wiseaj105619-8,WISEAJ105619.8,10:56:19.9,+17:05:06.0,164.08291667,17.085,960.7,True,True,True,Group04,unobserved,,,,0,
+wiseaj105619-8,WISEAJ105619.8,10:56:19.9,+17:05:06.0,164.08291667,17.085,960.7,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 wiseaj105620-0,WISEAJ105620.0,10:56:20.1,+31:16:13.5,164.08375,31.27041667,1281.0,False,True,True,,unobserved,,,,0,
-wiseaj105638-6,WISEAJ105638.6,10:56:38.6,+17:23:00.9,164.16083333,17.38358333,948.3,True,True,True,Group04,unobserved,,,,0,
+wiseaj105638-6,WISEAJ105638.6,10:56:38.6,+17:23:00.9,164.16083333,17.38358333,948.3,True,True,True,Group04,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 galexascj10564,GALEXASCJ10564,10:56:40.4,+36:08:27.9,164.16833333,36.14108333,816.0,True,True,True,Group04,unobserved,,,,0,
 sbs1054-504,SBS1054+504,10:56:58.7,+50:08:26.1,164.24458333,50.14058333,1377.3,False,True,True,,unobserved,,,,0,
 wiseaj105715-1,WISEAJ105715.1,10:57:15.0,+33:09:47.5,164.3125,33.16319444,323.8,True,True,True,Group04,unobserved,,,,0,
@@ -969,9 +969,9 @@ wiseaj105848-9,WISEAJ105848.9,10:58:49.0,+29:13:32.8,164.70416667,29.22577778,69
 wiseaj105849-5,WISEAJ105849.5,10:58:49.5,+49:42:57.9,164.70625,49.71608333,832.1,True,True,True,Group14,unobserved,,,,0,
 wiseaj105946-1,WISEAJ105946.1,10:59:46.1,+28:36:40.3,164.94208333,28.61119444,705.9,True,True,True,Group04,unobserved,,,,0,
 galexmscj10595,GALEXMSCJ10595,10:59:55.3,+01:40:39.9,164.98041667,1.67775,1001.3,True,True,True,Group04,unobserved,,,,0,
-ugc06083,UGC06083,11:00:23.8,+16:41:31.9,165.09916667,16.69219444,940.0,True,True,True,Group05,unobserved,,,,0,
+ugc06083,UGC06083,11:00:23.8,+16:41:31.9,165.09916667,16.69219444,940.0,True,True,True,Group05,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 wiseaj110047-2,WISEAJ110047.2,11:00:47.2,+16:52:56.7,165.19666667,16.88241667,1136.4,False,True,True,,unobserved,,,,0,
-lsbcd640-08,LSBCD640-08,11:00:52.0,+13:52:51.9,165.21666667,13.88108333,100.6,True,True,True,Group05,unobserved,,,,0,
+lsbcd640-08,LSBCD640-08,11:00:52.0,+13:52:51.9,165.21666667,13.88108333,100.6,True,True,True,Group05,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 ugc06095,UGC06095,11:01:04.7,+19:06:07.2,165.26958333,19.102,1115.6,False,True,True,,unobserved,,,,0,
 wiseaj110114-2,WISEAJ110114.2,11:01:14.3,+29:50:53.1,165.30958333,29.84808333,693.0,True,True,True,Group05,unobserved,,,,0,
 ngc3495,NGC3495,11:01:16.2,+03:37:41.2,165.3175,3.62811111,1128.1,False,True,True,,unobserved,,,,0,
@@ -992,9 +992,9 @@ galexascj11042,GALEXASCJ11042,11:04:22.8,+36:06:06.3,166.095,36.10175,766.0,True
 cgcg066-109,CGCG066-109,11:04:26.4,+11:45:22.8,166.11,11.75633333,778.0,True,True,True,Group05,unobserved,,,,0,
 sdssj110440-08,SDSSJ110440.08,11:04:40.1,+00:03:29.6,166.16708333,0.05822222,809.4,True,True,True,Group05,unobserved,,,,0,
 wiseaj110453-7,WISEAJ110453.7,11:04:53.7,+31:31:48.7,166.22375,31.53019444,1218.5,False,True,True,,unobserved,,,,0,
-sdssj110456-81,SDSSJ110456.81,11:04:56.8,+17:38:30.5,166.23666667,17.64180556,907.6,True,True,True,Group05,unobserved,,,,0,
+sdssj110456-81,SDSSJ110456.81,11:04:56.8,+17:38:30.5,166.23666667,17.64180556,907.6,True,True,True,Group05,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 wiseaj110512-3,WISEAJ110512.3,11:05:12.4,+19:52:15.5,166.30166667,19.87097222,1199.0,False,True,True,,unobserved,,,,0,
-ark276,ARK276,11:05:32.5,+17:38:23.0,166.38541667,17.63972222,1039.5,True,True,True,Group05,unobserved,,,,0,
+ark276,ARK276,11:05:32.5,+17:38:23.0,166.38541667,17.63972222,1039.5,True,True,True,Group05,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 mcg-10-16-056,MCG+10-16-056,11:05:34.0,+60:22:06.0,166.39166667,60.36833333,1265.0,False,True,True,,unobserved,,,,0,
 ugc06145,UGC06145,11:05:34.6,-01:51:47.6,166.39416667,-1.86322222,744.1,True,True,True,Group05,unobserved,,,,0,
 ngc3521,NGC3521,11:05:48.6,-00:02:09.1,166.4525,-0.03586111,798.9,True,True,True,Group05,unobserved,,,,0,
@@ -1003,7 +1003,7 @@ wiseaj110627-3,WISEAJ110627.3,11:06:27.4,+18:23:25.4,166.61416667,18.39038889,12
 ngc3524,NGC3524,11:06:32.1,+11:23:07.7,166.63375,11.38547222,1357.4,False,True,True,,unobserved,,,,0,
 ngc3522,NGC3522,11:06:40.5,+20:05:07.9,166.66875,20.08552778,1204.6,False,True,True,,unobserved,,,,0,
 ugc06161,UGC06161,11:06:49.2,+43:43:23.6,166.705,43.72322222,745.9,True,True,True,Group15,unobserved,,,,0,
-wiseaj110651-1,WISEAJ110651.1,11:06:51.1,+17:30:02.2,166.71291667,17.50061111,939.0,True,True,True,Group05,unobserved,,,,0,
+wiseaj110651-1,WISEAJ110651.1,11:06:51.1,+17:30:02.2,166.71291667,17.50061111,939.0,True,True,True,Group05,observed,undetected,GBT,,1,"Observing report for November 8, 2026 GBT observations. Low wind, system temperature ~50K Submitted via GitHub issue #46 by @dpesce."
 sdssj110657-24,SDSSJ110657.24,11:06:57.2,+26:54:31.3,166.73833333,26.90869444,1159.0,False,True,True,,unobserved,,,,0,
 wiseaj110703-8,WISEAJ110703.8,11:07:03.8,-17:36:21.4,166.76583333,-17.60594444,993.5,True,True,True,Group05,unobserved,,,,0,
 wiseaj110704-1,WISEAJ110704.1,11:07:04.2,+39:18:12.1,166.7675,39.30336111,869.4,True,True,True,Group15,unobserved,,,,0,
