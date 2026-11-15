@@ -2302,7 +2302,7 @@ ugca298,UGCA298,12:46:55.4,+26:33:51.6,191.73083333,26.56433333,822.3,True,True,
 ic3767,IC3767,12:46:55.5,+10:10:56.5,191.73125,10.18236111,1245.0,False,True,True,,unobserved,,,,0,
 ugc07950,UGC07950,12:46:56.7,+51:36:48.1,191.73625,51.61336111,497.4,True,True,True,Group16,unobserved,,,,0,
 ugc07949,UGC07949,12:46:59.8,+36:28:35.1,191.74916667,36.47641667,331.0,True,True,True,Group06,unobserved,,,,0,
-fgc1497,FGC1497,12:47:00.6,+32:39:05.0,191.7525,32.65138889,518.9,True,True,True,Group06,unobserved,,,,0,
+fgc1497,FGC1497,12:47:00.6,+32:39:05.0,191.7525,32.65138889,518.9,True,True,True,Group06,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 36 mJy per 1 km/s channel, no line. Observed through clouds: poor baseline. A 4 sigma peak at 536 km/s is at the noise level; to be observed again. Weather: clear with large cumulus clouds and sharp sun until sunset. Submitted via GitHub issue #54 by @chickin."
 ic3773,IC3773,12:47:15.3,+10:12:13.0,191.81375,10.20361111,1086.3,True,True,True,Group06,unobserved,,,,0,
 ic3779,IC3779,12:47:20.7,+12:09:58.9,191.83625,12.16636111,1165.1,False,True,True,,unobserved,,,,0,
 galexascj12472,GALEXASCJ12472,12:47:25.1,-08:24:29.1,191.85458333,-8.40808333,1180.0,False,True,True,,unobserved,,,,0,
