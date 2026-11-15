@@ -2850,7 +2850,7 @@ ugc11000,UGC11000,17:49:26.6,+36:08:43.2,267.36083333,36.14533333,1368.9,False,T
 cgcg278-034,CGCG278-034,17:49:32.6,+55:30:29.6,267.38583333,55.50822222,1067.0,True,True,True,Group18,unobserved,,,,0,
 wiseaj175437-3,WISEAJ175437.3,17:54:37.4,-07:32:48.3,268.65583333,-7.54675,886.8,True,True,True,Group09,unobserved,,,,0,
 ngc6689,NGC6689,18:34:50.2,+70:31:26.5,278.70916667,70.52402778,489.0,True,True,True,Group20,unobserved,,,,0,
-wiseaj183603-3,WISEAJ183603.3,18:36:03.4,+19:07:15.6,279.01416667,19.121,821.4,True,True,True,Group09,unobserved,,,,0,
+wiseaj183603-3,WISEAJ183603.3,18:36:03.4,+19:07:15.6,279.01416667,19.121,821.4,True,True,True,Group09,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 26 mJy per 1 km/s channel, no line. Pointing off by up to 17 arcsec: sensitivity down by up to a factor 1.8. Weather: large cumulus clouds, sunny. Submitted via GitHub issue #58 by @chickin."
 ugc11411,UGC11411,19:08:42.5,+70:17:03.0,287.17708333,70.28416667,69.0,True,True,True,Group20,unobserved,,,,0,
 ngc6789,NGC6789,19:16:41.9,+63:58:16.2,289.17458333,63.97116667,-151.1,True,True,True,Group19,unobserved,,,,0,
 2massj19214973,2MASSJ19214973,19:21:49.7,+47:58:44.3,290.45708333,47.97897222,679.0,True,True,True,Group19,unobserved,,,,0,
