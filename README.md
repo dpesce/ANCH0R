@@ -84,8 +84,6 @@ To mark a target as observed, add a row to `data/observations.csv` with
 The `rms_mjy_per_1_km_s` column is optional for observed data. Leave it blank
 until calibration is complete, then add the RMS noise in mJy per 1 km/s
 spectral channel. When supplied, it must be finite and non-negative.
-Reprocessing an edited report preserves RMS values and spectrum links already
-added for the same target and telescope within that report.
 
 A target that was attempted but not observed uses `status=failed`, with blank
 RMS, data-quality, and detection fields. Put spectrum images under
@@ -177,16 +175,27 @@ to shorten the notes while retaining all entered targets and assessments.
 The confirmation page also offers a readable text download for the observer's
 records.
 
-Each issue contains a versioned, machine-readable payload. The
-observing-report workflow validates that payload, adds one row per selected
-target to `data/observations.csv`, rebuilds the generated catalog files, and
-opens a pull request for review. The workflow also replaces the initial compact
-issue description with a readable target table and notes while keeping the
-compressed payload in a collapsed details section. Reports use the current V6
-payload format; decompression is bounded and every target and assessment is
-validated before observation rows are written. Earlier report formats are
-intentionally unsupported while the interface is
-under active design.
+Each issue contains a V6 payload. The workflow validates every open report not
+already imported on `main`, appends one row per target, and regenerates the
+catalogs. It creates or refreshes one review PR from the bot-managed
+`observing-report/pending` branch. Runs are serialized and each reads all open
+reports, so a burst of submissions or the separate parts of a split report go
+into the same PR. Invalid submissions are listed separately and do not block
+valid reports. Compact issue descriptions still expand into readable summaries
+with the V6 payload retained.
+
+Approve any required checks and review the latest PR contents before merging.
+Subsequent submissions may update the PR head and require checks again. Close a
+pending issue to withdraw it; once an issue is imported, edit its observations
+in the CSV rather than editing the issue. The workflow leaves imported rows
+and calibration metadata unchanged, even if their issues remain open. Close
+imported issues after confirming publication. Do not edit the bot's branch
+directly.
+
+The batch refreshes on report changes and pushes to `main`. To refresh it
+manually, choose **Actions > Process Observing Report > Run workflow** on
+`main`. If GitHub prevents automatic PR creation, the run log includes a
+compare link for opening the same batch PR manually.
 
 ## License
 

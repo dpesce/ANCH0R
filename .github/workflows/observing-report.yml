@@ -2,97 +2,41 @@ name: Process Observing Report
 
 on:
   issues:
-    types: [opened, edited, reopened]
+    types: [opened, edited, reopened, closed]
+  push:
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: write
   pull-requests: write
   issues: write
 
-concurrency:
-  group: observing-report-${{ github.event.issue.number }}
-  cancel-in-progress: true
-
 jobs:
-  create-report-pr:
-    if: ${{ contains(github.event.issue.body || '', '<!-- ANCH0R_OBSERVING_REPORT_V6 -->') }}
+  refresh-report-pr:
+    if: >-
+      github.ref_name == github.event.repository.default_branch &&
+      (github.event_name != 'issues' ||
+       contains(github.event.issue.body || '', '<!-- ANCH0R_OBSERVING_REPORT_V6 -->') ||
+       contains(github.event.changes.body.from || '', '<!-- ANCH0R_OBSERVING_REPORT_V6 -->'))
+    concurrency:
+      group: observing-report-batch
+      cancel-in-progress: false
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - name: Check out repository
+      - name: Check out latest main
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.repository.default_branch }}
-          fetch-depth: 0
+          ref: refs/heads/${{ github.event.repository.default_branch }}
 
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
-      - name: Convert issue into observation rows
-        run: |
-          python3 scripts/process_observing_report_issue.py \
-            --event-path "$GITHUB_EVENT_PATH" \
-            --expanded-body-path "$RUNNER_TEMP/observing-report.md"
-
-      - name: Validate catalog data
-        run: python3 scripts/validate_data.py
-
-      - name: Rebuild catalog outputs
-        run: python3 scripts/build_catalog.py
-
-      - name: Check for generated changes
-        id: diff
-        run: |
-          if git diff --quiet -- data/observations.csv data/master_targets.csv public/data/catalog.json; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Open or update observing-report PR
-        if: steps.diff.outputs.changed == 'true'
+      - name: Refresh the observing-report review PR
         env:
           GH_TOKEN: ${{ github.token }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-        run: |
-          set -euo pipefail
-          branch="observing-report/issue-${ISSUE_NUMBER}"
-          title="Add ANCH0R observing report from issue #${ISSUE_NUMBER}"
-          body="$(printf 'This PR was generated from observing-report issue #%s.\n\nReview the appended rows in data/observations.csv before merging.' "$ISSUE_NUMBER")"
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git switch -c "$branch"
-          git add data/observations.csv data/master_targets.csv public/data/catalog.json
-          git commit -m "$title"
-          git push --force origin "$branch"
-
-          pr_number="$(gh pr list --head "$branch" --state open --json number --jq '.[0].number')"
-          pr_url=""
-          pr_create_error="${RUNNER_TEMP}/pr-create-error.log"
-          if [ -z "$pr_number" ]; then
-            if pr_url="$(gh pr create --base "$DEFAULT_BRANCH" --head "$branch" --title "$title" --body "$body" 2> "$pr_create_error")"; then
-              echo "Created $pr_url"
-            else
-              compare_url="https://github.com/${GITHUB_REPOSITORY}/compare/${DEFAULT_BRANCH}...${branch}?expand=1"
-              error_message="$(cat "$pr_create_error")"
-              echo "::warning::Could not create pull request automatically: ${error_message}"
-              gh issue comment "$ISSUE_NUMBER" --body "$(printf 'The observing-report branch was pushed, but GitHub blocked this workflow from creating a pull request automatically.\n\nCreate the pull request manually here:\n%s\n\nGitHub reported:\n```text\n%s\n```' "$compare_url" "$error_message")"
-            fi
-          else
-            gh pr edit "$pr_number" --title "$title" --body "$body"
-            pr_url="$(gh pr view "$pr_number" --json url --jq '.url')"
-            echo "Updated $pr_url"
-          fi
-
-          gh label create observing-report --description "ANCH0R observing report submissions" --color "0f766e" || \
-            gh label edit observing-report --description "ANCH0R observing report submissions" --color "0f766e"
-          gh issue edit "$ISSUE_NUMBER" --add-label observing-report
-
-      - name: Show readable report on GitHub
-        env:
-          GH_TOKEN: ${{ github.token }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-        run: gh issue edit "$ISSUE_NUMBER" --body-file "$RUNNER_TEMP/observing-report.md"
+        run: python3 scripts/process_pending_observing_reports.py

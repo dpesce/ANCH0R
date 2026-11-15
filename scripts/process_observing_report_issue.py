@@ -222,9 +222,12 @@ def make_observation_rows(
     payload: dict[str, Any],
     issue_number: int,
     issue_author: str,
+    *,
+    targets_by_id: dict[str, dict[str, Any]] | None = None,
 ) -> list[dict[str, str]]:
-    catalog = build_catalog(write_outputs=False)
-    targets_by_id = {target["target_id"]: target for target in catalog["targets"]}
+    if targets_by_id is None:
+        catalog = build_catalog(write_outputs=False)
+        targets_by_id = {target["target_id"]: target for target in catalog["targets"]}
 
     report_notes = compact_text(payload.get("notes"))
     issue_note = f"Submitted via GitHub issue #{issue_number} by @{issue_author}."
@@ -260,10 +263,15 @@ def make_observation_rows(
 
 
 def render_expanded_issue(
-    payload: dict[str, Any], issue_body: str, issue_author: str
+    payload: dict[str, Any],
+    issue_body: str,
+    issue_author: str,
+    *,
+    targets_by_id: dict[str, dict[str, Any]] | None = None,
 ) -> str:
-    catalog = build_catalog(write_outputs=False)
-    by_id = {target["target_id"]: target for target in catalog["targets"]}
+    if targets_by_id is None:
+        catalog = build_catalog(write_outputs=False)
+        targets_by_id = {target["target_id"]: target for target in catalog["targets"]}
     lines = [
         REPORT_MARKER,
         "",
@@ -285,7 +293,7 @@ def render_expanded_issue(
         "| --- | --- | --- |",
     ]
     for entry in payload["targets"]:
-        source_name = by_id[entry["target_id"]]["source_name"].replace("|", r"\|")
+        source_name = targets_by_id[entry["target_id"]]["source_name"].replace("|", r"\|")
         quality = DATA_QUALITY_LABELS[entry["data_quality"]]
         detection = entry["detection_status"].capitalize()
         lines.append(
