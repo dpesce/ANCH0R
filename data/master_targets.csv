@@ -2857,7 +2857,7 @@ ngc6789,NGC6789,19:16:41.9,+63:58:16.2,289.17458333,63.97116667,-151.1,True,True
 ugc11458,UGC11458,19:35:06.9,+69:59:41.8,293.77875,69.99494444,1370.1,False,True,True,,unobserved,,,,0,
 ugc11466,UGC11466,19:42:58.8,+45:17:54.1,295.745,45.29836111,824.0,True,True,True,Group19,unobserved,,,,0,
 ugc11484,UGC11484,19:48:34.8,+54:12:28.4,297.145,54.20788889,1302.9,False,True,True,,unobserved,,,,0,
-galexascj19515,GALEXASCJ19515,19:51:57.0,+01:31:40.1,297.9875,1.52780556,1273.8,False,True,True,,unobserved,,,,0,
+galexascj19515,GALEXASCJ19515,19:51:57.0,+01:31:40.1,297.9875,1.52780556,1273.8,False,True,True,,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 24 mJy per 1 km/s channel, no line. A 4 sigma peak at 1324 km/s is at the noise level; to be observed again. Weather: large cumulus clouds, sunny. Submitted via GitHub issue #70 by @chickin."
 galexascj19521,GALEXASCJ19521,19:52:11.6,+14:28:25.5,298.04833333,14.47375,279.1,True,True,True,Group09,unobserved,,,,0,
 2masxj20124318,2MASXJ20124318,20:12:43.2,-03:54:21.9,303.18,-3.90608333,1341.6,False,True,True,,unobserved,,,,0,
 ugc11539,UGC11539,20:18:32.1,+62:41:26.0,304.63375,62.69055556,1387.1,False,True,True,,unobserved,,,,0,
