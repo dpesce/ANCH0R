@@ -2575,6 +2575,20 @@
       "status": "observed",
       "target_id": "wiseaj110651-1",
       "telescope": "GBT"
+    },
+    {
+      "data_quality": "possible_pointing_problems",
+      "detection_status": "undetected",
+      "end_utc": "",
+      "notes": "13 Nov 2026, 5 min on source: rms 46 mJy per 1 km/s channel, no line. Pointing off by up to 17 arcsec (beam 37 arcsec): sensitivity down by up to a factor 1.8. Low elevation (23 deg). Weather: large cumulus clouds, sunny. Submitted via GitHub issue #62 by @chickin.",
+      "observation_id": "ISSUE-62-001",
+      "observer": "chickin",
+      "rms_mjy_per_1_km_s": "",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "mcg-01-41-006",
+      "telescope": "EFF"
     }
   ],
   "project": {
@@ -2584,8 +2598,8 @@
   "schema_version": 2,
   "stats": {
     "detection_status_counts": {
-      "not_assessed": 2811,
-      "undetected": 184
+      "not_assessed": 2810,
+      "undetected": 185
     },
     "eligibility_overlap_counts": {
       "EFF+GBT+SRT": 1681,
@@ -2598,7 +2612,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 184,
+    "observations": 185,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -2617,8 +2631,8 @@
       }
     },
     "status_counts": {
-      "observed": 184,
-      "unobserved": 2811
+      "observed": 185,
+      "unobserved": 2810
     },
     "total_targets": 2995
   },
@@ -95224,11 +95238,11 @@
       "velocity_km_s": 1370.1
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "EFF",
       "coordinate_system": "Equatorial",
       "dec_deg": -4.62058333,
       "dec_dms": "-04:37:14.1",
-      "detection_status": "",
+      "detection_status": "undetected",
       "eligible_eff": true,
       "eligible_gbt": true,
       "eligible_srt": true,
@@ -95239,8 +95253,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "Group09",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "13 Nov 2026, 5 min on source: rms 46 mJy per 1 km/s channel, no line. Pointing off by up to 17 arcsec (beam 37 arcsec): sensitivity down by up to a factor 1.8. Low elevation (23 deg). Weather: large cumulus clouds, sunny. Submitted via GitHub issue #62 by @chickin.",
+      "observations_count": 1,
       "ra_deg": 242.40375,
       "ra_hms": "16:09:36.9",
       "ra_hours": 16.16025,
@@ -95251,7 +95265,7 @@
       },
       "source_name": "MCG-01-41-006",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "mcg-01-41-006",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",
