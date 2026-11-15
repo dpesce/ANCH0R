@@ -2575,6 +2575,20 @@
       "status": "observed",
       "target_id": "wiseaj110651-1",
       "telescope": "GBT"
+    },
+    {
+      "data_quality": "trusted",
+      "detection_status": "undetected",
+      "end_utc": "",
+      "notes": "13 Nov 2026, 5 min on source: rms 28 mJy per 1 km/s channel, no line. Observed through clouds: poor baseline. Weather: large cumulus clouds, sunny. Submitted via GitHub issue #72 by @chickin.",
+      "observation_id": "ISSUE-72-001",
+      "observer": "chickin",
+      "rms_mjy_per_1_km_s": "",
+      "spectrum_url": "",
+      "start_utc": "",
+      "status": "observed",
+      "target_id": "2masxj20124318",
+      "telescope": "EFF"
     }
   ],
   "project": {
@@ -2584,8 +2598,8 @@
   "schema_version": 2,
   "stats": {
     "detection_status_counts": {
-      "not_assessed": 2811,
-      "undetected": 184
+      "not_assessed": 2810,
+      "undetected": 185
     },
     "eligibility_overlap_counts": {
       "EFF+GBT+SRT": 1681,
@@ -2598,7 +2612,7 @@
       "GBT": 1780,
       "SRT": 2995
     },
-    "observations": 184,
+    "observations": 185,
     "raw_sources": {
       "EFF": {
         "path": "data/raw/source_list_Effelsberg.txt",
@@ -2617,8 +2631,8 @@
       }
     },
     "status_counts": {
-      "observed": 184,
-      "unobserved": 2811
+      "observed": 185,
+      "unobserved": 2810
     },
     "total_targets": 2995
   },
@@ -97246,11 +97260,11 @@
       "velocity_km_s": 279.1
     },
     {
-      "assigned_telescope": "",
+      "assigned_telescope": "EFF",
       "coordinate_system": "Equatorial",
       "dec_deg": -3.90608333,
       "dec_dms": "-03:54:21.9",
-      "detection_status": "",
+      "detection_status": "undetected",
       "eligible_eff": true,
       "eligible_gbt": false,
       "eligible_srt": true,
@@ -97260,8 +97274,8 @@
       ],
       "epoch": "J2000",
       "gbt_group": "",
-      "notes": "",
-      "observations_count": 0,
+      "notes": "13 Nov 2026, 5 min on source: rms 28 mJy per 1 km/s channel, no line. Observed through clouds: poor baseline. Weather: large cumulus clouds, sunny. Submitted via GitHub issue #72 by @chickin.",
+      "observations_count": 1,
       "ra_deg": 303.18,
       "ra_hms": "20:12:43.2",
       "ra_hours": 20.212,
@@ -97271,7 +97285,7 @@
       },
       "source_name": "2MASXJ20124318",
       "spectrum_url": "",
-      "status": "unobserved",
+      "status": "observed",
       "target_id": "2masxj20124318",
       "velocity_convention": "Optical",
       "velocity_frame": "Heliocentric",

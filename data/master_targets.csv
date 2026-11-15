@@ -2859,7 +2859,7 @@ ugc11466,UGC11466,19:42:58.8,+45:17:54.1,295.745,45.29836111,824.0,True,True,Tru
 ugc11484,UGC11484,19:48:34.8,+54:12:28.4,297.145,54.20788889,1302.9,False,True,True,,unobserved,,,,0,
 galexascj19515,GALEXASCJ19515,19:51:57.0,+01:31:40.1,297.9875,1.52780556,1273.8,False,True,True,,unobserved,,,,0,
 galexascj19521,GALEXASCJ19521,19:52:11.6,+14:28:25.5,298.04833333,14.47375,279.1,True,True,True,Group09,unobserved,,,,0,
-2masxj20124318,2MASXJ20124318,20:12:43.2,-03:54:21.9,303.18,-3.90608333,1341.6,False,True,True,,unobserved,,,,0,
+2masxj20124318,2MASXJ20124318,20:12:43.2,-03:54:21.9,303.18,-3.90608333,1341.6,False,True,True,,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 28 mJy per 1 km/s channel, no line. Observed through clouds: poor baseline. Weather: large cumulus clouds, sunny. Submitted via GitHub issue #72 by @chickin."
 ugc11539,UGC11539,20:18:32.1,+62:41:26.0,304.63375,62.69055556,1387.1,False,True,True,,unobserved,,,,0,
 6dfj2020317-04,6dFJ2020317-04,20:20:31.8,-04:53:58.2,305.1325,-4.8995,1385.3,False,True,True,,unobserved,,,,0,
 ugc11557,UGC11557,20:24:00.7,+60:11:41.3,306.00291667,60.19480556,1388.0,False,True,True,,unobserved,,,,0,
