@@ -2263,7 +2263,7 @@ vcc1985,VCC1985,12:43:55.6,+10:36:42.3,190.98166667,10.61175,1150.0,False,True,T
 ngc4654,NGC4654,12:43:56.6,+13:07:35.7,190.98583333,13.12658333,1036.1,True,True,True,Group06,observed,undetected,GBT,/ANCH0R/spectra/GBT/AGBT26B_076_03/09_NGC4654.png,1,"Observing report for October 21, 2026 GBT observations. Weather is good, low-medium wind, system temperature ~40K NGC 4258 test scan for this observation is known to suffer from imperfect pointing, which costs about a factor ~2 in flux density for that scan; pointing was re-done afterwards and should be better for the survey targets Submitted via GitHub issue #42 by @dpesce."
 wiseaj124357-6,WISEAJ124357.6,12:43:57.7,+05:12:47.5,190.99041667,5.21319444,410.6,True,True,True,Group06,unobserved,,,,0,
 ngc4656,NGC4656,12:43:57.7,+32:10:05.3,190.99041667,32.16813889,646.1,True,True,True,Group06,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 27 mJy per 1 km/s channel, no line. Observed through clouds: poor baseline. Weather: clear with large cumulus clouds and sharp sun until sunset. Submitted via GitHub issue #48 by @chickin."
-ngc4656ned01,NGC4656NED01,12:43:58.8,+32:10:25.5,190.995,32.17375,664.0,True,True,True,Group06,unobserved,,,,0,
+ngc4656ned01,NGC4656NED01,12:43:58.8,+32:10:25.5,190.995,32.17375,664.0,True,True,True,Group06,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 27 mJy per 1 km/s channel, no line. Observed through clouds: poor baseline. Weather: clear with large cumulus clouds and sharp sun until sunset. Submitted via GitHub issue #50 by @chickin."
 sdssj124407-95,SDSSJ124407.95,12:44:08.0,+03:00:22.2,191.03333333,3.00616667,1346.4,False,True,True,,unobserved,,,,0,
 ic3710,IC3710,12:44:09.4,+12:07:01.2,191.03916667,12.117,1013.0,True,True,True,Group06,unobserved,,,,0,
 wiseaj124411-7,WISEAJ124411.7,12:44:11.7,+03:36:24.0,191.04875,3.60666667,830.2,True,True,True,Group06,unobserved,,,,0,
@@ -2288,7 +2288,7 @@ ic3727,IC3727,12:45:05.7,+10:54:03.4,191.27375,10.90094444,1065.7,True,True,True
 ngc4665,NGC4665,12:45:06.0,+03:03:20.9,191.275,3.05580556,912.0,True,True,True,Group06,observed,undetected,GBT,/ANCH0R/spectra/GBT/AGBT26B_076_02/34_NGC4665.png,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 vcc2014,VCC2014,12:45:09.7,+10:37:49.6,191.29041667,10.63044444,936.5,True,True,True,Group06,unobserved,,,,0,
 vcc2017,VCC2017,12:45:15.4,+07:36:56.5,191.31416667,7.61569444,1304.1,False,True,True,,unobserved,,,,0,
-ngc4670,NGC4670,12:45:17.1,+27:07:31.6,191.32125,27.12544444,1088.2,True,True,True,Group06,unobserved,,,,0,
+ngc4670,NGC4670,12:45:17.1,+27:07:31.6,191.32125,27.12544444,1088.2,True,True,True,Group06,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 35 mJy per 1 km/s channel, no line. Observed through clouds: poor baseline. Weather: clear with large cumulus clouds and sharp sun until sunset. Submitted via GitHub issue #52 by @chickin."
 lsbvcc313,LSBVCC313,12:45:25.1,+10:55:26.3,191.35458333,10.92397222,1150.0,False,True,True,,unobserved,,,,0,
 ic3742,IC3742,12:45:32.0,+13:19:58.1,191.38333333,13.33280556,965.0,True,True,True,Group06,unobserved,,,,0,
 ugca296,UGCA296,12:45:36.4,+71:19:07.3,191.40166667,71.31869444,1200.1,False,True,True,,unobserved,,,,0,
@@ -2301,8 +2301,8 @@ ugc07943,UGC07943,12:46:45.7,+05:57:18.1,191.69041667,5.95502778,836.1,True,True
 ugca298,UGCA298,12:46:55.4,+26:33:51.6,191.73083333,26.56433333,822.3,True,True,True,Group06,unobserved,,,,0,
 ic3767,IC3767,12:46:55.5,+10:10:56.5,191.73125,10.18236111,1245.0,False,True,True,,unobserved,,,,0,
 ugc07950,UGC07950,12:46:56.7,+51:36:48.1,191.73625,51.61336111,497.4,True,True,True,Group16,unobserved,,,,0,
-ugc07949,UGC07949,12:46:59.8,+36:28:35.1,191.74916667,36.47641667,331.0,True,True,True,Group06,unobserved,,,,0,
-fgc1497,FGC1497,12:47:00.6,+32:39:05.0,191.7525,32.65138889,518.9,True,True,True,Group06,unobserved,,,,0,
+ugc07949,UGC07949,12:46:59.8,+36:28:35.1,191.74916667,36.47641667,331.0,True,True,True,Group06,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 35 mJy per 1 km/s channel, no line. Observed through clouds: poor baseline. Weather: clear with large cumulus clouds and sharp sun until sunset. Submitted via GitHub issue #56 by @chickin."
+fgc1497,FGC1497,12:47:00.6,+32:39:05.0,191.7525,32.65138889,518.9,True,True,True,Group06,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 36 mJy per 1 km/s channel, no line. Observed through clouds: poor baseline. A 4 sigma peak at 536 km/s is at the noise level; to be observed again. Weather: clear with large cumulus clouds and sharp sun until sunset. Submitted via GitHub issue #54 by @chickin."
 ic3773,IC3773,12:47:15.3,+10:12:13.0,191.81375,10.20361111,1086.3,True,True,True,Group06,unobserved,,,,0,
 ic3779,IC3779,12:47:20.7,+12:09:58.9,191.83625,12.16636111,1165.1,False,True,True,,unobserved,,,,0,
 galexascj12472,GALEXASCJ12472,12:47:25.1,-08:24:29.1,191.85458333,-8.40808333,1180.0,False,True,True,,unobserved,,,,0,
@@ -2795,17 +2795,17 @@ ugc10194,UGC10194,16:04:04.1,+63:42:45.2,241.01708333,63.71255556,870.0,True,Tru
 galexmscj16040,GALEXMSCJ16040,16:04:05.3,+53:36:02.7,241.02208333,53.60075,1300.2,False,True,True,,unobserved,,,,0,
 ugc10175,UGC10175,16:04:37.7,+30:42:53.2,241.15708333,30.71477778,798.8,True,True,True,Group09,unobserved,,,,0,
 sdssj160450-70,SDSSJ160450.70,16:04:50.7,+54:49:13.4,241.21125,54.82038889,795.0,True,True,True,Group18,unobserved,,,,0,
-ugc10176,UGC10176,16:05:02.0,+13:42:04.5,241.25833333,13.70125,-30.7,True,True,True,Group09,unobserved,,,,0,
+ugc10176,UGC10176,16:05:02.0,+13:42:04.5,241.25833333,13.70125,-30.7,True,True,True,Group09,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 30 mJy per 1 km/s channel, no line. Pointing off by up to 17 arcsec (beam 37 arcsec): sensitivity down by up to a factor 1.8. Weather: large cumulus clouds, sunny. Submitted via GitHub issue #60 by @chickin."
 cgcg079-046,CGCG079-046,16:06:02.2,+08:30:24.3,241.50916667,8.50675,1373.9,False,True,True,,unobserved,,,,0,
 ic1197,IC1197,16:08:17.3,+07:32:18.6,242.07208333,7.5385,1370.1,False,True,True,,unobserved,,,,0,
-mcg-01-41-006,MCG-01-41-006,16:09:36.9,-04:37:14.1,242.40375,-4.62058333,830.4,True,True,True,Group09,unobserved,,,,0,
-kug1608-191,KUG1608+191,16:10:38.7,+19:03:26.8,242.66125,19.05744444,-79.3,True,True,True,Group09,unobserved,,,,0,
+mcg-01-41-006,MCG-01-41-006,16:09:36.9,-04:37:14.1,242.40375,-4.62058333,830.4,True,True,True,Group09,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 46 mJy per 1 km/s channel, no line. Pointing off by up to 17 arcsec (beam 37 arcsec): sensitivity down by up to a factor 1.8. Low elevation (23 deg). Weather: large cumulus clouds, sunny. Submitted via GitHub issue #62 by @chickin."
+kug1608-191,KUG1608+191,16:10:38.7,+19:03:26.8,242.66125,19.05744444,-79.3,True,True,True,Group09,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 29 mJy per 1 km/s channel, no line. Pointing off by up to 17 arcsec (beam 37 arcsec): sensitivity down by up to a factor 1.8. Weather: large cumulus clouds, sunny. Submitted via GitHub issue #64 by @chickin."
 ic1218,IC1218,16:16:36.7,+68:12:08.3,244.15291667,68.20230556,1109.2,False,True,True,,unobserved,,,,0,
 mcg-02-41-001,MCG-02-41-001,16:17:15.7,-11:43:55.0,244.31541667,-11.73194444,974.9,True,True,True,Group09,unobserved,,,,0,
 wiseaj161914-9,WISEAJ161914.9,16:19:15.0,-25:52:18.2,244.8125,-25.87172222,1138.9,False,False,True,,unobserved,,,,0,
 wiseaj161942-7,WISEAJ161942.7,16:19:42.8,+43:28:38.8,244.92833333,43.47744444,1254.1,False,True,True,,unobserved,,,,0,
 ngc6140,NGC6140,16:20:58.2,+65:23:26.0,245.2425,65.39055556,908.1,True,True,True,Group18,unobserved,,,,0,
-ugc10351,UGC10351,16:21:28.2,+28:38:23.7,245.3675,28.63991667,891.0,True,True,True,Group09,unobserved,,,,0,
+ugc10351,UGC10351,16:21:28.2,+28:38:23.7,245.3675,28.63991667,891.0,True,True,True,Group09,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 28 mJy per 1 km/s channel, no line. Pointing off by up to 17 arcsec: sensitivity down by up to a factor 1.8. Weather: large cumulus clouds, sunny. Submitted via GitHub issue #66 by @chickin."
 ugc10369,UGC10369,16:21:50.5,+67:17:34.6,245.46041667,67.29294444,998.0,True,True,True,Group20,unobserved,,,,0,
 wiseaj163155-5,WISEAJ163155.5,16:31:55.5,+37:35:37.6,247.98125,37.59377778,299.8,True,True,True,Group09,unobserved,,,,0,
 ugc10445,UGC10445,16:33:47.5,+28:59:06.2,248.44791667,28.98505556,961.0,True,True,True,Group09,unobserved,,,,0,
@@ -2850,18 +2850,18 @@ ugc11000,UGC11000,17:49:26.6,+36:08:43.2,267.36083333,36.14533333,1368.9,False,T
 cgcg278-034,CGCG278-034,17:49:32.6,+55:30:29.6,267.38583333,55.50822222,1067.0,True,True,True,Group18,unobserved,,,,0,
 wiseaj175437-3,WISEAJ175437.3,17:54:37.4,-07:32:48.3,268.65583333,-7.54675,886.8,True,True,True,Group09,unobserved,,,,0,
 ngc6689,NGC6689,18:34:50.2,+70:31:26.5,278.70916667,70.52402778,489.0,True,True,True,Group20,unobserved,,,,0,
-wiseaj183603-3,WISEAJ183603.3,18:36:03.4,+19:07:15.6,279.01416667,19.121,821.4,True,True,True,Group09,unobserved,,,,0,
+wiseaj183603-3,WISEAJ183603.3,18:36:03.4,+19:07:15.6,279.01416667,19.121,821.4,True,True,True,Group09,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 26 mJy per 1 km/s channel, no line. Pointing off by up to 17 arcsec: sensitivity down by up to a factor 1.8. Weather: large cumulus clouds, sunny. Submitted via GitHub issue #58 by @chickin."
 ugc11411,UGC11411,19:08:42.5,+70:17:03.0,287.17708333,70.28416667,69.0,True,True,True,Group20,unobserved,,,,0,
 ngc6789,NGC6789,19:16:41.9,+63:58:16.2,289.17458333,63.97116667,-151.1,True,True,True,Group19,unobserved,,,,0,
 2massj19214973,2MASSJ19214973,19:21:49.7,+47:58:44.3,290.45708333,47.97897222,679.0,True,True,True,Group19,unobserved,,,,0,
 ugc11458,UGC11458,19:35:06.9,+69:59:41.8,293.77875,69.99494444,1370.1,False,True,True,,unobserved,,,,0,
 ugc11466,UGC11466,19:42:58.8,+45:17:54.1,295.745,45.29836111,824.0,True,True,True,Group19,unobserved,,,,0,
 ugc11484,UGC11484,19:48:34.8,+54:12:28.4,297.145,54.20788889,1302.9,False,True,True,,unobserved,,,,0,
-galexascj19515,GALEXASCJ19515,19:51:57.0,+01:31:40.1,297.9875,1.52780556,1273.8,False,True,True,,unobserved,,,,0,
-galexascj19521,GALEXASCJ19521,19:52:11.6,+14:28:25.5,298.04833333,14.47375,279.1,True,True,True,Group09,unobserved,,,,0,
-2masxj20124318,2MASXJ20124318,20:12:43.2,-03:54:21.9,303.18,-3.90608333,1341.6,False,True,True,,unobserved,,,,0,
+galexascj19515,GALEXASCJ19515,19:51:57.0,+01:31:40.1,297.9875,1.52780556,1273.8,False,True,True,,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 24 mJy per 1 km/s channel, no line. A 4 sigma peak at 1324 km/s is at the noise level; to be observed again. Weather: large cumulus clouds, sunny. Submitted via GitHub issue #70 by @chickin."
+galexascj19521,GALEXASCJ19521,19:52:11.6,+14:28:25.5,298.04833333,14.47375,279.1,True,True,True,Group09,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 22 mJy per 1 km/s channel, no line. Observed through clouds: poor baseline. Weather: large cumulus clouds, sunny. Submitted via GitHub issue #68 by @chickin."
+2masxj20124318,2MASXJ20124318,20:12:43.2,-03:54:21.9,303.18,-3.90608333,1341.6,False,True,True,,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 28 mJy per 1 km/s channel, no line. Observed through clouds: poor baseline. Weather: large cumulus clouds, sunny. Submitted via GitHub issue #72 by @chickin."
 ugc11539,UGC11539,20:18:32.1,+62:41:26.0,304.63375,62.69055556,1387.1,False,True,True,,unobserved,,,,0,
-6dfj2020317-04,6dFJ2020317-04,20:20:31.8,-04:53:58.2,305.1325,-4.8995,1385.3,False,True,True,,unobserved,,,,0,
+6dfj2020317-04,6dFJ2020317-04,20:20:31.8,-04:53:58.2,305.1325,-4.8995,1385.3,False,True,True,,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 32 mJy per 1 km/s channel, no line. Observed through clouds: poor baseline. Weather: large cumulus clouds, sunny. Submitted via GitHub issue #74 by @chickin."
 ugc11557,UGC11557,20:24:00.7,+60:11:41.3,306.00291667,60.19480556,1388.0,False,True,True,,unobserved,,,,0,
 ugc11583,UGC11583,20:30:15.1,+60:26:26.4,307.56291667,60.44066667,127.1,True,True,True,Group19,unobserved,,,,0,
 wiseaj203131-9,WISEAJ203131.9,20:31:32.0,+60:48:44.0,307.88333333,60.81222222,138.5,True,True,True,Group19,unobserved,,,,0,
@@ -2876,7 +2876,7 @@ wiseaj205647-5,WISEAJ205647.5,20:56:47.6,+54:41:09.8,314.19833333,54.68605556,32
 wiseaj210222-5,WISEAJ210222.5,21:02:22.5,+76:52:43.4,315.59375,76.87872222,506.3,True,True,True,Group20,unobserved,,,,0,
 wiseaj210505-3,WISEAJ210505.3,21:05:05.4,+41:10:03.6,316.2725,41.16766667,1192.6,False,True,True,,unobserved,,,,0,
 wiseaj211216-0,WISEAJ211216.0,21:12:16.0,+45:31:16.6,318.06666667,45.52127778,700.0,True,True,True,Group19,unobserved,,,,0,
-ugc11707,UGC11707,21:14:31.7,+26:44:05.3,318.63208333,26.73480556,905.1,True,True,True,Group10,unobserved,,,,0,
+ugc11707,UGC11707,21:14:31.7,+26:44:05.3,318.63208333,26.73480556,905.1,True,True,True,Group10,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 29 mJy per 1 km/s channel, no line. Observed through clouds: poor baseline. Weather: large cumulus clouds, sunny. Submitted via GitHub issue #76 by @chickin."
 wiseaj211558-5,WISEAJ211558.5,21:15:58.5,-00:20:22.5,318.99375,-0.33958333,1178.5,False,True,True,,unobserved,,,,0,
 wiseaj211756-0,WISEAJ211756.0,21:17:56.0,-18:53:19.6,319.48333333,-18.88877778,600.0,True,True,True,Group10,unobserved,,,,0,
 galexascj21184,GALEXASCJ21184,21:18:42.5,+26:17:34.6,319.67708333,26.29294444,918.9,True,True,True,Group10,unobserved,,,,0,
