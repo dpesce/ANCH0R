@@ -2876,7 +2876,7 @@ wiseaj205647-5,WISEAJ205647.5,20:56:47.6,+54:41:09.8,314.19833333,54.68605556,32
 wiseaj210222-5,WISEAJ210222.5,21:02:22.5,+76:52:43.4,315.59375,76.87872222,506.3,True,True,True,Group20,unobserved,,,,0,
 wiseaj210505-3,WISEAJ210505.3,21:05:05.4,+41:10:03.6,316.2725,41.16766667,1192.6,False,True,True,,unobserved,,,,0,
 wiseaj211216-0,WISEAJ211216.0,21:12:16.0,+45:31:16.6,318.06666667,45.52127778,700.0,True,True,True,Group19,unobserved,,,,0,
-ugc11707,UGC11707,21:14:31.7,+26:44:05.3,318.63208333,26.73480556,905.1,True,True,True,Group10,unobserved,,,,0,
+ugc11707,UGC11707,21:14:31.7,+26:44:05.3,318.63208333,26.73480556,905.1,True,True,True,Group10,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 29 mJy per 1 km/s channel, no line. Observed through clouds: poor baseline. Weather: large cumulus clouds, sunny. Submitted via GitHub issue #76 by @chickin."
 wiseaj211558-5,WISEAJ211558.5,21:15:58.5,-00:20:22.5,318.99375,-0.33958333,1178.5,False,True,True,,unobserved,,,,0,
 wiseaj211756-0,WISEAJ211756.0,21:17:56.0,-18:53:19.6,319.48333333,-18.88877778,600.0,True,True,True,Group10,unobserved,,,,0,
 galexascj21184,GALEXASCJ21184,21:18:42.5,+26:17:34.6,319.67708333,26.29294444,918.9,True,True,True,Group10,unobserved,,,,0,
