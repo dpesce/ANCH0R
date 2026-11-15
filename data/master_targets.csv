@@ -2263,7 +2263,7 @@ vcc1985,VCC1985,12:43:55.6,+10:36:42.3,190.98166667,10.61175,1150.0,False,True,T
 ngc4654,NGC4654,12:43:56.6,+13:07:35.7,190.98583333,13.12658333,1036.1,True,True,True,Group06,observed,undetected,GBT,/ANCH0R/spectra/GBT/AGBT26B_076_03/09_NGC4654.png,1,"Observing report for October 21, 2026 GBT observations. Weather is good, low-medium wind, system temperature ~40K NGC 4258 test scan for this observation is known to suffer from imperfect pointing, which costs about a factor ~2 in flux density for that scan; pointing was re-done afterwards and should be better for the survey targets Submitted via GitHub issue #42 by @dpesce."
 wiseaj124357-6,WISEAJ124357.6,12:43:57.7,+05:12:47.5,190.99041667,5.21319444,410.6,True,True,True,Group06,unobserved,,,,0,
 ngc4656,NGC4656,12:43:57.7,+32:10:05.3,190.99041667,32.16813889,646.1,True,True,True,Group06,unobserved,,,,0,
-ngc4656ned01,NGC4656NED01,12:43:58.8,+32:10:25.5,190.995,32.17375,664.0,True,True,True,Group06,unobserved,,,,0,
+ngc4656ned01,NGC4656NED01,12:43:58.8,+32:10:25.5,190.995,32.17375,664.0,True,True,True,Group06,observed,undetected,EFF,,1,"13 Nov 2026, 5 min on source: rms 27 mJy per 1 km/s channel, no line. Observed through clouds: poor baseline. Weather: clear with large cumulus clouds and sharp sun until sunset. Submitted via GitHub issue #50 by @chickin."
 sdssj124407-95,SDSSJ124407.95,12:44:08.0,+03:00:22.2,191.03333333,3.00616667,1346.4,False,True,True,,unobserved,,,,0,
 ic3710,IC3710,12:44:09.4,+12:07:01.2,191.03916667,12.117,1013.0,True,True,True,Group06,unobserved,,,,0,
 wiseaj124411-7,WISEAJ124411.7,12:44:11.7,+03:36:24.0,191.04875,3.60666667,830.2,True,True,True,Group06,unobserved,,,,0,
