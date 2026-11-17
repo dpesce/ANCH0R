@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { DetectionBadge } from "../components/DetectionBadge";
 import { StatusBadge } from "../components/StatusBadge";
 import { formatInteger, formatVelocity } from "../lib/format";
+import { buildSpectrumLinksByTarget } from "../lib/spectra";
 import { TELESCOPE_CODES } from "../lib/telescopes";
 import type {
   CatalogData,
@@ -122,6 +123,11 @@ export function MasterTable({ catalog }: MasterTableProps) {
     }
     return observed;
   }, [catalog.observations]);
+
+  const spectrumLinksByTarget = useMemo(
+    () => buildSpectrumLinksByTarget(catalog.observations),
+    [catalog.observations],
+  );
 
   const filteredTargets = useMemo(() => {
     return catalog.targets.filter((target) => {
@@ -265,7 +271,7 @@ export function MasterTable({ catalog }: MasterTableProps) {
               </th>
               <th>Observation status</th>
               <th>Detection status</th>
-              <th>Spectrum</th>
+              <th>Spectra</th>
             </tr>
           </thead>
           <tbody>
@@ -290,10 +296,21 @@ export function MasterTable({ catalog }: MasterTableProps) {
                   <DetectionBadge status={target.detection_status} />
                 </td>
                 <td>
-                  {target.spectrum_url ? (
-                    <a href={target.spectrum_url} target="_blank" rel="noreferrer">
-                      View
-                    </a>
+                  {spectrumLinksByTarget.has(target.target_id) ? (
+                    <div className="spectrum-links">
+                      {spectrumLinksByTarget.get(target.target_id)?.map((spectrum) => (
+                        <a
+                          key={spectrum.observation_id}
+                          href={spectrum.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          title={`${spectrum.telescope} spectrum: ${spectrum.observation_id}`}
+                          aria-label={`${target.source_name}: ${spectrum.label} spectrum`}
+                        >
+                          {spectrum.label}
+                        </a>
+                      ))}
+                    </div>
                   ) : (
                     <span className="subtle">None</span>
                   )}

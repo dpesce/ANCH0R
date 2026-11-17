@@ -714,6 +714,17 @@ button:disabled {
   background: var(--surface);
 }
 
+.spectrum-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.spectrum-links a {
+  white-space: nowrap;
+}
+
 table {
   width: 100%;
   min-width: 920px;
