@@ -1566,7 +1566,7 @@ galexascj12200,GALEXASCJ12200,12:20:09.9,+40:52:42.7,185.04125,40.87852778,520.0
 wiseaj122017-4,WISEAJ122017.4,12:20:17.5,+29:06:09.5,185.07291667,29.10263889,720.3,True,True,True,Group06,unobserved,,,,0,
 vcc0403,VCC0403,12:20:17.6,+10:19:15.4,185.07333333,10.32094444,1150.0,False,True,True,,unobserved,,,,0,
 wiseaj122020-1,WISEAJ122020.1,12:20:20.1,+09:47:50.1,185.08375,9.79725,1188.6,False,True,True,,unobserved,,,,0,
-ngc4283,NGC4283,12:20:20.8,+29:18:39.4,185.08666667,29.31094444,1055.9,True,True,True,Group06,observed,undetected,EFF,,1,"Observing report for session November 18-19, 2026 Effelsberg observations. Session: 18 Nov 16:35 to 19 Nov 06:43 UT. 55 targets, 5 min on source each. Fixed 300 MHz band centered on 22150 MHz, position switching between the two horns. Tsys ~125 K. No detections. Weather: overcast and wet all night (8 to 10 C, humidity 85 to 98%, wind 3 to 7 m/s). Showers around 18:00 and 20:15 UT, rain from 04:15 UT, heavy rain at 06:50 UT. Issues: potential pointing problems for 9 targets. NGC7292, UGC12009, WISEAJ213454.4, WISEAJ213114.9, WISEAJ213219.1: pointing off by 20 arcsec after the block. SDSSJ121651.40, WISEAJ121938.4, KUG1218+310: off by 21 arcsec after rain. ARP250: pointing source 24 deg away, check failed in rain. Flux scale from NGC7027, uncertain by ~15% (3C286 lost in rain). Horn 2 RCP gave no sky signal (possibly faulty cable, investigating). Reobservations: SDSSJ121651.40 (marginal on 17 Nov): feature at 695 to 720 km/s not there in 10 min on source. WISEAJ024326.8, WISEAJ231557.8, WISEAJ031452.8, WISEAJ031403.2, ARP250: re-observed to cover the red side missing on 13 Nov. Submitted via GitHub issue #86 by @chickin."
+ngc4283,NGC4283,12:20:20.8,+29:18:39.4,185.08666667,29.31094444,1055.9,True,True,True,Group06,observed,undetected,GBT,,2,Low wind speed : ~3 m/s. Temperature ~2 degree (C) A clear narrow feature is clearly detected toward UGC08313 near the systemic velocity ! Submitted via GitHub issue #89 by @cykuotara720-maser.
 cgcg014-010,CGCG014-010,12:20:21.3,+00:22:03.0,185.08875,0.3675,893.7,True,True,True,Group06,unobserved,,,,0,
 vcc0410,VCC0410,12:20:21.8,+12:11:16.1,185.09083333,12.18780556,280.9,True,True,True,Group06,unobserved,,,,0,
 wiseaj122025-8,WISEAJ122025.8,12:20:25.8,+33:14:31.2,185.1075,33.242,1036.4,True,True,True,Group06,unobserved,,,,0,
@@ -1576,7 +1576,7 @@ vcc0426,VCC0426,12:20:36.3,+12:53:05.1,185.15125,12.88475,1182.1,False,True,True
 ngc4288,NGC4288,12:20:38.2,+46:17:30.4,185.15916667,46.29177778,530.6,True,True,True,Group16,unobserved,,,,0,
 vcc0428,VCC0428,12:20:40.3,+13:53:22.4,185.16791667,13.88955556,799.1,True,True,True,Group06,unobserved,,,,0,
 wiseaj122041-1,WISEAJ122041.1,12:20:41.2,+24:57:22.2,185.17166667,24.95616667,786.0,True,True,True,Group06,unobserved,,,,0,
-ngc4286,NGC4286,12:20:42.1,+29:20:45.2,185.17541667,29.34588889,636.6,True,True,True,Group06,unobserved,,,,0,
+ngc4286,NGC4286,12:20:42.1,+29:20:45.2,185.17541667,29.34588889,636.6,True,True,True,Group06,observed,undetected,GBT,,1,Low wind speed : ~3 m/s. Temperature ~2 degree (C) A clear narrow feature is clearly detected toward UGC08313 near the systemic velocity ! Submitted via GitHub issue #89 by @cykuotara720-maser.
 vcc0429,VCC0429,12:20:44.0,+14:37:51.8,185.18333333,14.63105556,598.5,True,True,True,Group06,unobserved,,,,0,
 ugc07401,UGC07401,12:20:48.4,+47:49:33.6,185.20166667,47.826,761.8,True,True,True,Group16,unobserved,,,,0,
 kug1218-387,KUG1218+387,12:20:54.8,+38:25:48.6,185.22833333,38.43016667,574.1,True,True,True,Group06,unobserved,,,,0,
@@ -2457,7 +2457,7 @@ am1306-265,AM1306-265,13:09:36.6,-27:08:26.8,197.4025,-27.14077778,681.1,True,Fa
 ugca330,UGCA330,13:09:47.5,-10:19:12.0,197.44791667,-10.32,1210.3,False,True,True,,unobserved,,,,0,
 ugc08246,UGC08246,13:10:04.4,+34:10:52.2,197.51833333,34.18116667,807.9,True,True,True,Group07,unobserved,,,,0,
 wiseaj131029-2,WISEAJ131029.2,13:10:29.2,+34:14:12.7,197.62166667,34.23686111,848.4,True,True,True,Group07,unobserved,,,,0,
-ngc5002,NGC5002,13:10:38.0,+36:38:02.1,197.65833333,36.63391667,1056.2,True,True,True,Group07,unobserved,,,,0,
+ngc5002,NGC5002,13:10:38.0,+36:38:02.1,197.65833333,36.63391667,1056.2,True,True,True,Group07,observed,undetected,GBT,,1,Low wind speed : ~3 m/s. Temperature ~2 degree (C) A clear narrow feature is clearly detected toward UGC08313 near the systemic velocity ! Submitted via GitHub issue #89 by @cykuotara720-maser.
 wiseaj131038-7,WISEAJ131038.7,13:10:38.7,-09:55:52.9,197.66125,-9.93136111,1165.0,False,True,True,,unobserved,,,,0,
 sdssj131051-06,SDSSJ131051.06,13:10:51.1,+36:56:23.4,197.71291667,36.93983333,1024.7,True,True,True,Group07,unobserved,,,,0,
 wiseaj131115-7,WISEAJ131115.7,13:11:15.8,+36:59:11.4,197.81583333,36.9865,1041.0,True,True,True,Group07,unobserved,,,,0,
@@ -2467,16 +2467,16 @@ sdssj131141-36,SDSSJ131141.36,13:11:41.4,+40:51:45.5,197.9225,40.86263889,604.0,
 kug1309-362,KUG1309+362,13:11:43.1,+35:57:38.6,197.92958333,35.96072222,1136.7,False,True,True,,unobserved,,,,0,
 ugc08276,UGC08276,13:12:06.5,+05:28:32.2,198.02708333,5.47561111,912.9,True,True,True,Group07,observed,undetected,GBT,/ANCH0R/spectra/GBT/AGBT26B_076_02/52_UGC08276.png,1,"Observing report for October 20, 2026 GBT observations. Weather is good, low wind, system temperature ~40K Submitted via GitHub issue #40 by @dpesce."
 ic4213,IC4213,13:12:11.2,+35:40:12.3,198.04666667,35.67008333,815.1,True,True,True,Group07,unobserved,,,,0,
-ngc5023,NGC5023,13:12:12.6,+44:02:28.4,198.0525,44.04122222,407.1,True,True,True,Group17,unobserved,,,,0,
+ngc5023,NGC5023,13:12:12.6,+44:02:28.4,198.0525,44.04122222,407.1,True,True,True,Group17,observed,undetected,GBT,,1,Low wind speed : ~3 m/s. Temperature ~2 degree (C) A clear narrow feature is clearly detected toward UGC08313 near the systemic velocity ! Submitted via GitHub issue #89 by @cykuotara720-maser.
 kug1309-269,KUG1309+269,13:12:17.6,+26:41:09.3,198.07333333,26.68591667,778.5,True,True,True,Group07,unobserved,,,,0,
 ugc08285,UGC08285,13:12:33.3,+07:11:03.4,198.13875,7.18427778,904.4,True,True,True,Group07,observed,undetected,GBT,/ANCH0R/spectra/GBT/AGBT26B_076_03/19_UGC08285.png,1,"Observing report for October 21, 2026 GBT observations. Weather is good, low-medium wind, system temperature ~40K NGC 4258 test scan for this observation is known to suffer from imperfect pointing, which costs about a factor ~2 in flux density for that scan; pointing was re-done afterwards and should be better for the survey targets Submitted via GitHub issue #42 by @dpesce."
 wiseaj131245-1,WISEAJ131245.1,13:12:45.1,+37:56:10.2,198.18791667,37.93616667,1104.6,False,True,True,,unobserved,,,,0,
 cgcg217-018,CGCG217-018,13:12:51.8,+40:32:35.6,198.21583333,40.54322222,562.1,True,True,True,Group17,unobserved,,,,0,
-ugca337,UGCA337,13:12:58.9,+41:47:08.1,198.24541667,41.78558333,535.4,True,True,True,Group17,unobserved,,,,0,
+ugca337,UGCA337,13:12:58.9,+41:47:08.1,198.24541667,41.78558333,535.4,True,True,True,Group17,observed,undetected,GBT,,1,Low wind speed : ~3 m/s. Temperature ~2 degree (C) A clear narrow feature is clearly detected toward UGC08313 near the systemic velocity ! Submitted via GitHub issue #89 by @cykuotara720-maser.
 holmbergviii,HolmbergVIII,13:13:17.7,+36:12:50.7,198.32375,36.21408333,944.0,True,True,True,Group07,unobserved,,,,0,
 sdssj131318-79,SDSSJ131318.79,13:13:18.8,+31:24:49.5,198.32833333,31.41375,800.0,True,True,True,Group07,unobserved,,,,0,
 ugc08298,UGC08298,13:13:19.6,+10:11:38.1,198.33166667,10.19391667,1156.9,False,True,True,,unobserved,,,,0,
-ugc08313,UGC08313,13:13:53.9,+42:12:31.0,198.47458333,42.20861111,592.7,True,True,True,Group17,unobserved,,,,0,
+ugc08313,UGC08313,13:13:53.9,+42:12:31.0,198.47458333,42.20861111,592.7,True,True,True,Group17,observed,detected,GBT,,1,Low wind speed : ~3 m/s. Temperature ~2 degree (C) A clear narrow feature is clearly detected toward UGC08313 near the systemic velocity ! Submitted via GitHub issue #89 by @cykuotara720-maser.
 ugc08314,UGC08314,13:14:01.0,+36:19:07.8,198.50416667,36.31883333,935.1,True,True,True,Group07,unobserved,,,,0,
 ugc08315ned02,UGC08315NED02,13:14:10.8,+39:08:55.0,198.545,39.14861111,1147.0,False,True,True,,unobserved,,,,0,
 ugc08320,UGC08320,13:14:26.1,+45:55:29.8,198.60875,45.92494444,191.9,True,True,True,Group17,unobserved,,,,0,
@@ -2485,10 +2485,10 @@ wiseaj131447-7,WISEAJ131447.7,13:14:47.8,+41:21:58.8,198.69916667,41.36633333,12
 ugc08323,UGC08323,13:14:48.4,+34:52:51.8,198.70166667,34.88105556,863.1,True,True,True,Group07,unobserved,,,,0,
 wiseaj131450-7,WISEAJ131450.7,13:14:50.7,-22:03:54.4,198.71125,-22.06511111,1384.1,False,False,True,,unobserved,,,,0,
 wiseaj131454-8,WISEAJ131454.8,13:14:54.9,+42:02:40.4,198.72875,42.04455556,299.8,True,True,True,Group17,unobserved,,,,0,
-ugca342,UGCA342,13:15:06.8,+42:00:03.6,198.77833333,42.001,387.9,True,True,True,Group17,unobserved,,,,0,
+ugca342,UGCA342,13:15:06.8,+42:00:03.6,198.77833333,42.001,387.9,True,True,True,Group17,observed,undetected,GBT,,1,Low wind speed : ~3 m/s. Temperature ~2 degree (C) A clear narrow feature is clearly detected toward UGC08313 near the systemic velocity ! Submitted via GitHub issue #89 by @cykuotara720-maser.
 ugc08331,UGC08331,13:15:30.7,+47:29:47.4,198.87791667,47.4965,259.9,True,True,True,Group17,unobserved,,,,0,
 ngc5042,NGC5042,13:15:31.1,-23:59:01.0,198.87958333,-23.98361111,1390.1,False,False,True,,unobserved,,,,0,
-messier063,MESSIER063,13:15:49.3,+42:01:45.6,198.95541667,42.02933333,500.1,True,True,True,Group17,unobserved,,,,0,
+messier063,MESSIER063,13:15:49.3,+42:01:45.6,198.95541667,42.02933333,500.1,True,True,True,Group17,observed,undetected,GBT,,1,Low wind speed : ~3 m/s. Temperature ~2 degree (C) A clear narrow feature is clearly detected toward UGC08313 near the systemic velocity ! Submitted via GitHub issue #89 by @cykuotara720-maser.
 ugc08333,UGC08333,13:15:53.8,+25:26:08.0,198.97416667,25.43555556,941.0,True,True,True,Group07,unobserved,,,,0,
 cgcg101-017,CGCG101-017,13:15:56.3,+17:45:38.1,198.98458333,17.76058333,973.8,True,True,True,Group07,unobserved,,,,0,
 wiseaj131610-6,WISEAJ131610.6,13:16:10.6,+25:40:23.9,199.04416667,25.67330556,988.6,True,True,True,Group07,unobserved,,,,0,
@@ -2511,8 +2511,8 @@ kug1318-226,KUG1318+226,13:20:46.3,+22:23:41.0,200.19291667,22.39472222,1055.2,T
 wiseaj132047-2,WISEAJ132047.2,13:20:47.2,+22:02:17.5,200.19666667,22.03819444,789.2,True,True,True,Group07,unobserved,,,,0,
 wiseaj132106-6,WISEAJ132106.6,13:21:06.6,+38:59:16.1,200.2775,38.98780556,1013.0,True,True,True,Group17,unobserved,,,,0,
 ngc5099,NGC5099,13:21:19.6,-13:02:31.6,200.33166667,-13.04211111,1322.7,False,True,True,,unobserved,,,,0,
-ngc5107,NGC5107,13:21:24.7,+38:32:15.2,200.35291667,38.53755556,946.1,True,True,True,Group17,unobserved,,,,0,
-ngc5112,NGC5112,13:21:56.4,+38:44:04.5,200.485,38.73458333,974.0,True,True,True,Group17,unobserved,,,,0,
+ngc5107,NGC5107,13:21:24.7,+38:32:15.2,200.35291667,38.53755556,946.1,True,True,True,Group17,observed,undetected,GBT,,1,Low wind speed : ~3 m/s. Temperature ~2 degree (C) A clear narrow feature is clearly detected toward UGC08313 near the systemic velocity ! Submitted via GitHub issue #89 by @cykuotara720-maser.
+ngc5112,NGC5112,13:21:56.4,+38:44:04.5,200.485,38.73458333,974.0,True,True,True,Group17,observed,undetected,GBT,,1,Low wind speed : ~3 m/s. Temperature ~2 degree (C) A clear narrow feature is clearly detected toward UGC08313 near the systemic velocity ! Submitted via GitHub issue #89 by @cykuotara720-maser.
 wiseaj132207-9,WISEAJ132207.9,13:22:07.9,-00:37:08.1,200.53291667,-0.61891667,1349.1,False,True,True,,unobserved,,,,0,
 wiseaj132227-5,WISEAJ132227.5,13:22:27.6,+35:12:19.1,200.615,35.20530556,705.2,True,True,True,Group07,unobserved,,,,0,
 galexascj13224,GALEXASCJ13224,13:22:44.3,-28:57:11.4,200.68458333,-28.95316667,991.1,True,False,True,Group07,unobserved,,,,0,
@@ -2567,7 +2567,7 @@ wiseaj133922-3,WISEAJ133922.3,13:39:22.4,+31:14:57.5,204.84333333,31.24930556,70
 wiseaj133931-5,WISEAJ133931.5,13:39:31.5,+39:25:59.6,204.88125,39.43322222,683.1,True,True,True,Group17,unobserved,,,,0,
 wiseaj133942-7,WISEAJ133942.7,13:39:42.7,+39:08:10.6,204.92791667,39.13627778,671.8,True,True,True,Group17,unobserved,,,,0,
 sdssj133945-08,SDSSJ133945.08,13:39:45.1,+39:08:09.4,204.93791667,39.13594444,682.0,True,True,True,Group17,unobserved,,,,0,
-ugc08651,UGC08651,13:39:53.8,+40:44:20.7,204.97416667,40.73908333,201.8,True,True,True,Group17,unobserved,,,,0,
+ugc08651,UGC08651,13:39:53.8,+40:44:20.7,204.97416667,40.73908333,201.8,True,True,True,Group17,observed,undetected,GBT,,1,Low wind speed : ~3 m/s. Temperature ~2 degree (C) A clear narrow feature is clearly detected toward UGC08313 near the systemic velocity ! Submitted via GitHub issue #89 by @cykuotara720-maser.
 ic4316,IC4316,13:40:18.5,-28:53:29.9,205.07708333,-28.89163889,581.9,True,False,True,Group07,unobserved,,,,0,
 wiseaj134112-3,WISEAJ134112.3,13:41:12.3,+55:35:09.2,205.30125,55.58588889,714.1,True,True,True,Group17,unobserved,,,,0,
 ugca371,UGCA371,13:41:19.3,+43:17:29.0,205.33041667,43.29138889,1241.0,False,True,True,,unobserved,,,,0,
@@ -2588,7 +2588,7 @@ wiseaj134837-1,WISEAJ134837.1,13:48:37.4,+58:18:03.6,207.15583333,58.301,299.8,T
 galexascj13490,GALEXASCJ13490,13:49:09.7,-12:45:42.8,207.29041667,-12.76188889,1393.9,False,True,True,,unobserved,,,,0,
 wiseaj134913-6,WISEAJ134913.6,13:49:13.6,+22:35:24.2,207.30666667,22.59005556,946.3,True,True,True,Group07,unobserved,,,,0,
 ugc08756,UGC08756,13:50:35.9,+42:32:28.4,207.64958333,42.54122222,1323.0,False,True,True,,unobserved,,,,0,
-ugc08760,UGC08760,13:50:50.7,+38:01:08.4,207.71125,38.019,193.1,True,True,True,Group07,unobserved,,,,0,
+ugc08760,UGC08760,13:50:50.7,+38:01:08.4,207.71125,38.019,193.1,True,True,True,Group07,observed,undetected,GBT,,1,Low wind speed : ~3 m/s. Temperature ~2 degree (C) A clear narrow feature is clearly detected toward UGC08313 near the systemic velocity ! Submitted via GitHub issue #89 by @cykuotara720-maser.
 wiseaj135205-6,WISEAJ135205.6,13:52:05.6,+05:45:53.9,208.02333333,5.76497222,984.0,True,True,True,Group07,unobserved,,,,0,
 ngc5334,NGC5334,13:52:54.5,-01:06:52.0,208.22708333,-1.11444444,1385.9,False,True,True,,unobserved,,,,0,
 ugc08799,UGC08799,13:53:19.9,+05:46:17.9,208.33291667,5.77163889,1046.0,True,True,True,Group07,observed,undetected,GBT,/ANCH0R/spectra/GBT/AGBT26B_076_03/23_UGC08799.png,1,"Observing report for October 21, 2026 GBT observations. Weather is good, low-medium wind, system temperature ~40K NGC 4258 test scan for this observation is known to suffer from imperfect pointing, which costs about a factor ~2 in flux density for that scan; pointing was re-done afterwards and should be better for the survey targets Submitted via GitHub issue #42 by @dpesce."
